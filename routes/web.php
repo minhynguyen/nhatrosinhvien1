@@ -14,8 +14,15 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+use App\truoghoc;
 
 Auth::routes();
 Route::get('user/activation/{token}', 'Auth\RegisterController@activateUser')->name('user.activate');
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['prefix'=>'admin'], function(){	
+	
+	Route::resource('truong', 'TruonghocController'); // route hỗ trợ lấy toàn bộ controller.
+	
+	
+});
