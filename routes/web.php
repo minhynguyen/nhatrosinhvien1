@@ -26,3 +26,19 @@ Route::group(['prefix'=>'admin'], function(){
 	
 	
 });
+
+Route::get('/', function () {
+    return view('frontend.index');
+});
+Route::get('/dangnhap', function () {
+    return view('frontend.dangnhap');
+});
+Route::get('/dangki', function () {
+    return view('frontend.dangki');
+});
+Route::get('/dangtin', function () {
+    return view('frontend.dangtin');
+});
+Route::get('/thongtin', function () {
+    return view('frontend.thongtinnhatro');
+});

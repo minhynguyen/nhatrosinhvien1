@@ -1,13 +1,13 @@
 @extends('backend.layouts.app')   
 
 @section('title')
-  Danh sach cac trường
+  Trường Học
 @endsection
 
 
 @section('page-header')
       <h1>
-        DANH SÁCH CÁC TRƯỜNG
+        DANH SÁCH CÁC TRƯỜNG ĐẠI HỌC
         <small>DANH SÁCH CÁC TRƯỜNG</small>
       </h1>
 @endsection
@@ -44,31 +44,31 @@
                   <th>Ngày Tạo Mới</th>
                   <th>Ngày Cập Nhật</th>
                   <th>Trạng Thái</th>
-                  <!-- <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('truong.create') }}"><i class="fa fa-plus"></i> Thêm Chủ Đề</button></a></th> -->
+                  <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('truong.create') }}"><i class="fa fa-plus"></i> Thêm Trường</button></a></th>
                   <!-- <th></th> -->
                 </tr>
-                @foreach ($dstruong as $dstruong)
+                @foreach ($dstruong as $truong)
         <!-- nhãn từ controller -->
                 <tr>
-                    <td>{{$dstruong->t_ma}}</td>
-                    <td style="text-align: left;">{{$dstruong->t_ten}}</td>
-                    <td style="text-align: left;">{{$dstruong->t_vido}}</td>
-                    <td style="text-align: left;">{{$dstruong->t_kinhdo}}</td>
-                    <td>{{$dstruong->t_taomoi}}</td>
-                    <td>{{$dstruong->t_capnhat}}</td>
-                    <td>{{$dstruong->t_trangthai}}</td>
-                   <!--  <td>
-                      <button type="button" class="btn btn-warning"> <a href=" {{ route('chude.edit', ['chude' => $cd->cd_ma]) }}" ><i class="fa fa-edit"></i> Edit</a></button>
+                    <td>{{$truong->t_ma}}</td>
+                    <td style="text-align: left;">{{$truong->t_ten}}</td>
+                    <td style="text-align: left;">{{$truong->t_vido}}</td>
+                    <td style="text-align: left;">{{$truong->t_kinhdo}}</td>
+                    <td>{{$truong->t_taomoi}}</td>
+                    <td>{{$truong->t_capnhat}}</td>
+                    <td>{{$truong->t_trangthai}}</td>
+                    <td>
+                      <button type="button" class="btn btn-warning"> <a href=" {{ route('truong.edit', ['truong' => $truong->t_ma]) }}" ><i class="fa fa-edit"></i> Edit</a></button>
                     
                       
-                    </td> -->
-                   <!--  <td>
-                      <form method="POST" action="{{route('chude.destroy', ['chude' => $cd->cd_ma])}}">
+                    </td>
+                    <td>
+                      <form method="POST" action="{{route('truong.destroy', ['truong' => $truong->t_ma])}}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete </a></button>
                       </form>
-                    </td> -->
+                    </td>
                 </tr>
 
         @endforeach

@@ -25,7 +25,7 @@ class TruonghocController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.truong.create');
     }
 
     /**
@@ -36,7 +36,31 @@ class TruonghocController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+        't_ten' => 'required|max:100',
+        't_vido' => 'required',
+        't_kinhdo' => 'required',
+        't_taomoi' => 'required',
+        't_capnhat' => 'required',
+        't_trangthai' => 'required',
+
+        ]);
+        try{
+        $truong = new truonghoc();
+        $truong->t_ten = $request->t_ten; //trước giống tên cột sau giống tên input ở form nhập liệu
+        $truong->t_kinhdo = $request->t_kinhdo;
+        $truong->t_vido = $request->t_vido;
+        $truong->t_taomoi = $request->t_taomoi;
+        $truong->t_capnhat = $request->t_capnhat;
+        $truong->t_trangthai = $request->t_trangthai;
+        $truong->save();
+
+        return redirect(route('truong.index')); //trả về trang cần hiển thị
+        }
+        catch(QueryException $ex){
+            return reponse([
+                'error' => true, 'message' => $ex->getMessage()], 500);
+        }
     }
 
     /**
@@ -58,7 +82,8 @@ class TruonghocController extends Controller
      */
     public function edit($id)
     {
-        //
+        $truong = truonghoc::find($id);
+        return view('backend.truong.edit')->with('truong', $truong);
     }
 
     /**
@@ -70,7 +95,20 @@ class TruonghocController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+        $truong = truonghoc::find($id);
+        $truong->t_ten = $request->t_ten; //trước giống tên cột sau giống tên input ở form nhập liệu
+        $truong->t_taomoi = $request->t_taomoi;
+        $truong->t_capnhat = $request->t_capnhat;
+        $truong->t_trangthai = $request->t_trangthai;
+        $truong->save();
+
+        return redirect(route('truong.index')); //trả về trang cần hiển thị
+        }
+        catch(QueryException $ex){
+            return reponse([
+                'error' => true, 'message' => $ex->getMessage()], 500);
+        }
     }
 
     /**
@@ -81,6 +119,8 @@ class TruonghocController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $truong = truonghoc::find($id);
+        $truong->delete();
+        return redirect(route('truong.index'));
     }
 }

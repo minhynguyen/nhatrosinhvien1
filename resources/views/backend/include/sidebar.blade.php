@@ -34,13 +34,13 @@
         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Trường</span>
+          <a href="#"><i class="fa fa-university"></i> <span>Trường</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{route('truong.index')}}">Danh Sách Các Chủ Đề</a></li>
+            <li><a href="{{route('truong.index')}}">Danh Sách Các Trường Đại Học</a></li>
           </ul>
         </li>
         

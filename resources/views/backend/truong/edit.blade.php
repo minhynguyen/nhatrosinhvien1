@@ -1,13 +1,13 @@
 @extends('backend.layouts.app')   
 
 @section('title')
-  THEM MOI CHU DE
+  Cập Nhật Thông Tin Trường
 @endsection
 
 
 @section('page-header')
       <h1>
-        SỬA CHỦ ĐỀ
+        Cập Nhật Thông Tin Trường Học
         <small>CÁC CHỦ ĐỀ VÀ LOẠI HOA</small>
       </h1>
 @endsection
@@ -27,13 +27,13 @@
     </ul>
   </div>
   @endif
-<form name="frmChude" method="POST" action="{{route('chude.update', ['chude'=> $chude->cd_ma]) }}"> <!-- action tu controller -->
+<form name="frmTruong" method="POST" action="{{route('truong.update', ['truong'=> $truong->t_ma]) }}"> <!-- action tu controller -->
   {{ csrf_field() }}
   {{ method_field('PATCH') }}
   
   <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">SỬA CHỦ ĐỀ</h3>
+        <h3 class="box-title">SỬA </h3>
       </div>
       <!-- /.box-header -->
       <!-- form start -->
@@ -41,33 +41,31 @@
         <div class="box-body">
           <div class="form-group">
 
-            <label for="exampleInputEmail1">TÊN CHỦ ĐỀ</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" name="cd_ten" placeholder="Nhập Tên Chủ Đề" value="{{$chude->cd_ten}}">
+            <label for="exampleInputEmail1">TÊN Trường</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="t_ten" placeholder="Nhập Tên Trường" value="{{$truong->t_ten}}">
           </div>
-          <!-- <div class="form-group">
-            <label for="exampleInputPassword1">TRẠNG THÁI</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" name="cd_trangthai" placeholder="Nhập Trạng Thái" value="{{$chude->cd_trangthai}}">
-          </div> -->
+
+          <div class="form-group">
+
+            <label for="exampleInputEmail1">Kinh Độ</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="t_kinhdo" placeholder="Nhập Kinh Độ" value="{{$truong->t_kinhdo}}">
+          </div>
+
+          <div class="form-group">
+
+            <label for="exampleInputEmail1">Vĩ Độ</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="t_vido" placeholder="Nhập Vĩ Độ" value="{{$truong->t_vido}}">
+          </div>
+          
           <div class="form-group">
                 <label>Trạng Thái</label>
-                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="cd_trangthai", id="cd_trangthai">
+                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="t_trangthai", id="t_trangthai">
                     <option value="1">Khóa</option> 
                     <option value="2">Khả dụng</option>
                 </select>
 
-
-            
-
           </div>
-          <!-- <div class="form-group">
-            <label for="exampleInputPassword1">Tao moi</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" name="cd_taomoi" placeholder="Nhập Trạng Thái" value="{{$chude->cd_taomoi}}">
-          </div> -->
-        <!--   <div class="form-group">
-            <label for="exampleInputPassword1">cap nhat</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" name="cd_capnhat" placeholder="Nhập Trạng Thái" value="{{$chude->cd_capnhat}}">
-            <!value hiện lại giá trị cũ
-          </div> --> 
+          
           
 
           <div class="form-group">
@@ -76,7 +74,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right datepicker" id="cd_taomoi" name="cd_taomoi" value="{{$chude->cd_taomoi}}">
+                  <input type="text" class="form-control pull-right datepicker" id="t_taomoi" name="t_taomoi" value="{{$truong->t_taomoi}}">
                 </div>
               </div>
               <div class="form-group">
@@ -86,7 +84,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right datepicker" id="cd_capnhat" name="cd_capnhat" value="{{$chude->cd_capnhat}}">
+                  <input type="text" class="form-control pull-right datepicker" id="t_capnhat" name="t_capnhat" value="{{$truong->t_capnhat}}">
                 </div>
                 <!-- /.input group -->
               </div>
