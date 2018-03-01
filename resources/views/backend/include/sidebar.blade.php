@@ -40,7 +40,8 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{route('truong.index')}}">Danh Sách Các Trường Đại Học</a></li>
+            <li><a href="{{route('truong.index')}}"> <i class="fa fa-list"></i>Danh Sách Các Trường Đại Học</a></li>
+            <li><a href="{{route('truong.create')}}"><i class="fa fa-plus"></i>Thêm Trường Đại Học</a></li>
           </ul>
         </li>
         

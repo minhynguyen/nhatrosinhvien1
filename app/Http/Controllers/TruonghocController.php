@@ -37,7 +37,7 @@ class TruonghocController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-        't_ten' => 'required|max:100',
+        't_ten' => 'required|max:200',
         't_vido' => 'required',
         't_kinhdo' => 'required',
         't_taomoi' => 'required',
@@ -99,6 +99,8 @@ class TruonghocController extends Controller
         $truong = truonghoc::find($id);
         $truong->t_ten = $request->t_ten; //trước giống tên cột sau giống tên input ở form nhập liệu
         $truong->t_taomoi = $request->t_taomoi;
+        $truong->t_vido = $request->t_vido;
+        $truong->t_kinhdo = $request->t_kinhdo;
         $truong->t_capnhat = $request->t_capnhat;
         $truong->t_trangthai = $request->t_trangthai;
         $truong->save();

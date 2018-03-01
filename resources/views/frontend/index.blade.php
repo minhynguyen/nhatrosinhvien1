@@ -168,6 +168,7 @@
 
     $('#lat').val(lat);
     $('#lng').val(lng);
+    
     // console.log(lat, lng);
 
   });

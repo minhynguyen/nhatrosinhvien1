@@ -21,7 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="{{ asset ('theme/admin/dist/css/skins/skin-blue.min.css') }}">
-
+  <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   @yield ('css')
@@ -36,9 +36,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>NT</b>SV</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>NhaTro</b>SinhVien</span>
     </a>
 
     <!-- Header Navbar -->
@@ -64,10 +64,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         
         <small>Optional description</small>
       </h1> -->
-      <ol class="breadcrumb">
+      <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
-      </ol>
+      </ol> -->
     </section>
 
     <!-- Main content -->

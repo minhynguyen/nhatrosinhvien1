@@ -8,8 +8,15 @@
 @section('page-header')
       <h1>
         DANH SÁCH CÁC TRƯỜNG ĐẠI HỌC
-        <small>DANH SÁCH CÁC TRƯỜNG</small>
+        <small>Tọa Độ Của Các Trường Đại Học Trên Địa Bàn Thành Phố Cần Thơ</small>
       </h1>
+@endsection
+@section('css')
+<style>
+  a {
+    color: #ffffff !important;
+}
+</style>
 @endsection
 
 
@@ -38,13 +45,13 @@
               <table class="table table-hover text-center ">
                 <tr>
                   <th>Mã</th>
-                  <th style="text-align: left">Tên</th>
-                  <th style="text-align: left">Vĩ độ</th>
-                  <th style="text-align: left">Kinh độ</th>
+                  <th style="text-align: center;">Tên Trường</th>
+                  <th style="text-align: center;">Vĩ độ</th>
+                  <th style="text-align: center;">Kinh độ</th>
                   <th>Ngày Tạo Mới</th>
                   <th>Ngày Cập Nhật</th>
                   <th>Trạng Thái</th>
-                  <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('truong.create') }}"><i class="fa fa-plus"></i> Thêm Trường</button></a></th>
+                  <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('truong.create') }}"><i class="fa fa-plus"></i> Thêm Trường</a></button></th>
                   <!-- <th></th> -->
                 </tr>
                 @foreach ($dstruong as $truong)
@@ -52,8 +59,8 @@
                 <tr>
                     <td>{{$truong->t_ma}}</td>
                     <td style="text-align: left;">{{$truong->t_ten}}</td>
-                    <td style="text-align: left;">{{$truong->t_vido}}</td>
-                    <td style="text-align: left;">{{$truong->t_kinhdo}}</td>
+                    <td style="text-align: center;">{{$truong->t_vido}}</td>
+                    <td style="text-align: center;">{{$truong->t_kinhdo}}</td>
                     <td>{{$truong->t_taomoi}}</td>
                     <td>{{$truong->t_capnhat}}</td>
                     <td>{{$truong->t_trangthai}}</td>
