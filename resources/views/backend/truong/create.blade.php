@@ -148,7 +148,8 @@
   function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 10.031450, lng: 105.768872},
-          zoom: 17
+          zoom: 17,
+          scrollwheel: true
         });
         var card = document.getElementById('pac-card');
         var input = document.getElementById('pac-input');
@@ -180,7 +181,7 @@
           var place = autocomplete.getPlace();
           if (!place.geometry) {
             
-            window.alert("No details available for input: '" + place.name + "'");
+            window.alert("Không Tìm Thấy Vị Trí: '" + place.name + "'");
             return;
           }
 

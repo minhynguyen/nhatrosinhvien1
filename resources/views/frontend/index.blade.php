@@ -38,8 +38,6 @@
                         <div class="navbar-header">
                             <a class="navbar-brand" href="index.html" style="margin-left: -100px; padding-top: 20px">NhàTrọSinhViên</a>
                         </div>
-
-                        <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav main-nav  clear navbar-right">
                                 <li>
@@ -112,36 +110,27 @@
 
 
             <div id="map"></div>
-            <!-- <script type="text/javascript" src="js/jquery-1.10.2.min.js"> </script>
-            <script type="text/javascript" src="js/bootstrap.min.js" ></script>
-            <script type="text/javascript" src="js/jquery-1.10.2.js"></script>     
-            <script type="text/javascript" src="js/jquery.mixitup.min.js" ></script>
-            <script type="text/javascript" src="js/main.js" ></script>
-            <script src="css/timepicker/bootstrap-timepicker.min.js"></script> -->
-            <!-- <script src="js/moment.js"></script> -->
-            <!-- <script src="js/bootstrap-datetimepicker.min.js"></script> -->
-            <!-- <script src="css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script> -->
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.min.js') }}"> </script>
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/bootstrap.min.js') }}" ></script>
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.js') }}"></script>     
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery.mixitup.min.js') }}" ></script>
             <script src="{{ asset ('theme/homepage/css/timepicker/bootstrap-timepicker.min.js') }}"></script>
             <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-            <script>
-              $(function(){
-                // chấm là class # là id
-                $('.datepicker').datepicker({
-                  format: 'yyyy-mm-dd',
-                  autoclose: true
-                })
+<script>
+  $(function(){
+    // chấm là class # là id
+    $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd',
+      autoclose: true
+    })
 
-                $('.timepicker').timepicker({
-                showInputs: false
-                })
-              });
-              
-              
-            </script>
+    $('.timepicker').timepicker({
+    showInputs: false
+    })
+  });
+  
+  
+</script>
 <script>
   var map, marker;
   var mapDiv = document.getElementById('map');
@@ -174,26 +163,26 @@
   });
 
  
-  var marker2 = new google.maps.Marker({
-    position:{
-      lat:10.015686,
-      lng:105.764305
-    },
-    map:map,
+  // var marker2 = new google.maps.Marker({
+  //   position:{
+  //     lat:10.015686,
+  //     lng:105.764305
+  //   },
+  //   map:map,
 
-    // icon: 'http://maps.google.com/mapfiles/ms/micons/green.png'
+  //   icon: 'http://maps.google.com/mapfiles/ms/micons/green.png'
     
-  });
-  var marker3 = new google.maps.Marker({
-    position:{
-      lat:10.035031,
-      lng:105.753593
-    },
-    map:map,
+  // });
+  // var marker3 = new google.maps.Marker({
+  //   position:{
+  //     lat:10.035031,
+  //     lng:105.753593
+  //   },
+  //   map:map,
 
-    // icon: 'http://maps.google.com/mapfiles/ms/micons/green.png'
+  //   icon: 'http://maps.google.com/mapfiles/ms/micons/green.png'
     
-  });
+  // });
   
   
   var customMapType = new google.maps.StyledMapType([

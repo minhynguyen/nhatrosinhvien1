@@ -17,10 +17,12 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
             <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
-            type="text/javascript"></script>
+            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
+        async defer></script> -->
+            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
+            type="text/javascript"></script> -->
   <style>
-  #map-canvas{
+  #map{
     width: 100%;
     height: 290px;
     
@@ -113,9 +115,17 @@
                           <div class="fa fa-cogs fa-2x" > Địa Chỉ Cụ Thể</div>
                           
                               <!-- <label for="">ĐIỂM CẦN THÊM:</label> -->
-                              <input type="text" id="searchmap"  class="form" placeholder="Nhập Địa Chỉ Chính Xác Nhà Trọ" style="width: 100%">
+                              <!-- <input type="text" id="searchmap"  class="form" placeholder="Nhập Địa Chỉ Chính Xác Nhà Trọ" style="width: 100%"> -->
                               <!-- <hr> -->
                               <!-- <div id="map-canvas"></div> -->
+                              <input id="pac-input" type="text" name="t_ten" placeholder="Vui Lòng Nhập Chính Xác Địa Chỉ Nhà Trọ" style="width: 100%" class="form">
+                
+                 <!-- <div id="map"></div> -->
+                 <div id="infowindow-content">
+                  <img src="" width="16" height="16" id="place-icon">
+                  <span id="place-name"  class="title"></span><br>
+                  <span id="place-address"></span>
+                </div>
                               
                           
                         </div>
@@ -203,7 +213,7 @@
                     </div>
                     <div class="col-md-6" style="margin-top: 10px">
                       <label>Kéo thả vị trí trên bản đồ để chỉnh địa điểm chính xác hơn</label>
-                        <div id="map-canvas"></div>
+                        <div id="map"></div>
                     </div>
 
                     <div class="col-md-6">
@@ -213,7 +223,7 @@
                           <div id="image-preview-div" style="display: none">
                             <label for="exampleInputFile">Ảnh Đã Chọn</label>
                             <br>
-                            <img id="preview-img" src="noimage">
+                            <img id="preview-img" src="">
                           </div>
                           <div class="form-group">
                             <input type="file" name="file" id="file" required>
@@ -257,60 +267,79 @@
             <script src="{{ asset ('theme/homepage/ckeditor/ckeditor.js') }}"></script>
             <script>CKEDITOR.replace('editor1');</script>
             <script>
+ function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 10.031450, lng: 105.768872},
+          zoom: 15,
+          scrollwheel: true
+        });
+        var card = document.getElementById('pac-card');
+        var input = document.getElementById('pac-input');
+        var types = document.getElementById('type-selector');
+        var strictBounds = document.getElementById('strict-bounds-selector');
 
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
-                var map = new google.maps.Map(document.getElementById('map-canvas'),{
-                  center:{
-                        lat: 10.031450,
-                        lng: 105.768872
-                  },
-                  zoom:16,
-                  zoomControl: false,
-                  streetViewControl: false,
-                  scrolwheel : true
-                });
+        var autocomplete = new google.maps.places.Autocomplete(input);
 
-                var marker = new google.maps.Marker({
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var infowindowContent = document.getElementById('infowindow-content');
+        infowindow.setContent(infowindowContent);
+        var marker = new google.maps.Marker({
                   position: {
-                    lat: 10.031450,
-                    lng: 105.768872
-                  },
-                  map: map,
-                  draggable: true
-                });
+                  lat: 10.031450,
+                  lng: 105.768872
+            },
+          map: map,
+          draggable: true,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
 
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            
+            window.alert("Không Tìm Thấy Vị Trí: '" + place.name + "'");
+            return;
+          }
 
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
 
-                var searchBox = new google.maps.places.SearchBox(document.getElementById('searchmap'));
+          var address = '';
+          if (place.address_components) {
+            address = [
+              (place.address_components[0] && place.address_components[0].short_name || ''),
+              (place.address_components[1] && place.address_components[1].short_name || ''),
+              (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+          }
 
-                google.maps.event.addListener(searchBox,'places_changed',function(){
+          infowindowContent.children['place-icon'].src = place.icon;
+          infowindowContent.children['place-name'].textContent = place.name;
+          infowindowContent.children['place-address'].textContent = address;
+          infowindow.open(map, marker);
+        });
 
-                  var places = searchBox.getPlaces();
-                  var bounds = new google.maps.LatLngBounds();
-                  var i, place;
-
-                  for(i=0; place=places[i];i++){
-                      bounds.extend(place.geometry.location);
-                      marker.setPosition(place.geometry.location); //set marker position new...
-                    }
-
-                    map.fitBounds(bounds);
-                    map.setZoom(15);
-
-                });
-
-                google.maps.event.addListener(marker,'position_changed',function(){
-
-                  var lat = marker.getPosition().lat();
-                  var lng = marker.getPosition().lng();
-
-                  $('#lat').val(lat);
-                  $('#lng').val(lng);
-
-                });
-
-
-                function GeolocationControl(){
+        
+        google.maps.event.addListener(marker,'position_changed',function(){
+          var lat = marker.getPosition().lat();
+          var lng = marker.getPosition().lng();
+          $('#lat').val(lat);
+          $('#lng').val(lng);
+        });
+        function GeolocationControl(){
                 var geoButton = document.getElementById('curent-location');
                 google.maps.event.addListener(geoButton, 'click', geolocate); 
               };
@@ -318,7 +347,7 @@
                 if (navigator.geolocation) { //nếu trình duyệt lấy đc vị trí
                         navigator.geolocation.getCurrentPosition(function(position) {
 
-                          console.log(position);
+                          // console.log(position);
                           var pos = {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude
@@ -333,7 +362,11 @@
                       }
                 };
                 geolocate();
-
-              </script>
+      }
+      
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
+        async defer></script>
+    
   </body>
 </html>
