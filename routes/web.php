@@ -15,6 +15,7 @@
 //     return view('welcome');
 // });
 use App\truoghoc;
+use App\loainhatro;
 
 Auth::routes();
 Route::get('user/activation/{token}', 'Auth\RegisterController@activateUser')->name('user.activate');
@@ -23,13 +24,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix'=>'admin'], function(){	
 	
 	Route::resource('truong', 'TruonghocController'); // route hỗ trợ lấy toàn bộ controller.
-	
+	Route::resource('loainhatro', 'LoainhatroController');
 	
 });
-
-Route::get('/', function () {
-    return view('frontend.index');
-});
+Route::get('/', 'FrontendController@index');
+// Route::get('/', function () {
+//     return view('frontend.index');
+// });
 Route::get('/dangnhap', function () {
     return view('frontend.dangnhap');
 });

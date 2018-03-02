@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\truonghoc;
+use App\Http\Requests\TruongHocRequest;
 
 class TruonghocController extends Controller
 {
@@ -34,7 +35,7 @@ class TruonghocController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TruongHocRequest $request)
     {
         $validatedData = $request->validate([
         't_ten' => 'required|max:200',
@@ -43,7 +44,6 @@ class TruonghocController extends Controller
         't_taomoi' => 'required',
         't_capnhat' => 'required',
         't_trangthai' => 'required',
-
         ]);
         try{
         $truong = new truonghoc();
@@ -93,7 +93,7 @@ class TruonghocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TruongHocRequest $request, $id)
     {
         try{
         $truong = truonghoc::find($id);
