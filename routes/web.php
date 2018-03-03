@@ -19,7 +19,8 @@ use App\loainhatro;
 
 Auth::routes();
 Route::get('user/activation/{token}', 'Auth\RegisterController@activateUser')->name('user.activate');
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'FrontendController@index')->name('index');
 
 Route::group(['prefix'=>'admin'], function(){	
 	

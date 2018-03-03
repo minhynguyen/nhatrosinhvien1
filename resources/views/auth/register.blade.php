@@ -30,7 +30,7 @@
                     <div class="row">
                     <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="index.html" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
+                            <a class="navbar-brand" href="{{ route('index')}}" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,10 +52,10 @@
                                     
                                 </li>
                                 <li>
-                                    <a class="color_animation" href="">Đăng Nhập</a>
+                                    <a class="color_animation" href="{{ route('login')}}">Đăng Nhập</a>
                                 </li>
                                 <li>
-                                    <a class="color_animation" href="" style="margin-left: 2px!important"> | Đăng Kí</a>
+                                    <a class="color_animation" href="{{ route('register')}}" style="margin-left: 2px!important"> | Đăng Kí</a>
                                 </li>
                             </ul>
                       
@@ -79,7 +79,7 @@
                             <!-- <input type="text" name="" class="form" style="width: 100%" placeholder="Họ Và Tên"> -->
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 
-                                <input id="name" type="text" class="form" name="name" style="width: 100%" placeholder="Name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form" name="name" style="width: 100%" placeholder="Tên Người Dùng" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -119,7 +119,7 @@
                             
 
                             
-                                <input id="password" type="password" class="form" name="password" required placeholder="Pass" style="width: 100%">
+                                <input id="password" type="password" class="form" name="password" required placeholder="Mật Khẩu" style="width: 100%">
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -135,7 +135,7 @@
                             <!-- <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label> -->
 
                             <!-- <div class="col-md-6"> -->
-                                <input id="password-confirm" type="password" class="form" name="password_confirmation" required style="width: 100%" placeholder="Pass">
+                                <input id="password-confirm" type="password" class="form" name="password_confirmation" required style="width: 100%" placeholder="Xác Nhận Mật Khẩu">
                             <!-- </div> -->
                         <!-- </div> -->
                         </div>

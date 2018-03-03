@@ -31,7 +31,7 @@
                     <div class="row">
                     <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="index.html" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
+                            <a class="navbar-brand" href="{{ route('index')}}" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -85,11 +85,11 @@
                                       <option>Trên 30 Khách</option>
                                     </select> -->
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a class="color_animation" href="">Đăng Nhập</a>
-                                </li>
+                                </li> -->
                                 <li>
-                                    <a class="color_animation" href="" style="margin-left: 2px!important"> | Đăng Kí</a>
+                                    <a class="color_animation" href="{{ route('register')}}" style="margin-left: 2px!important"> Đăng Kí</a>
                                 </li>
                             </ul>
                       

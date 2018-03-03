@@ -88,7 +88,7 @@
                     <div class="row">
                     <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="index.html" style="margin-left: -100px; padding-top: 20px">NhàTrọSinhViên</a>
+                            <a class="navbar-brand" href="{{ route('index')}}" style="margin-left: -100px; padding-top: 20px">NhàTrọSinhViên</a>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav main-nav  clear navbar-right">
@@ -121,14 +121,19 @@
                                       
                                     </select>
                                 </li>
-                                
+                                <?php 
+                                  $dsDT = [];
+                                  for($i=10; $i<=100; $i+= 10){
+                                  array_push($dsDT, $i);}
+                                 ?>
                                 <li>
                                     <select class="form" >
                                       <option value="" disabled selected>Diện Tích</option>
-                                      <option>Trên 10m2</option>
-                                      <option>Trên 10m2</option>
-                                      <option>Trên 10m2</option>
-                                      <option>Trên 10m2</option>
+                                      <option value="0">ALL</option>
+                                        @foreach($dsDT as $DT)
+                                        <option value="{{$DT}}">{{number_format($DT)}} m2</option>
+                                        @endforeach
+                                      
                                       
                                     </select>
                                 </li>
@@ -149,12 +154,44 @@
                                   
                                     
                                 </li>
+                                <!-- <ul class="nav navbar-nav navbar-right"> -->
+                        <!-- Authentication Links -->
+                                @guest
                                 <li>
+                                    <a class="color_animation" href="{{ route('login')}}">Đăng Nhập</a>
+                                </li>
+                                <li>
+                                    <a class="color_animation" href="{{ route('register')}}" style="margin-left: 2px!important"> | Đăng Kí</a>
+                                </li>
+                                   
+                                @else
+                                <!--  -->
+                                    <li class="dropdown">
+                                        <a href="#" class="color_animation" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                            {{ Auth::user()->name }} <span class="caret" class="color_animation"></span>
+                                        </a>
+
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                  document.getElementById('logout-form').submit();">Đăng Xuất
+                                                </a>
+                                                
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                @endguest
+                   
+                                <!-- <li>
                                     <a class="color_animation" href="">Đăng Nhập</a>
                                 </li>
                                 <li>
                                     <a class="color_animation" href="" style="margin-left: 2px!important"> | Đăng Kí</a>
-                                </li>
+                                </li> -->
                             </ul>
                       
                             

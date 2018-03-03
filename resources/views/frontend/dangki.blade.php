@@ -84,12 +84,12 @@
                                       <option>Trên 30 Khách</option>
                                     </select> -->
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a class="color_animation" href="">Đăng Nhập</a>
                                 </li>
                                 <li>
                                     <a class="color_animation" href="" style="margin-left: 2px!important"> | Đăng Kí</a>
-                                </li>
+                                </li> -->
                             </ul>
                       
                             
