@@ -43,6 +43,29 @@
             <li><a href="{{route('truong.index')}}"> <i class="fa fa-list"></i>Danh Sách Các Trường Đại Học</a></li>
             <li><a href="{{route('truong.create')}}"><i class="fa fa-plus"></i>Thêm Trường Đại Học</a></li>
           </ul>
+          <a href="#"><i class="fa fa-list-alt"></i> <span>Loại Nhà Trọ</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('loainhatro.index')}}"> <i class="fa fa-list"></i>Danh Sách Các Loại Nhà Trọ</a></li>
+            <li><a href="{{route('loainhatro.create')}}"><i class="fa fa-plus"></i>Thêm Loại Nhà Trọ</a></li>
+          </ul>
+          <a href="#"><i class="fa fa-users"></i> <span>Quản Trị Người Dùng</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('user.index')}}"> <i class="fa fa-list"></i>Danh Sách User</a></li>
+            <li><a href="{{route('dsadmin')}}"> <i class="fa fa-gg"></i>Danh Sách Admin</a></li>
+            <li><a href="{{route('dsmem')}}"> <i class="fa  fa-user"></i>Danh Sách MemBer</a></li>
+            
+            
+            
+            <!-- <li><a href="{{route('loainhatro.create')}}"><i class="fa fa-plus"></i>Thêm Loại Nhà Trọ</a></li> -->
+          </ul>
         </li>
         
       </ul>

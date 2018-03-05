@@ -14,6 +14,7 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+use App\Http\Middleware\CheckLevelMiddleware;
 use App\truoghoc;
 use App\loainhatro;
 
@@ -23,11 +24,15 @@ Route::get('user/activation/{token}', 'Auth\RegisterController@activateUser')->n
 Route::get('/home', 'FrontendController@index')->name('index');
 
 Route::group(['prefix'=>'admin'], function(){	
-	
-	Route::resource('truong', 'TruonghocController'); // route hỗ trợ lấy toàn bộ controller.
-	Route::resource('loainhatro', 'LoainhatroController');
-	
+
+Route::resource('truong', 'TruonghocController')->middleware(CheckLevelMiddleware::class); // route hỗ trợ lấy toàn bộ controller.
+Route::resource('loainhatro', 'LoainhatroController')->middleware(CheckLevelMiddleware::class);
+Route::resource('user', 'UserController')->middleware(CheckLevelMiddleware::class);
+Route::get('dsadmin', 'UserController@getdsadmin')->name('dsadmin')->middleware(CheckLevelMiddleware::class);
+Route::get('dsmem', 'UserController@getdsmem')->name('dsmem')->middleware(CheckLevelMiddleware::class);
+
 });
+
 Route::get('/', 'FrontendController@index');
 // Route::get('/', function () {
 //     return view('frontend.index');
@@ -38,9 +43,15 @@ Route::get('/dangnhap', function () {
 Route::get('/dangki', function () {
     return view('frontend.dangki');
 });
+
 Route::get('/dangtin', function () {
     return view('frontend.dangtin');
 });
 Route::get('/thongtin', function () {
     return view('frontend.thongtinnhatro');
 });
+Route::get('/loi', function () {
+    return view('errors.khongduoctruycap');
+});
+
+
