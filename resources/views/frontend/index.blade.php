@@ -177,6 +177,8 @@
                                                 <a href="{{ route('logout') }}"onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">Đăng Xuất
                                                 </a>
+                                                <a href="{{ route('profile') }}">Thông Tin Tài Khoản
+                                                </a>
 
                                                 
 

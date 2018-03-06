@@ -91,28 +91,7 @@
                 </select>
           </div>
           
-          <div class="form-group">
-                <label>Tạo Mới:</label>
-
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input type="text" class="form-control pull-right datepicker" id="t_taomoi" name="t_taomoi">
-                </div>
-                <!-- /.input group -->
-              </div>
-              <div class="form-group">
-                <label>Cập Nhật:</label>
-
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input type="text" class="form-control pull-right datepicker" id="t_capnhat" name="t_capnhat">
-                </div>
-                <!-- /.input group -->
-              </div>
+         
 
               
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TruongHocRequest extends FormRequest
+class tienichrequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,22 +21,22 @@ class TruongHocRequest extends FormRequest
      *
      * @return array
      */
+    
     public function rules()
     {
         return [
-        't_ten' => 'required|max:200',
-        't_vido' => 'required',
-        't_kinhdo' => 'required',
-        't_trangthai' => 'required',
+            'ti_ten' => 'required|max:50',
+            'ti_diengiai' => 'required',
+            'ti_ten'=>'unique:tienich',
         ];
     }
     public function messages()
     {
         return [
-        't_ten.required' => 'Tên Trường Không Được Bỏ Trống',
-        't_kinhdo.required' => 'Kinh Độ Không Được Bỏ Trống',
-        't_vido.required' => 'Vĩ Độ Không Được Bỏ Trống',
-        't_ten.max' => 'Tên Không Được Vượt Quá :max Kí Tự',
+        'ti_ten.required' => 'Tên Tiện Ích Không Được Bỏ Trống',
+        'ti_diengiai.required' => 'Diễn Giải Ích Không Được Bỏ Trống',
+        'ti_ten.max' => 'Tên Không Được Vượt Quá :max Kí Tự',
+        'ti_ten.unique' => 'Tiện Ích Này Đã Tồn Tại',
         ];
     }
 }

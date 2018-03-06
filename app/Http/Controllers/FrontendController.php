@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\truonghoc;
 use App\loainhatro;
+use App\tienich;
+use DB;
 
 class FrontendController extends Controller
 {
@@ -15,10 +17,23 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        $dsTruong = Truonghoc::all();
-        $dsloainhatro = Loainhatro::all();
+
+        $dsTruong = DB::table('truong')->where('t_trangthai','2')->get();
+        // $dsTruong = Truonghoc::all();
+        $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
+        $dstienich = tienich::all();
         return view('frontend.index')->with('dsTruong', $dsTruong)
-        ->with('dsloainhatro', $dsloainhatro);
+                                        ->with('dsloainhatro', $dsloainhatro)
+                                         ->with('dstienich', $dstienich);
+
+    }
+    public function gettienich()
+    {
+
+        
+        $dstienich = tienich::all();
+        $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
+        return view('frontend.themnhatro')->with('dsloainhatro', $dsloainhatro)->with('dstienich', $dstienich);
 
     }
 

@@ -48,8 +48,8 @@
                   <th style="text-align: center;">Tên Trường</th>
                   <th style="text-align: center;">Vĩ độ</th>
                   <th style="text-align: center;">Kinh độ</th>
-                  <th>Ngày Tạo Mới</th>
-                  <th>Ngày Cập Nhật</th>
+                  <!-- <th>Ngày Tạo Mới</th>
+                  <th>Ngày Cập Nhật</th> -->
                   <th>Trạng Thái</th>
                   <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('truong.create') }}"><i class="fa fa-plus"></i> Thêm Trường</a></button></th>
                   <!-- <th></th> -->
@@ -61,9 +61,15 @@
                     <td style="text-align: left;">{{$truong->t_ten}}</td>
                     <td style="text-align: center;">{{$truong->t_vido}}</td>
                     <td style="text-align: center;">{{$truong->t_kinhdo}}</td>
-                    <td>{{$truong->t_taomoi}}</td>
-                    <td>{{$truong->t_capnhat}}</td>
-                    <td>{{$truong->t_trangthai}}</td>
+                    <!-- <td>{{$truong->t_taomoi}}</td>
+                    <td>{{$truong->t_capnhat}}</td> -->
+                    <!-- <td>{{$truong->t_trangthai}}</td> -->
+                     @if ($truong->t_trangthai === 1)
+
+                        <td style="text-align: center;"><span class="badge bg-yellow">KHÓA</span></td>
+                    @else
+                        <td style="text-align: center;"><span class="badge bg-green">Khả Dụng</span></td>
+                    @endif
                     <td>
                       <button type="button" class="btn btn-warning"> <a href=" {{ route('truong.edit', ['truong' => $truong->t_ma]) }}" ><i class="fa fa-edit"></i> Edit</a></button>
                     

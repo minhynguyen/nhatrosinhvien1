@@ -51,16 +51,23 @@
           
           <div class="form-group">
                 <label>Trạng Thái</label>
-                <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="lnt_trangthai", id="lnt_trangthai">
-                    <option value="1">Khóa</option> 
-                    <option value="2">Khả dụng</option>
+                @if ($loainhatro->lnt_trangthai === 1)
+                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="lnt_trangthai", id="lnt_trangthai">
+                    <option value="1" selected="">Khóa</option> 
+                    <option value="2">Khả Dụng</option>
                 </select>
+                @else
+                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="lnt_trangthai", id="lnt_trangthai">
+                    <option value="1" >Khóa</option> 
+                    <option value="2" selected>Khả Dụng</option>
+                </select>
+                @endif
 
           </div>
           
           
 
-          <div class="form-group">
+          <!-- <div class="form-group">
                 <label>Tạo Mới:</label>
                 <div class="input-group date">
                   <div class="input-group-addon">
@@ -78,8 +85,8 @@
                   </div>
                   <input type="text" class="form-control pull-right datepicker" id="lnt_capnhat" name="lnt_capnhat" value="{{$loainhatro->lnt_capnhat}}">
                 </div>
-                <!-- /.input group -->
-              </div>
+                
+              </div> -->
         </div>
         <!-- /.box-body -->
 

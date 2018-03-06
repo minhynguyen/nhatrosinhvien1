@@ -46,7 +46,7 @@
         <div class="box-body">
           <div class="form-group">
 
-            <label for="exampleInputEmail1">TÊN Trường</label>
+            <label for="exampleInputEmail1">TÊN TRƯỜNG</label>
             <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="t_ten" placeholder="Nhập Tên Trường" value="{{$truong->t_ten}}"> -->
             <input id="pac-input" type="text" name="t_ten" placeholder="Vui Lòng Nhập Chính Xác Địa Chỉ Trường" style="width: 100%" class="form-control" value="{{$truong->t_ten}}">
                 <hr>
@@ -84,37 +84,26 @@
           </div>
 
           
+          
           <div class="form-group">
                 <label>Trạng Thái</label>
+                @if ($truong->t_trangthai === 1)
                 <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="t_trangthai", id="t_trangthai">
-                    <option value="1">Khóa</option> 
-                    <option value="2">Khả dụng</option>
+                    <option value="1" selected="">Khóa</option> 
+                    <option value="2">Khả Dụng</option>
                 </select>
+                @else
+                <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="t_trangthai", id="t_trangthai">
+                    <option value="1" >Khóa</option> 
+                    <option value="2" selected>Khả Dụng</option>
+                </select>
+                @endif
 
           </div>
           
           
 
-          <div class="form-group">
-                <label>Tạo Mới:</label>
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input type="text" class="form-control pull-right datepicker" id="t_taomoi" name="t_taomoi" value="{{$truong->t_taomoi}}">
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Cập Nhật:</label>
-
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input type="text" class="form-control pull-right datepicker" id="t_capnhat" name="t_capnhat" value="{{$truong->t_capnhat}}">
-                </div>
-                <!-- /.input group -->
-              </div>
+          
         </div>
         <!-- /.box-body -->
 

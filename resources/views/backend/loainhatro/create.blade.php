@@ -57,7 +57,7 @@
                 </select>
           </div>
           
-          <div class="form-group">
+          <!-- <div class="form-group">
                 <label>Tạo Mới:</label>
 
                 <div class="input-group date">
@@ -66,7 +66,7 @@
                   </div>
                   <input type="text" class="form-control pull-right datepicker" id="lnt_taomoi" name="lnt_taomoi">
                 </div>
-                <!-- /.input group -->
+               
               </div>
               <div class="form-group">
                 <label>Cập Nhật:</label>
@@ -77,8 +77,8 @@
                   </div>
                   <input type="text" class="form-control pull-right datepicker" id="lnt_capnhat" name="lnt_capnhat">
                 </div>
-                <!-- /.input group -->
-              </div>
+                
+              </div> -->
 
               
 

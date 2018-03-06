@@ -27,6 +27,7 @@ Route::group(['prefix'=>'admin'], function(){
 
 Route::resource('truong', 'TruonghocController')->middleware(CheckLevelMiddleware::class); // route hỗ trợ lấy toàn bộ controller.
 Route::resource('loainhatro', 'LoainhatroController')->middleware(CheckLevelMiddleware::class);
+Route::resource('tienich', 'TienichController')->middleware(CheckLevelMiddleware::class);
 Route::resource('user', 'UserController')->middleware(CheckLevelMiddleware::class);
 Route::get('dsadmin', 'UserController@getdsadmin')->name('dsadmin')->middleware(CheckLevelMiddleware::class);
 Route::get('dsmem', 'UserController@getdsmem')->name('dsmem')->middleware(CheckLevelMiddleware::class);
@@ -43,10 +44,13 @@ Route::get('/dangnhap', function () {
 Route::get('/dangki', function () {
     return view('frontend.dangki');
 });
-
-Route::get('/dangtin', function () {
-    return view('frontend.dangtin');
-});
+Route::get('/themnhatro', 'FrontendController@gettienich')->name('themnhatro');
+// Route::get('/themnhatro', function () {
+//     return view('frontend.themnhatro');
+// })->name('themnhatro');
+Route::get('/profile', function () {
+    return view('frontend.profile');
+})->name('profile');
 Route::get('/thongtin', function () {
     return view('frontend.thongtinnhatro');
 });

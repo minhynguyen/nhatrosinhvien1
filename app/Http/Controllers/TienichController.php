@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\loainhatro;
-use App\Http\Requests\LoaiNhaTroRequest;
-class LoainhatroController extends Controller
+use App\tienich;
+use App\Http\Requests\tienichRequest;
+
+class TienichController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class LoainhatroController extends Controller
      */
     public function index()
     {
-        $dsloainhatro = loainhatro::all();
-        return view('backend.loainhatro.index')->with('dsloainhatro',$dsloainhatro);
+        $dstienich = tienich::all();
+        return view('backend.tienich.index')->with('dstienich',$dstienich);
     }
 
     /**
@@ -25,7 +26,7 @@ class LoainhatroController extends Controller
      */
     public function create()
     {
-        return view('backend.loainhatro.create');
+        return view('backend.tienich.create');
     }
 
     /**
@@ -34,19 +35,23 @@ class LoainhatroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LoaiNhaTroRequest $request)
+    public function store(tienichRequest $request)
     {
         $validatedData = $request->validate([
-        'lnt_ten' => 'required|max:50',
-        'lnt_trangthai' => 'required',
+        'ti_ten' => 'required|max:30',
+        'ti_diengiai' => 'required',
+        'ti_ten'=>'unique:tienich'
+
         ]);
         try{
-        $loainhatro = new loainhatro();
-        $loainhatro->lnt_ten = $request->lnt_ten; //trước giống tên cột sau giống tên input ở form nhập liệu
-        $loainhatro->lnt_trangthai = $request->lnt_trangthai;
-        $loainhatro->save();
+        $tienich = new tienich();
+        $tienich->ti_ten = $request->ti_ten; //trước giống tên cột sau giống tên input ở form nhập liệu
+        $tienich->ti_diengiai = $request->ti_diengiai;
+        // $tienich->ti_taomoi = $request->ti_taomoi;
+        // $tienich->ti_capnhat = $request->ti_capnhat;
+        $tienich->save();
 
-        return redirect(route('loainhatro.index')); //trả về trang cần hiển thị
+        return redirect(route('tienich.index')); //trả về trang cần hiển thị
         }
         catch(QueryException $ex){
             return reponse([
@@ -73,8 +78,8 @@ class LoainhatroController extends Controller
      */
     public function edit($id)
     {
-        $loainhatro = loainhatro::find($id);
-        return view('backend.loainhatro.edit')->with('loainhatro', $loainhatro);
+        $tienich = tienich::find($id);
+        return view('backend.tienich.edit')->with('tienich', $tienich);
     }
 
     /**
@@ -84,15 +89,15 @@ class LoainhatroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(LoaiNhaTroRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try{
-        $loainhatro = loainhatro::find($id);
-        $loainhatro->lnt_ten = $request->lnt_ten; //trước giống tên cột sau giống tên input ở form nhập liệu
-        $loainhatro->lnt_trangthai = $request->lnt_trangthai;
-        $loainhatro->save();
+        $tienich = tienich::find($id);
+        $tienich->ti_ten = $request->ti_ten; //trước giống tên cột sau giống tên input ở form nhập liệu
+        $tienich->ti_diengiai = $request->ti_diengiai;
+        $tienich->save();
 
-        return redirect(route('loainhatro.index')); //trả về trang cần hiển thị
+        return redirect(route('tienich.index')); //trả về trang cần hiển thị
         }
         catch(QueryException $ex){
             return reponse([
@@ -108,8 +113,8 @@ class LoainhatroController extends Controller
      */
     public function destroy($id)
     {
-        $loainhatro = loainhatro::find($id);
-        $loainhatro->delete();
-        return redirect(route('loainhatro.index'));
+        $tienich = tienich::find($id);
+        $tienich->delete();
+        return redirect(route('tienich.index'));
     }
 }

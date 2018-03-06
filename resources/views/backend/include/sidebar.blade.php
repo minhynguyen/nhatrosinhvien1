@@ -52,6 +52,15 @@
             <li><a href="{{route('loainhatro.index')}}"> <i class="fa fa-list"></i>Danh Sách Các Loại Nhà Trọ</a></li>
             <li><a href="{{route('loainhatro.create')}}"><i class="fa fa-plus"></i>Thêm Loại Nhà Trọ</a></li>
           </ul>
+          <a href="#"><i class="fa fa-list-alt"></i> <span>Tiện Ích Nhà Trọ</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('tienich.index')}}"> <i class="fa fa-list"></i>Danh Sách Các Loại Tiện Ích Nhà Trọ</a></li>
+            <li><a href="{{route('tienich.create')}}"><i class="fa fa-plus"></i>Thêm Tiện Ích Nhà Trọ</a></li>
+          </ul>
           <a href="#"><i class="fa fa-users"></i> <span>Quản Trị Người Dùng</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>

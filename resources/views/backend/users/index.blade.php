@@ -3,7 +3,13 @@
 @section('title')
   Quản Trị Tài Khoản Người Dùng
 @endsection
-
+@section('css')
+<style>
+  a {
+    color: #ffffff !important;
+}
+</style>
+@endsection
 
 @section('page-header')
       <h1>
