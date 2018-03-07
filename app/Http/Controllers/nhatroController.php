@@ -13,6 +13,7 @@ class nhatroController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
