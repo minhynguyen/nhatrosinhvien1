@@ -167,12 +167,31 @@
                                    
                                 @else
                                 <!--  -->
-                                    <li class="dropdown">
-                                        <a href="#" class="color_animation" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                            {{ Auth::user()->name }} <span class="caret" class="color_animation"></span>
-                                        </a>
 
-                                        <ul class="dropdown-menu">
+                                    <li class="dropdown">
+                                        <!-- <a href="#" class="color_animation" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                            {{ Auth::user()->name }} <span class="caret" class="color_animation"></span>
+                                        </a> -->
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li class="dropdown" >
+                                              <a href="" class="dropdown-toggle"  data-toggle="dropdown" style="color: white" >{{ Auth::user()->name }} <span class="caret"></span></a>
+                                              <ul class="dropdown-menu" role="menu">
+                                                
+                                                <li><a href="{{ route('profile') }}">Thông Tin Tài Khoản</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                  document.getElementById('logout-form').submit();">Đăng Xuất</a></li>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+                                                <!-- <li><a href="#">Something else here</a></li>
+                                                
+                                                <li><a href="#">Separated link</a></li> -->
+                                              </ul>
+                                            </li>
+                                        </ul>
+
+                                        <!-- <ul class="dropdown-menu">
                                             <li>
                                                 <a href="{{ route('logout') }}"onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">Đăng Xuất
@@ -186,7 +205,7 @@
                                                     {{ csrf_field() }}
                                                 </form>
                                             </li>
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                 @endguest
                    
@@ -232,6 +251,18 @@
     showInputs: false
     })
   });
+$(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
   
   
 </script>
@@ -275,7 +306,7 @@
     map:map,
 
 
-    icon: '{{ asset ('theme/homepage/image/school.png') }}'
+    icon: '{{ asset ('theme/homepage/image/mar2.png') }}'
     
   });
   var infowindow = new google.maps.InfoWindow();  
@@ -285,7 +316,7 @@
                     '<div class="iw-title">{{$Tr->t_ten}}</div>' +
                     '<div class="iw-content">' +
                       '<div class="iw-subTitle">Tọa Độ: {{$Tr->t_vido}} , {{$Tr->t_kinhdo}}</div>'+
-                      '<img src="{{ asset ('theme/homepage/image/school.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
+                      '<img src="{{ asset ('theme/homepage/image/home.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
                   '</div>';  
                infowindow.setContent(content);  
                infowindow.open(map, school);  
@@ -296,7 +327,7 @@
                     '<div class="iw-title">Vị Trí Của Tôi: </div>' +
                     '<div class="iw-content">' +
                       '<div class="iw-subTitle">Tọa Độ: </div>'+
-                      '<img src="{{ asset ('theme/homepage/image/school.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
+                      '<img src="{{ asset ('theme/homepage/image/mar.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
                   '</div>';
 
   // A new Info Window is created and set content

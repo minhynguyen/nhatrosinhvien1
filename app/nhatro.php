@@ -10,7 +10,7 @@ class nhatro extends Model
     const UPDATED_AT ='nt_capnhat';
     
     protected $table = 'nhatro';
-    protected $fillable = ['nt_ten', 'nt_diachi', 'nt_kinhdo', 'nt_vido', 'nt_thongtin', 'nt_giadien', 'nt_gianuoc', 'nt_hinh', 'nt_taomoi', 'nt_capnhat', 'nt_trangthai', 'id'];
+    protected $fillable = ['nt_ten', 'nt_diachi', 'nt_kinhdo', 'nt_vido', 'nt_thongtin', 'nt_giadien', 'nt_gianuoc', 'nt_hinh', 'nt_taomoi', 'nt_capnhat', 'nt_trangthai', 'id', 'lnt_ma'];
     protected $guarded = ['nt_ma'];
     protected $primaryKey = 'nt_ma';
     protected $dates =['nt_taomoi', 'nt_capnhat'];
@@ -19,6 +19,10 @@ class nhatro extends Model
     public function user(){
     	return $this->belongsTo('App\User', 'id', 'id');
     	// mot nha tro chi thuoc 1 user
+    }
+    public function loaint(){
+        return $this->belongsTo('App\loainhatro', 'lnt_ma', 'lnt_ma');
+        // mot nha tro chi thuoc 1 user
     }
     public function phongtros(){
     	return $this->hasMany('App\phongtro', 'nt_ma', 'nt_ma');

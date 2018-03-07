@@ -29,10 +29,7 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <!-- <li class="header">HEADER</li>
-        Optionally, you can add icons to the links
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->
+        <li class="active"><a href="{{ route('index')}}"><i class="fa fa-home"></i> <span>Trang Chủ</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-university"></i> <span>Trường</span>
             <span class="pull-right-container">
