@@ -39,7 +39,6 @@
           
           
           <div class="form-group">
-
             <label for="exampleInputEmail1">Nhập Tên Loại</label>
             <input type="text" class="form-control" id="lnt_ten" name="lnt_ten" placeholder="Nhập Tên Loại Nhà Trọ">
           </div>

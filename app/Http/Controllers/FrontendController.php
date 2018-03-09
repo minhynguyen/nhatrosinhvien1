@@ -37,6 +37,41 @@ class FrontendController extends Controller
 
     }
 
+
+    // public function themnhatro(Request $request)
+    // {
+    //     // $validatedData = $request->validate([
+    //     // 'lnt_ten' => 'required|max:50',
+    //     // 'lnt_trangthai' => 'required',
+    //     // ]);
+    //     try{
+    //     $nhatro = new nhatro();
+    //     $nhatro->nt_ten = $request->nt_ten;
+    //     $nhatro->nt_diachi = $request->nt_diachi;
+    //     $nhatro->nt_kinhdo = $request->nt_kinhdo;
+    //     $nhatro->nt_vido = $request->nt_vido;
+    //     $nhatro->nt_thongtin = $request->nt_thongtin;
+    //     $nhatro->nt_giadien = $request->nt_giadien;
+    //     $nhatro->nt_gianuoc = $request->nt_gianuoc;
+    //     $nhatro->id = $request->id;
+    //     $nhatro->lnt_ma = $request->lnt_ma;
+    //     $nhatro->save();
+
+    //     foreach ($tienich['items'] as $key => $value) {
+    //         $nhatro_tienich = new nhatro_tienich();
+    //         $nhatro_tienich->nt_ma = $key;
+    //         $nhatro_tienich->ti_ma = $request->ti_ma;
+
+    //     }
+
+    //     return redirect(route('frontend.profile')); //trả về trang cần hiển thị
+    //     }
+    //     catch(QueryException $ex){
+    //         return reponse([
+    //             'error' => true, 'message' => $ex->getMessage()], 500);
+    //     }
+    // }
+
     /**
      * Show the form for creating a new resource.
      *

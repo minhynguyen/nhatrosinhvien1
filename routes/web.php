@@ -31,8 +31,9 @@ Route::resource('tienich', 'TienichController')->middleware(CheckLevelMiddleware
 Route::resource('user', 'UserController')->middleware(CheckLevelMiddleware::class);
 Route::get('dsadmin', 'UserController@getdsadmin')->name('dsadmin')->middleware(CheckLevelMiddleware::class);
 Route::get('dsmem', 'UserController@getdsmem')->name('dsmem')->middleware(CheckLevelMiddleware::class);
-
+Route::resource('nhatro', 'nhatroController')->middleware(CheckLevelMiddleware::class);
 });
+
 
 Route::get('/', 'FrontendController@index');
 // Route::get('/', function () {

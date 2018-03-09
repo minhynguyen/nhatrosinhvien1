@@ -8,7 +8,7 @@ class nhatro_tienich extends Model
 {
     public    $timestamps   = false;
 
-    protected $table        = 'nhatrotienich';
+    protected $table        = 'nhatro_tienich';
     protected $fillable     = [];
     protected $guarded      = ['nt_ma', 'ti_ma'];
 

@@ -28,6 +28,17 @@
     
   }
 </style>
+<script>
+    function preview_images() 
+        {
+         var total_file=document.getElementById("images").files.length;
+         for(var i=0;i<total_file;i++)
+         {
+          $('#image_preview').append("<div class='col-md-3'><img class='img-responsive' src='"+URL.createObjectURL(event.target.files[i])+"'></div>");
+         }
+    }
+</script>
+
             
       </head>
      
@@ -57,16 +68,16 @@
                 </div><!-- /.container-fluid -->
             </nav>
             
-
+          <form name="frmnhatro" method="POST" action="">
             <div class="description_content">
                 <div class="text-content container">
                     <div class="col-md-6">
                         <h1 style="font-family: Time new romance">Đăng Kí Nhà Trọ</h1>
                         <div class="fa fa-tasks fa-2x"></div>
-              
-                        <div class="col-md-6" style="margin-top: 10px">
+                        
+                        <div class="col-md-12" style="margin-top: 10px">
                             <!-- <input type="text" name="" class="form" style="width: 100%" placeholder="Chọn Loại Bài Đăng"> -->
-                            <select class="form" style="width: 100%">
+                            <select class="form" style="width: 100%" name="lnt_ma">
                                       <option value="" disabled selected>Chọn Loại Nhà Trọ</option>
                                       @foreach($dsloainhatro as $lnt)
                                         <option value="{{$lnt->lnt_ma}}">{{$lnt->lnt_ten}}</option>
@@ -74,32 +85,23 @@
                             </select>
                         </div>
 
-                        <div class="col-md-6" style="margin-top: 10px">
-                            <!-- <input type="text" name="" class="form" style="width: 100%" placeholder="Chọn Loại Phòng"> -->
-                            <select class="form" style="width: 100%">
-                                      <option value="" disabled selected>Chọn Loại Phòng</option>
-                                      <option>CHO THUÊ</option>
-                                      <option>Ở GHÉP</option>      
-                            </select>
-                        </div>
-                        
-
                         <div class="col-md-12" style="margin-top: 10px">
-                          <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div>
+                          <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
                             <input type="text" name="" class="form" style="width: 100%" placeholder="Tên Nhà Trọ">
                         </div>
 
-                        <!-- <div class="col-md-6" style="margin-top: 10px">
-                            <input type="text" name="" class="form" style="width: 100%" placeholder="Tên Người Cho Thuê">
+                        
+                        <div class="col-md-12" style="margin-top: 10px">
+                            <input type="text" name="" class="form" style="width: 100%" placeholder="Tên Người Cho Thuê" value="{{ Auth::user()->name}}">
                         </div>
 
-                        <div class="col-md-6" style="margin-top: 10px">
+                        <div class="col-md-12" style="margin-top: 10px">
                             <input type="text" name="" class="form" style="width: 100%" placeholder="Số Điện Thoại Liên Lạc">
-                        </div> -->
+                        </div>
                         
-                        <div class="col-md-6" style="margin-top: 10px">
+                        <!-- <div class="col-md-6" style="margin-top: 10px">
                             <div class="input-group" class="form">
-                              <input type="text" class="form" name="msg" placeholder="Giá Cho Thuê" >
+                              <input type="text" class="form" name="nt_giathue" placeholder="Giá Cho Thuê" >
                               <span class="input-group-addon">/Tháng</span>
                             </div>
                         </div>
@@ -109,7 +111,7 @@
                               <input type="text" class="form" name="msg" placeholder="Diện Tích Phòng" >
                               <span class="input-group-addon">(~ M<sup>2</sup>).</span>
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div class="col-md-12" style="margin-top: 10px">
@@ -119,27 +121,27 @@
                               <!-- <input type="text" id="searchmap"  class="form" placeholder="Nhập Địa Chỉ Chính Xác Nhà Trọ" style="width: 100%"> -->
                               <!-- <hr> -->
                               <!-- <div id="map-canvas"></div> -->
-                              <input id="pac-input" type="text" name="t_ten" placeholder="Vui Lòng Nhập Chính Xác Địa Chỉ Nhà Trọ" style="width: 100%" class="form">
+                              <input id="pac-input" type="text" name="nt_diachi" placeholder="Vui Lòng Nhập Chính Xác Địa Chỉ Nhà Trọ" style="width: 100%" class="form">
                 
                  <!-- <div id="map"></div> -->
-                 <div id="infowindow-content">
-                  <img src="" width="16" height="16" id="place-icon">
-                  <span id="place-name"  class="title"></span><br>
-                  <span id="place-address"></span>
-                </div>
+                               <div id="infowindow-content">
+                                <img src="" width="16" height="16" id="place-icon">
+                                <span id="place-name"  class="title"></span><br>
+                                <span id="place-address"></span>
+                              </div>
                               
                           
                         </div>
                         <div class="col-md-6" style="margin-top: 10px">
                           
                             <label for="">VĨ ĐỘ (LATITUDE)</label>
-                            <input type="text" class="form" name="lat" id="lat" style="width: 100%">
+                            <input type="text" class="form" name="nt_vido" id="lat" style="width: 100%">
                           
                         </div>
                         <div class="col-md-6" style="margin-top: 10px"> 
                           
                             <label for="">KINH ĐỘ (LONGITUDE)</label>
-                            <input type="text" class="form" name="lng" id="lng" style="width: 100%">
+                            <input type="text" class="form" name="nt_kinhdo" id="lng" style="width: 100%">
                           
                         </div>
 
@@ -162,14 +164,14 @@
                           <div class="fa fa-cubes fa-2x" > Thông Tin Bổ Sung</div>
                           <div class="col-md-6" style="margin-top: 10px">
                             <div class="input-group" class="form">
-                              <input type="text" class="form" name="msg" placeholder="Giá Điện" >
+                              <input type="text" class="form" name="nt_giadien" placeholder="Giá Điện" >
                               <span class="input-group-addon">(~ Kw/h)</span>
                             </div>
                         </div>
 
                         <div class="col-md-6" style="margin-top: 10px">
                             <div class="input-group" class="form">
-                              <input type="text" class="form" name="msg" placeholder="Giá Nước" >
+                              <input type="text" class="form" name="nt_gianuoc" placeholder="Giá Nước" >
                               <span class="input-group-addon">(~ M<sup>3</sup>).</span>
                             </div>
                         </div>
@@ -212,35 +214,32 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="fa fa-file-photo-o fa-2x" > Hình Ảnh Nhà Trọ</div>
-                        <div style="max-width: 650px; margin: auto;">
-                        <form id="upload-image-form" action="" method="post" enctype="multipart/form-data">
-                          <div id="image-preview-div" style="display: none">
-                            <label for="exampleInputFile">Ảnh Đã Chọn</label>
-                            <br>
-                            <img id="preview-img" src="">
+                        <div class="fa fa-cubes fa-2x" > Hình Ảnh Nhà Trọ</div>
+                        <div class="row">
+                         <form action="multiupload.php" method="post" enctype="multipart/form-data">
+                          <div class="col-md-6">
+                              <input type="file" class="form-control" id="images" name="images[]" onchange="preview_images();" multiple/>
                           </div>
-                          <div class="form-group">
-                            <input type="file" name="file" id="file" required>
+                          <div class="col-md-6">
+                              <input type="submit" class="btn btn-primary" name='submit_image' value="Upload Multiple Image"/>
                           </div>
-                        </form>
-                      </div>
-
-                     
-
-
+                         </form>
+                         </div>
+                         <div class="row" id="image_preview"></div>
+                           
                     </div>
 
 
                     <div class="col-md-12">
                         <div class="fa fa-puzzle-piece fa-2x" > Thông Tin Mô Tả Thêm</div>
-                        <textarea id="editor1" name="editor1" rows="10" cols="80" style="width: 100%">
+                        <textarea id="editor1" name="nt_thongtin" rows="10" cols="80" style="width: 100%">
                     </textarea>
                     </div>
 
                     <div class="col-md-12" style="margin-top: 10px">
                             <button type="submit" id="submit" name="submit" class="text-center form-btn" style="width: 100%; background-color: #50a900"><li class="fa fa-paper-plane"> </li> Đăng Tin</button>
                     </div>
+                  </form>
 
                     
 
@@ -253,6 +252,7 @@
                 </div>
             </footer>
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.min.js') }}"> </script>
+            <!-- <script type="text/javascript" src="{{ asset ('theme/homepage/js/upload.js') }}"> </script> -->
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/bootstrap.min.js') }}" ></script>
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.js') }}"></script>     
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery.mixitup.min.js') }}" ></script>
