@@ -8,7 +8,7 @@
 @section('page-header')
       <h1>
         DANH SÁCH CÁC NHÀ TRỌ
-        <small>Tọa Độ Của Các Trường Đại Học Trên Địa Bàn Thành Phố Cần Thơ</small>
+        <small>Thông Tin Các Nhà Trọ</small>
       </h1>
 @endsection
 @section('css')
@@ -25,9 +25,6 @@
 <div class="box">
             <div class="box-header">
               <h3 class="box-title">DANH SÁCH CÁC NHÀ TRỌ</h3>
-              
-              
-
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -49,6 +46,9 @@
                   <th style="text-align: center;">Vĩ độ</th>
                   <th style="text-align: center;">Kinh độ</th>
                   <th style="text-align: center;">Mã Loại</th>
+                  <th style="text-align: center;">Giá Điện</th>
+                  <th style="text-align: center;">Giá Nước</th>
+                  <th style="text-align: center;">Thông Tin</th>
                   <!-- <th>Ngày Tạo Mới</th>
                   <th>Ngày Cập Nhật</th> -->
                   <th>Trạng Thái</th>
@@ -64,12 +64,28 @@
                     
                     <td style="text-align: center;">{{$nhatro->nt_kinhdo}}</td>
                     <td style="text-align: center;">{{$nhatro->lnt_ma}}</td>
-                     @if ($nhatro->nt_trangthai === 1)
+                     
+                    <td>{{$nhatro->nt_giadien}}</td>
+                    <td>{{$nhatro->nt_gianuoc}}</td>
+                    <td>{{$nhatro->nt_thongtin}}</td>
+                    @if ($nhatro->nt_trangthai === 1)
 
                         <td style="text-align: center;"><span class="badge bg-yellow">KHÓA</span></td>
                     @else
                         <td style="text-align: center;"><span class="badge bg-green">Khả Dụng</span></td>
                     @endif
+                    <td>
+                      <button type="button" class="btn btn-warning"> <a href=" {{ route('nhatro.edit', ['nhatro' => $nhatro->nt_ma]) }}" ><i class="fa fa-edit"></i> Edit</a></button>
+                    
+                      
+                    </td>
+                    <td>
+                      <form method="POST" action="{{route('nhatro.destroy', ['nhatro' => $nhatro->nt_ma])}}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete </a></button>
+                      </form>
+                    </td>
                     
                 </tr>
 

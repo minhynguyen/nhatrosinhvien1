@@ -48,21 +48,14 @@
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <!-- <ul class="nav navbar-nav main-nav  clear navbar-right ">
-                                <li style="padding-right: 30px"><a class="color_animation" href="#">ĐĂNG TIN CHO THUÊ</a></li>
-                                <li style="padding-right: 30px"> <a class="color_animation" href="#">QUẢN LÝ TÀI KHOẢN</a></li>
-                                <li style="padding-right: 30px"><a class="color_animation" href="#">QUẢN LÝ ĐẶT PHÒNG</a></li>
-                                <li style="padding-right: 30px"><a class="color_animation" href="#">KHÔNG GIAN</a></li>
-                                
-                            </ul> -->
+                           
                         </div><!-- /.navbar-collapse -->
                     </div>
                 </div><!-- /.container-fluid -->
             </nav>
-            
-          <form name="frmnhatro" method="POST" action="{{route('create')}}" enctype="multipart/form-data">
-
-            {{ csrf_field() }}
+        <form name="frmTruong" method="POST" action="{{route('nhatrofrontend.update', ['nhatro'=> $nhatro->nt_ma]) }}"> <!-- action tu controller -->
+          {{ csrf_field() }}
+          {{ method_field('PATCH') }}
             <div class="description_content">
                 <div class="text-content container">
                     @if($errors->any())
@@ -76,7 +69,7 @@
                       </div>
                       @endif
                     <div class="col-md-6">
-                        <h1 style="font-family: Time new romance">Đăng Kí Nhà Trọ</h1>
+                        <h1 style="font-family: Time new romance">Cập Nhật Nhà Trọ</h1>
                         <div class="fa fa-tasks fa-2x"></div>
                         
                         <div class="col-md-12" style="margin-top: 10px">
@@ -84,23 +77,27 @@
                             <select class="form" style="width: 100%" name="lnt_ma">
                                       <option value="" disabled selected>Chọn Loại Nhà Trọ</option>
                                       @foreach($dsloainhatro as $lnt)
-                                        <option value="{{$lnt->lnt_ma}}">{{$lnt->lnt_ten}}</option>
+                                        <!-- <option value="{{$lnt->lnt_ma}}">{{$lnt->lnt_ten}}</option> -->
+                                        <option value="{{$lnt->lnt_ma}}" <?php echo ($lnt->lnt_ma == $nhatro->lnt_ma) ? 'selected' : ''  ?>>{{$lnt->lnt_ten}}</option>
                                       @endforeach      
                             </select>
                         </div>
 
+                       
+
                         <div class="col-md-12" style="margin-top: 10px">
                           <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
-                            <input type="text" name="" class="form" style="width: 100%" placeholder="Tên Nhà Trọ">
+                            <input type="text" name="nt_ten" class="form" style="width: 100%" placeholder="Tên Nhà Trọ" value="{{$nhatro->nt_ten}}">
                         </div>
+                        
 
                         
-                        <div class="col-md-12" style="margin-top: 10px">
+                        <!-- <div class="col-md-12" style="margin-top: 10px">
                             <input type="text" name="" class="form" style="width: 100%" placeholder="Tên Người Cho Thuê" value="{{ Auth::user()->name}}">
-                        </div>
+                        </div> -->
 
                         <div class="col-md-12" style="margin-top: 10px">
-                            <input type="text" name="" class="form" style="width: 100%" placeholder="Số Điện Thoại Liên Lạc">
+                            <input type="text" name="nt_sdtlienhe" class="form" style="width: 100%" placeholder="Số Điện Thoại Liên Lạc" value="{{$nhatro->nt_sdtlienhe}}">
                         </div>
                         
                         <!-- <div class="col-md-6" style="margin-top: 10px">
@@ -120,12 +117,7 @@
 
                         <div class="col-md-12" style="margin-top: 10px">
                           <div class="fa fa-cogs fa-2x" > Địa Chỉ Cụ Thể</div>
-                          
-                              <!-- <label for="">ĐIỂM CẦN THÊM:</label> -->
-                              <!-- <input type="text" id="searchmap"  class="form" placeholder="Nhập Địa Chỉ Chính Xác Nhà Trọ" style="width: 100%"> -->
-                              <!-- <hr> -->
-                              <!-- <div id="map-canvas"></div> -->
-                              <input id="pac-input" type="text" name="nt_diachi" placeholder="Vui Lòng Nhập Chính Xác Địa Chỉ Nhà Trọ" style="width: 100%" class="form">
+                              <input id="pac-input" type="text" name="nt_diachi" placeholder="Vui Lòng Nhập Chính Xác Địa Chỉ Nhà Trọ" style="width: 100%" class="form" value="{{$nhatro->nt_diachi}}">
                 
                  <!-- <div id="map"></div> -->
                                <div id="infowindow-content">
@@ -139,46 +131,48 @@
                         <div class="col-md-6" style="margin-top: 10px">
                           
                             <label for="">VĨ ĐỘ (LATITUDE)</label>
-                            <input type="text" class="form" name="nt_vido" id="lat" style="width: 100%">
+                            <input type="text" class="form" name="nt_vido" id="lat" style="width: 100%" value="{{$nhatro->nt_vido}}">
                           
                         </div>
                         <div class="col-md-6" style="margin-top: 10px"> 
                           
                             <label for="">KINH ĐỘ (LONGITUDE)</label>
-                            <input type="text" class="form" name="nt_kinhdo" id="lng" style="width: 100%">
+                            <input type="text" class="form" name="nt_kinhdo" id="lng" style="width: 100%" value="{{$nhatro->nt_kinhdo}}">
                           
                         </div>
 
 
-                        <div class="col-md-12" style="margin-top: 10px">
+                        <!-- <div class="col-md-12" style="margin-top: 10px">
                           <div class="fa fa-cogs fa-2x" > Tiện ích phòng trọ</div>
                           <div class="col-md-12">
                             <div class="checkbox">
                               @foreach($dstienich as $ti)
-                              <!-- <option value="{{$ti->ti_ma}}">{{$ti->ti_ten}}</option> -->
-                              <label><input type="checkbox" value="{{$ti->ti_ma}}">{{$ti->ti_ten}}</label>
+                             
+                              <label><input type="checkbox" value="{{$ti->ti_ma}}" name="tienich[]">{{$ti->ti_ten}}</label>
                               @endforeach
                               
                             </div>
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div class="col-md-12" style="margin-top: 10px">
                           <div class="fa fa-cubes fa-2x" > Thông Tin Bổ Sung</div>
                           <div class="col-md-6" style="margin-top: 10px">
                             <div class="input-group" class="form">
-                              <input type="text" class="form" name="nt_giadien" placeholder="Giá Điện" >
+                              <input type="text" class="form" name="nt_giadien" placeholder="Giá Điện" value="{{$nhatro->nt_giadien}}">
                               <span class="input-group-addon">(~ Kw/h)</span>
                             </div>
                         </div>
 
                         <div class="col-md-6" style="margin-top: 10px">
                             <div class="input-group" class="form">
-                              <input type="text" class="form" name="nt_gianuoc" placeholder="Giá Nước" >
+                              <input type="text" class="form" name="nt_gianuoc" placeholder="Giá Nước" value="{{$nhatro->nt_gianuoc}}">
                               <span class="input-group-addon">(~ M<sup>3</sup>).</span>
                             </div>
                         </div>
+
+
 
                         <!-- <div class="col-md-6" style="margin-top: 10px">
                             <select class="form" style="width: 100%">
@@ -217,30 +211,34 @@
                         <div id="map"></div>
                     </div>
 
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <div class="fa fa-cubes fa-2x" > Hình Ảnh Nhà Trọ</div>
                         
                          <div class="form-group">
-            <!-- <div id="formdiv"> -->
                           <div id="filediv">
                             <input type="file" id="file" name="images[]" multiple="multiple" accept="image/*" title="Select Images To Be Uploaded">
                             <br>
-                          <!-- </div> -->
                       </div>
 
                       </div>
                            
-                    </div>
+                    </div> -->
 
 
-                    <div class="col-md-12">
-                        <div class="fa fa-puzzle-piece fa-2x" > Thông Tin Mô Tả Thêm</div>
-                        <textarea id="editor1" name="nt_thongtin" rows="10" cols="80" style="width: 100%">
+                    <!-- <div class="col-md-12">
+                        
+                        <textarea id="editor1" name="nt_thongtin" rows="10" cols="80" style="width: 100%" value="{{old('nt_thongtin')}}">
                     </textarea>
+                    </div> -->
+                    <!-- <div class="col-md-12"> -->
+                        <div class="col-md-12" style="margin-top: 10px">
+                          <div class="fa fa-puzzle-piece fa-2x" > Thông Tin Mô Tả Thêm</div>
+                            <input type="text" name="nt_thongtin" class="form" style="width: 100%" placeholder="Thông Tin Thêm" value="{{$nhatro->nt_thongtin}}">
+                        <!-- </div> -->
                     </div>
 
                     <div class="col-md-12" style="margin-top: 10px">
-                            <button type="submit"  class="text-center form-btn" style="width: 100%; background-color: #50a900"><li class="fa fa-paper-plane"> </li> Đăng Tin</button>
+                            <button type="submit"  class="text-center form-btn" style="width: 100%; background-color: #50a900"><li class="fa fa-paper-plane"> </li> Cập Nhật</button>
                     </div>
                   </form>
 
@@ -263,7 +261,7 @@
             <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
             <script src="{{ asset ('theme/homepage/upload-image.js') }}"></script>
             <script src="{{ asset ('theme/homepage/ckeditor/ckeditor.js') }}"></script>
-            <script>CKEDITOR.replace('editor1');</script>
+            <!-- <script>CKEDITOR.replace('editor1');</script> -->
 
 <script>
   $('#add_more').click(function() {
@@ -344,8 +342,8 @@
             <script>
  function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 10.031450, lng: 105.768872},
-          zoom: 15,
+          center: {lat: {{$nhatro->nt_vido}}, lng: {{$nhatro->nt_kinhdo}}},
+          zoom: 17,
           scrollwheel: true
         });
         var card = document.getElementById('pac-card');
@@ -364,8 +362,8 @@
         infowindow.setContent(infowindowContent);
         var marker = new google.maps.Marker({
                   position: {
-                  lat: 10.031450,
-                  lng: 105.768872
+                  lat: {{$nhatro->nt_vido}},
+                  lng: {{$nhatro->nt_kinhdo}}
             },
           map: map,
           draggable: true,
@@ -436,7 +434,7 @@
                         alert('use location');
                       }
                 };
-                geolocate();
+                // geolocate();
       }
       
     </script>

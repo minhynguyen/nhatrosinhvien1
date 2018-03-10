@@ -24,7 +24,7 @@ class nhatrorequest extends FormRequest
     public function rules()
     {
         return [
-            'nt_ten' => 'required|max:50',
+            'nt_ten' => 'required|max:150|unique:nhatro',
             'nt_kinhdo' => 'required',
             'nt_vido' => 'required',
             'nt_sdtlienhe' => 'required',
@@ -32,7 +32,7 @@ class nhatrorequest extends FormRequest
             'nt_giadien' => 'required',
             'nt_gianuoc' => 'required',
             'lnt_ma' => 'required',
-            'nt_ten'=>'unique:nhatro',
+            // 'nt_ten'=>'unique:nhatro',
             'nt_diachi'=>'unique:nhatro',
         ];
     }
@@ -46,4 +46,5 @@ class nhatrorequest extends FormRequest
         'nt_ten.unique' => 'Nhà Trọ Này Đã Tồn Tại',
         ];
     }
+    
 }

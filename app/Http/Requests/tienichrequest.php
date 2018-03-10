@@ -25,9 +25,8 @@ class tienichrequest extends FormRequest
     public function rules()
     {
         return [
-            'ti_ten' => 'required|max:50',
+            'ti_ten' => 'required|max:30|unique:tienich',
             'ti_diengiai' => 'required',
-            'ti_ten'=>'unique:tienich',
         ];
     }
     public function messages()

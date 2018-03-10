@@ -38,9 +38,8 @@ class TienichController extends Controller
     public function store(tienichRequest $request)
     {
         $validatedData = $request->validate([
-        'ti_ten' => 'required|max:30',
+        'ti_ten' => 'required|max:30|unique:tienich',
         'ti_diengiai' => 'required',
-        'ti_ten'=>'unique:tienich'
 
         ]);
         try{

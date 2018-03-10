@@ -16,16 +16,5 @@ class nhatro extends Model
     protected $dates =['nt_taomoi', 'nt_capnhat'];
     protected $dateFormat = 'Y-m-d H:i:s';
 
-    // public function user(){
-    // 	return $this->belongsTo('App\User', 'id', 'id');
-    // 	// mot nha tro chi thuoc 1 user
-    // }
-    // public function loaint(){
-    //     return $this->belongsTo('App\loainhatro', 'lnt_ma', 'lnt_ma');
-    //     // mot nha tro chi thuoc 1 user
-    // }
-    // public function phongtros(){
-    // 	return $this->hasMany('App\phongtro', 'nt_ma', 'nt_ma');
-    // 	// mot nt co nhieu pt hasMany()
-    // }
+
 }

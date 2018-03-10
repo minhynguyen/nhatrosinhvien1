@@ -34,8 +34,8 @@ Route::get('dsmem', 'UserController@getdsmem')->name('dsmem')->middleware(CheckL
 Route::resource('nhatro', 'nhatroController')->middleware(CheckLevelMiddleware::class);
 });
 
-
-Route::get('/', 'FrontendController@index');
+Route::resource('nhatrofrontend', 'NhaTroFrontendController');
+Route::get('/', 'FrontendController@index')->name('index');
 // Route::get('/', function () {
 //     return view('frontend.index');
 // });
@@ -46,14 +46,19 @@ Route::get('/dangki', function () {
     return view('frontend.dangki');
 });
 
-Route::get('/themnhatro', 'FrontendController@gettienich')->name('themnhatro');
-Route::post('/themnhatro', 'FrontendController@store')->name('create');
+// Route::get('/themnhatro', 'FrontendController@gettienich')->name('themnhatro');
+// Route::post('/themnhatro', 'FrontendController@store')->name('create');
+
+// Route::get('/editnhatro', 'FrontendController@edit')->name('editnhatro');
+// Route::post('/edit', 'FrontendController@update')->name('edit');
+
 // Route::get('/themnhatro', function () {
 //     return view('frontend.themnhatro');
 // })->name('themnhatro');
-Route::get('/profile', function () {
-    return view('frontend.profile');
-})->name('profile');
+// Route::get('/profile', function () {
+//     return view('frontend.profile');
+// })->name('profile');
+Route::get('/profile', 'FrontendController@getnhatro')->name('profile');
 Route::get('/thongtin', function () {
     return view('frontend.thongtinnhatro');
 });

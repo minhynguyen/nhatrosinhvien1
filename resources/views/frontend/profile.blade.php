@@ -202,35 +202,38 @@
                               <table class="table table-striped table-bordered table-list">
                                 <thead>
                                   <tr>
+                                      <th>Mã Nhà Trọ</th>
                                       <th class="hidden-xs">Tên Nhà Trọ</th>
-                                      <th>Loại Nhà Trọ</th>
+                                      
                                       <th>Địa Chỉ</th>
                                       <th>Thông Tin</th>
                                       <th>Giá Điện</th>
                                       <th>Giá Nước</th>
                                       <th>Trạng Thái</th>
-                                      <th style="text-align: center;"><a class="btn btn-default" href="{{ route('themnhatro') }}"><em class="fa fa-plus"></em>Thêm Nhà Trọ</a></th>
+                                      <th style="text-align: center;"><a class="btn btn-default" href="{{ route('nhatrofrontend.create') }}"><em class="fa fa-plus"></em>Thêm Nhà Trọ</a></th>
                                   </tr> 
                                 </thead>
                                 <tbody>
+                                        @foreach ($dsnhatro as $ds)
                                         <tr>
-                                          
-                                          <td class="hidden-xs"></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
+                                          <td class="hidden-xs">{{$ds->nt_ma}}</td>
+                                          <td>{{$ds->nt_ten}}</td>
+                                          <td>{{$ds->nt_diachi}}</td>
+                                          <td>{{$ds->nt_thongtin}}</td>
+                                          <td>{{$ds->nt_giadien}}</td>
+                                          <td>{{$ds->nt_gianuoc}}</td>
+                                          <td>{{$ds->nt_trangthai}}</td>
+
                                           <td align="center">
-                                            <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
+                                            <a class="btn btn-default" href="{{ route('nhatrofrontend.edit', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-pencil"></em></a>
                                             <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
                                           </td>
                                         </tr>
+                                        @endforeach
                                       </tbody>
                               </table>
                             </div>
-                            <h3><a href="{{ route('themnhatro') }}"> Nếu Bạn Chưa Đăng Kí Nhà Trọ. Hãy Nhấn Vào Đây Để Đăng Kí Nhà Trọ Miễn Phí.</h3></a>
+                            <h3><a href="{{ route('nhatrofrontend.create') }}"> Nếu Bạn Chưa Đăng Kí Nhà Trọ. Hãy Nhấn Vào Đây Để Đăng Kí Nhà Trọ Miễn Phí.</h3></a>
                           </div>
                           <div class="tab-pane fade in" id="tab3">
                             <h3>This is tab 3</h3>
@@ -245,7 +248,7 @@
                                       <th>Giá Điện</th>
                                       <th>Giá Nước</th>
                                       <th>Trạng Thái</th>
-                                      <th style="text-align: center;"><a class="btn btn-default" href="{{ route('themnhatro') }}"><em class="fa fa-plus"></em>Thêm Nhà Trọ</a></th>
+                                      <th style="text-align: center;"><a class="btn btn-default" href="{{ route('nhatrofrontend.create') }}"><em class="fa fa-plus"></em>Thêm Nhà Trọ</a></th>
                                   </tr> 
                                 </thead>
                                 <tbody>
@@ -280,7 +283,7 @@
                                       <th>Giá Điện</th>
                                       <th>Giá Nước</th>
                                       <th>Trạng Thái</th>
-                                      <th style="text-align: center;"><a class="btn btn-default" href="{{ route('themnhatro') }}"><em class="fa fa-plus"></em>Thêm Nhà Trọ</a></th>
+                                      <th style="text-align: center;"><a class="btn btn-default" href="{{ route('nhatrofrontend.create') }}"><em class="fa fa-plus"></em>Thêm Nhà Trọ</a></th>
                                   </tr> 
                                 </thead>
                                 <tbody>
