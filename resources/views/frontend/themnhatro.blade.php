@@ -17,6 +17,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
             <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
+            <link rel="stylesheet" href="{{url('css/dropzone.css')}}">
             <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
         async defer></script> -->
             <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
@@ -28,16 +29,7 @@
     
   }
 </style>
-<script>
-    function preview_images() 
-        {
-         var total_file=document.getElementById("images").files.length;
-         for(var i=0;i<total_file;i++)
-         {
-          $('#image_preview').append("<div class='col-md-3'><img class='img-responsive' src='"+URL.createObjectURL(event.target.files[i])+"'></div>");
-         }
-    }
-</script>
+
 
             
       </head>
@@ -68,9 +60,21 @@
                 </div><!-- /.container-fluid -->
             </nav>
             
-          <form name="frmnhatro" method="POST" action="">
+          <form name="frmnhatro" method="POST" action="{{route('create')}}" enctype="multipart/form-data">
+
+            {{ csrf_field() }}
             <div class="description_content">
                 <div class="text-content container">
+                    @if($errors->any())
+                      <div class="alert alert-danger">
+                        <ul>
+                          <!-- hàm validate trong lar hỗ trợ biến errors -->
+                          @foreach($errors->all() as $error)
+                          <li>{{$error}}</li>
+                          @endforeach
+                        </ul>
+                      </div>
+                      @endif
                     <div class="col-md-6">
                         <h1 style="font-family: Time new romance">Đăng Kí Nhà Trọ</h1>
                         <div class="fa fa-tasks fa-2x"></div>
@@ -215,17 +219,16 @@
 
                     <div class="col-md-6">
                         <div class="fa fa-cubes fa-2x" > Hình Ảnh Nhà Trọ</div>
-                        <div class="row">
-                         <form action="multiupload.php" method="post" enctype="multipart/form-data">
-                          <div class="col-md-6">
-                              <input type="file" class="form-control" id="images" name="images[]" onchange="preview_images();" multiple/>
-                          </div>
-                          <div class="col-md-6">
-                              <input type="submit" class="btn btn-primary" name='submit_image' value="Upload Multiple Image"/>
-                          </div>
-                         </form>
-                         </div>
-                         <div class="row" id="image_preview"></div>
+                        
+                         <div class="form-group">
+            <!-- <div id="formdiv"> -->
+                          <div id="filediv">
+                            <input type="file" id="file" name="images[]" multiple="multiple" accept="image/*" title="Select Images To Be Uploaded">
+                            <br>
+                          <!-- </div> -->
+                      </div>
+
+                      </div>
                            
                     </div>
 
@@ -237,7 +240,7 @@
                     </div>
 
                     <div class="col-md-12" style="margin-top: 10px">
-                            <button type="submit" id="submit" name="submit" class="text-center form-btn" style="width: 100%; background-color: #50a900"><li class="fa fa-paper-plane"> </li> Đăng Tin</button>
+                            <button type="submit"  class="text-center form-btn" style="width: 100%; background-color: #50a900"><li class="fa fa-paper-plane"> </li> Đăng Tin</button>
                     </div>
                   </form>
 
@@ -261,6 +264,83 @@
             <script src="{{ asset ('theme/homepage/upload-image.js') }}"></script>
             <script src="{{ asset ('theme/homepage/ckeditor/ckeditor.js') }}"></script>
             <script>CKEDITOR.replace('editor1');</script>
+
+<script>
+  $('#add_more').click(function() {
+      "use strict";
+      $(this).before($("<div/>", {
+        id: 'filediv'
+      }).fadeIn('slow').append(
+        $("<input/>", {
+          name: 'file[]',
+          type: 'file',
+          id: 'file',
+          multiple: 'multiple',
+          accept: 'image/*'
+        })
+      ));
+    });
+
+    $('#upload').click(function(e) {
+      "use strict";
+      e.preventDefault();
+
+      if (window.filesToUpload.length === 0 || typeof window.filesToUpload === "undefined") {
+        alert("No files are selected.");
+        return false;
+      }
+
+      // Now, upload the files below...
+      // https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications#Handling_the_upload_process_for_a_file.2C_asynchronously
+    });
+
+    function deletePreview(ele, i) {
+      "use strict";
+      try {
+        $(ele).parent().remove();
+        window.filesToUpload.splice(i, 1);
+      } catch (e) {
+        console.log(e.message);
+      }
+    }
+
+    $("#file").on('change', function() {
+      "use strict";
+
+      // create an empty array for the files to reside.
+      window.filesToUpload = [];
+
+      if (this.files.length >= 1) {
+        $("[id^=previewImg]").remove();
+        $.each(this.files, function(i, img) {
+          var reader = new FileReader(),
+            newElement = $("<div id='previewImg" + i + "' class='abcd'><img /></div>"),
+            deleteBtn = $("<span class='delete' onClick='deletePreview(this, " + i + ")'>delete</span>").prependTo(newElement),
+            preview = newElement.find("img");
+
+          reader.onloadend = function() {
+            preview.attr("src", reader.result);
+            preview.attr("alt", img.name);
+          };
+
+          try {
+            window.filesToUpload.push(document.getElementById("file").files[i]);
+          } catch (e) {
+            console.log(e.message);
+          }
+
+          if (img) {
+            reader.readAsDataURL(img);
+          } else {
+            preview.src = "";
+          }
+
+          newElement.appendTo("#filediv");
+        });
+      }
+    });
+</script>
+
             <script>
  function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {

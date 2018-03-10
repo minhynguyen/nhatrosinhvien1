@@ -45,7 +45,9 @@ Route::get('/dangnhap', function () {
 Route::get('/dangki', function () {
     return view('frontend.dangki');
 });
+
 Route::get('/themnhatro', 'FrontendController@gettienich')->name('themnhatro');
+Route::post('/themnhatro', 'FrontendController@store')->name('create');
 // Route::get('/themnhatro', function () {
 //     return view('frontend.themnhatro');
 // })->name('themnhatro');

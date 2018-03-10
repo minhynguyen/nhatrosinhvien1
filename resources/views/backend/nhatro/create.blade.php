@@ -1,12 +1,16 @@
 @extends('backend.layouts.app')   
 
 @section('title')
-  THÊM MỚI TRƯỜNG
+  THÊM MỚI NHÀ TRỌ
 @endsection
 @section('css')
   <link rel="stylesheet" href="{{ asset ('theme/admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
-        async defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="{{url('css/dropzone.css')}}">
+  <!-- <link rel="stylesheet" href="{{url('css/dropzone.js')}}"> -->
+
+ <!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
+        async defer></script> -->
 <!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
             type="text/javascript"></script> -->
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries=places" type="text/javascript"></script> -->
@@ -15,12 +19,13 @@
     width: 100%;
     height: 350px;
   }
+  
 </style>
 @endsection
 
 @section('page-header')
       <h1>
-        THÊM MỚI TRƯỜNG
+        THÊM MỚI NHÀ TRỌ
         <small>CÁC CHỦ ĐỀ VÀ LOẠI HOA</small>
       </h1>
 @endsection
@@ -36,7 +41,7 @@
     </ul>
   </div>
   @endif
-<form name="frmChude" method="POST" action="{{route('nhatro.store')}}"> <!-- action tu controller -->
+<form name="frmChude" method="POST" action="{{route('nhatro.store')}}" enctype="multipart/form-data"> <!-- action tu controller -->
   {{ csrf_field() }}
   <div class="box box-primary">
       <div class="box-header with-border">
@@ -67,8 +72,7 @@
             <input type="text" id="Searchmap"  class="form-control" placeholder="Vui Lòng Nhập Chính Xác Địa Chỉ Trường" style="width: 100%">
                 <hr>
                 <div id="map"></div> -->
-                <input id="pac-input" type="text" name="nt_diachi" placeholder="Vui Lòng Nhập Chính Xác Địa Chỉ Trường" style="width: 100%" class="form-control">
-                <hr>
+                <input id="pac-input" type="text" name="nt_diachi" placeholder="Vui Lòng Nhập Chính Xác Địa Chỉ Nhà Trọ" style="width: 100%" class="form-control"> <hr>
                  <div id="map"></div>
                  <div id="infowindow-content">
                   <img src="" width="16" height="16" id="place-icon">
@@ -142,13 +146,15 @@
               </div>
           </div>
 
-          
-         
+          <div class="form-group">
+            <!-- <div id="formdiv"> -->
+              <div id="filediv">
+                <input type="file" id="file" name="images[]" multiple="multiple" accept="image/*" title="Select Images To Be Uploaded">
+                <br>
+              <!-- </div> -->
+          </div>
 
-              
-
-          
-        </div>
+          </div>
         <!-- /.box-body -->
 
         <div class="box-footer">
@@ -166,6 +172,8 @@
 @endsection
 @section('script')
 <script src=" {{ asset ('theme/admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+
+
 <script>
   $(function(){
     // chấm là class # là id
@@ -175,6 +183,84 @@
     })
   });
 </script>
+<script>
+  $('#add_more').click(function() {
+      "use strict";
+      $(this).before($("<div/>", {
+        id: 'filediv'
+      }).fadeIn('slow').append(
+        $("<input/>", {
+          name: 'file[]',
+          type: 'file',
+          id: 'file',
+          multiple: 'multiple',
+          accept: 'image/*'
+        })
+      ));
+    });
+
+    $('#upload').click(function(e) {
+      "use strict";
+      e.preventDefault();
+
+      if (window.filesToUpload.length === 0 || typeof window.filesToUpload === "undefined") {
+        alert("No files are selected.");
+        return false;
+      }
+
+      // Now, upload the files below...
+      // https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications#Handling_the_upload_process_for_a_file.2C_asynchronously
+    });
+
+    function deletePreview(ele, i) {
+      "use strict";
+      try {
+        $(ele).parent().remove();
+        window.filesToUpload.splice(i, 1);
+      } catch (e) {
+        console.log(e.message);
+      }
+    }
+
+    $("#file").on('change', function() {
+      "use strict";
+
+      // create an empty array for the files to reside.
+      window.filesToUpload = [];
+
+      if (this.files.length >= 1) {
+        $("[id^=previewImg]").remove();
+        $.each(this.files, function(i, img) {
+          var reader = new FileReader(),
+            newElement = $("<div id='previewImg" + i + "' class='abcd'><img /></div>"),
+            deleteBtn = $("<span class='delete' onClick='deletePreview(this, " + i + ")'>delete</span>").prependTo(newElement),
+            preview = newElement.find("img");
+
+          reader.onloadend = function() {
+            preview.attr("src", reader.result);
+            preview.attr("alt", img.name);
+          };
+
+          try {
+            window.filesToUpload.push(document.getElementById("file").files[i]);
+          } catch (e) {
+            console.log(e.message);
+          }
+
+          if (img) {
+            reader.readAsDataURL(img);
+          } else {
+            preview.src = "";
+          }
+
+          newElement.appendTo("#filediv");
+        });
+      }
+    });
+</script>
+
+
+
 <script>
   function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -257,6 +343,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
         async defer></script>
 </script>
+
+
 
 @endsection
 

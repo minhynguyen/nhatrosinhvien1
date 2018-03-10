@@ -43,7 +43,7 @@ class nhatrorequest extends FormRequest
         'nt_kinhdo.required' => 'Kinh Độ Không Được Bỏ Trống',
         'nt_vido.required' => 'Vĩ Độ Không Được Bỏ Trống',
         'nt_ten.max' => 'Tên Không Được Vượt Quá :max Kí Tự',
-        'nt_ten.unique' => 'Tiện Ích Này Đã Tồn Tại',
+        'nt_ten.unique' => 'Nhà Trọ Này Đã Tồn Tại',
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\loainhatro;
 use App\tienich;
 use App\nhatro;
 use App\nhatro_tienich;
+use App\hinhanh_nhatro;
 use Auth;
 use DB;
 use Illuminate\Support\collection;
@@ -64,6 +65,7 @@ class nhatroController extends Controller
         $nhatro = new nhatro();
         $nhatro->nt_ten = $request->nt_ten;
         $nhatro->nt_diachi = $request->nt_diachi;
+        $nhatro->nt_sdtlienhe = $request->nt_sdtlienhe;
         $nhatro->nt_kinhdo = $request->nt_kinhdo;
         $nhatro->nt_vido = $request->nt_vido;
         $nhatro->nt_thongtin = $request->nt_thongtin;
@@ -81,14 +83,30 @@ class nhatroController extends Controller
             $nhatro_tienich->ti_ma = $ti;
             $nhatro_tienich->save();
         }
-        // $pic = $request->input('pic');
-        // foreach ($pic as $pi) {
-        //         if($request->hasFile('sp_hinh')){
-        //             $file = $request->sp_hinh;
-        //             $sanpham->sp_hinh = $file->getClientOriginalName();
-        //             $file->move('upload', $sanpham->sp_hinh); //hàm này di chuyển ảnh tới thư mục public/upload
-        //         }
-        //     }
+        $input=$request->all();
+        $images=array();
+        if($files=$request->file('images')){
+            foreach($files as $file){
+                $hinhanh_nhatro = new hinhanh_nhatro();
+                $hinhanh_nhatro->nt_ma = $nhatro->nt_ma;
+
+                $name=$file->getClientOriginalName();
+                $file->move('upload',$name);
+                $hinhanh_nhatro->ha_ten = $name;
+                $images[]=$name;
+                $hinhanh_nhatro->save();
+            }
+        }
+        // $images = $request->input('images');
+        // foreach ($images as $pi) {
+        //         $hinhanh_nhatro = new hinhanh_nhatro();
+        //         $hinhanh_nhatro->nt_ma = $nhatro->nt_ma;
+        //         $file = $request->$pi;
+        //         $hinhanh_nhatro->ha_ten = $file->getClientOriginalName();
+        //         $file->move('upload', $hinhanh_nhatro->ha_ten); //hàm này di chuyển ảnh tới thư mục public/upload
+        //         $hinhanh_nhatro->save();
+        // }
+            
         
 
         return redirect(route('nhatro.index')); //trả về trang cần hiển thị

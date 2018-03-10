@@ -178,6 +178,7 @@
                                               <ul class="dropdown-menu" role="menu">
                                                 
                                                 <li><a href="{{ route('profile') }}">Thông Tin Tài Khoản</a></li>
+                                                <li><a href="{{ route('themnhatro') }}">Đăng Kí Nhà Trọ</a></li>
                                                 <li class="divider"></li>
                                                 <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">Đăng Xuất</a></li>
