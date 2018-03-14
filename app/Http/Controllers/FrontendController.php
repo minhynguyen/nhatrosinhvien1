@@ -27,9 +27,13 @@ class FrontendController extends Controller
         // $dsTruong = Truonghoc::all();
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $dstienich = tienich::all();
+        $dsnhatro = DB::table('nhatro')->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')->where('nt_trangthai','2')->get();
+        // $dsanh = hinhanh_nhatro::all();
+        // $dsnhatro = DB::table('nhatro')->where('nt_trangthai','2')->get();
         return view('frontend.index')->with('dsTruong', $dsTruong)
                                         ->with('dsloainhatro', $dsloainhatro)
-                                         ->with('dstienich', $dstienich);
+                                         ->with('dstienich', $dstienich)
+                                         ->with('dsnhatro', $dsnhatro);
 
     }
     public function gettienich()
@@ -44,7 +48,6 @@ class FrontendController extends Controller
     public function getnhatro()
     {
         $id = Auth::user()->id;
-        // dd($id);
         $dsnhatro = DB::table('nhatro')->where('id',$id)->get();
         return view('frontend.profile')->with('dsnhatro', $dsnhatro);
 

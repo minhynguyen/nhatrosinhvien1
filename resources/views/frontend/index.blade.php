@@ -30,7 +30,7 @@
                     height: 100%;
                 }
                 .gm-style-iw {
-                  width: 350px !important;
+                  width: 300px !important;
                   top: 15px !important;
                   left: 0px !important;
                   background-color: #fff;
@@ -307,7 +307,7 @@ $(document).ready(function(){
     map:map,
 
 
-    icon: '{{ asset ('theme/homepage/image/mar2.png') }}'
+    icon: '{{ asset ('theme/homepage/image/school.png') }}'
     
   });
   var infowindow = new google.maps.InfoWindow();  
@@ -317,25 +317,67 @@ $(document).ready(function(){
                     '<div class="iw-title">{{$Tr->t_ten}}</div>' +
                     '<div class="iw-content">' +
                       '<div class="iw-subTitle">Tọa Độ: {{$Tr->t_vido}} , {{$Tr->t_kinhdo}}</div>'+
-                      '<img src="{{ asset ('theme/homepage/image/home.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
+                      '<img src="{{ asset ('theme/homepage/image/school.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
                   '</div>';  
                infowindow.setContent(content);  
                infowindow.open(map, school);  
            }  
          })(school));                            
   @endforeach
-    var content = '<div id="iw-container">' +
-                    '<div class="iw-title">Vị Trí Của Tôi: </div>' +
-                    '<div class="iw-content">' +
-                      '<div class="iw-subTitle">Tọa Độ: </div>'+
-                      '<img src="{{ asset ('theme/homepage/image/mar.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
-                  '</div>';
 
-  // A new Info Window is created and set content
-  var infowindow = new google.maps.InfoWindow({
-    content: content,
-    maxWidth: 350
+  @foreach($dsnhatro as $nt)
+
+    var home = new google.maps.Marker({
+    position:{
+      lat:{{$nt->nt_vido}},
+      lng:{{$nt->nt_kinhdo}},
+
+    },
+    map:map,
+
+
+    icon: '{{ asset ('theme/homepage/image/house.png') }}'
+    
   });
+  var infowindow = new google.maps.InfoWindow();  
+        google.maps.event.addListener(home, 'click', (function(home) {  
+           return function() {
+              var content = '<div id="iw-container">' +
+                    '<div class="iw-title">{{$nt->nt_ten}}</div>' +
+                    '<div class="iw-content">' +
+                      '<div class="iw-subTitle">History</div>' +
+                      '<img src="{{ asset('upload/' . $nt->ha_ten)}}" alt="" height="150" width="100">' +
+                      '<p>Địa Chỉ: {{$nt->nt_diachi}}</p>' +
+                      '<p>Kinh Độ: {{$nt->nt_kinhdo}}</p>' +
+                      '<p>Vĩ Độ: {{$nt->nt_vido}}</p>' +
+                      '<p>Giá Nước: {{$nt->nt_gianuoc}}</p>' +
+                      '<p>Giá Điện: {{$nt->nt_giadien}}</p>' +
+                      '<div class="iw-subTitle">Liên Hệ</div>' +
+                      '<p>Liên Hệ<br>'+
+                      '<br>SĐT : {{$nt->nt_sdtlienhe}}<br>e-mail: geral@vaa.pt<br>www: www.myvistaalegre.com</p>'+
+                    '</div>' +
+                    '<div class="iw-bottom-gradient"></div>' +
+                  '</div>';
+               infowindow.setContent(content);  
+               infowindow.open(map, home);
+               // maxWidth: 350;  
+           }  
+         })(home));
+
+                              
+  @endforeach
+  //   var content = '<div id="iw-container">' +
+  //                   '<div class="iw-title">Vị Trí Của Tôi: </div>' +
+  //                   '<div class="iw-content">' +
+  //                     '<div class="iw-subTitle">Tọa Độ: </div>'+
+  //                     '<img src="{{ asset ('theme/homepage/image/mar.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
+  //                 '</div>';
+
+  // // A new Info Window is created and set content
+  // var infowindow = new google.maps.InfoWindow({
+  //   content: content,
+  //   maxWidth: 300
+  // });
   // This event expects a click on a marker
   // When this event is fired the Info Window is opened.
   google.maps.event.addListener(marker, 'click', function() {
@@ -345,7 +387,9 @@ $(document).ready(function(){
   // Event that closes the Info Window with a click on the map
   google.maps.event.addListener(map, 'click', function() {
     infowindow.close();
+
   });
+
   google.maps.event.addListener(infowindow, 'domready', function() {
     var iwOuter = $('.gm-style-iw');
     var iwBackground = iwOuter.prev();
@@ -363,7 +407,9 @@ $(document).ready(function(){
     iwCloseBtn.mouseout(function(){
       $(this).css({opacity: '1'});
     });
+    google.maps.event.addDomListener(window, 'load', initialize);
   });
+
   var customMapType = new google.maps.StyledMapType([
           {stylers: [{hue: '#D2E4C8'}]},
           {
@@ -399,6 +445,8 @@ function geolocate(){
         }
   };
     geolocate();
+
+
       // initMap();
       // GeolocationControl();
 </script>

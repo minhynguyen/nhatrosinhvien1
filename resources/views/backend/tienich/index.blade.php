@@ -45,10 +45,10 @@
               <table class="table table-hover text-center ">
                 <tr>
                   <th>Mã</th>
-                  <th style="text-align: center;">Tên Tiện Ích</th>
-                  <th style="text-align: center;">Diễn Giải</th>
-                  <th>Ngày Tạo Mới</th>
-                  <th>Ngày Cập Nhật</th>
+                  <th style="text-align: left;">Tên Tiện Ích</th>
+                  <th style="text-align: left;">Diễn Giải</th>
+                  <!-- <th>Ngày Tạo Mới</th>
+                  <th>Ngày Cập Nhật</th> -->
                   <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('tienich.create') }}"><i class="fa fa-plus"></i> Thêm Tiện Ích</a></button></th>
                   <!-- <th></th> -->
                 </tr>
@@ -56,10 +56,10 @@
         <!-- nhãn từ controller -->
                 <tr>
                     <td>{{$ti->ti_ma}}</td>
-                    <td style="text-align: center;">{{$ti->ti_ten}}</td>
-                    <td>{{$ti->ti_diengiai}}</td>
-                    <td>{{$ti->ti_taomoi}}</td>
-                    <td>{{$ti->ti_capnhat}}</td>
+                    <td style="text-align: left;">{{$ti->ti_ten}}</td>
+                    <td style="text-align: left;">{{$ti->ti_diengiai}}</td>
+                    <!-- <td>{{$ti->ti_taomoi}}</td>
+                    <td>{{$ti->ti_capnhat}}</td> -->
                     <td>
                       <button type="button" class="btn btn-warning"> <a href=" {{ route('tienich.edit', ['tienich' => $ti->ti_ma]) }}" ><i class="fa fa-edit"></i> Edit</a></button>
                     

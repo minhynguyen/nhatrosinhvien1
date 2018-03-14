@@ -60,7 +60,7 @@ Route::get('/dangki', function () {
 // })->name('profile');
 Route::get('/profile', 'FrontendController@getnhatro')->name('profile');
 Route::get('/thongtin', function () {
-    return view('frontend.thongtinnhatro');
+    return view('frontend.nhatro.show');
 });
 Route::get('/loi', function () {
     return view('errors.khongduoctruycap');

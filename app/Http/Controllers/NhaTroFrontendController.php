@@ -38,6 +38,8 @@ class NhaTroFrontendController extends Controller
         $dstienich = tienich::all();
         return view('frontend.nhatro.create')->with('dsloainhatro', $dsloainhatro)
                                          ->with('dstienich', $dstienich);
+
+        
     }
 
     /**
@@ -96,19 +98,9 @@ class NhaTroFrontendController extends Controller
                 $hinhanh_nhatro->save();
             }
         }
-        // $images = $request->input('images');
-        // foreach ($images as $pi) {
-        //         $hinhanh_nhatro = new hinhanh_nhatro();
-        //         $hinhanh_nhatro->nt_ma = $nhatro->nt_ma;
-        //         $file = $request->$pi;
-        //         $hinhanh_nhatro->ha_ten = $file->getClientOriginalName();
-        //         $file->move('upload', $hinhanh_nhatro->ha_ten); //hàm này di chuyển ảnh tới thư mục public/upload
-        //         $hinhanh_nhatro->save();
-        // }
-            
         
 
-        return redirect(route('nhatrofrontend.index')); //trả về trang cần hiển thị
+        return redirect(route('profile')); //trả về trang cần hiển thị
         }
         catch(QueryException $ex){
             return reponse([
@@ -164,7 +156,6 @@ class NhaTroFrontendController extends Controller
         $nhatro->nt_thongtin = $request->nt_thongtin;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;
-        // $nhatro->nt_trangthai = $request->nt_trangthai;
         $nhatro->id = Auth::user()->id;
         $nhatro->lnt_ma = $request->lnt_ma;
         $nhatro->save();
