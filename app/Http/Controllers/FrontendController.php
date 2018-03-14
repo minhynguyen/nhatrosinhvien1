@@ -27,7 +27,7 @@ class FrontendController extends Controller
         // $dsTruong = Truonghoc::all();
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $dstienich = tienich::all();
-        $dsnhatro = DB::table('nhatro')->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')->where('nt_trangthai','2')->get();
+        $dsnhatro = DB::table('nhatro')->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nt_trangthai','2')->get();
         // $dsanh = hinhanh_nhatro::all();
         // $dsnhatro = DB::table('nhatro')->where('nt_trangthai','2')->get();
         return view('frontend.index')->with('dsTruong', $dsTruong)
@@ -45,11 +45,14 @@ class FrontendController extends Controller
         return view('frontend.nhatro.create')->with('dsloainhatro', $dsloainhatro)->with('dstienich', $dstienich);
 
     }
+    
     public function getnhatro()
     {
         $id = Auth::user()->id;
+        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->get();
+        
         $dsnhatro = DB::table('nhatro')->where('id',$id)->get();
-        return view('frontend.profile')->with('dsnhatro', $dsnhatro);
+        return view('frontend.profile')->with('dsnhatro', $dsnhatro)->with('dsbaidang', $dsbaidang);
 
     }
 

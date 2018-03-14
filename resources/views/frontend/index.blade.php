@@ -177,8 +177,8 @@
                                               <a href="" class="dropdown-toggle"  data-toggle="dropdown" style="color: white" >{{ Auth::user()->name }} <span class="caret"></span></a>
                                               <ul class="dropdown-menu" role="menu">
                                                 
-                                                <li><a href="{{ route('profile') }}">Thông Tin Tài Khoản</a></li>
-                                                <li><a href="{{ route('nhatrofrontend.create') }}">Đăng Kí Nhà Trọ</a></li>
+                                                <li><a href="{{ route('profile') }}" target="_blank">Thông Tin Tài Khoản</a></li>
+                                                <li><a href="{{ route('nhatrofrontend.create') }}" target="_blank">Đăng Kí Nhà Trọ</a></li>
                                                 <li class="divider"></li>
                                                 <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">Đăng Xuất</a></li>
@@ -275,7 +275,7 @@ $(document).ready(function(){
   function initMap() {
         map = new google.maps.Map(mapDiv, {
           center: myLatLng,
-          zoom: 14,
+          zoom: 16,
           zoomControl: false,
           streetViewControl: false,
           scrolwheel : true,
@@ -287,6 +287,7 @@ $(document).ready(function(){
           draggable: true,
           // icon: 'http://maps.google.com/mapfiles/ms/micons/green.png'
         });
+
        google.maps.event.addListener(marker,'position_changed',function(){
 
     var lat = marker.getPosition().lat();
@@ -345,22 +346,22 @@ $(document).ready(function(){
               var content = '<div id="iw-container">' +
                     '<div class="iw-title">{{$nt->nt_ten}}</div>' +
                     '<div class="iw-content">' +
-                      '<div class="iw-subTitle">History</div>' +
+                      '<div class="iw-subTitle">Thông Tin: </div>' +
                       '<img src="{{ asset('upload/' . $nt->ha_ten)}}" alt="" height="150" width="100">' +
                       '<p>Địa Chỉ: {{$nt->nt_diachi}}</p>' +
                       '<p>Kinh Độ: {{$nt->nt_kinhdo}}</p>' +
                       '<p>Vĩ Độ: {{$nt->nt_vido}}</p>' +
                       '<p>Giá Nước: {{$nt->nt_gianuoc}}</p>' +
                       '<p>Giá Điện: {{$nt->nt_giadien}}</p>' +
-                      '<div class="iw-subTitle">Liên Hệ</div>' +
-                      '<p>Liên Hệ<br>'+
-                      '<br>SĐT : {{$nt->nt_sdtlienhe}}<br>e-mail: geral@vaa.pt<br>www: www.myvistaalegre.com</p>'+
+                      '<div class="iw-subTitle">Liên Hệ: </div>' +
+                      '<p>Liên Hệ: {{$nt->name}}<br>'+
+                      '<br>SĐT : {{$nt->nt_sdtlienhe}}<br>e-mail: {{$nt->email}}<br>Xem Chi Tiết</p>'+
                     '</div>' +
                     '<div class="iw-bottom-gradient"></div>' +
                   '</div>';
-               infowindow.setContent(content);  
-               infowindow.open(map, home);
-               // maxWidth: 350;  
+                  infowindow.setContent(content);
+                  infowindow.open(map, home);
+                     
            }  
          })(home));
 
@@ -407,8 +408,9 @@ $(document).ready(function(){
     iwCloseBtn.mouseout(function(){
       $(this).css({opacity: '1'});
     });
-    google.maps.event.addDomListener(window, 'load', initialize);
+    
   });
+  google.maps.event.addDomListener(window, 'load', initMap);
 
   var customMapType = new google.maps.StyledMapType([
           {stylers: [{hue: '#D2E4C8'}]},
@@ -445,10 +447,6 @@ function geolocate(){
         }
   };
     geolocate();
-
-
-      // initMap();
-      // GeolocationControl();
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
         async defer></script>

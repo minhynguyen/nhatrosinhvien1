@@ -15,7 +15,7 @@ class CreateBaidangTable extends Migration
     {
         Schema::create('baidang', function (Blueprint $table) {
             $table->bigIncrements('bd_ma')->comment('Mã bài đăng');
-            $table->unsignedInteger('id')->comment('Tài Khoản đăng bài');
+            $table->unsignedBigInteger('nt_ma')->comment('Mã Nhà Trọ đăng bài');
             $table->unsignedTinyInteger('lbd_ma')->comment('Loại Bài Đăng');
             $table->string('bd_tieude', 150)->comment('Tiêu Đề Bài Đăng');
             $table->text('bd_noidung')->comment('Nội Dung Bài Đăng');
@@ -27,7 +27,7 @@ class CreateBaidangTable extends Migration
 
 
 
-            $table->foreign('id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('nt_ma')->references('nt_ma')->on('nhatro')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('lbd_ma')->references('lbd_ma')->on('loaibaidang')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
         DB::statement("ALTER TABLE `baidang` comment 'Bài Đăng'");

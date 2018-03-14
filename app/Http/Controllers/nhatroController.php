@@ -23,7 +23,8 @@ class nhatroController extends Controller
     {
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $dstienich = tienich::all();
-        $dsnhatro = nhatro::all();
+        $dsnhatro = DB::table('nhatro')->join('loainhatro', 'nhatro.lnt_ma', '=', 'loainhatro.lnt_ma')->get();
+        // $dsnhatro = DB::table('nhatro')->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nt_trangthai','2')->get();
         return view('backend.nhatro.index')->with('dsloainhatro', $dsloainhatro)
                                          ->with('dstienich', $dstienich)->with('dsnhatro', $dsnhatro);
     }
@@ -71,6 +72,7 @@ class nhatroController extends Controller
         $nhatro->nt_thongtin = $request->nt_thongtin;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;
+        $nhatro->nt_trangthai = $request->nt_trangthai;
         $nhatro->id = Auth::user()->id;
         $nhatro->lnt_ma = $request->lnt_ma;
         $nhatro->save();

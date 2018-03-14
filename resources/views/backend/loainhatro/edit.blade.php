@@ -42,7 +42,7 @@
           <div class="form-group">
 
             <label for="exampleInputEmail1">Tên Loại</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" name="lnt_ten" placeholder="Nhập Tên Trường" value="{{$loainhatro->lnt_ten}}">
+            <input type="text" class="form-control" id="exampleInputEmail1" name="lnt_ten" placeholder="Nhập Tên Loại Nhà Trọ" value="{{$loainhatro->lnt_ten}}">
             
           </div>
 

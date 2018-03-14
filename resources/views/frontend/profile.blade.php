@@ -41,16 +41,7 @@
                        <div class="navbar-header">
                             <a class="navbar-brand" href="index.html" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
                         </div>
-                        <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav main-nav  clear navbar-right ">
-                                <li style="padding-right: 30px"><a class="color_animation" href="#">ĐĂNG TIN CHO THUÊ</a></li>
-                                <li style="padding-right: 30px"> <a class="color_animation" href="#">QUẢN LÝ TÀI KHOẢN</a></li>
-                                <li style="padding-right: 30px"><a class="color_animation" href="#">QUẢN LÝ ĐẶT PHÒNG</a></li>
-                                <li style="padding-right: 30px"><a class="color_animation" href="#">KHÔNG GIAN</a></li>
-                                
-                            </ul>
-                        </div> --><!-- /.navbar-collapse -->
-                    </div>
+                      </div>
                 </div><!-- /.container-fluid -->
             </nav>
             
@@ -144,41 +135,47 @@
                             </div>
                             <h3><a href="{{ route('nhatrofrontend.create') }}"> Nếu Bạn Chưa Đăng Kí Nhà Trọ. Hãy Nhấn Vào Đây Để Đăng Kí Nhà Trọ Miễn Phí.</h3></a>
                           </div>
+                          
                           <div class="tab-pane fade in" id="tab3">
-                            <h3>This is tab 3</h3>
+                            <h3>Bài Đăng</h3>
                             <div class="table-responsive">
                               <table class="table table-striped table-bordered table-list">
                                 <thead>
                                   <tr>
-                                      <th class="hidden-xs">Tên Nhà Trọ</th>
-                                      <th>Loại Nhà Trọ</th>
-                                      <th>Địa Chỉ</th>
-                                      <th>Thông Tin</th>
-                                      <th>Giá Điện</th>
-                                      <th>Giá Nước</th>
-                                      <th>Trạng Thái</th>
-                                      <th style="text-align: center;"><a class="btn btn-default" href="{{ route('nhatrofrontend.create') }}"><em class="fa fa-plus"></em>Thêm Nhà Trọ</a></th>
+                                      <th>Mã</th>
+                                      <th style="text-align: left;">Tên Người Đăng</th>
+                                      <th style="text-align: left;">Tên Nhà Trọ</th>
+                                      <th style="text-align: left;">Loại Bài Đăng</th>
+                                      <th style="text-align: left;">Tiêu Đề</th>
+                                      <th style="text-align: left;">Nội Dung</th>
+                                      <th >Trạng Thái</th>
                                   </tr> 
                                 </thead>
                                 <tbody>
+                                   @foreach ($dsbaidang as $baidang)
                                         <tr>
+                                          <td>{{$baidang->bd_ma}}</td>
+                                          <td style="text-align: left;">{{$baidang->name}}</td>
+                                          <td style="text-align: left;">{{$baidang->nt_ten}}</td>
+                                          <td style="text-align: left;">{{$baidang->lbd_ten}}</td>
+                                          <td style="text-align: left;">{{$baidang->bd_tieude}}</td>
+                                          <td style="text-align: left;">{{$baidang->bd_noidung}}</td>
                                           
-                                          <td class="hidden-xs"></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td align="center">
-                                            <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                                            <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
-                                          </td>
+                                          @if ($baidang->bd_trangthai === 1)
+
+                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">KHÓA</span></td>
+                                          @else
+                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Khả Dụng</span></td>
+                                          @endif
+                                          
                                         </tr>
                                       </tbody>
+                                      @endforeach
                               </table>
                             </div>
                           </div>
+
+
                           <div class="tab-pane fade in" id="tab4">
                             <h3>This is tab 3</h3>
                             <div class="table-responsive">

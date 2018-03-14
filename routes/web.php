@@ -32,6 +32,8 @@ Route::resource('user', 'UserController')->middleware(CheckLevelMiddleware::clas
 Route::get('dsadmin', 'UserController@getdsadmin')->name('dsadmin')->middleware(CheckLevelMiddleware::class);
 Route::get('dsmem', 'UserController@getdsmem')->name('dsmem')->middleware(CheckLevelMiddleware::class);
 Route::resource('nhatro', 'nhatroController')->middleware(CheckLevelMiddleware::class);
+Route::resource('loaibaidang', 'loaibaidangController')->middleware(CheckLevelMiddleware::class);
+Route::resource('baidang', 'baidangController')->middleware(CheckLevelMiddleware::class);
 });
 
 Route::resource('nhatrofrontend', 'NhaTroFrontendController');

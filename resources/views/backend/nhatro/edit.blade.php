@@ -93,7 +93,7 @@
           <div class="form-group">
                 <label>Trạng Thái</label>
                 @if ($nhatro->nt_trangthai === 1)
-                <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="t_trangthai", id="t_trangthai">
+                <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="nt_trangthai", id="nt_trangthai">
                     <option value="1" selected="">Khóa</option> 
                     <option value="2">Khả Dụng</option>
                 </select>
