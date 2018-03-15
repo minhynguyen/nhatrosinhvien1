@@ -138,10 +138,9 @@ class nhatroController extends Controller
      */
     public function edit($id)
     {
+        
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $dstienich = tienich::all();
-       
-
         $nhatro = nhatro::find($id);
         return view('backend.nhatro.edit')->with('nhatro', $nhatro)
         ->with('dsloainhatro', $dsloainhatro)->with('dstienich', $dstienich);

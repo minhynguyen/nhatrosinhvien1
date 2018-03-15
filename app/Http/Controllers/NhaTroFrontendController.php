@@ -21,10 +21,12 @@ class NhaTroFrontendController extends Controller
     public function index()
     {
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
+        $id = Auth::user()->id;
+        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->get();
         $dstienich = tienich::all();
-        $dsnhatro = nhatro::all();
+        $dsnhatro = DB::table('nhatro')->where('id',$id)->get();
         return view('frontend.profile')->with('dsloainhatro', $dsloainhatro)
-                                         ->with('dstienich', $dstienich)->with('dsnhatro', $dsnhatro);
+                                         ->with('dstienich', $dstienich)->with('dsnhatro', $dsnhatro)->with('dsbaidang', $dsbaidang);
     }
 
     /**
@@ -116,7 +118,15 @@ class NhaTroFrontendController extends Controller
      */
     public function show($id)
     {
-        //
+        $nhatro = DB::table('nhatro')->join('users', 'users.id', '=', 'nhatro.id')->join('loainhatro', 'loainhatro.lnt_ma', '=', 'nhatro.lnt_ma')->where('nt_ma', $id)->get();
+        $dstienich = DB::table('nhatro_tienich')->join('tienich', 'tienich.ti_ma', '=', 'nhatro_tienich.ti_ma')->where('nt_ma', $id)->get();
+        $tienich = tienich::all();
+        $slider = DB::table('hinhanh_nhatro')->where('nt_ma',$id)->limit(3)->get();
+        // dd($slider);
+        
+        // $dshinhanh = DB::table('hinhanh_nhatro')->where('nt_ma',$id)->get();
+        // dd($dshinhanh);
+        return view('frontend.nhatro.show')->with('nhatro', $nhatro)->with('dstienich', $dstienich)->with('tienich', $tienich)->with('slider', $slider);
     }
 
     /**
@@ -129,7 +139,7 @@ class NhaTroFrontendController extends Controller
     {
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $dstienich = tienich::all();
-       
+        
 
         $nhatro = nhatro::find($id);
         return view('frontend.nhatro.edit')->with('nhatro', $nhatro)

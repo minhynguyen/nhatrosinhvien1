@@ -275,7 +275,7 @@ $(document).ready(function(){
   function initMap() {
         map = new google.maps.Map(mapDiv, {
           center: myLatLng,
-          zoom: 16,
+          zoom: 15,
           zoomControl: false,
           streetViewControl: false,
           scrolwheel : true,
@@ -355,7 +355,7 @@ $(document).ready(function(){
                       '<p>Giá Điện: {{$nt->nt_giadien}}</p>' +
                       '<div class="iw-subTitle">Liên Hệ: </div>' +
                       '<p>Liên Hệ: {{$nt->name}}<br>'+
-                      '<br>SĐT : {{$nt->nt_sdtlienhe}}<br>e-mail: {{$nt->email}}<br>Xem Chi Tiết</p>'+
+                      '<br>SĐT : {{$nt->nt_sdtlienhe}}<br>e-mail: {{$nt->email}}<br><a href="{{ route('nhatrofrontend.show', ['nhatro' => $nt->nt_ma]) }}" target="_blank">Xem Chi Tiết</a></p>'+
                     '</div>' +
                     '<div class="iw-bottom-gradient"></div>' +
                   '</div>';

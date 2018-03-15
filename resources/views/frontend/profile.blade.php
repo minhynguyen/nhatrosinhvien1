@@ -126,7 +126,7 @@
 
                                           <td align="center">
                                             <a class="btn btn-default" href="{{ route('nhatrofrontend.edit', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-pencil"></em></a>
-                                            <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                                            <a class="btn btn-danger" href="{{ route('nhatrofrontend.show', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-eye"></em></a>
                                           </td>
                                         </tr>
                                         @endforeach
