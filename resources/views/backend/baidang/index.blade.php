@@ -61,11 +61,11 @@
                     <td style="text-align: left;">{{$baidang->bd_tieude}}</td>
                     <td style="text-align: left;">{{$baidang->bd_noidung}}</td>
                     
-                    @if ($baidang->bd_trangthai === 1)
+                    @if ($baidang->bd_trangthai === 2)
 
-                        <td style="text-align: center;"><span class="badge bg-yellow">KHÓA</span></td>
+                        <td style="text-align: center;"><span class="badge bg-yellow">Chờ Duyệt</span></td>
                     @else
-                        <td style="text-align: center;"><span class="badge bg-green">Khả Dụng</span></td>
+                        <td style="text-align: center;"><span class="badge bg-green">Đã Duyệt</span></td>
                     @endif
                     <td>
                       <button type="button" class="btn btn-warning"> <a href=" {{ route('baidang.edit', ['baidang' => $baidang->bd_ma]) }}" ><i class="fa fa-edit"></i> </a></button>

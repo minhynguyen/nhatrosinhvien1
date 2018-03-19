@@ -127,6 +127,7 @@
                                           <td align="center">
                                             <a class="btn btn-default" href="{{ route('nhatrofrontend.edit', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-pencil"></em></a>
                                             <a class="btn btn-danger" href="{{ route('nhatrofrontend.show', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-eye"></em></a>
+                                            
                                           </td>
                                         </tr>
                                         @endforeach
@@ -137,36 +138,42 @@
                           </div>
                           
                           <div class="tab-pane fade in" id="tab3">
-                            <h3>Bài Đăng</h3>
+                            <h3>Tất Cả Các Bài Đăng</h3>
                             <div class="table-responsive">
                               <table class="table table-striped table-bordered table-list">
                                 <thead>
                                   <tr>
-                                      <th>Mã</th>
-                                      <th style="text-align: left;">Tên Người Đăng</th>
+                                      <th style="text-align: center;">Mã</th>
+                                      <!-- <th style="text-align: left;">Tên Người Đăng</th> -->
                                       <th style="text-align: left;">Tên Nhà Trọ</th>
                                       <th style="text-align: left;">Loại Bài Đăng</th>
                                       <th style="text-align: left;">Tiêu Đề</th>
                                       <th style="text-align: left;">Nội Dung</th>
-                                      <th >Trạng Thái</th>
+                                      <th style="text-align: center;">Ngày Đăng</th>
+                                      <th style="text-align: center;">Trạng Thái</th>
+                                      
+                                      
+                                      
                                   </tr> 
                                 </thead>
                                 <tbody>
                                    @foreach ($dsbaidang as $baidang)
                                         <tr>
                                           <td>{{$baidang->bd_ma}}</td>
-                                          <td style="text-align: left;">{{$baidang->name}}</td>
+                                          <!-- <td style="text-align: left;">{{$baidang->name}}</td> -->
                                           <td style="text-align: left;">{{$baidang->nt_ten}}</td>
                                           <td style="text-align: left;">{{$baidang->lbd_ten}}</td>
                                           <td style="text-align: left;">{{$baidang->bd_tieude}}</td>
                                           <td style="text-align: left;">{{$baidang->bd_noidung}}</td>
+                                          <td style="text-align: center;">{{$baidang->bd_taomoi}}</td>
                                           
-                                          @if ($baidang->bd_trangthai === 1)
+                                          @if ($baidang->bd_trangthai === 2)
 
-                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">KHÓA</span></td>
+                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">Chờ Duyệt</span></td>
                                           @else
-                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Khả Dụng</span></td>
+                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Đã Duyệt</span></td>
                                           @endif
+                                          
                                           
                                         </tr>
                                       </tbody>
@@ -177,37 +184,48 @@
 
 
                           <div class="tab-pane fade in" id="tab4">
-                            <h3>This is tab 3</h3>
+                            <h3>Danh Sách Các Bài Đăng Chờ Duyệt</h3>
                             <div class="table-responsive">
                               <table class="table table-striped table-bordered table-list">
                                 <thead>
                                   <tr>
-                                      <th class="hidden-xs">Tên Nhà Trọ</th>
-                                      <th>Loại Nhà Trọ</th>
-                                      <th>Địa Chỉ</th>
-                                      <th>Thông Tin</th>
-                                      <th>Giá Điện</th>
-                                      <th>Giá Nước</th>
-                                      <th>Trạng Thái</th>
-                                      <th style="text-align: center;"><a class="btn btn-default" href="{{ route('nhatrofrontend.create') }}"><em class="fa fa-plus"></em>Thêm Nhà Trọ</a></th>
+                                      <th style="text-align: center;">Mã</th>
+                                      <!-- <th style="text-align: left;">Tên Người Đăng</th> -->
+                                      <th style="text-align: left;">Tên Nhà Trọ</th>
+                                      <th style="text-align: left;">Loại Bài Đăng</th>
+                                      <th style="text-align: left;">Tiêu Đề</th>
+                                      <th style="text-align: left;">Nội Dung</th>
+                                      <th style="text-align: left;">Ngày Đăng</th>
+                                      <th style="text-align: left;">Trạng Thái</th>
+                                      
+                                      <th style="text-align: center;"><a class="btn btn-default" href="{{ route('baidangfrontend.create') }}"><em class="fa fa-plus"></em>Thêm Bài Đăng</a></th>
                                   </tr> 
                                 </thead>
                                 <tbody>
+                                   @foreach ($dsbaidangcho as $baidangcho)
                                         <tr>
-                                          
-                                          <td class="hidden-xs"></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
+                                          <td>{{$baidangcho->bd_ma}}</td>
+                                          <!-- <td style="text-align: left;">{{$baidangcho->name}}</td> -->
+                                          <td style="text-align: left;">{{$baidangcho->nt_ten}}</td>
+                                          <td style="text-align: left;">{{$baidangcho->lbd_ten}}</td>
+                                          <td style="text-align: left;">{{$baidangcho->bd_tieude}}</td>
+                                          <td style="text-align: left;">{{$baidangcho->bd_noidung}}</td>
+                                          <td style="text-align: left;">{{$baidangcho->bd_taomoi}}</td>
+                                          @if ($baidangcho->bd_trangthai === 2)
+
+                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">Chờ Duyệt</span></td>
+                                          @else
+                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Đã Duyệt</span></td>
+                                          @endif
                                           <td align="center">
-                                            <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                                            <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                                            <a class="btn btn-default" href="{{ route('baidangfrontend.edit', ['baidang' => $baidangcho->bd_ma]) }}"><em class="fa fa-pencil"></em></a>
+                                            <a class="btn btn-danger" href="{{ route('nhatrofrontend.show', ['baidang' => $baidang->bd_ma]) }}"><em class="fa fa-eye"></em></a>
+                                            
                                           </td>
+                                          
                                         </tr>
                                       </tbody>
+                                      @endforeach
                               </table>
                             </div>
                           </div>

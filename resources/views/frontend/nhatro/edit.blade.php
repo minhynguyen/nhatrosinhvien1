@@ -59,7 +59,7 @@
             <div class="description_content">
                 <div class="text-content container">
                     @if($errors->any())
-                      <div class="alert alert-danger">
+                      <div class="alert alert-danger" style="background-color: red; text-align: left;">
                         <ul>
                           <!-- hàm validate trong lar hỗ trợ biến errors -->
                           @foreach($errors->all() as $error)

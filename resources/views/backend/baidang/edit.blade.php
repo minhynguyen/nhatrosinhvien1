@@ -66,15 +66,15 @@
          
           <div class="form-group">
                 <label>Trạng Thái</label>
-                @if ($baidang->bd_trangthai === 1)
+                @if ($baidang->bd_trangthai === 2)
                 <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="bd_trangthai", id="bd_trangthai">
-                    <option value="1" selected="">Khóa</option> 
-                    <option value="2">Khả Dụng</option>
+                    <option value="2" selected="">Chờ Duyệt</option> 
+                    <option value="1">Đã Duyệt</option>
                 </select>
                 @else
                 <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="bd_trangthai", id="bd_trangthai">
-                    <option value="1" >Khóa</option> 
-                    <option value="2" selected>Khả Dụng</option>
+                    <option value="2" >Chờ Duyệt</option> 
+                    <option value="1" selected>Đã Duyệt</option>
                 </select>
                 @endif
 

@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\loainhatro;
+use App\loaibaidang;
+use App\baidang;
 use App\tienich;
 use App\nhatro;
 use App\nhatro_tienich;
@@ -23,10 +25,11 @@ class NhaTroFrontendController extends Controller
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $id = Auth::user()->id;
         $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->get();
+        $dsbaidangcho = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->where('baidang.bd_trangthai','2')->get();
         $dstienich = tienich::all();
         $dsnhatro = DB::table('nhatro')->where('id',$id)->get();
         return view('frontend.profile')->with('dsloainhatro', $dsloainhatro)
-                                         ->with('dstienich', $dstienich)->with('dsnhatro', $dsnhatro)->with('dsbaidang', $dsbaidang);
+                                         ->with('dstienich', $dstienich)->with('dsnhatro', $dsnhatro)->with('dsbaidang', $dsbaidang)->with('dsbaidangcho', $dsbaidangcho);
     }
 
     /**
@@ -43,6 +46,8 @@ class NhaTroFrontendController extends Controller
 
         
     }
+
+    
 
     /**
      * Store a newly created resource in storage.
@@ -128,6 +133,9 @@ class NhaTroFrontendController extends Controller
         // dd($dshinhanh);
         return view('frontend.nhatro.show')->with('nhatro', $nhatro)->with('dstienich', $dstienich)->with('tienich', $tienich)->with('slider', $slider);
     }
+
+
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -224,4 +232,6 @@ class NhaTroFrontendController extends Controller
     {
         //
     }
+
+    
 }

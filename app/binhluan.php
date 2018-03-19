@@ -9,10 +9,10 @@ class binhluan extends Model
     public    $timestamps   = false;
 
     protected $table        = 'binhluan';
-    protected $fillable     = ['bl_noidung', 'bl_taomoi'];
-    protected $guarded      = ['bd_ma', 'id', 'bl_stt'];
+    protected $fillable     = ['id', 'bd_ma', 'bl_noidung', 'bl_taomoi'];
+    protected $guarded      = [];
 
-    protected $primaryKey   = ['bd_ma', 'id', 'bl_stt'];
+    protected $primaryKey   = ;
     public    $incrementing = false;
 
 
