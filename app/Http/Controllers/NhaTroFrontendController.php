@@ -6,6 +6,7 @@ use App\loaibaidang;
 use App\baidang;
 use App\tienich;
 use App\nhatro;
+use App\binhluan;
 use App\nhatro_tienich;
 use App\hinhanh_nhatro;
 use Auth;
@@ -39,10 +40,10 @@ class NhaTroFrontendController extends Controller
      */
     public function create()
     {
+        $dsloaibaidang = DB::table('loaibaidang')->where('lbd_trangthai','2')->get();
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $dstienich = tienich::all();
-        return view('frontend.nhatro.create')->with('dsloainhatro', $dsloainhatro)
-                                         ->with('dstienich', $dstienich);
+        return view('frontend.nhatro.create')->with('dsloainhatro', $dsloainhatro)->with('dsloaibaidang', $dsloaibaidang)->with('dstienich', $dstienich);
 
         
     }
@@ -76,7 +77,7 @@ class NhaTroFrontendController extends Controller
         $nhatro->nt_sdtlienhe = $request->nt_sdtlienhe;
         $nhatro->nt_kinhdo = $request->nt_kinhdo;
         $nhatro->nt_vido = $request->nt_vido;
-        $nhatro->nt_thongtin = $request->nt_thongtin;
+        $nhatro->nt_giathue = $request->nt_giathue;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;
         $nhatro->id = Auth::user()->id;
@@ -105,6 +106,15 @@ class NhaTroFrontendController extends Controller
                 $hinhanh_nhatro->save();
             }
         }
+
+        $baidang = new baidang();
+        $baidang->nt_ma = $nhatro->nt_ma;
+        $baidang->lbd_ma = $request->lbd_ma;
+        $baidang->bd_tieude = $request->bd_tieude;
+        $baidang->bd_noidung = $request->bd_noidung;
+        $baidang->save();
+
+
         
 
         return redirect(route('profile')); //trả về trang cần hiển thị
@@ -124,14 +134,19 @@ class NhaTroFrontendController extends Controller
     public function show($id)
     {
         $nhatro = DB::table('nhatro')->join('users', 'users.id', '=', 'nhatro.id')->join('loainhatro', 'loainhatro.lnt_ma', '=', 'nhatro.lnt_ma')->where('nt_ma', $id)->get();
+        $baidang = DB::table('baidang')->join('loaibaidang', 'loaibaidang.lbd_ma', '=', 'baidang.lbd_ma')->where('nt_ma',$id)->get();
+        $idbaidang = DB::table('baidang')->join('nhatro', 'baidang.nt_ma', '=', 'nhatro.nt_ma')->where('baidang.nt_ma',$id)->value('bd_ma');
+        
+        $dsbinhluan = DB::table('binhluan')->join('users', 'users.id', '=', 'binhluan.id')->where('binhluan.bd_ma', $idbaidang)->get();
+        // dd($dsbinhluan);
         $dstienich = DB::table('nhatro_tienich')->join('tienich', 'tienich.ti_ma', '=', 'nhatro_tienich.ti_ma')->where('nt_ma', $id)->get();
         $tienich = tienich::all();
         $slider = DB::table('hinhanh_nhatro')->where('nt_ma',$id)->limit(3)->get();
-        // dd($slider);
+        // $binhluan = DB::table('binhluan')->where('_ma',$id)->limit(3)->get();
         
         // $dshinhanh = DB::table('hinhanh_nhatro')->where('nt_ma',$id)->get();
         // dd($dshinhanh);
-        return view('frontend.nhatro.show')->with('nhatro', $nhatro)->with('dstienich', $dstienich)->with('tienich', $tienich)->with('slider', $slider);
+        return view('frontend.nhatro.show')->with('nhatro', $nhatro)->with('dstienich', $dstienich)->with('tienich', $tienich)->with('slider', $slider)->with('baidang', $baidang)->with('dsbinhluan', $dsbinhluan)->with('slider', $slider)->with('baidang', $baidang);
     }
 
 
@@ -171,7 +186,7 @@ class NhaTroFrontendController extends Controller
         $nhatro->nt_sdtlienhe = $request->nt_sdtlienhe;
         $nhatro->nt_kinhdo = $request->nt_kinhdo;
         $nhatro->nt_vido = $request->nt_vido;
-        $nhatro->nt_thongtin = $request->nt_thongtin;
+        $nhatro->nt_giathue = $request->nt_giathue;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;
         $nhatro->id = Auth::user()->id;

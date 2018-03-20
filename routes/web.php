@@ -34,7 +34,10 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::resource('nhatro', 'nhatroController')->middleware(CheckLevelMiddleware::class);
 		Route::resource('loaibaidang', 'loaibaidangController')->middleware(CheckLevelMiddleware::class);
 		Route::resource('baidang', 'baidangController')->middleware(CheckLevelMiddleware::class);
+		// Route::resource('binhluan', 'binhluanController');
+
 });
+Route::resource('binhluan', 'binhluanController');
 
 Route::resource('nhatrofrontend', 'NhaTroFrontendController');
 Route::resource('baidangfrontend', 'baidangfrontendController');

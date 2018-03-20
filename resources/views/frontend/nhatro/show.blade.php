@@ -103,6 +103,10 @@ height: 290px;
                                   <td style="text-align: right;">{{$nt->nt_diachi}}</td>
                             </tr>
                             <tr>
+                                  <td style="text-align: left;"><span>Giá Thuê: </span></td>
+                                  <td style="text-align: right;">{{$nt->nt_giathue}} </td>
+                            </tr>
+                            <tr>
                                   <td style="text-align: left;"><span>Giá Điện: </span></td>
                                   <td style="text-align: right;">{{$nt->nt_giadien}} </td>
                             </tr>
@@ -153,10 +157,9 @@ height: 290px;
                           </div>
                       </div>
 
-                      <div class="well">
+                      <div class="well" style="background-color: white">
                     <div class="tab-content">
                       <div class="tab-pane fade in active" id="tab1">
-                      <p class="desc-text">Thông Tin: {{$nt->nt_thongtin}}</p>
                       <p class="desc-text">Loại Nhà Trọ: {{$nt->lnt_ten}}</p>
                       <p class="desc-text">Giá Điện: {{$nt->nt_giadien}}</p>
                       <p class="desc-text">Giá Nước: {{$nt->nt_gianuoc}}</p>
@@ -174,7 +177,13 @@ height: 290px;
                        
                       </div>
                       <div class="tab-pane fade in" id="tab3">
-                        <h3>Ảnh</h3>
+                        <h3>Bài Đăng</h3>
+                        @foreach($baidang as $bd)
+                        <p class="desc-text">Loại Bài Đăng: {{$bd->lbd_ten}}</p>
+                        <p class="desc-text">Tiêu Đề: {{$bd->bd_tieude}}</p>
+                        <p class="desc-text">Nội Dung: {{$bd->bd_noidung}}</p>
+                        
+                        @endforeach
                         
                       </div>
                       <div class="tab-pane fade in" id="tab4">
@@ -182,31 +191,34 @@ height: 290px;
                           <!-- <div class="col-md-6" style="margin-top: 10px"> -->
                             <div class="fa fa-comments fa-2x" > Bình Luận Về Nhà Trọ</div>
                             <div class="comments-list">
+                              @foreach($dsbinhluan as $bl)
                                <div class="media">
-                                   <p class="pull-right"><small>5 days ago</small></p>
+                                   <p class="pull-right"><small>{{$bl->bl_taomoi}}</small></p>
                                     
                                     <div class="media-body">
                                         
-                                      <h4 class="media-heading user_name">Baltej Singh</h4>
-                                      Wow! this is really great.
+                                      <h4 class="media-heading user_name">{{$bl->name}}</h4>
+                                      {{$bl->bl_noidung}}
                                       
                                       
                                     </div>
                                   </div>
-                     
-                     
-                                   <div class="media">
-                                       <p class="pull-right"><small>5 days ago</small></p>
-                                        
-                                        <div class="media-body">
-                                            
-                                          <h4 class="media-heading user_name">Baltej Singh</h4>
-                                          Wow! this is really great. 
-                                        </div>
-                                      </div>
-
-
+                                  @endforeach
                                 </div>
+                                @if(isset(Auth::user()->id))
+                                
+                                <div class="panel panel-info" style="margin-top: 50px ">
+                                      <div class="panel-body">
+                                          <form class="form-inline" name="frmBinhLuan" method="POST" action="{{ route('binhluan.update', ['baidang' => $bd->bd_ma]) }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PATCH') }}
+
+                                          <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea" name="bl_noidung"></textarea>
+                                              <button class="btn btn-primary pull-right" type="submit">Gửi Bình Luận</button>
+                                          </form>
+                                      </div>
+                                  </div>
+                                @endif
                       </div>
                     </div>
 

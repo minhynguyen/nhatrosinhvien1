@@ -106,7 +106,7 @@
                                       <th>Mã Nhà Trọ</th>
                                       <th>Tên Nhà Trọ</th>
                                       <th>Địa Chỉ</th>
-                                      <th>Thông Tin</th>
+                                      <th>Giá Thuê</th>
                                       <th>Giá Điện</th>
                                       <th>Giá Nước</th>
                                       <th>Trạng Thái</th>
@@ -119,10 +119,15 @@
                                           <td style="text-align: left;">{{$ds->nt_ma}}</td>
                                           <td style="text-align: left;">{{$ds->nt_ten}}</td>
                                           <td style="text-align: left;">{{$ds->nt_diachi}}</td>
-                                          <td style="text-align: left;">{{$ds->nt_thongtin}}</td>
+                                          <td style="text-align: left;">{{$ds->nt_giathue}}</td>
                                           <td style="text-align: left;">{{$ds->nt_giadien}}</td>
                                           <td style="text-align: left;">{{$ds->nt_gianuoc}}</td>
-                                          <td style="text-align: left;">{{$ds->nt_trangthai}}</td>
+                                          @if ($ds->nt_trangthai === 2)
+
+                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">Chờ Duyệt</span></td>
+                                          @else
+                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Đã Duyệt</span></td>
+                                          @endif
 
                                           <td align="center">
                                             <a class="btn btn-default" href="{{ route('nhatrofrontend.edit', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-pencil"></em></a>

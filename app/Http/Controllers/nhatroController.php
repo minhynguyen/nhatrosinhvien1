@@ -69,7 +69,7 @@ class nhatroController extends Controller
         $nhatro->nt_sdtlienhe = $request->nt_sdtlienhe;
         $nhatro->nt_kinhdo = $request->nt_kinhdo;
         $nhatro->nt_vido = $request->nt_vido;
-        $nhatro->nt_thongtin = $request->nt_thongtin;
+        $nhatro->nt_giathue = $request->nt_giathue;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;
         $nhatro->nt_trangthai = $request->nt_trangthai;
@@ -164,11 +164,11 @@ class nhatroController extends Controller
         $nhatro->nt_sdtlienhe = $request->nt_sdtlienhe;
         $nhatro->nt_kinhdo = $request->nt_kinhdo;
         $nhatro->nt_vido = $request->nt_vido;
-        $nhatro->nt_thongtin = $request->nt_thongtin;
+        $nhatro->nt_giathue = $request->nt_giathue;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;
         $nhatro->nt_trangthai = $request->nt_trangthai;
-        $nhatro->id = Auth::user()->id;
+        // $nhatro->id = Auth::user()->id;
         $nhatro->lnt_ma = $request->lnt_ma;
         $nhatro->save();
         

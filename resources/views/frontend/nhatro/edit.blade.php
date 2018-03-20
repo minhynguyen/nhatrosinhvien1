@@ -172,6 +172,13 @@
                             </div>
                         </div>
 
+                        <div class="col-md-12" style="margin-top: 10px">
+                            <div class="input-group" class="form">
+                              <input type="text" class="form" name="nt_giathue" placeholder="Giá Cho Thuê" value="{{$nhatro->nt_giathue}}" style="width: 100%">
+                              <span class="input-group-addon">(VNĐ / Tháng).</span>
+                            </div>
+                        </div>
+
 
 
                         <!-- <div class="col-md-6" style="margin-top: 10px">
@@ -231,11 +238,10 @@
                     </textarea>
                     </div> -->
                     <!-- <div class="col-md-12"> -->
-                        <div class="col-md-12" style="margin-top: 10px">
+                        <!-- <div class="col-md-12" style="margin-top: 10px">
                           <div class="fa fa-puzzle-piece fa-2x" > Thông Tin Mô Tả Thêm</div>
                             <input type="text" name="nt_thongtin" class="form" style="width: 100%" placeholder="Thông Tin Thêm" value="{{$nhatro->nt_thongtin}}">
-                        <!-- </div> -->
-                    </div>
+                    </div> -->
 
                     <div class="col-md-12" style="margin-top: 10px">
                             <button type="submit"  class="text-center form-btn" style="width: 100%; background-color: #50a900"><li class="fa fa-paper-plane"> </li> Cập Nhật</button>

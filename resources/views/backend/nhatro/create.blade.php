@@ -101,7 +101,7 @@
 
             <label for="exampleInputEmail1">TT</label>
             <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="t_vido" placeholder="Nhập Vĩ Độ"> -->
-            <input type="text" class="form-control" name="nt_thongtin" id="" style="width: 100%">
+            <input type="text" class="form-control" name="nt_giathue" id="" style="width: 100%">
           </div>
           <div class="form-group">
 

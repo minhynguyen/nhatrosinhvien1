@@ -27,7 +27,7 @@ class FrontendController extends Controller
         // $dsTruong = Truonghoc::all();
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $dstienich = tienich::all();
-        $dsnhatro = DB::table('nhatro')->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nt_trangthai','2')->get();
+        $dsnhatro = DB::table('nhatro')->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nt_trangthai','1')->get();
         // $dsanh = hinhanh_nhatro::all();
         // $dsnhatro = DB::table('nhatro')->where('nt_trangthai','2')->get();
         return view('frontend.index')->with('dsTruong', $dsTruong)

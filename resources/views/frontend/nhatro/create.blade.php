@@ -88,10 +88,38 @@
                                       @endforeach      
                             </select>
                         </div>
+                        <div class="col-md-12" style="margin-top: 10px">
+                            <!-- <input type="text" name="" class="form" style="width: 100%" placeholder="Chọn Loại Bài Đăng"> -->
+                            <select class="form" style="width: 100%" name="lbd_ma">
+                                      <option value="" disabled selected>Chọn Loại Bài Đăng</option>
+                                      @foreach($dsloaibaidang as $lbd)
+                                        <option value="{{$lbd->lbd_ma}}">{{$lbd->lbd_ten}}</option>
+                                      @endforeach      
+                            </select>
+                        </div>
 
                         <div class="col-md-12" style="margin-top: 10px">
                           <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
                             <input type="text" name="nt_ten" class="form" style="width: 100%" placeholder="Tên Nhà Trọ" value="{{old('nt_ten')}}">
+                        </div>
+
+                        <div class="col-md-12" style="margin-top: 10px">
+                          <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
+                            <input type="text" name="bd_tieude" class="form" style="width: 100%" placeholder="Tiêu đề bài đăng" value="{{old('bd_tieude')}}">
+                        </div>
+
+                        <!-- <div class="col-md-12" style="margin-top: 10px">
+                            <input type="text" name="nt_ten" class="form" style="width: 100%" placeholder="Nội dung bài đăng" value="{{old('bd_noidung')}}">
+                        </div> -->
+
+
+                        <div class="col-md-12" style="margin-top: 10px">
+                          <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
+                            <!-- <input type="text" name="nt_ten" class="form" style="width: 100%" placeholder="Nội dung bài đăng" value="{{old('bd_noidung')}}"> -->
+
+                            <textarea rows="10" class="form" style="width: 100%; height: 100%;" placeholder="Nội dung bài đăng" value="{{old('bd_noidung')}}" name="bd_noidung">
+                              
+                            </textarea>
                         </div>
                         
 
@@ -181,6 +209,13 @@
                             </div>
                         </div>
 
+                        <div class="col-md-12" style="margin-top: 10px">
+                            <div class="input-group" class="form">
+                              <input type="text" class="form" name="nt_giathue" placeholder="Giá Cho Thuê" value="{{old('nt_giathue')}}" style="width: 100%">
+                              <span class="input-group-addon">(VNĐ / Tháng).</span>
+                            </div>
+                        </div>
+
                         <!-- <div class="col-md-6" style="margin-top: 10px">
                             <select class="form" style="width: 100%">
                                       <option value="" disabled selected>Vệ Sinh</option>
@@ -240,11 +275,10 @@
                     </textarea>
                     </div> -->
                     <!-- <div class="col-md-12"> -->
-                        <div class="col-md-12" style="margin-top: 10px">
+                        <!-- <div class="col-md-12" style="margin-top: 10px">
                           <div class="fa fa-puzzle-piece fa-2x" > Thông Tin Mô Tả Thêm</div>
                             <input type="text" name="nt_thongtin" class="form" style="width: 100%" placeholder="Thông Tin Thêm" value="{{old('nt_sdtlienhe')}}">
-                        <!-- </div> -->
-                    </div>
+                    </div> -->
 
                     <div class="col-md-12" style="margin-top: 10px">
                             <button type="submit"  class="text-center form-btn" style="width: 100%; background-color: #50a900"><li class="fa fa-paper-plane"> </li> Đăng Kí</button>

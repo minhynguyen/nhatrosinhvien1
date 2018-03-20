@@ -54,6 +54,16 @@
           </div>
 
           <div class="form-group">
+            <label for="exampleInputPassword1">Loại</label>
+            <select name="lnt_ma" id="lnt_ma" class="form-control">
+              @foreach($dsloainhatro as $lnt)
+              <!-- <option value="{{$lnt->lnt_ma}}">{{$lnt->lnt_ten}}</option> -->
+              <option value="{{$lnt->lnt_ma}}" <?php echo ($lnt->lnt_ma == $nhatro->lnt_ma) ? 'selected' : ''  ?>>{{$lnt->lnt_ten}}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="form-group">
 
             <label for="exampleInputEmail1">SĐT</label>
             <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="t_vido" placeholder="Nhập Vĩ Độ"> -->
@@ -90,26 +100,12 @@
 
           
           
-          <div class="form-group">
-                <label>Trạng Thái</label>
-                @if ($nhatro->nt_trangthai === 1)
-                <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="nt_trangthai", id="nt_trangthai">
-                    <option value="1" selected="">Khóa</option> 
-                    <option value="2">Khả Dụng</option>
-                </select>
-                @else
-                <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="nt_trangthai", id="nt_trangthai">
-                    <option value="1" >Khóa</option> 
-                    <option value="2" selected>Khả Dụng</option>
-                </select>
-                @endif
-
-          </div>
+          
           <div class="form-group">
 
-            <label for="exampleInputEmail1">TT</label>
+            <label for="exampleInputEmail1">Giá Thuê</label>
             <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="t_vido" placeholder="Nhập Vĩ Độ"> -->
-            <input type="text" class="form-control" name="nt_thongtin" value="{{$nhatro->nt_thongtin}}" id="" style="width: 100%">
+            <input type="text" class="form-control" name="nt_giathue" value="{{$nhatro->nt_giathue}}" id="" style="width: 100%">
           </div>
           <div class="form-group">
 
@@ -123,14 +119,22 @@
             <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="t_vido" placeholder="Nhập Vĩ Độ"> -->
             <input type="text" class="form-control" name="nt_gianuoc" value="{{$nhatro->nt_gianuoc}}" id="" style="width: 100%">
           </div>
+          
+
           <div class="form-group">
-            <label for="exampleInputPassword1">Loại</label>
-            <select name="lnt_ma" id="lnt_ma">
-              @foreach($dsloainhatro as $lnt)
-              <!-- <option value="{{$lnt->lnt_ma}}">{{$lnt->lnt_ten}}</option> -->
-              <option value="{{$lnt->lnt_ma}}" <?php echo ($lnt->lnt_ma == $nhatro->lnt_ma) ? 'selected' : ''  ?>>{{$lnt->lnt_ten}}</option>
-              @endforeach
-            </select>
+                <label>Trạng Thái</label>
+                @if ($nhatro->nt_trangthai === 1)
+                <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="nt_trangthai", id="nt_trangthai">
+                    <option value="1" selected="">Đã Duyệt</option> 
+                    <option value="2">Chờ Duyệt</option>
+                </select>
+                @else
+                <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="nt_trangthai", id="nt_trangthai">
+                    <option value="1" >Đã Duyệt</option> 
+                    <option value="2" selected>Chờ Duyệt</option>
+                </select>
+                @endif
+
           </div>
           
           <!-- <div class="form-group">

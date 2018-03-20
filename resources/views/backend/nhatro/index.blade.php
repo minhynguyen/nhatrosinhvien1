@@ -49,7 +49,7 @@
                   <th style="text-align: left;">Mã Loại</th>
                   <th style="text-align: left;">Giá Điện</th>
                   <th style="text-align: left;">Giá Nước</th>
-                  <th style="text-align: left;">Thông Tin</th>
+                  <th style="text-align: left;">Giá Thuê</th>
                   <!-- <th>Ngày Tạo Mới</th>
                   <th>Ngày Cập Nhật</th> -->
                   <th >Trạng Thái</th>
@@ -68,12 +68,12 @@
                      
                     <td style="text-align: left;">{{$nhatro->nt_giadien}}</td>
                     <td style="text-align: left;">{{$nhatro->nt_gianuoc}}</td>
-                    <td style="text-align: left;">{{$nhatro->nt_thongtin}}</td>
+                    <td style="text-align: left;">{{$nhatro->nt_giathue}}</td>
                     @if ($nhatro->nt_trangthai === 1)
 
-                        <td style="text-align: center;"><span class="badge bg-yellow">KHÓA</span></td>
+                        <td style="text-align: center;"><span class="badge bg-green">Đã Duyệt</span></td>
                     @else
-                        <td style="text-align: center;"><span class="badge bg-green">Khả Dụng</span></td>
+                        <td style="text-align: center;"><span class="badge bg-yellow">Chờ Duyệt</span></td>
                     @endif
                     <td>
                       <button type="button" class="btn btn-warning"> <a href=" {{ route('nhatro.edit', ['nhatro' => $nhatro->nt_ma]) }}" ><i class="fa fa-edit"></i> </a></button>

@@ -10,9 +10,8 @@ class binhluan extends Model
 
     protected $table        = 'binhluan';
     protected $fillable     = ['id', 'bd_ma', 'bl_noidung', 'bl_taomoi'];
-    protected $guarded      = [];
+    
 
-    protected $primaryKey   = ;
     public    $incrementing = false;
 
 
