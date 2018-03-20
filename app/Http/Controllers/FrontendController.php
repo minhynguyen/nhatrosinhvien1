@@ -240,4 +240,5 @@ public function store(nhatrorequest $request)
     {
         //
     }
+
 }

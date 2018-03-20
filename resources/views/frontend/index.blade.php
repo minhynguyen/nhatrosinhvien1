@@ -17,8 +17,10 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
             <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
-            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
-            type="text/javascript"></script> -->
+            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
+        async defer></script> -->
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
+            type="text/javascript"></script>
             
       </head>
      
@@ -140,7 +142,7 @@
                                 </li>
                         
                                 <li>
-                                    <select class="form" >
+                                    <select class="form" onchange="getval(this);" id="location">
                                       <option value="" disabled selected>Chọn Trường Học</option>
                                       <option value="0">ALL</option>
                                         @foreach($dsTruong as $tr)
@@ -280,6 +282,7 @@ $(document).ready(function(){
           streetViewControl: false,
           scrolwheel : true,
         });
+
         marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
@@ -446,10 +449,37 @@ function geolocate(){
           alert('use location');
         }
   };
+    function getval(sel)
+      {
+
+
+            // alert(sel.value);
+            $val = sel.value;
+            
+            alert($val);
+            var pos = {
+              lat: 10.0309641000,
+              lng: 105.7689041000
+            };
+
+
+            map.setCenter(pos);
+            map.setZoom(19);
+            // marker.setPosition(pos);
+
+           
+
+
+
+           
+
+
+      }
+  
     geolocate();
+    initMap();
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
-        async defer></script>
+
 
 
 
