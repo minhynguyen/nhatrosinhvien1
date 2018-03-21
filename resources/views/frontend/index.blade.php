@@ -142,11 +142,12 @@
                                 </li>
                         
                                 <li>
-                                    <select class="form" onchange="getval(this);" id="location">
+                                  <!-- onchange="getval(this);" -->
+                                    <select class="form"  id="selectlocation">
                                       <option value="" disabled selected>Chọn Trường Học</option>
                                       <option value="0">ALL</option>
                                         @foreach($dsTruong as $tr)
-                                        <option value="{{$tr->t_ma}}">{{$tr->t_ten}}</option>
+                                        <option value="{{$tr->t_vido}}|{{$tr->t_kinhdo}}">{{$tr->t_ten}}</option>
                                         @endforeach
                                       
                                     </select>
@@ -326,7 +327,8 @@ $(document).ready(function(){
                infowindow.setContent(content);  
                infowindow.open(map, school);  
            }  
-         })(school));                            
+         })(school));
+
   @endforeach
 
   @foreach($dsnhatro as $nt)
@@ -354,11 +356,12 @@ $(document).ready(function(){
                       '<p>Địa Chỉ: {{$nt->nt_diachi}}</p>' +
                       '<p>Kinh Độ: {{$nt->nt_kinhdo}}</p>' +
                       '<p>Vĩ Độ: {{$nt->nt_vido}}</p>' +
+                      '<p>Giá Thuê: {{$nt->nt_giathue}}</p>' +
                       '<p>Giá Nước: {{$nt->nt_gianuoc}}</p>' +
                       '<p>Giá Điện: {{$nt->nt_giadien}}</p>' +
                       '<div class="iw-subTitle">Liên Hệ: </div>' +
                       '<p>Liên Hệ: {{$nt->name}}<br>'+
-                      '<br>SĐT : {{$nt->nt_sdtlienhe}}<br>e-mail: {{$nt->email}}<br><a href="{{ route('nhatrofrontend.show', ['nhatro' => $nt->nt_ma]) }}" target="_blank">Xem Chi Tiết</a></p>'+
+                      '<br>SĐT : {{$nt->nt_sdtlienhe}}<br>e-mail: {{$nt->email}}<br><a style="color: red;" href="{{ route('nhatrofrontend.show', ['nhatro' => $nt->nt_ma]) }}" target="_blank">Xem Chi Tiết</a></p>'+
                     '</div>' +
                     '<div class="iw-bottom-gradient"></div>' +
                   '</div>';
@@ -367,6 +370,7 @@ $(document).ready(function(){
                      
            }  
          })(home));
+
 
                               
   @endforeach
@@ -449,35 +453,34 @@ function geolocate(){
           alert('use location');
         }
   };
-    function getval(sel)
-      {
 
+      jQuery(document).on('change','#selectlocation',function() {
+        var latlngzoom = jQuery(this).val().split('|');
+        var newzoom = 16,
+        newlat = 1*latlngzoom[0],
+        newlng = 1*latlngzoom[1];
+        map.setZoom(newzoom);
+        map.setCenter({lat:newlat, lng:newlng});
+        marker.setPosition({lat:newlat, lng:newlng});
+      //   var myLatLng = {lat:newlat, lng:newlng};
+      //   var marker = new google.maps.Marker({
+      //   position: myLatLng,
+      //   map: map,
+      //   title: 'Trường Học Bạn Chọn',
+      //   // icon: '{{ asset ('theme/homepage/image/school1.png') }}'
+      // });
 
-            // alert(sel.value);
-            $val = sel.value;
-            
-            alert($val);
-            var pos = {
-              lat: 10.0309641000,
-              lng: 105.7689041000
-            };
+        // marker.
+      });
 
-
-            map.setCenter(pos);
-            map.setZoom(19);
-            // marker.setPosition(pos);
-
-           
-
-
-
-           
-
-
-      }
   
     geolocate();
     initMap();
+
+</script>
+
+<script>
+        
 </script>
 
 

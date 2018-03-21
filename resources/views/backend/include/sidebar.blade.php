@@ -65,6 +65,9 @@
           </ul>
 
 
+          
+
+
 
           <a href="#"><i class="fa fa-list-alt"></i> <span>Tiện Ích Nhà Trọ</span>
             <span class="pull-right-container">
@@ -112,7 +115,21 @@
             <li><a href="{{route('baidang.index')}}"> <i class="fa fa-list"></i>Danh Sách Các Bài Đăng</a></li>
             <li><a href="{{route('baidang.create')}}"> <i class="fa  fa-user"></i>Thêm Bài Đăng</a></li>
           </ul>
+
+
+          <a href="#"><i class="fa fa-comments"></i> <span>Comments</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('binhluanadmin.index')}}"> <i class="fa fa-list"></i>Danh Sách Các Comment</a></li>
+            
+          </ul>
         </li>
+
+
+
         
       </ul>
       <!-- /.sidebar-menu -->

@@ -65,7 +65,7 @@
                     
                     
                     <td>
-                      <form method="POST" action="{{route('binhluan.destroy', ['binhluan' => $bl->bl_noidung])}}">
+                      <form method="POST" action="{{route('binhluanadmin.destroy', ['binhluan' => $bl->bl_noidung])}}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete </a></button>

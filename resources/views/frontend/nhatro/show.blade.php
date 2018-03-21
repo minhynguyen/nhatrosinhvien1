@@ -193,7 +193,13 @@ height: 290px;
                             <div class="comments-list">
                               @foreach($dsbinhluan as $bl)
                                <div class="media">
-                                   <p class="pull-right"><small>{{$bl->bl_taomoi}}</small></p>
+                                  
+                                   <p class="pull-right"><small><!-- {{$bl->bl_taomoi}} -->
+                                      <?php \Carbon\Carbon::setLocale('vi')  ?>
+                                     {{ \Carbon\Carbon::createFromTimeStamp(strtotime($bl->bl_taomoi  ))->diffForHumans() }}
+
+                                     
+                                     </small></p>
                                     
                                     <div class="media-body">
                                         
