@@ -432,9 +432,9 @@ $(document).ready(function(){
         geolocate();
       };
   function GeolocationControl(){
-  var geoButton = document.getElementById('curent-location');
-  google.maps.event.addListener(geoButton, 'click', geolocate); 
-};
+      var geoButton = document.getElementById('curent-location');
+      google.maps.event.addListener(geoButton, 'click', geolocate); 
+    };
 function geolocate(){
   if (navigator.geolocation) { //nếu trình duyệt lấy đc vị trí
           navigator.geolocation.getCurrentPosition(function(position) {
@@ -453,27 +453,48 @@ function geolocate(){
           alert('use location');
         }
   };
+  function setci(){
+    
+    var circle = new google.maps.Circle({
+          map: map,
+          radius: 1000,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            // fillColor: '#FF0000',
+            fillOpacity: 0.35,    
+          fillColor: '#CCFFFF'
+        });
+        circle.bindTo('center', marker, 'position');
+  };
+    function remove_circle(circle) {
+      // remove event listers
+      google.maps.event.clearListeners(circle, 'click_handler_name');
+      google.maps.event.clearListeners(circle, 'drag_handler_name');
+      circle.setRadius(0);
+      circle.setMap(null);
+      // initMap();
+  };
 
       jQuery(document).on('change','#selectlocation',function() {
+
         var latlngzoom = jQuery(this).val().split('|');
-        var newzoom = 16,
+        var newzoom = 15,
         newlat = 1*latlngzoom[0],
         newlng = 1*latlngzoom[1];
         map.setZoom(newzoom);
         map.setCenter({lat:newlat, lng:newlng});
         marker.setPosition({lat:newlat, lng:newlng});
-      //   var myLatLng = {lat:newlat, lng:newlng};
-      //   var marker = new google.maps.Marker({
-      //   position: myLatLng,
-      //   map: map,
-      //   title: 'Trường Học Bạn Chọn',
-      //   // icon: '{{ asset ('theme/homepage/image/school1.png') }}'
-      // });
+        // initMap();
+        setci();
 
-        // marker.
+        // remove_circle(circle);
+
       });
 
-  
+
+    // setci();
+
     geolocate();
     initMap();
 

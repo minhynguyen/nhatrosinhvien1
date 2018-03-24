@@ -2,7 +2,7 @@
     <html>
          <head>
             <meta charset="UTF-8">
-            <title>Nhà Trọ Sinh Viên</title>
+            <title>Đăng Kí</title>
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/normalize.css') }}">
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/main.css') }}">
             <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
@@ -69,7 +69,7 @@
             
 
             <div class="description_content">
-                <div class="text-content container">
+                <div class="text-content container" >
                   <form method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
                     <div class="col-md-6">
@@ -153,11 +153,11 @@
                   </form>
                     <div class="col-md-6">
                         <div class="img-section">
-                           <img src="{{ asset ('theme/homepage/image/pic1_250.jpg') }}" width="250" height="220">
-                           <img src="{{ asset ('theme/homepage/image/pic6.jpg') }}" width="250" height="220">
+                           <img style="height: 220px; width: 250px !important" src="{{ asset ('theme/homepage/image/anh1.jpg') }}" width="250" height="220">
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/pic4.jpg') }}" width="250" height="220">
                            <div class="img-section-space"></div>
-                           <img src="{{ asset ('theme/homepage/image/pic3.jpg') }}"  width="250" height="220">
-                           <img src="{{ asset ('theme/homepage/image/pic4.jpg') }}"  width="250" height="220">
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/pic2.jpg') }}"  width="250" height="220">
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/pic3.jpg') }}"  width="250" height="220">
                        </div>
                     </div>
                 </div>

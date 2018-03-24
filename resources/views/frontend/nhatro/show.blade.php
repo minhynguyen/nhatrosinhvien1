@@ -100,19 +100,19 @@ height: 290px;
                             </tr>
                             <tr>
                                   <td style="text-align: left;"><span>Địa Chỉ: </span></td>
-                                  <td style="text-align: right;">{{$nt->nt_diachi}}</td>
+                                  <td style="text-align: left;">{{$nt->nt_diachi}}</td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                   <td style="text-align: left;"><span>Giá Thuê: </span></td>
                                   <td style="text-align: right;">{{$nt->nt_giathue}} </td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                   <td style="text-align: left;"><span>Giá Điện: </span></td>
-                                  <td style="text-align: right;">{{$nt->nt_giadien}} </td>
+                                  <td style="text-align: right;">{{$nt->nt_giadien}} (~ Kw/h) </td>
                             </tr>
                             <tr>
                                   <td style="text-align: left;"><span>Giá Nước: </span></td>
-                                  <td style="text-align: right;">{{$nt->nt_gianuoc}}</td>
+                                  <td style="text-align: right;">{{$nt->nt_gianuoc}} (~ M<sup>3</sup>)</td>
                             </tr>
                           </tbody>
                     </table>
@@ -121,7 +121,7 @@ height: 290px;
                     <div class="row">
                           <div class="col-md-12">
                         <!-- <h6><span>Retail Price</span></h6> -->
-                        <h3 class="price">Rs 340.00 /unit</h3>
+                        <h3 class="price">Giá Thuê: {{$nt->nt_giathue}} /Tháng</h3>
                         <!-- <h4><span>Email ID- : ravi7284007@gmail.com</span></h4> -->
                       </div>
                     </div>

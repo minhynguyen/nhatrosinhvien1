@@ -17,8 +17,8 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
             <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q"
-  type="text/javascript"></script>
+            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q"
+  type="text/javascript"></script> -->
             
       </head>
      
@@ -153,11 +153,11 @@
                     </div>
                     <div class="col-md-6">
                         <div class="img-section">
-                           <img src="{{ asset ('theme/homepage/image/pic1_250.jpg') }}" width="250" height="220">
-                           <img src="{{ asset ('theme/homepage/image/pic6.jpg') }}" width="250" height="220">
+                           <img style="height: 220px; width: 250px !important" src="{{ asset ('theme/homepage/image/anh1.jpg') }}" width="250" height="220">
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/anh2.jpg') }}" width="250" height="220">
                            <div class="img-section-space"></div>
-                           <img src="{{ asset ('theme/homepage/image/pic3.jpg') }}"  width="250" height="220">
-                           <img src="{{ asset ('theme/homepage/image/pic4.jpg') }}"  width="250" height="220">
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/pic2.jpg') }}"  width="250" height="220">
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/pic3.jpg') }}"  width="250" height="220">
                        </div>
                     </div>
                 </div>
