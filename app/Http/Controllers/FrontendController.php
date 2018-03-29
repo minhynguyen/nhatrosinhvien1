@@ -37,14 +37,16 @@ class FrontendController extends Controller
 
     }
     public function gettienich()
-    {
-
-        
+    {        
         $dstienich = tienich::all();
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         return view('frontend.nhatro.create')->with('dsloainhatro', $dsloainhatro)->with('dstienich', $dstienich);
 
     }
+    
+        
+       
+    
     
     public function getnhatro()
     {

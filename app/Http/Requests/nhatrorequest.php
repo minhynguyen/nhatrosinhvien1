@@ -42,6 +42,11 @@ class nhatrorequest extends FormRequest
         'nt_ten.required' => 'Tên Nhà Trọ Không Được Bỏ Trống',
         'nt_kinhdo.required' => 'Kinh Độ Không Được Bỏ Trống',
         'nt_vido.required' => 'Vĩ Độ Không Được Bỏ Trống',
+        'nt_sdtlienhe.required' => 'Số Điện Thoại Không Được Bỏ Trống',
+        'nt_diachi.required' => 'Địa Chỉ Không Được Bỏ Trống',
+        'nt_giadien.required' => 'Giá Điện Không Được Bỏ Trống',
+        'nt_gianuoc.required' => 'Giá Nước Không Được Bỏ Trống',
+        'lnt_ma.required' => 'Loại Nhà Trọ Không Được Bỏ Trống',
         'nt_ten.max' => 'Tên Không Được Vượt Quá :max Kí Tự',
         'nt_ten.unique' => 'Nhà Trọ Này Đã Tồn Tại',
         ];

@@ -98,6 +98,14 @@
             <input type="text" class="form-control" name="nt_vido" id="lat" style="width: 100%" value="{{$nhatro->nt_vido}}">
           </div>
 
+          <div class="form-group">
+
+            <label for="exampleInputEmail1">Diện Tích</label>
+            <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="t_kinhdo" placeholder="Nhập Kinh Độ"> -->
+            <input type="text" class="form-control" name="nt_dientich"  style="width: 100%" value="{{$nhatro->nt_dientich}}">
+
+          </div>
+
           
           
           

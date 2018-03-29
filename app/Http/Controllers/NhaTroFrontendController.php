@@ -56,7 +56,7 @@ class NhaTroFrontendController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(nhatrorequest $request)
     {
         $validatedData = $request->validate([
             'nt_ten' => 'required|max:50',
@@ -77,6 +77,7 @@ class NhaTroFrontendController extends Controller
         $nhatro->nt_sdtlienhe = $request->nt_sdtlienhe;
         $nhatro->nt_kinhdo = $request->nt_kinhdo;
         $nhatro->nt_vido = $request->nt_vido;
+        $nhatro->nt_dientich = $request->nt_dientich;
         $nhatro->nt_giathue = $request->nt_giathue;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;
@@ -186,6 +187,7 @@ class NhaTroFrontendController extends Controller
         $nhatro->nt_sdtlienhe = $request->nt_sdtlienhe;
         $nhatro->nt_kinhdo = $request->nt_kinhdo;
         $nhatro->nt_vido = $request->nt_vido;
+        $nhatro->nt_dientich = $request->nt_dientich;
         $nhatro->nt_giathue = $request->nt_giathue;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;

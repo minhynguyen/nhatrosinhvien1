@@ -56,6 +56,7 @@ class nhatroController extends Controller
             'nt_vido' => 'required',
             'nt_sdtlienhe' => 'required',
             'nt_diachi' => 'required',
+            'nt_dientich' => 'required',
             'nt_giadien' => 'required',
             'nt_gianuoc' => 'required',
             'lnt_ma' => 'required',
@@ -69,6 +70,7 @@ class nhatroController extends Controller
         $nhatro->nt_sdtlienhe = $request->nt_sdtlienhe;
         $nhatro->nt_kinhdo = $request->nt_kinhdo;
         $nhatro->nt_vido = $request->nt_vido;
+        $nhatro->nt_dientich = $request->nt_dientich;
         $nhatro->nt_giathue = $request->nt_giathue;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;
@@ -164,6 +166,7 @@ class nhatroController extends Controller
         $nhatro->nt_sdtlienhe = $request->nt_sdtlienhe;
         $nhatro->nt_kinhdo = $request->nt_kinhdo;
         $nhatro->nt_vido = $request->nt_vido;
+        $nhatro->nt_dientich = $request->nt_dientich;
         $nhatro->nt_giathue = $request->nt_giathue;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;

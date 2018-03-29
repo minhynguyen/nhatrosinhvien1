@@ -131,6 +131,16 @@
                         <div class="col-md-12" style="margin-top: 10px">
                             <input type="text" name="nt_sdtlienhe" class="form" style="width: 100%" placeholder="Số Điện Thoại Liên Lạc" value="{{old('nt_sdtlienhe')}}">
                         </div>
+
+                        <div class="col-md-12" style="margin-top: 10px">
+                          <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
+                          <div class="input-group" class="form">
+                              <input type="text" class="form" name="nt_dientich" placeholder="Diện Tích Phòng" value="{{old('nt_dientich')}}" style="width: 100%">
+                              <span class="input-group-addon">(~ M<sup>2</sup>).</span>
+                            </div>
+                            <!-- <input type="text" name="nt_dientich" class="form" style="width: 100%" placeholder="Diện Tích Phòng" value="{{old('nt_dientich')}}">
+                            <span class="input-group-addon">(~ M<sup>3</sup>).</span> -->
+                        </div>
                         
                         <!-- <div class="col-md-6" style="margin-top: 10px">
                             <div class="input-group" class="form">

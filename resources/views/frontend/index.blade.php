@@ -6,6 +6,7 @@
             <title>Nhà Trọ Sinh Viên</title>
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/normalize.css') }}">
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/main.css') }}">
+            <!-- <link rel="stylesheet" href="{{ asset ('js/jqueryMap.js') }}"> -->
             <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
             <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/bootstrap.css') }}">
@@ -31,9 +32,16 @@
                     width: 100%;
                     height: 100%;
                 }
+                #map img {
+                  max-width: none !important;
+                }
+
                 .gm-style-iw {
-                  width: 300px !important;
+                  width: 350px !important;
                   top: 15px !important;
+                  /*padding-right: 0px !important;*/
+                  /*bottom: : 0px !important;*/
+                  /*right: 0px !important;*/
                   left: 0px !important;
                   background-color: #fff;
                   box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
@@ -45,7 +53,7 @@
                 }
                 #iw-container .iw-title {
                   font-family: 'Time New Romance', sans-serif;
-                  font-size: 15px;
+                  font-size: 22px;
                   font-weight: 400;
                   padding: 10px;
                   background-color: #48b5e9;
@@ -54,7 +62,7 @@
                   border-radius: 2px 2px 0 0;
                 }
                 #iw-container .iw-content {
-                  font-size: 13px;
+                  font-size: 15px;
                   line-height: 18px;
                   font-weight: 400;
                   margin-right: 1px;
@@ -96,7 +104,7 @@
                             <ul class="nav navbar-nav main-nav  clear navbar-right">
                                 <li>
                                     <select class="form" id="cmbLoaiNhaTro">
-                                      <option value="" disabled selected>Chọn Loại Nhà Trọ</option>
+                                      <option value="0" disabled selected>Chọn Loại Nhà Trọ</option>
                                       <option value="0">ALL</option>
                                         @foreach($dsloainhatro as $lnt)
                                         <option value="{{$lnt->lnt_ma}}">{{$lnt->lnt_ten}}</option>
@@ -105,21 +113,35 @@
                                     </select>
                                 </li>
                               <?php 
-                                  $dsGia = [];
+                                  $dsGiaTu = [];
                                   for($i=200000; $i<=2200000; $i+= 200000){
-                                      array_push($dsGia, $i);
+                                      array_push($dsGiaTu, $i);
+                                  }
+                               ?>
+                               <?php 
+                                  $dsGiaDen = [];
+                                  for($i=200000; $i<=2200000; $i+= 200000){
+                                      array_push($dsGiaDen, $i);
                                   }
                                ?>
                                 <li>
-                                    <select class="form" id="Gia">
-                                      <option value="" disabled selected>Chọn Mức Giá</option>
+                                    <select class="form" id="cmbGiaTu">
+                                      <option value="0" disabled selected>Chọn Mức Giá Từ</option>
                                       <option value="0">ALL</option>
-                                      <option>Dưới 1 Triệu</option>
-                                      <option>1 Triệu đến 2 Triệu</option>
-                                      <option>2 Triệu đến 3 Triệu</option>
-                                      <option>3 Triệu đến 5 Triệu</option>
-                                      <option>5 Triệu đến 7 Triệu</option>
-                                      <option>Trên 7 Triệu</option>
+                                      @foreach($dsGiaTu as $giatu)
+                                        <option value="{{$giatu}}">{{number_format($giatu)}}</option>
+                                      @endforeach
+                                      
+                                    </select>
+                                    
+                                </li>
+                                <li>
+                                  <select class="form" id="cmbGiaDen">
+                                      <option value="0" disabled selected>Đến</option>
+                                      <option value="0">ALL</option>
+                                      @foreach($dsGiaDen as $giaden)
+                                        <option value="{{$giaden}}">{{number_format($giaden)}}</option>
+                                      @endforeach
                                       
                                     </select>
                                 </li>
@@ -130,8 +152,8 @@
                                   array_push($dsDT, $i);}
                                  ?>
                                 <li>
-                                    <select class="form" >
-                                      <option value="" disabled selected>Diện Tích</option>
+                                    <select class="form" id="cmbDienTich">
+                                      <option value="0" disabled selected>Diện Tích</option>
                                       <option value="0">ALL</option>
                                         @foreach($dsDT as $DT)
                                         <option value="{{$DT}}">{{number_format($DT)}} m2</option>
@@ -144,7 +166,7 @@
                                 <li>
                                   <!-- onchange="getval(this);" -->
                                     <select class="form"  id="selectlocation">
-                                      <option value="" disabled selected>Chọn Trường Học</option>
+                                      <option value="0" disabled selected>Chọn Trường Học</option>
                                       <option value="0">ALL</option>
                                         @foreach($dsTruong as $tr)
                                         <option value="{{$tr->t_vido}}|{{$tr->t_kinhdo}}">{{$tr->t_ten}}</option>
@@ -154,7 +176,8 @@
                                 </li>
                                 <li>
                                  
-                                    <button type="submit" id="submit" name="submit" class="text-center form-btn" style="width: 100%; background-color: white; color: black">Tìm Kiếm</button>
+                                    <button type="button" id="btnTimkiem" name="btnTimkiem" class="text-center form-btn" style="width: 100%; background-color: white; color: black">Tìm Kiếm</button>
+                                    <!-- <button id="btnTimkiem" class=" btn btn-default navbar-right" type="button">Tìm Kiếm</button> -->
                                   
                                     
                                 </li>
@@ -243,6 +266,8 @@
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery.mixitup.min.js') }}" ></script>
             <script src="{{ asset ('theme/homepage/css/timepicker/bootstrap-timepicker.min.js') }}"></script>
             <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+            <!-- <link rel="stylesheet" href="{{ asset ('js/jqueryMap.js') }}"> -->
+            <!-- <script src="{{ asset ('js/jqueryMap.js') }}"></script> -->
 <script>
   $(function(){
     // chấm là class # là id
@@ -273,7 +298,6 @@ $(document).ready(function(){
 <script>
   var map, marker;
   var mapDiv = document.getElementById('map');
-
   var myLatLng = {lat: 10.0309641000, lng: 105.7689041000};
   function initMap() {
         map = new google.maps.Map(mapDiv, {
@@ -283,7 +307,6 @@ $(document).ready(function(){
           streetViewControl: false,
           scrolwheel : true,
         });
-
         marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
@@ -291,27 +314,19 @@ $(document).ready(function(){
           draggable: true,
           // icon: 'http://maps.google.com/mapfiles/ms/micons/green.png'
         });
-
        google.maps.event.addListener(marker,'position_changed',function(){
-
     var lat = marker.getPosition().lat();
     var lng = marker.getPosition().lng();
-
     $('#lat').val(lat);
     $('#lng').val(lng);
   });
-
   @foreach($dsTruong as $Tr)
-
     var school = new google.maps.Marker({
     position:{
       lat:{{$Tr->t_vido}},
       lng:{{$Tr->t_kinhdo}},
-
     },
     map:map,
-
-
     icon: '{{ asset ('theme/homepage/image/school.png') }}'
     
   });
@@ -328,20 +343,14 @@ $(document).ready(function(){
                infowindow.open(map, school);  
            }  
          })(school));
-
   @endforeach
-
   @foreach($dsnhatro as $nt)
-
     var home = new google.maps.Marker({
     position:{
       lat:{{$nt->nt_vido}},
       lng:{{$nt->nt_kinhdo}},
-
     },
     map:map,
-
-
     icon: '{{ asset ('theme/homepage/image/house.png') }}'
     
   });
@@ -370,8 +379,6 @@ $(document).ready(function(){
                      
            }  
          })(home));
-
-
                               
   @endforeach
   //   var content = '<div id="iw-container">' +
@@ -380,7 +387,6 @@ $(document).ready(function(){
   //                     '<div class="iw-subTitle">Tọa Độ: </div>'+
   //                     '<img src="{{ asset ('theme/homepage/image/mar.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
   //                 '</div>';
-
   // // A new Info Window is created and set content
   // var infowindow = new google.maps.InfoWindow({
   //   content: content,
@@ -391,13 +397,10 @@ $(document).ready(function(){
   google.maps.event.addListener(marker, 'click', function() {
     infowindow.open(map,marker);
   });
-
   // Event that closes the Info Window with a click on the map
   google.maps.event.addListener(map, 'click', function() {
     infowindow.close();
-
   });
-
   google.maps.event.addListener(infowindow, 'domready', function() {
     var iwOuter = $('.gm-style-iw');
     var iwBackground = iwOuter.prev();
@@ -418,7 +421,6 @@ $(document).ready(function(){
     
   });
   google.maps.event.addDomListener(window, 'load', initMap);
-
   var customMapType = new google.maps.StyledMapType([
           {stylers: [{hue: '#D2E4C8'}]},
           {
@@ -438,14 +440,11 @@ $(document).ready(function(){
 function geolocate(){
   if (navigator.geolocation) { //nếu trình duyệt lấy đc vị trí
           navigator.geolocation.getCurrentPosition(function(position) {
-
             // console.log(position);
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-
-
             map.setCenter(pos);
             marker.setPosition(pos);
           });
@@ -475,9 +474,7 @@ function geolocate(){
       circle.setMap(null);
       // initMap();
   };
-
       jQuery(document).on('change','#selectlocation',function() {
-
         var latlngzoom = jQuery(this).val().split('|');
         var newzoom = 15,
         newlat = 1*latlngzoom[0],
@@ -487,25 +484,12 @@ function geolocate(){
         marker.setPosition({lat:newlat, lng:newlng});
         // initMap();
         setci();
-
         // remove_circle(circle);
-
       });
-
-
     // setci();
-
     geolocate();
     initMap();
-
 </script>
-
-<script>
-        
-</script>
-
-
-
 
         </body>
     </html>

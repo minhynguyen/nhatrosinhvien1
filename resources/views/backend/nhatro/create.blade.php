@@ -80,6 +80,14 @@
                   <span id="place-address"></span>
                 </div>
           </div>
+
+          <div class="form-group">
+
+            <label for="exampleInputEmail1">Diện Tích</label>
+            <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="t_kinhdo" placeholder="Nhập Kinh Độ"> -->
+            <input type="text" class="form-control" name="nt_dientich"  style="width: 100%">
+
+          </div>
           
 
           <div class="form-group">
@@ -99,7 +107,7 @@
 
           <div class="form-group">
 
-            <label for="exampleInputEmail1">TT</label>
+            <label for="exampleInputEmail1">Giá Thuê</label>
             <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="t_vido" placeholder="Nhập Vĩ Độ"> -->
             <input type="text" class="form-control" name="nt_giathue" id="" style="width: 100%">
           </div>
@@ -127,7 +135,7 @@
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Loại</label>
-            <select name="lnt_ma" id="lnt_ma">
+            <select name="lnt_ma" id="lnt_ma" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
               @foreach($dsloainhatro as $lnt)
               <option value="{{$lnt->lnt_ma}}">{{$lnt->lnt_ten}}</option>
               @endforeach

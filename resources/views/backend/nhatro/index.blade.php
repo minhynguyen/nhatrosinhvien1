@@ -46,7 +46,8 @@
                   <th style="text-align: left;">Địa Chỉ</th>
                   <th style="text-align: left;">Vĩ độ</th>
                   <th style="text-align: left;">Kinh độ</th>
-                  <th style="text-align: left;">Mã Loại</th>
+                  <th style="text-align: left;">Loại Nhà Trọ</th>
+                  <th style="text-align: left;">Diện Tích</th>
                   <th style="text-align: left;">Giá Điện</th>
                   <th style="text-align: left;">Giá Nước</th>
                   <th style="text-align: left;">Giá Thuê</th>
@@ -65,6 +66,7 @@
                     <td style="text-align: left;">{{$nhatro->nt_vido}}</td>
                     <td style="text-align: left;">{{$nhatro->nt_kinhdo}}</td>
                     <td style="text-align: left;">{{$nhatro->lnt_ten}}</td>
+                    <td style="text-align: left;">{{$nhatro->nt_dientich}}</td>
                      
                     <td style="text-align: left;">{{$nhatro->nt_giadien}}</td>
                     <td style="text-align: left;">{{$nhatro->nt_gianuoc}}</td>

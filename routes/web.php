@@ -42,6 +42,7 @@ Route::resource('binhluan', 'binhluanController');
 Route::resource('nhatrofrontend', 'NhaTroFrontendController');
 Route::resource('baidangfrontend', 'baidangfrontendController');
 Route::get('/', 'FrontendController@index')->name('index');
+// Route::get('/timkiem/{maLoai}/{giaTu}/{giaDen}/{dienTich}', ['uses' => 'frontendController@dsNhatro_timkiem']);
 // Route::get('/', function () {
 //     return view('frontend.index');
 // });

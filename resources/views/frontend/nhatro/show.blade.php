@@ -27,7 +27,7 @@
 <style>
 #map{
 width: 100%;
-height: 290px;
+height: 500px;
 
 }
 </style>
@@ -102,16 +102,16 @@ height: 290px;
                                   <td style="text-align: left;"><span>Địa Chỉ: </span></td>
                                   <td style="text-align: left;">{{$nt->nt_diachi}}</td>
                             </tr>
-                            <!-- <tr>
-                                  <td style="text-align: left;"><span>Giá Thuê: </span></td>
-                                  <td style="text-align: right;">{{$nt->nt_giathue}} </td>
-                            </tr> -->
+                            <tr>
+                                  <td style="text-align: left;"><span>Diện Tích: </span></td>
+                                  <td style="text-align: right;">{{$nt->nt_dientich}} (~ M<sup>2</sup>)</td>
+                            </tr>
                             <tr>
                                   <td style="text-align: left;"><span>Giá Điện: </span></td>
                                   <td style="text-align: right;">{{$nt->nt_giadien}} (~ Kw/h) </td>
                             </tr>
                             <tr>
-                                  <td style="text-align: left;"><span>Giá Nước: </span></td>
+                                  <td style="text-align: left;"><span>Giá Nước:</span></td>
                                   <td style="text-align: right;">{{$nt->nt_gianuoc}} (~ M<sup>3</sup>)</td>
                             </tr>
                           </tbody>
@@ -173,7 +173,7 @@ height: 290px;
                       
                       </div>
                       <div class="tab-pane fade in" id="tab2">
-                        <div id="map"></div>
+                        
                        
                       </div>
                       <div class="tab-pane fade in" id="tab3">
@@ -226,9 +226,13 @@ height: 290px;
                                   </div>
                                 @endif
                       </div>
+
                     </div>
 
+
+
                   </div>
+                  <div id="map"></div>
                   @endforeach
                   
               
@@ -272,21 +276,35 @@ height: 290px;
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places"
         ></script>
         <script>
-          @foreach($nhatro as $nt)
+  @foreach($nhatro as $nt)
   var lat = {{$nt->nt_vido}};
   var lng = {{$nt->nt_kinhdo}};
+  var map, marker;
+  var infowindow = new google.maps.InfoWindow();
+  var mapDiv = document.getElementById('map');
+  var myLatLng = {lat: 10.0309641000, lng: 105.7689041000};
+  var directionsService = new google.maps.DirectionsService();
+  var directionsDisplay = new google.maps.DirectionsRenderer();
+  var directionsDisplay = new google.maps.DirectionsRenderer({map: map});
+  var service = new google.maps.DistanceMatrixService();
+  function initMap() {
 
-  var map = new google.maps.Map(document.getElementById('map'),{
-    center:{
-      lat: lat,
-      lng: lng
-    },
-    zoomControl: false,
-    streetViewControl: false,
-    scrolwheel : true,
-    zoom: 17
-  });
-  var marker = new google.maps.Marker({
+  map = new google.maps.Map(mapDiv, {
+          center: myLatLng,
+          zoom: 19,
+          zoomControl: false,
+          streetViewControl: false,
+          scrolwheel : true,
+        });
+  marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Vị Trí Của Tôi',
+          // draggable: true,
+          // icon: 'http://maps.google.com/mapfiles/ms/micons/green.png'
+        });
+ 
+  var home = new google.maps.Marker({
     position:{
       lat:lat,
       lng: lng,
@@ -296,25 +314,117 @@ height: 290px;
     icon: '{{ asset ('theme/homepage/image/house.png') }}'
   });
   @endforeach
-  // @foreach($nhatro as $nt)
-  // var map, marker;
-  // var mapDiv = document.getElementById('map');
-  // var myLatLng = {lat: {{$nt->nt_vido}}, lng: {{$nt->nt_kinhdo}} };
-  //     function initMap() {
-  //       map = new google.maps.Map(mapDiv, {
-  //         center: myLatLng,
-  //         zoom: 16,
-  //         zoomControl: false,
-  //         streetViewControl: false,
-  //         scrolwheel : true,
-  //       });
-  //       marker = new google.maps.Marker({
-  //         position: myLatLng,
-  //         map: map,
-  //         icon: '{{ asset ('theme/homepage/image/home.png') }}'
-  //       });
-  //       @endforeach
-          
+
+  // console.log(home.getPosition());
+
+var customMapType = new google.maps.StyledMapType([
+          {stylers: [{hue: '#D2E4C8'}]},
+          {
+                featureType: 'water',
+                stylers: [{color: '#599459'}]
+              },
+        ]);
+  var customMapTypeId ='custom_style'
+        map.mapTypes.set(customMapTypeId, customMapType);
+        map.setMapTypeId(customMapTypeId);
+        geolocate();
+      
+
+
+function GeolocationControl(){
+      var geoButton = document.getElementById('curent-location');
+      google.maps.event.addListener(geoButton, 'click', geolocate); 
+    };
+function geolocate(){
+  if (navigator.geolocation) { //nếu trình duyệt lấy đc vị trí
+          navigator.geolocation.getCurrentPosition(function(position) {
+            console.log(position);
+            var marker1 = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            map.setCenter(marker1);
+            marker.setPosition(marker1);
+            var directionsService = new google.maps.DirectionsService();
+        var directionsRequest = {
+          origin: home.getPosition(),
+          destination: marker1,
+          travelMode: google.maps.DirectionsTravelMode.DRIVING,
+          // unitSystem: google.maps.UnitSystem.METRIC
+        };
+        directionsService.route(
+
+          directionsRequest,
+          function(response, status)
+          {
+            if (status == google.maps.DirectionsStatus.OK)
+            {
+              directionsDisplay.setDirections(response);
+              directionsDisplay.setDirections(response);
+              new google.maps.DirectionsRenderer({
+                map: map,
+                // initMap();
+                // zoom: 17,
+
+                directions: response
+              });
+              
+              service.getDistanceMatrix({
+              origins: [home.getPosition()],
+              destinations: [marker1],
+              travelMode: 'DRIVING',
+              
+            }, function(response, status) {
+              if (status === 'OK') {
+
+                var originList = response.originAddresses;
+                var destinationList = response.destinationAddresses;
+                      for (var i = 0; i < originList.length; i++) {
+                    var results = response.rows[i].elements;
+                    for (var j = 0; j < results.length; j++) {
+                      var element = results[j];
+                      var dt = element.distance.text;
+                      var dr = element.duration.text;
+
+                    };
+                  console.log(dt, dr);
+
+                };
+                var content = '<div> Khoảng Cách: ' + dt + '<br> Thời Gian: ' +dr+ '<div>';
+                infowindow.setContent(content);
+                // infowindow.setPosition();
+                infowindow.open(map);
+                google.maps.event.addListener(home, 'mouseover', function() {
+                  infowindow.open(map,home);
+                });
+
+                // Event that closes the Info Window with a click on the map
+                google.maps.event.addListener(map, 'click', function() {
+                  infowindow.close();
+                });
+                
+
+              }
+            });
+
+            }
+            else
+              $("#error").append("Unable to retrieve your route<br />");
+          }
+        );
+
+            // calculateAndDisplayRoute(pos);
+          });
+        }else{
+          alert('use location');
+        }
+  };
+  // geolocate();
+  
+      }
+      
+    
+    initMap();
 </script>
 
 </body>
