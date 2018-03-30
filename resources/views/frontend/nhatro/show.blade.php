@@ -20,6 +20,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
         <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
+        
         <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places"
         async defer></script> -->
         
@@ -426,6 +427,7 @@ function geolocate(){
     
     initMap();
 </script>
+
 
 </body>
 </html>

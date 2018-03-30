@@ -18,6 +18,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
             <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
         async defer></script> -->
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
@@ -111,6 +112,8 @@
                                         @endforeach
                                       
                                     </select>
+
+
                                 </li>
                               <?php 
                                   $dsGiaTu = [];
@@ -490,6 +493,132 @@ function geolocate(){
     geolocate();
     initMap();
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $(document).on('change','#cmbLoaiNhaTro',function(){
+            // console.log("hmm its change");
+
+            var lnt_ma=$(this).val();
+            console.log(lnt_ma);
+            // console.log(cat_id);
+            var div=$(this).parent();
+
+            var op=" ";
+
+            $.ajax({
+                type:'get',
+                url:'{!!URL::to('timkiem')!!}',
+                data:{'id':lnt_ma},
+                success:function(data){
+                    // console.log('success');
+
+                    
+
+                    // console.log(data.length);
+                   //  op+='<option value="0" selected disabled>chose product</option>';
+                   //  for(var i=0;i<data.length;i++){
+                   //  op+='<option value="'+data[i].id+'">'+data[i].nt_ten+'</option>';
+                   // }
+
+                   // div.find('.nt_ten').html(" ");
+                   // div.find('.nt_ten').append(op);
+                },
+                error:function(){
+
+                }
+            });
+        });
+
+        $(document).on('change','#cmbDienTich',function () {
+            var dt=$(this).val();
+
+            // var a=$(this).parent();
+            console.log(dt);
+            // console.log(a);
+            var op="";
+            $.ajax({
+                type:'get',
+                url:'{!!URL::to('timkiem')!!}',
+                data:{'id':dt},
+                dataType:'json',//return data will be json
+                success:function(data){
+                    // console.log("price");
+                    // console.log(data.price);
+
+                    // here price is coloumn name in products table data.coln name
+
+                    // a.find('.prod_price').val(data.price);
+
+                },
+                error:function(){
+
+                }
+            });
+
+
+        });
+        $(document).on('change','#cmbGiaTu',function () {
+            var gt=$(this).val();
+
+            // var a=$(this).parent();
+            console.log(gt);
+            // console.log(a);
+            var op="";
+            $.ajax({
+                type:'get',
+                url:'{!!URL::to('timkiem')!!}',
+                data:{'id':gt},
+                dataType:'json',//return data will be json
+                success:function(data){
+                    // console.log("price");
+                    // console.log(data.price);
+
+                    // here price is coloumn name in products table data.coln name
+
+                    // a.find('.prod_price').val(data.price);
+
+                },
+                error:function(){
+
+                }
+            });
+
+
+        });
+
+        $(document).on('change','#cmbGiaDen',function () {
+            var gd=$(this).val();
+
+            // var a=$(this).parent();
+            console.log(gd);
+            // console.log(a);
+            var op="";
+            $.ajax({
+                type:'get',
+                url:'{!!URL::to('timkiem')!!}',
+                data:{'id':gd},
+                dataType:'json',//return data will be json
+                success:function(data){
+                    // console.log("price");
+                    // console.log(data.price);
+
+                    // here price is coloumn name in products table data.coln name
+
+                    // a.find('.prod_price').val(data.price);
+
+                },
+                error:function(){
+
+                }
+            });
+
+
+        });
+
+    });
+</script>
+
 
         </body>
     </html>

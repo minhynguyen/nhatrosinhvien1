@@ -44,6 +44,86 @@ class FrontendController extends Controller
 
     }
     
+     public function timkiem(Request $lnt_ma ,Request $gt,Request $gd,Request $dt){
+        try{
+            $sql = "SELECT * FROM nhatro";
+            $sqlWhere = "";
+            if(
+                $lnt_ma !=0 ||
+                $gt !=0 ||
+                $gd !=0 ||
+                $dt !=0 ){
+                $sql .= " WHERE ";
+                if($lnt_ma !== 0){
+                    if($sqlWhere != ""){
+                        $sqlWhere .= " AND ";
+                    }
+                    $sqlWhere .= "lnt_ma = $lnt_ma";
+                }
+                if($gt !== 0){
+                    if($sqlWhere != ""){
+                        $sqlWhere .= " AND ";
+                    }
+                    $sqlWhere .= "nt_giathue >= $gt";
+                }
+                if($gd !== 0){
+                    if($sqlWhere != ""){
+                        $sqlWhere .= " AND ";
+                    }
+                    $sqlWhere .= "nt_giathue <= $gd";
+                }
+                if($dt !== 0){
+                    if($sqlWhere != ""){
+                        $sqlWhere .= " AND ";
+                    }
+                    $sqlWhere .= "nt_dientich <= $dt";
+                }
+                $sql = $sqlWhere;
+                dd($sql);
+
+            }
+            $dsnt = DB::select($sql);
+            dd($dsnt);
+            // $dsLoai = Loai::all();
+            // $dsChude = ChuDe::all();
+            // return view('frontend.index', [
+            //     'dsLoai' =>$dsLoai,
+            //     'dsChude' =>$dsChude,
+            //     'dsSanPham' =>$dsSanPham,
+            //     'tuKhoa' => ($tuKhoa=="-" ? "" : $tuKhoa),
+            //     'maLoai' =>$maLoai,
+            //     'maChude' =>$maChude,
+            //     'giaTu' =>$giaTu,
+            //     'giaDen' =>$giaDen,
+
+            // ]);
+
+        }
+        
+        catch(QueryException $ex){
+            return reponse([
+                'error' => true,
+                'message' => $ex->getMessage()
+            ], 200);
+
+        } catch(PDOExpection $ex){
+            return reponse([
+                'error' => true,
+                'message' => $ex->getMessage()
+            ], 200);
+        }
+        
+    }
+
+
+    // public function timtheogia(Request $request){
+
+        
+    //     $p=DB::table('nhatro')->where('nt_giathue', '<=' ,$request->id)->take(100)->get;
+
+    //     return response()->json($p);
+    // }
+   
         
        
     
