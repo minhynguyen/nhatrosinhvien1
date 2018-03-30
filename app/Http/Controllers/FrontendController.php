@@ -43,76 +43,104 @@ class FrontendController extends Controller
         return view('frontend.nhatro.create')->with('dsloainhatro', $dsloainhatro)->with('dstienich', $dstienich);
 
     }
+
     
-     public function timkiem(Request $lnt_ma ,Request $gt,Request $gd,Request $dt){
-        try{
-            $sql = "SELECT * FROM nhatro";
-            $sqlWhere = "";
-            if(
-                $lnt_ma !=0 ||
-                $gt !=0 ||
-                $gd !=0 ||
-                $dt !=0 ){
-                $sql .= " WHERE ";
-                if($lnt_ma !== 0){
-                    if($sqlWhere != ""){
-                        $sqlWhere .= " AND ";
-                    }
-                    $sqlWhere .= "lnt_ma = $lnt_ma";
-                }
-                if($gt !== 0){
-                    if($sqlWhere != ""){
-                        $sqlWhere .= " AND ";
-                    }
-                    $sqlWhere .= "nt_giathue >= $gt";
-                }
-                if($gd !== 0){
-                    if($sqlWhere != ""){
-                        $sqlWhere .= " AND ";
-                    }
-                    $sqlWhere .= "nt_giathue <= $gd";
-                }
-                if($dt !== 0){
-                    if($sqlWhere != ""){
-                        $sqlWhere .= " AND ";
-                    }
-                    $sqlWhere .= "nt_dientich <= $dt";
-                }
-                $sql = $sqlWhere;
-                dd($sql);
+     public function timkiem(Request $request){
+       
+        $lnt_ma = $request->loainhatro;
+        $giatu = $request->giaTu;
+        $giaden = $request->giaden;
+        $dientich = $request->dientich;
+        // $sql = "SELECT * FROM nhatro" ;
+        //     $sqlWhere = "";
+        //     if($lnt_ma !=0 ||
+        //         $giatu !=0 ||
+        //         $giaden !=0 ||
+        //         $dientich !=0 ){
+        //         $sql .= " WHERE ";
+        //         if($lnt_ma !== 0){
+        //             if($sqlWhere != ""){
+        //                 $sqlWhere .= " AND ";
+        //             }
+        //             $sqlWhere .= "lnt_ma = $lnt_ma";
+        //         }
+                
+        //         if($giatu !== 0){
+        //             if($sqlWhere != ""){
+        //                 $sqlWhere .= " AND ";
+        //             }
+        //             $sqlWhere .= "nt_giathue >= $giatu";
+        //         }
+        //         if($giaden !== 0){
+        //             if($sqlWhere != ""){
+        //                 $sqlWhere .= " AND ";
+        //             }
+        //             $sqlWhere .= "nt_giathue <= $giaden";
+        //         }
+        //         if($dientich !== 0){
+        //             if($sqlWhere != ""){
+        //                 $sqlWhere .= " AND ";
+        //             }
+        //             $sqlWhere .= "nt_dientich <= $dientich";
+        //         }
+                
+        //         $sql .= $sqlWhere;
+                
 
-            }
-            $dsnt = DB::select($sql);
-            dd($dsnt);
-            // $dsLoai = Loai::all();
-            // $dsChude = ChuDe::all();
-            // return view('frontend.index', [
-            //     'dsLoai' =>$dsLoai,
-            //     'dsChude' =>$dsChude,
-            //     'dsSanPham' =>$dsSanPham,
-            //     'tuKhoa' => ($tuKhoa=="-" ? "" : $tuKhoa),
-            //     'maLoai' =>$maLoai,
-            //     'maChude' =>$maChude,
-            //     'giaTu' =>$giaTu,
-            //     'giaDen' =>$giaDen,
+        //     }
 
-            // ]);
-
-        }
         
-        catch(QueryException $ex){
-            return reponse([
-                'error' => true,
-                'message' => $ex->getMessage()
-            ], 200);
-
-        } catch(PDOExpection $ex){
-            return reponse([
-                'error' => true,
-                'message' => $ex->getMessage()
-            ], 200);
-        }
-        
+       if($lnt_ma!="" && $giatu!="" && $giaden !="" && $dientich !="" ){
+         
+          $data = DB::table('nhatro')
+          ->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')
+          ->join('users', 'users.id', '=', 'nhatro.id')
+          ->where('nhatro.lnt_ma',$lnt_ma)
+          ->where('nhatro.nt_giathue', ">=", $giatu)
+          ->where('nhatro.nt_giathue', "<=", $giaden)
+          ->where('nhatro.nt_dientich', "<=", $dientich)
+          ->where('nt_trangthai','1')
+          ->get();
+      }
+       
+       // else if($lnt_ma=='0'&& $giatu=='0' && $giaden =='0' && $dientich =='0' ){
+       //  echo "string";
+       //   $data = DB::table('nhatro')->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nt_trangthai','1')->get();
+       //    // dd($data);
+       // }
+       // else if($giatu!=""){
+       //   $data = DB::table('nhatro')
+       //    ->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')
+       //    ->join('users', 'users.id', '=', 'nhatro.id')
+       //    ->where('nhatro.lnt_ma',$lnt_ma)
+       //    ->where('nhatro.nt_giathue', ">=", $giatu)
+       //    // ->where('nhatro.nt_giathue', "<=", $giaden)
+       //    // ->where('nhatro.nt_dientich', "<=", $dientich)
+       //    ->get();
+       //    // dd($data);
+       // }
+       // if(count($data)=="0"){
+       //   echo "<h1 align='center'>no products found under this Category</h1>";
+       // }else{
+            // $data = DB::select($sql);
+            // dd($data);
+            // ->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')
+            // ->join('users', 'users.id', '=', 'nhatro.id');
+            $dsTruong = DB::table('truong')->where('t_trangthai','2')->get();
+                $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
+               return view('frontend.index', [
+                        'dsTruong' =>$dsTruong,
+                        'dsloainhatro' =>$dsloainhatro,
+                        'dsnhatro' =>$data,
+                        'loainhatro' =>$lnt_ma,
+                        'giatu' =>$giatu,
+                        'giaden' =>$giaden,
+                        'dientich' =>$dientich,
+                    ]);
+       // }
+       
+          
+         
     }
 
 

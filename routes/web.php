@@ -52,7 +52,8 @@ Route::get('/dangnhap', function () {
 Route::get('/dangki', function () {
     return view('frontend.dangki');
 });
-Route::get('/timkiem','FrontendController@timkiem');
+// Route::get('/timkiem','FrontendController@timkiem');
+Route::get('/timkiem/{loainhatro}/{giaTu}/{giaden}/{dientich}', ['uses' => 'frontendController@timkiem']);
 
 // Route::get('/themnhatro', 'FrontendController@gettienich')->name('themnhatro');
 // Route::post('/themnhatro', 'FrontendController@store')->name('create');

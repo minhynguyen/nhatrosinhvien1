@@ -493,7 +493,7 @@ function geolocate(){
     geolocate();
     initMap();
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function(){
 
         $(document).on('change','#cmbLoaiNhaTro',function(){
@@ -617,6 +617,51 @@ function geolocate(){
         });
 
     });
+</script> -->
+<!-- <script>
+$(document).ready(function(){
+  $("#btnTimkiem").click(function(){
+    var loainhatro = $("#cmbLoaiNhaTro").val();
+    var giatu = $('#cmbGiaTu').val();
+    var giaden = $('#cmbGiaDen').val();
+    var dientich = $('#cmbDienTich').val();
+    // console.log(loainhatro);
+    // console.log(giatu, giaden);
+    // console.log(dientich);
+    location.href = "/nhatrosinhvien/public/timkiem/"+loainhatro+"/"+giatu+"/"+giaden+"/"+dientich;
+    // $.ajax({
+    //   type: 'get',
+    //   dataType: 'html',
+    //   url: '{{url('/timkiem')}}',
+    //   // url:'{!!URL::to('timkiem')!!}',
+    //   // data:'lnt_ma=' + loainhatro + '&giatu=' + giatu + '&giaden=' + giaden +'&dientich=' + dientich,
+
+
+    //   success:function(response){
+    //     // console.log(data);
+    //     console.log(response);
+    //     // $("#productData").html(response);
+    //   }
+    // });
+  });
+});
+</script> -->
+<script>
+
+
+    $(document).ready(function(){
+        $("#btnTimkiem").click(function(){
+        loainhatro = $("#cmbLoaiNhaTro").val();
+        giatu = $('#cmbGiaTu').val();
+        giaden = $('#cmbGiaDen').val();
+        dientich = $('#cmbDienTich').val();
+        // giaDen = $('#cmbgiaDen :selected').val();
+
+        location.href = "/nhatrosinhvien/public/timkiem/"+loainhatro+"/"+giatu+"/"+giaden+"/"+dientich;
+
+
+    });
+});
 </script>
 
 
