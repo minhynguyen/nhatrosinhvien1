@@ -88,51 +88,54 @@ height: 500px;
 
                   <div class="col-md-5">
                     @foreach($nhatro as $nt)
-                    <h3>{{$nt->nt_ten}} <span class="in_sport"></span></h3>
+                    <h2 style="font-family: Pacifico; font-size: 40px !important; color: #bc6264">{{$nt->nt_ten}}</h2>
                     <table class="table">
                           <tbody>
                             <tr>
-                                  <td style="text-align: left;"><span>Liên Hệ: </span></td>
+                                  <td style="text-align: left;"><span><strong>Liên Hệ:</strong></span></td>
                                   <td style="text-align: right;">{{$nt->name}}</td>
                             </tr>
                             <tr>
-                                  <td style="text-align: left;"><span>Số Điện Thoại: </span></td>
+                                  <td style="text-align: left; width: 150px"><span><strong>Số Điện Thoại:</strong></span></td>
                                   <td style="text-align: right;">{{$nt->nt_sdtlienhe}}</td>
                             </tr>
                             <tr>
-                                  <td style="text-align: left;"><span>Địa Chỉ: </span></td>
-                                  <td style="text-align: left;">{{$nt->nt_diachi}}</td>
+                                  <td style="text-align: left;"><span><strong>Địa Chỉ:</strong> </span></td>
+                                  <td style="text-align: right;">{{$nt->nt_diachi}}</td>
                             </tr>
                             <tr>
-                                  <td style="text-align: left;"><span>Diện Tích: </span></td>
+                                  <td style="text-align: left;"><span><strong>Diện Tích:</strong> </span></td>
                                   <td style="text-align: right;">{{$nt->nt_dientich}} (~ M<sup>2</sup>)</td>
                             </tr>
                             <tr>
-                                  <td style="text-align: left;"><span>Giá Điện: </span></td>
+                                  <td style="text-align: left;"><span><strong>Giá Điện: </strong></span></td>
                                   <td style="text-align: right;">{{$nt->nt_giadien}} (~ Kw/h) </td>
                             </tr>
                             <tr>
-                                  <td style="text-align: left;"><span>Giá Nước:</span></td>
+                                  <td style="text-align: left;"><span><strong>Giá Nước:</strong></span></td>
                                   <td style="text-align: right;">{{$nt->nt_gianuoc}} (~ M<sup>3</sup>)</td>
                             </tr>
                           </tbody>
                     </table>
-                    
-                    <hr>
+                    <!-- <hr> -->
                     <div class="row">
                           <div class="col-md-12">
                         <!-- <h6><span>Retail Price</span></h6> -->
-                        <h3 class="price">Giá Thuê: {{$nt->nt_giathue}} /Tháng</h3>
-                        <!-- <h4><span>Email ID- : ravi7284007@gmail.com</span></h4> -->
+                        <h2 class="price" style="color: #bc6264 ">Giá Thuê: {{$nt->nt_giathue}} /Tháng</h2>
+                        <h4><span>Email : {{$nt->email}}</span></h4>
                       </div>
                     </div>
     <!-- <a href="#0" class="btn btn-cart">ADD TO CART</a> </div> -->
                   </div>
+
                 </div>
                 <div style="margin-top: 20px; margin-bottom: 20px">
                     <h2>THÔNG TIN CHI TIẾT VỀ NHÀ TRỌ</h2>
                 </div>
               </div>
+              
+
+              
 
 
 <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group">
@@ -233,6 +236,9 @@ height: 500px;
 
 
                   </div>
+                  <div style="margin-top: 20px; margin-bottom: 20px">
+                    <h2>SƠ ĐỒ NHÀ TRỌ</h2>
+                </div>
                   <div id="map"></div>
                   @endforeach
                   
@@ -249,7 +255,10 @@ height: 500px;
 
 
           </div>
+
         </div>
+
+
 
         
         <footer class="sub_footer" style="margin-top: 55px">
@@ -295,7 +304,7 @@ height: 500px;
           zoom: 19,
           zoomControl: false,
           streetViewControl: false,
-          scrolwheel : true,
+          scrolwheel : false,
         });
   marker = new google.maps.Marker({
           position: myLatLng,
