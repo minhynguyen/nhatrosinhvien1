@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\loainhatro;
+use App\baidang;
 use App\tienich;
 use App\nhatro;
 use App\nhatro_tienich;
@@ -161,6 +162,7 @@ class nhatroController extends Controller
         try{
         $nhatro = nhatro::find($id);
         
+        
         $nhatro->nt_ten = $request->nt_ten;
         $nhatro->nt_diachi = $request->nt_diachi;
         $nhatro->nt_sdtlienhe = $request->nt_sdtlienhe;
@@ -174,6 +176,8 @@ class nhatroController extends Controller
         // $nhatro->id = Auth::user()->id;
         $nhatro->lnt_ma = $request->lnt_ma;
         $nhatro->save();
+
+        // $baidang = baidang::find($id);
         
         // $tienich = $request->input('tienich');
         // // dd($tienich);

@@ -38,19 +38,21 @@
                 }
 
                 .gm-style-iw {
-                  width: 350px !important;
-                  top: 15px !important;
-                  /*padding-right: 0px !important;*/
-                  /*bottom: : 0px !important;*/
-                  /*right: 0px !important;*/
+                  width: 100% !important;
+                  /*height: 100% !important;*/
+                  /*top: 15px !important;
+                  margin-top: 0px!important;*/
                   left: 0px !important;
-                  background-color: #fff;
+                  /*background-color: #fff;
                   box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
                   border: 1px solid rgba(72, 181, 233, 0.6);
-                  border-radius: 2px 2px 10px 10px;
+                  border-radius: 2px 2px 10px 10px;*/
                 }
                 #iw-container {
                   margin-bottom: 10px;
+                  /*width: 100%;*/
+
+                  /*height: 100% !important;*/
                 }
                 #iw-container .iw-title {
                   font-family: 'Time New Romance', sans-serif;
@@ -60,10 +62,12 @@
                   background-color: #48b5e9;
                   color: white;
                   margin: 0;
+
                   border-radius: 2px 2px 0 0;
                 }
                 #iw-container .iw-content {
                   font-size: 15px;
+                  /*width: 100% !important;*/
                   line-height: 18px;
                   font-weight: 400;
                   margin-right: 1px;
@@ -92,6 +96,7 @@
                   background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
                   background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
                 }
+
             </style>
 
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -179,7 +184,7 @@
                                 </li>
                                 <li>
                                  
-                                    <button type="button" id="btnTimkiem" name="btnTimkiem" class="text-center form-btn" style="width: 100%; background-color: white; color: black">Tìm Kiếm</button>
+                                    <button type="button" id="btnTimkiem" name="btnTimkiem" class="btn btn-default form" style="width: 100%;height: 50px;"><span class="fa fa-search"></span>Tìm Kiếm</button>
                                     <!-- <button id="btnTimkiem" class=" btn btn-default navbar-right" type="button">Tìm Kiếm</button> -->
                                   
                                     
@@ -302,6 +307,7 @@ $(document).ready(function(){
   var map, marker;
   var mapDiv = document.getElementById('map');
   var myLatLng = {lat: 10.0309641000, lng: 105.7689041000};
+
   function initMap() {
         map = new google.maps.Map(mapDiv, {
           center: myLatLng,
@@ -366,11 +372,11 @@ $(document).ready(function(){
                       '<div class="iw-subTitle">Thông Tin: </div>' +
                       '<img src="{{ asset('upload/' . $nt->ha_ten)}}" alt="" height="150" width="100">' +
                       '<p>Địa Chỉ: {{$nt->nt_diachi}}</p>' +
-                      '<p>Kinh Độ: {{$nt->nt_kinhdo}}</p>' +
-                      '<p>Vĩ Độ: {{$nt->nt_vido}}</p>' +
-                      '<p>Giá Thuê: {{$nt->nt_giathue}}</p>' +
-                      '<p>Giá Nước: {{$nt->nt_gianuoc}}</p>' +
-                      '<p>Giá Điện: {{$nt->nt_giadien}}</p>' +
+                      '<p>Diện Tích: {{$nt->nt_dientich}} (~ M<sup>2</sup>)</p>' +
+                      // '<p>Vĩ Độ: {{$nt->nt_vido}}</p>' +
+                      '<p>Giá Cho Thuê: {{$nt->nt_giathue}} (VNĐ / Tháng)</p>' +
+                      '<p>Giá Nước: {{$nt->nt_gianuoc}} (~ M<sup>3</sup>)</p>' +
+                      '<p>Giá Điện: {{$nt->nt_giadien}} (~ Kw/h)</p>' +
                       '<div class="iw-subTitle">Liên Hệ: </div>' +
                       '<p>Liên Hệ: {{$nt->name}}<br>'+
                       '<br>SĐT : {{$nt->nt_sdtlienhe}}<br>e-mail: {{$nt->email}}<br><a style="color: red;" href="{{ route('nhatrofrontend.show', ['nhatro' => $nt->nt_ma]) }}" target="_blank">Xem Chi Tiết</a></p>'+
@@ -379,51 +385,64 @@ $(document).ready(function(){
                   '</div>';
                   infowindow.setContent(content);
                   infowindow.open(map, home);
-                     
+
+                   
            }  
+
          })(home));
                               
   @endforeach
-  //   var content = '<div id="iw-container">' +
-  //                   '<div class="iw-title">Vị Trí Của Tôi: </div>' +
-  //                   '<div class="iw-content">' +
-  //                     '<div class="iw-subTitle">Tọa Độ: </div>'+
-  //                     '<img src="{{ asset ('theme/homepage/image/mar.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
-  //                 '</div>';
-  // // A new Info Window is created and set content
-  // var infowindow = new google.maps.InfoWindow({
-  //   content: content,
-  //   maxWidth: 300
-  // });
+    var content = '<div id="iw-container">' +
+                    '<div class="iw-title">Vị Trí Của Tôi: </div>' +
+                    '<div class="iw-content">' +
+                      '<div class="iw-subTitle">Tọa Độ: </div>'+
+                      '<img src="{{ asset ('theme/homepage/image/mar.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
+                  '</div>';
+  // A new Info Window is created and set content
+  var infowindow = new google.maps.InfoWindow({
+    content: content,
+    // maxWidth: 100%
+  });
   // This event expects a click on a marker
   // When this event is fired the Info Window is opened.
+  // google.maps.event.addListener(marker, 'click', function() {
+  //   infowindow.open(map,marker);
+  // });
+  // // Event that closes the Info Window with a click on the map
+  // google.maps.event.addListener(map, 'click', function() {
+  //   infowindow.close();
+  // });
+  // google.maps.event.addListener(infowindow, 'domready', function() {
+  //   var iwOuter = $('.gm-style-iw');
+  //   var iwBackground = iwOuter.prev();
+  //   iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+  //   iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+  //   iwOuter.parent().parent().css({left: '115px'});
+  //   iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+  //   iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+  //   iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+  //   var iwCloseBtn = iwOuter.next();
+  //   iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
+  //   if($('.iw-content').height() < 140){
+  //     $('.iw-bottom-gradient').css({display: 'none'});
+  //   }
+  //   iwCloseBtn.mouseout(function(){
+  //     $(this).css({opacity: '1'});
+  //   });
+  //    google.maps.event.addDomListener(window, 'load', initMap);
+  // });
+  // google.maps.event.addDomListener(window, 'load', initMap);
   google.maps.event.addListener(marker, 'click', function() {
     infowindow.open(map,marker);
   });
+
   // Event that closes the Info Window with a click on the map
   google.maps.event.addListener(map, 'click', function() {
     infowindow.close();
   });
-  google.maps.event.addListener(infowindow, 'domready', function() {
-    var iwOuter = $('.gm-style-iw');
-    var iwBackground = iwOuter.prev();
-    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-    iwOuter.parent().parent().css({left: '115px'});
-    iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
-    iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
-    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
-    var iwCloseBtn = iwOuter.next();
-    iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
-    if($('.iw-content').height() < 140){
-      $('.iw-bottom-gradient').css({display: 'none'});
-    }
-    iwCloseBtn.mouseout(function(){
-      $(this).css({opacity: '1'});
-    });
-    
-  });
-  google.maps.event.addDomListener(window, 'load', initMap);
+
+  
+
   var customMapType = new google.maps.StyledMapType([
           {stylers: [{hue: '#D2E4C8'}]},
           {
@@ -492,6 +511,7 @@ function geolocate(){
     // setci();
     geolocate();
     initMap();
+    google.maps.event.addDomListener(window, 'load', map);
 </script>
 <!-- <script type="text/javascript">
     $(document).ready(function(){
@@ -661,6 +681,20 @@ $(document).ready(function(){
 
 
     });
+});
+</script>
+<script >
+  $(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
 });
 </script>
 

@@ -246,6 +246,7 @@ h1 {
     width: 414px;
     letter-spacing: 0.040em;
     border: 1px solid rgba(47, 46, 47, 0.59);
+    /*font-family: Pacifico !important  ;*/
     /*font-family: inherit;*/
 }
 
@@ -394,7 +395,11 @@ h1, h2, p, span, a {
     color: #2f2e2f;
     margin: 0;
     padding: 0;
+    
 }
+/*span{
+    background-color: #ecffdc!important;
+}*/
 
 .limit {
     max-width: 1200px;

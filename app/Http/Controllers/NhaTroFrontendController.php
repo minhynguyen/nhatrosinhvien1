@@ -106,6 +106,12 @@ class NhaTroFrontendController extends Controller
                 $images[]=$name;
                 $hinhanh_nhatro->save();
             }
+        }else{
+            $hinhanh_nhatro = new hinhanh_nhatro();
+            $hinhanh_nhatro->nt_ma = $nhatro->nt_ma;
+            $hinhanh_nhatro->ha_ten = 'comingsoon.png';
+                // $images[]=$name;
+                $hinhanh_nhatro->save();
         }
 
         $baidang = new baidang();
@@ -191,43 +197,14 @@ class NhaTroFrontendController extends Controller
         $nhatro->nt_giathue = $request->nt_giathue;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;
+        $nhatro->nt_tinhtrang = $request->nt_tinhtrang;
         $nhatro->id = Auth::user()->id;
         $nhatro->lnt_ma = $request->lnt_ma;
         $nhatro->save();
+
+        // $nhatro = nhatro::find($id);
         
-        // $tienich = $request->input('tienich');
-        // // dd($tienich);
-        // foreach ($tienich as $ti) {
-        //     $nhatro_tienich = nhatro_tienich::find($id);
-        //     dd($nhatro_tienich);
-        //     // $nhatro_tienich->nt_ma = $nhatro->nt_ma;
-        //     $nhatro_tienich->ti_ma = $ti;
-
-        //     $nhatro_tienich->save();
-        // }
-        // $input=$request->all();
-        // $images=array();
-        // if($files=$request->file('images')){
-        //     foreach($files as $file){
-        //         $hinhanh_nhatro = hinhanh_nhatro::find($id);
-        //         // $hinhanh_nhatro->nt_ma = $nhatro->nt_ma;
-
-        //         $name=$file->getClientOriginalName();
-        //         $file->move('upload',$name);
-        //         $hinhanh_nhatro->ha_ten = $name;
-        //         $images[]=$name;
-        //         $hinhanh_nhatro->save();
-        //     }
-        // }
-        // $images = $request->input('images');
-        // foreach ($images as $pi) {
-        //         $hinhanh_nhatro = new hinhanh_nhatro();
-        //         $hinhanh_nhatro->nt_ma = $nhatro->nt_ma;
-        //         $file = $request->$pi;
-        //         $hinhanh_nhatro->ha_ten = $file->getClientOriginalName();
-        //         $file->move('upload', $hinhanh_nhatro->ha_ten); //hàm này di chuyển ảnh tới thư mục public/upload
-        //         $hinhanh_nhatro->save();
-        // }
+        
             
         
 

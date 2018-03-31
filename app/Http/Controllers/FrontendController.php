@@ -27,7 +27,12 @@ class FrontendController extends Controller
         // $dsTruong = Truonghoc::all();
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $dstienich = tienich::all();
-        $dsnhatro = DB::table('nhatro')->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nt_trangthai','1')->get();
+        $dsnhatro = DB::table('nhatro')
+                ->join('users', 'users.id', '=', 'nhatro.id')
+                ->where('nt_trangthai','1')
+                ->join('hinhanh_nhatro', 'hinhanh_nhatro.nt_ma', '=', 'nhatro.nt_ma')
+                ->get();
+        // dd($dsnhatro);
         // $dsanh = hinhanh_nhatro::all();
         // $dsnhatro = DB::table('nhatro')->where('nt_trangthai','2')->get();
         return view('frontend.index')->with('dsTruong', $dsTruong)
@@ -51,6 +56,31 @@ class FrontendController extends Controller
         $giatu = $request->giaTu;
         $giaden = $request->giaden;
         $dientich = $request->dientich;
+        $sql = "SELECT * FROM nhatro a join hinhanh_nhatro b on a.nt_ma = b.nt_ma join users c on a.id = c.id ";
+            $sqlWhere = "";
+            if ($lnt_ma  != 0  || 
+            $giatu != 0  || 
+            $giaden   != 0  || 
+            $dientich  != 0) {
+            $sql .= "  WHERE  ";
+            if ($lnt_ma != 0) {
+                if ($sqlWhere != "") { $sqlWhere .= " AND "; }
+                $sqlWhere .= " lnt_ma=$lnt_ma ";
+            }
+            if ($giatu != 0) {
+                if ($sqlWhere != "") { $sqlWhere .= " AND "; }
+                $sqlWhere .= " nt_giathue >= $giatu ";
+            }            
+            if ($giaden != 0) {
+                if ($sqlWhere != "") { $sqlWhere .= " AND "; }
+                $sqlWhere .= " nt_giathue <= $giaden";
+            }
+            if ($dientich != 0) {
+                if ($sqlWhere != "") { $sqlWhere .= " AND "; }
+                $sqlWhere .= " nt_dientich <= $dientich";
+            }
+            $sql .= $sqlWhere;          
+            }
         // $sql = "SELECT * FROM nhatro" ;
         //     $sqlWhere = "";
         //     if($lnt_ma !=0 ||
@@ -90,18 +120,18 @@ class FrontendController extends Controller
         //     }
 
         
-       if($lnt_ma!="" && $giatu!="" && $giaden !="" && $dientich !="" ){
+      //  if($lnt_ma!="" && $giatu!="" && $giaden !="" && $dientich !="" ){
          
-          $data = DB::table('nhatro')
-          ->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')
-          ->join('users', 'users.id', '=', 'nhatro.id')
-          ->where('nhatro.lnt_ma',$lnt_ma)
-          ->where('nhatro.nt_giathue', ">=", $giatu)
-          ->where('nhatro.nt_giathue', "<=", $giaden)
-          ->where('nhatro.nt_dientich', "<=", $dientich)
-          ->where('nt_trangthai','1')
-          ->get();
-      }
+      //     $data = DB::table('nhatro')
+      //     ->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')
+      //     ->join('users', 'users.id', '=', 'nhatro.id')
+      //     ->where('nhatro.lnt_ma',$lnt_ma)
+      //     ->where('nhatro.nt_giathue', ">=", $giatu)
+      //     ->where('nhatro.nt_giathue', "<=", $giaden)
+      //     ->where('nhatro.nt_dientich', "<=", $dientich)
+      //     ->where('nt_trangthai','1')
+      //     ->get();
+      // }
        
        // else if($lnt_ma=='0'&& $giatu=='0' && $giaden =='0' && $dientich =='0' ){
        //  echo "string";
@@ -122,7 +152,7 @@ class FrontendController extends Controller
        // if(count($data)=="0"){
        //   echo "<h1 align='center'>no products found under this Category</h1>";
        // }else{
-            // $data = DB::select($sql);
+            $data = DB::select($sql);
             // dd($data);
             // ->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')
             // ->join('users', 'users.id', '=', 'nhatro.id');

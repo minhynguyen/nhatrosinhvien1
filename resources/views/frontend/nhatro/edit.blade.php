@@ -103,6 +103,16 @@
                         <div class="col-md-12" style="margin-top: 10px">
                             <input type="text" name="nt_dientich" class="form" style="width: 100%" placeholder="Diện Tích Nhà Trọ" value="{{$nhatro->nt_dientich}}">
                         </div>
+
+                        <div class="col-md-12" style="margin-top: 10px">
+                            <!-- <input type="text" name="" class="form" style="width: 100%" placeholder="Chọn Loại Bài Đăng"> -->
+                            <select class="form" style="width: 100%" name="nt_tinhtrang">
+                                      <option value="" disabled selected>Tình Trạng Phòng</option>
+                                      <option value="1" <?php echo ($nhatro->nt_tinhtrang == 1) ? 'selected' : ''  ?>>Còn Phòng</option> 
+                                      <option value="0" <?php echo ($nhatro->nt_tinhtrang == 0) ? 'selected' : ''  ?>>Hết Phòng</option> 
+
+                            </select>
+                        </div>
                         
                         <!-- <div class="col-md-6" style="margin-top: 10px">
                             <div class="input-group" class="form">

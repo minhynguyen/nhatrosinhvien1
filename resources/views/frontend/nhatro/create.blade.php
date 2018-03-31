@@ -28,6 +28,7 @@
     height: 290px;
     
   }
+
 </style>
 
 
@@ -66,7 +67,7 @@
             <div class="description_content">
                 <div class="text-content container">
                     @if($errors->any())
-                      <div class="alert alert-danger" style="background-color: red; text-align: left;">
+                      <div class="alert alert-danger" style="background-color: #31708f; text-align: left;">
                         <ul>
                           <!-- hàm validate trong lar hỗ trợ biến errors -->
                           @foreach($errors->all() as $error)
@@ -76,7 +77,7 @@
                       </div>
                       @endif
                     <div class="col-md-6">
-                        <h1 style="font-family: Time new romance">Đăng Kí Nhà Trọ</h1>
+                        <h1 style="font-family: Pacifico, cursive">Đăng Kí Nhà Trọ</h1>
                         <div class="fa fa-tasks fa-2x"></div>
                         
                         <div class="col-md-12" style="margin-top: 10px">
@@ -117,10 +118,16 @@
                           <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
                             <!-- <input type="text" name="nt_ten" class="form" style="width: 100%" placeholder="Nội dung bài đăng" value="{{old('bd_noidung')}}"> -->
 
-                            <textarea rows="10" class="form" style="width: 100%; height: 100%;" placeholder="Nội dung bài đăng" value="{{old('bd_noidung')}}" name="bd_noidung">
+                            <!-- <textarea  class="form textarea" style="width: 100%; height: 100%;" placeholder="Ghi Chú Đặt Bàn" value="{{old('bd_noidung')}}" name="bd_noidung"> -->
+                              <textarea name="bd_noidung" class="form textarea"  placeholder="Nội dung bài đăng" style="width: 100%">{{old('bd_noidung')}}</textarea>
                               
                             </textarea>
                         </div>
+                        <!-- <div class="right-text">
+                                         <textarea name="message" id="message" class="form textarea"  placeholder="Ghi Chú Đặt Bàn"></textarea>
+                                         <button type="submit" id="submit" name="submit" class="text-center form-btn" >Đặt Bàn</button>
+                                         
+                                    </div> -->
                         
 
                         
@@ -136,7 +143,7 @@
                           <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
                           <div class="input-group" class="form">
                               <input type="text" class="form" name="nt_dientich" placeholder="Diện Tích Phòng" value="{{old('nt_dientich')}}" style="width: 100%">
-                              <span class="input-group-addon">(~ M<sup>2</sup>).</span>
+                              <span class="input-group-addon" >(~ M<sup>2</sup>).</span>
                             </div>
                             <!-- <input type="text" name="nt_dientich" class="form" style="width: 100%" placeholder="Diện Tích Phòng" value="{{old('nt_dientich')}}">
                             <span class="input-group-addon">(~ M<sup>3</sup>).</span> -->
@@ -158,7 +165,7 @@
 
 
                         <div class="col-md-12" style="margin-top: 10px">
-                          <div class="fa fa-cogs fa-2x" > Địa Chỉ Cụ Thể</div>
+                          <div  class="fa fa-cogs fa-2x"> Địa Chỉ Cụ Thể</div>
                           
                               <!-- <label for="">ĐIỂM CẦN THÊM:</label> -->
                               <!-- <input type="text" id="searchmap"  class="form" placeholder="Nhập Địa Chỉ Chính Xác Nhà Trọ" style="width: 100%"> -->
@@ -208,14 +215,14 @@
                           <div class="col-md-6" style="margin-top: 10px">
                             <div class="input-group" class="form">
                               <input type="text" class="form" name="nt_giadien" placeholder="Giá Điện" value="{{old('nt_giadien')}}">
-                              <span class="input-group-addon">(~ Kw/h)</span>
+                              <span class="input-group-addon" style="width: 100%">(~ Kw/h)</span>
                             </div>
                         </div>
 
                         <div class="col-md-6" style="margin-top: 10px">
                             <div class="input-group" class="form">
                               <input type="text" class="form" name="nt_gianuoc" placeholder="Giá Nước" value="{{old('nt_gianuoc')}}">
-                              <span class="input-group-addon">(~ M<sup>3</sup>).</span>
+                              <span class="input-group-addon" style="width: 100%">(~ M<sup>3</sup>).</span>
                             </div>
                         </div>
 
@@ -251,11 +258,11 @@
                     </div>
                     <div class="col-md-6">
                         <div class="img-section">
-                           <img src="{{ asset ('theme/homepage/image/pic6.jpg' )}}" width="250" height="220">
-                           <img src="{{ asset ('theme/homepage/image/pic6.jpg' )}}" width="250" height="220">
+                           <img style="height: 220px; width: 250px !important" src="{{ asset ('theme/homepage/image/anh1.jpg') }}" width="250" height="220">
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/anh2.jpg') }}" width="250" height="220">
                            <div class="img-section-space"></div>
-                           <img src="{{ asset ('theme/homepage/image/pic3.jpg' )}}"  width="250" height="220">
-                           <img src="{{ asset ('theme/homepage/image/pic4.jpg' )}}"  width="250" height="220">
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/pic2.jpg') }}"  width="250" height="220">
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/pic3.jpg') }}"  width="250" height="220">
                        </div>
                     </div>
                     <div class="col-md-6" style="margin-top: 10px">

@@ -109,6 +109,7 @@
                                       <th>Giá Thuê</th>
                                       <th>Giá Điện</th>
                                       <th>Giá Nước</th>
+                                      <th>Tình Trạng</th>
                                       <th>Trạng Thái</th>
                                       <th style="text-align: center;"><a class="btn btn-default" href="{{ route('nhatrofrontend.create') }}"><em class="fa fa-plus"></em>Thêm Nhà Trọ</a></th>
                                   </tr> 
@@ -122,12 +123,19 @@
                                           <td style="text-align: left;">{{$ds->nt_giathue}}</td>
                                           <td style="text-align: left;">{{$ds->nt_giadien}}</td>
                                           <td style="text-align: left;">{{$ds->nt_gianuoc}}</td>
+                                          @if ($ds->nt_tinhtrang === 1)
+
+                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">Còn Phòng</span></td>
+                                          @else
+                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Hết Phòng</span></td>
+                                          @endif
                                           @if ($ds->nt_trangthai === 2)
 
                                               <td style="text-align: center;"><span class="badge" style="background-color: orange">Chờ Duyệt</span></td>
                                           @else
                                               <td style="text-align: center;"><span class="badge" style="background-color: green">Đã Duyệt</span></td>
                                           @endif
+                                          
 
                                           <td align="center">
                                             <a class="btn btn-default" href="{{ route('nhatrofrontend.edit', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-pencil"></em></a>
