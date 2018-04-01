@@ -26,7 +26,7 @@
 @section('page-header')
       <h1>
         THÊM MỚI NHÀ TRỌ
-        <small>CÁC CHỦ ĐỀ VÀ LOẠI HOA</small>
+        <small></small>
       </h1>
 @endsection
 
@@ -123,13 +123,23 @@
             <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="t_vido" placeholder="Nhập Vĩ Độ"> -->
             <input type="text" class="form-control" name="nt_gianuoc" id="" style="width: 100%">
           </div>
+
+          <div class="form-group">
+                <label>Tình trạng</label>
+                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="nt_tinhtrang", id="nt_trangthai">
+                  <!-- <select > -->
+                    <option value="1">Còn phòng</option>
+                    <option value="0">Hết Phòng</option>
+                  <!-- </select> -->
+                </select>
+          </div>
          
           <div class="form-group">
                 <label>Trạng Thái</label>
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="nt_trangthai", id="nt_trangthai">
                   <!-- <select > -->
-                    <option value="1">Khóa</option>
-                    <option value="2">Khả dụng</option>
+                    <option value="1">Đã Duyệt</option>
+                    <option value="2">Chờ Duyệt</option>
                   <!-- </select> -->
                 </select>
           </div>

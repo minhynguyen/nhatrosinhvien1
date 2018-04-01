@@ -128,7 +128,21 @@
             <input type="text" class="form-control" name="nt_gianuoc" value="{{$nhatro->nt_gianuoc}}" id="" style="width: 100%">
           </div>
           
+          <div class="form-group">
+                <label>Tình trạng</label>
+                @if ($nhatro->nt_tinhtrang === 1)
+                <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="nt_tinhtrang", id="nt_trangthai">
+                    <option value="1" selected="">Còn Phòng</option> 
+                    <option value="0">Hết Phòng</option>
+                </select>
+                @else
+                <select class="form-control select2 select2-hidden-accessible"  style="width: 100%;" tabindex="-1" aria-hidden="true" name="nt_tinhtrang", id="nt_trangthai">
+                    <option value="1" >Còn Phòng</option> 
+                    <option value="0" selected>Hết Phòng</option>
+                </select>
+                @endif
 
+          </div>
           <div class="form-group">
                 <label>Trạng Thái</label>
                 @if ($nhatro->nt_trangthai === 1)

@@ -9,9 +9,6 @@ class hinhanh_nhatro extends Model
     public    $timestamps   = false;
 
     protected $table        = 'hinhanh_nhatro';
-    protected $fillable     = ['ha_ten'];
-    protected $guarded      = ['nt_ma'];
-
-    // protected $primaryKey   = 'nt_ma';
+    protected $fillable     = ['nt_ma', 'ha_ten'];
     public    $incrementing = false;
 }

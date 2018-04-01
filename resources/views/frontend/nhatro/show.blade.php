@@ -100,6 +100,10 @@ height: 500px;
                                   <td style="text-align: right;">{{$nt->nt_sdtlienhe}}</td>
                             </tr>
                             <tr>
+                                  <td style="text-align: left; width: 150px"><span><strong>Email:</strong></span></td>
+                                  <td style="text-align: right;">{{$nt->email}}</td>
+                            </tr>
+                            <tr>
                                   <td style="text-align: left;"><span><strong>Địa Chỉ:</strong> </span></td>
                                   <td style="text-align: right;">{{$nt->nt_diachi}}</td>
                             </tr>
@@ -115,14 +119,21 @@ height: 500px;
                                   <td style="text-align: left;"><span><strong>Giá Nước:</strong></span></td>
                                   <td style="text-align: right;">{{$nt->nt_gianuoc}} (~ M<sup>3</sup>)</td>
                             </tr>
+                            <tr>
+                                  <td style="text-align: left;"><span><strong>Giá Thuê:</strong></span></td>
+                                  <td style="text-align: right;">{{$nt->nt_giathue}} (/Tháng)</td>
+                            </tr>
                           </tbody>
                     </table>
                     <!-- <hr> -->
                     <div class="row">
                           <div class="col-md-12">
+                            <td align="center">
+                              <a class="btn btn-success" href="{{ route('datphongfrontend.edit', ['nhatro' => $nt->nt_ma]) }}"><em class="fa fa-pencil"> Hẹn Xem Nhà</em></a>
+                            </td>
                         <!-- <h6><span>Retail Price</span></h6> -->
-                        <h2 class="price" style="color: #bc6264 ">Giá Thuê: {{$nt->nt_giathue}} /Tháng</h2>
-                        <h4><span>Email : {{$nt->email}}</span></h4>
+                        <!-- <h2 class="price" style="color: #bc6264 ">Giá Thuê: {{$nt->nt_giathue}} /Tháng</h2> -->
+                        <!-- <h4><span>Email : {{$nt->email}}</span></h4> -->
                       </div>
                     </div>
     <!-- <a href="#0" class="btn btn-cart">ADD TO CART</a> </div> -->

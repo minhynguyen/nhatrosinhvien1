@@ -30,6 +30,7 @@ class FrontendController extends Controller
         $dsnhatro = DB::table('nhatro')
                 ->join('users', 'users.id', '=', 'nhatro.id')
                 ->where('nt_trangthai','1')
+                ->where('nt_tinhtrang','1')
                 ->join('hinhanh_nhatro', 'hinhanh_nhatro.nt_ma', '=', 'nhatro.nt_ma')
                 ->get();
         // dd($dsnhatro);
@@ -48,6 +49,13 @@ class FrontendController extends Controller
         return view('frontend.nhatro.create')->with('dsloainhatro', $dsloainhatro)->with('dstienich', $dstienich);
 
     }
+    // public function book($id)
+    // {
+    //   $nhatro = DB::table('nhatro')->where('nt_ma',$id)->get();
+    //   // dd($nhatro);
+    //   // $nhatro = nhatro::find($id);
+    //   return view('frontend.nhatro.datphong')->with('$nhatro', $nhatro);
+    // }
 
     
      public function timkiem(Request $request){

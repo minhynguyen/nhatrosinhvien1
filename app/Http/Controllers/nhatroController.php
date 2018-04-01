@@ -75,6 +75,7 @@ class nhatroController extends Controller
         $nhatro->nt_giathue = $request->nt_giathue;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;
+        $nhatro->nt_tinhtrang = $request->nt_tinhtrang;
         $nhatro->nt_trangthai = $request->nt_trangthai;
         $nhatro->id = Auth::user()->id;
         $nhatro->lnt_ma = $request->lnt_ma;
@@ -101,6 +102,12 @@ class nhatroController extends Controller
                 $images[]=$name;
                 $hinhanh_nhatro->save();
             }
+        }else{
+            $hinhanh_nhatro = new hinhanh_nhatro();
+            $hinhanh_nhatro->nt_ma = $nhatro->nt_ma;
+            $hinhanh_nhatro->ha_ten = 'comingsoon.png';
+                // $images[]=$name;
+                $hinhanh_nhatro->save();
         }
         // $images = $request->input('images');
         // foreach ($images as $pi) {
@@ -172,6 +179,7 @@ class nhatroController extends Controller
         $nhatro->nt_giathue = $request->nt_giathue;
         $nhatro->nt_giadien = $request->nt_giadien;
         $nhatro->nt_gianuoc = $request->nt_gianuoc;
+        $nhatro->nt_tinhtrang = $request->nt_tinhtrang;
         $nhatro->nt_trangthai = $request->nt_trangthai;
         // $nhatro->id = Auth::user()->id;
         $nhatro->lnt_ma = $request->lnt_ma;

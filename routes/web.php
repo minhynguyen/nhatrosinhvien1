@@ -42,6 +42,7 @@ Route::resource('binhluan', 'binhluanController');
 Route::resource('nhatrofrontend', 'NhaTroFrontendController');
 Route::resource('baidangfrontend', 'baidangfrontendController');
 Route::get('/', 'FrontendController@index')->name('index');
+Route::resource('datphongfrontend', 'datphongfrontendController');
 // Route::get('/timkiem/{maLoai}/{giaTu}/{giaDen}/{dienTich}', ['uses' => 'frontendController@dsNhatro_timkiem']);
 // Route::get('/', function () {
 //     return view('frontend.index');
@@ -54,7 +55,7 @@ Route::get('/dangki', function () {
 });
 // Route::get('/timkiem','FrontendController@timkiem');
 Route::get('/timkiem/{loainhatro}/{giaTu}/{giaden}/{dientich}', ['uses' => 'frontendController@timkiem']);
-
+// Route::get('/testMail', 'datphongfrontendController@testMail');
 // Route::get('/themnhatro', 'FrontendController@gettienich')->name('themnhatro');
 // Route::post('/themnhatro', 'FrontendController@store')->name('create');
 
@@ -74,6 +75,9 @@ Route::get('/thongtin', function () {
 Route::get('/loi', function () {
     return view('errors.khongduoctruycap');
 });
+
+// Route::get('/book', 'FrontendController@book')->name('book');
+// Route::get('/book/{id}', 'FrontendController@book')->name('book');
 
 
 

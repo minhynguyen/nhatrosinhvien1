@@ -53,6 +53,7 @@
                   <th style="text-align: left;">Giá Thuê</th>
                   <!-- <th>Ngày Tạo Mới</th>
                   <th>Ngày Cập Nhật</th> -->
+                  <th >Tình trạng</th>
                   <th >Trạng Thái</th>
                   <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('nhatro.create') }}"><i class="fa fa-plus"></i> Thêm Nhà Trọ</a></button></th>
                   <!-- <th></th> -->
@@ -71,6 +72,12 @@
                     <td style="text-align: left;">{{$nhatro->nt_giadien}}</td>
                     <td style="text-align: left;">{{$nhatro->nt_gianuoc}}</td>
                     <td style="text-align: left;">{{$nhatro->nt_giathue}}</td>
+                    @if ($nhatro->nt_tinhtrang === 1)
+
+                        <td style="text-align: center;"><span class="badge bg-green">Còn Phòng</span></td>
+                    @else
+                        <td style="text-align: center;"><span class="badge bg-yellow">Hết Phòng</span></td>
+                    @endif
                     @if ($nhatro->nt_trangthai === 1)
 
                         <td style="text-align: center;"><span class="badge bg-green">Đã Duyệt</span></td>
