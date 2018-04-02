@@ -75,7 +75,6 @@ Route::get('/thongtin', function () {
 Route::get('/loi', function () {
     return view('errors.khongduoctruycap');
 });
-
 // Route::get('/book', 'FrontendController@book')->name('book');
 // Route::get('/book/{id}', 'FrontendController@book')->name('book');
 
