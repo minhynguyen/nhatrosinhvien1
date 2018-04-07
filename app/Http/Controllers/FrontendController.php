@@ -89,77 +89,7 @@ class FrontendController extends Controller
             }
             $sql .= $sqlWhere;          
             }
-        // $sql = "SELECT * FROM nhatro" ;
-        //     $sqlWhere = "";
-        //     if($lnt_ma !=0 ||
-        //         $giatu !=0 ||
-        //         $giaden !=0 ||
-        //         $dientich !=0 ){
-        //         $sql .= " WHERE ";
-        //         if($lnt_ma !== 0){
-        //             if($sqlWhere != ""){
-        //                 $sqlWhere .= " AND ";
-        //             }
-        //             $sqlWhere .= "lnt_ma = $lnt_ma";
-        //         }
-                
-        //         if($giatu !== 0){
-        //             if($sqlWhere != ""){
-        //                 $sqlWhere .= " AND ";
-        //             }
-        //             $sqlWhere .= "nt_giathue >= $giatu";
-        //         }
-        //         if($giaden !== 0){
-        //             if($sqlWhere != ""){
-        //                 $sqlWhere .= " AND ";
-        //             }
-        //             $sqlWhere .= "nt_giathue <= $giaden";
-        //         }
-        //         if($dientich !== 0){
-        //             if($sqlWhere != ""){
-        //                 $sqlWhere .= " AND ";
-        //             }
-        //             $sqlWhere .= "nt_dientich <= $dientich";
-        //         }
-                
-        //         $sql .= $sqlWhere;
-                
-
-        //     }
-
         
-      //  if($lnt_ma!="" && $giatu!="" && $giaden !="" && $dientich !="" ){
-         
-      //     $data = DB::table('nhatro')
-      //     ->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')
-      //     ->join('users', 'users.id', '=', 'nhatro.id')
-      //     ->where('nhatro.lnt_ma',$lnt_ma)
-      //     ->where('nhatro.nt_giathue', ">=", $giatu)
-      //     ->where('nhatro.nt_giathue', "<=", $giaden)
-      //     ->where('nhatro.nt_dientich', "<=", $dientich)
-      //     ->where('nt_trangthai','1')
-      //     ->get();
-      // }
-       
-       // else if($lnt_ma=='0'&& $giatu=='0' && $giaden =='0' && $dientich =='0' ){
-       //  echo "string";
-       //   $data = DB::table('nhatro')->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nt_trangthai','1')->get();
-       //    // dd($data);
-       // }
-       // else if($giatu!=""){
-       //   $data = DB::table('nhatro')
-       //    ->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')
-       //    ->join('users', 'users.id', '=', 'nhatro.id')
-       //    ->where('nhatro.lnt_ma',$lnt_ma)
-       //    ->where('nhatro.nt_giathue', ">=", $giatu)
-       //    // ->where('nhatro.nt_giathue', "<=", $giaden)
-       //    // ->where('nhatro.nt_dientich', "<=", $dientich)
-       //    ->get();
-       //    // dd($data);
-       // }
-       // if(count($data)=="0"){
-       //   echo "<h1 align='center'>no products found under this Category</h1>";
-       // }else{
             $data = DB::select($sql);
             // dd($data);
             // ->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')
@@ -182,13 +112,7 @@ class FrontendController extends Controller
     }
 
 
-    // public function timtheogia(Request $request){
-
-        
-    //     $p=DB::table('nhatro')->where('nt_giathue', '<=' ,$request->id)->take(100)->get;
-
-    //     return response()->json($p);
-    // }
+    
    
         
        
@@ -321,56 +245,14 @@ public function store(nhatrorequest $request)
         try{
         $nhatro = nhatro::find($id);
         
-        $nhatro->nt_ten = $request->nt_ten;
-        $nhatro->nt_diachi = $request->nt_diachi;
-        $nhatro->nt_sdtlienhe = $request->nt_sdtlienhe;
-        $nhatro->nt_kinhdo = $request->nt_kinhdo;
-        $nhatro->nt_vido = $request->nt_vido;
-        $nhatro->nt_thongtin = $request->nt_thongtin;
-        $nhatro->nt_giadien = $request->nt_giadien;
-        $nhatro->nt_gianuoc = $request->nt_gianuoc;
-        $nhatro->nt_trangthai = $request->nt_trangthai;
-        $nhatro->id = Auth::user()->id;
-        $nhatro->lnt_ma = $request->lnt_ma;
+        
+        $nhatro->nt_tinhtrang = $request->nt_tinhtrang;
+        
         $nhatro->save();
+
+        // $nhatro = nhatro::find($id);
         
-        // $tienich = $request->input('tienich');
-        // // dd($tienich);
-        // foreach ($tienich as $ti) {
-        //     $nhatro_tienich = nhatro_tienich::find($id);
-        //     dd($nhatro_tienich);
-        //     // $nhatro_tienich->nt_ma = $nhatro->nt_ma;
-        //     $nhatro_tienich->ti_ma = $ti;
-
-        //     $nhatro_tienich->save();
-        // }
-        // $input=$request->all();
-        // $images=array();
-        // if($files=$request->file('images')){
-        //     foreach($files as $file){
-        //         $hinhanh_nhatro = hinhanh_nhatro::find($id);
-        //         // $hinhanh_nhatro->nt_ma = $nhatro->nt_ma;
-
-        //         $name=$file->getClientOriginalName();
-        //         $file->move('upload',$name);
-        //         $hinhanh_nhatro->ha_ten = $name;
-        //         $images[]=$name;
-        //         $hinhanh_nhatro->save();
-        //     }
-        // }
-        // $images = $request->input('images');
-        // foreach ($images as $pi) {
-        //         $hinhanh_nhatro = new hinhanh_nhatro();
-        //         $hinhanh_nhatro->nt_ma = $nhatro->nt_ma;
-        //         $file = $request->$pi;
-        //         $hinhanh_nhatro->ha_ten = $file->getClientOriginalName();
-        //         $file->move('upload', $hinhanh_nhatro->ha_ten); //hàm này di chuyển ảnh tới thư mục public/upload
-        //         $hinhanh_nhatro->save();
-        // }
-            
-        
-
-        return redirect(route('nhatro.index')); //trả về trang cần hiển thị
+        return redirect(route('nhatrofrontend.index')); //trả về trang cần hiển thị
         }
         catch(QueryException $ex){
             return reponse([

@@ -22,7 +22,8 @@ Auth::routes();
 Route::get('user/activation/{token}', 'Auth\RegisterController@activateUser')->name('user.activate');
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'FrontendController@index')->name('index');
-
+// Route::get('/full', 'FrontendController@update')->name('full');
+Route::resource('full', 'FrontendController');
 Route::group(['prefix'=>'admin'], function(){	
 
 		Route::resource('truong', 'TruonghocController')->middleware(CheckLevelMiddleware::class); // route hỗ trợ lấy toàn bộ controller.

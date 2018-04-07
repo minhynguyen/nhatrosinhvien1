@@ -140,7 +140,7 @@
                                           <td align="center">
                                             <a class="btn btn-default" href="{{ route('nhatrofrontend.edit', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-pencil"></em></a>
                                             <a class="btn btn-danger" href="{{ route('nhatrofrontend.show', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-eye"></em></a>
-                                            
+                                            <!-- <a class="btn btn-default" href="{{ route('full.update', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-pencil"></em>full</a> -->
                                           </td>
                                         </tr>
                                         @endforeach
@@ -233,6 +233,7 @@
                                           <td align="center">
                                             <a class="btn btn-default" href="{{ route('baidangfrontend.edit', ['baidang' => $baidangcho->bd_ma]) }}"><em class="fa fa-pencil"></em></a>
                                             <a class="btn btn-danger" href="{{ route('nhatrofrontend.show', ['baidang' => $baidang->bd_ma]) }}"><em class="fa fa-eye"></em></a>
+
                                             
                                           </td>
                                           

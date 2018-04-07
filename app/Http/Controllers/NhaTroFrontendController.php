@@ -206,7 +206,6 @@ class NhaTroFrontendController extends Controller
         
         
             
-        
 
         return redirect(route('nhatrofrontend.index')); //trả về trang cần hiển thị
         }
