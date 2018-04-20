@@ -161,9 +161,30 @@
                            <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/pic3.jpg') }}"  width="250" height="220">
                        </div>
                     </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <h2 style="margin-top: 20px">Danh Sách Đặt Phòng</h2>
+                      <table class="table table-striped table-bordered table-list">
+                        <thead>
+                          <tr>
+                            <th style="text-align: center;">Giờ Đặt</th>
+                            <th style="text-align: center;">Hết Hạn</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($dsdat as $ds)
+                          <tr>
+                            <td>{{$ds->dp_thoigiandat}}</td>
+                            <td>{{$ds->dp_thoigianketthuc}}</td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                        
+                      </table>
+                    </div>
                 </div>
             </div>
           </form>
+          
             <footer class="sub_footer" style="margin-top: 25px">
                 <div class="container">
                     <div class="social_heading" style="font-family: time new romance; margin-top: 5px">Hệ Thống Quản Lý Nhà Trọ Sinh Viên</div>

@@ -9,6 +9,7 @@ use App\nhatro;
 use App\binhluan;
 use App\nhatro_tienich;
 use App\hinhanh_nhatro;
+use App\datphong;
 use Auth;
 use DB;
 use Illuminate\Support\collection;
@@ -29,8 +30,12 @@ class NhaTroFrontendController extends Controller
         $dsbaidangcho = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->where('baidang.bd_trangthai','2')->get();
         $dstienich = tienich::all();
         $dsnhatro = DB::table('nhatro')->where('id',$id)->get();
+        
         return view('frontend.profile')->with('dsloainhatro', $dsloainhatro)
-                                         ->with('dstienich', $dstienich)->with('dsnhatro', $dsnhatro)->with('dsbaidang', $dsbaidang)->with('dsbaidangcho', $dsbaidangcho);
+                                         ->with('dstienich', $dstienich)
+                                         ->with('dsnhatro', $dsnhatro)
+                                         ->with('dsbaidang', $dsbaidang)
+                                         ->with('dsbaidangcho', $dsbaidangcho);
     }
 
     /**
@@ -149,6 +154,10 @@ class NhaTroFrontendController extends Controller
         $dstienich = DB::table('nhatro_tienich')->join('tienich', 'tienich.ti_ma', '=', 'nhatro_tienich.ti_ma')->where('nt_ma', $id)->get();
         $tienich = tienich::all();
         $slider = DB::table('hinhanh_nhatro')->where('nt_ma',$id)->limit(3)->get();
+
+        
+
+        // dd($dsdatphong);
         // $binhluan = DB::table('binhluan')->where('_ma',$id)->limit(3)->get();
         
         // $dshinhanh = DB::table('hinhanh_nhatro')->where('nt_ma',$id)->get();

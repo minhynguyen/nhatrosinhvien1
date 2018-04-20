@@ -80,12 +80,18 @@
                               </div>
                               <div class="btn-group" role="group">
                                   <button type="button" id="following" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                      <div class="hidden-xs">Đăng Tin Mới</div>
+                                      <div class="hidden-xs">Bài Đăng Chờ Duyệt</div>
+                                  </button>
+                              </div>
+
+                              <div class="btn-group" role="group">
+                                  <button type="button" id="following" class="btn btn-default" href="#tab5" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                      <div class="hidden-xs">Quản Lí Đặt Phòng</div>
                                   </button>
                               </div>
                           </div>
 
-                          <div class="well">
+                          <div class="well" style="background-color: white">
                         <div class="tab-content">
                           <div class="tab-pane fade in active" id="tab1">
                             <p class="desc-text">Name: {{ Auth::user()->name }}</p>
@@ -189,8 +195,9 @@
                                           
                                           
                                         </tr>
+                                        @endforeach
                                       </tbody>
-                                      @endforeach
+                                      
                               </table>
                             </div>
                           </div>
@@ -238,10 +245,50 @@
                                           </td>
                                           
                                         </tr>
+                                        @endforeach
                                       </tbody>
-                                      @endforeach
+                                      
                               </table>
                             </div>
+                          </div>
+
+
+
+                          <div class="tab-pane fade in" id="tab5">
+                            <h3>Danh Sách Đặt Phòng</h3>
+                            <div class="table-responsive">
+                              <table class="table table-striped table-bordered table-list">
+                                <thead>
+                                  <tr>
+                                      <th style="text-align: left;">Tên Nhà Trọ</th>
+                                      <th style="text-align: left;">Tên Người Đặt</th>
+                                      <th style="text-align: left;">Số Điện Thoại</th>
+                                      <th style="text-align: left;">Ghi Chú</th>
+                                      <th style="text-align: left;">Ngày Đặt</th>
+                                      <th style="text-align: left;">Hết Hạn</th>
+                                  </tr> 
+                                </thead>
+                                <tbody>
+                                      @foreach ($dsdatphong as $ds)
+                                        <tr>  
+                                          <td style="text-align: left;">{{$ds->nt_ten}}</td>
+                                          
+                                          <td style="text-align: left;">{{$ds->name}}</td>
+                                          <td style="text-align: left;">{{$ds->dp_sdt}}</td>
+                                          <td style="text-align: left;">{{$ds->dp_ghichu}}</td>
+                                          <td style="text-align: left;">{{$ds->dp_thoigiandat}}</td>
+                                          <td style="text-align: left;">{{$ds->dp_thoigianketthuc}}</td>
+                                          
+                                          
+                                          
+                                          
+                                        </tr>
+                                        @endforeach  
+                                        
+                                </tbody>
+                              </table>
+                            </div>
+                            
                           </div>
                         </div>
                       </div>

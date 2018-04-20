@@ -92,8 +92,14 @@ class datphongfrontendController extends Controller
      */
     public function edit($id)
     {
+        $current = new Carbon();
         $nhatro = nhatro::find($id);
-        return view('frontend.nhatro.datphong')->with('nhatro', $nhatro);
+        $dsdat = DB::table('datphong')->where('nt_ma', $id)->where('dp_thoigianketthuc','>=', $current)->orderBy('dp_thoigianketthuc', 'asc')->get();
+        // $dsdat = datphong::find($id);
+        // dd($dsdat);
+
+        return view('frontend.nhatro.datphong')->with('nhatro', $nhatro)
+                                                ->with('dsdat', $dsdat);
     }
 
     /**

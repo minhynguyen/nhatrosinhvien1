@@ -20,6 +20,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
         <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
+
+
+        
         
         <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places"
         async defer></script> -->
@@ -126,6 +129,7 @@ height: 500px;
                           </tbody>
                     </table>
                     <!-- <hr> -->
+                    @if(isset(Auth::user()->id))
                     <div class="row">
                           <div class="col-md-12">
                             <td align="center">
@@ -136,6 +140,7 @@ height: 500px;
                         <!-- <h4><span>Email : {{$nt->email}}</span></h4> -->
                       </div>
                     </div>
+                    @endif
     <!-- <a href="#0" class="btn btn-cart">ADD TO CART</a> </div> -->
                   </div>
 
@@ -149,24 +154,24 @@ height: 500px;
               
 
 
-<div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group">
+              <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group">
                           <div class="btn-group" role="group">
                               <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                   <div class="hidden-xs">Thông Tin Chung</div>
                               </button>
                           </div>
-                          <div class="btn-group" role="group">
-                              <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                  <div class="hidden-xs">Sơ Đồ Nhà Trọ</div>
+                          <!-- <div class="btn-group" role="group">
+                              <button type="button" id="favorites" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                                  <div class="hidden-xs">So Sánh Nhà Trọ</div>
                               </button>
-                          </div>
+                          </div> -->
                           <div class="btn-group" role="group">
-                              <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                              <button type="button" id="following" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                   <div class="hidden-xs">Bài Đăng</div>
                               </button>
                           </div>
                           <div class="btn-group" role="group">
-                              <button type="button" id="following" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="fa fa-comments" aria-hidden="true"></span>
+                              <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="fa fa-comments" aria-hidden="true"></span>
                                   <div class="hidden-xs">Bình Luận/ Đánh Giá</div>
                               </button>
                           </div>
@@ -187,11 +192,83 @@ height: 500px;
                       </div>
                       
                       </div>
+                      <!-- <div class="tab-pane fade in" id="tab4">
+                        <div class="fa  fa-server fa-2x" > So Sánh Nhà Trọ</div>
+                          
+                        @foreach($nhatro as $nt)
+                          <table class="table table-condensed table-hover">
+                          <thead>
+                            <tr>
+                              <th> </th>
+                              <th style="text-align: center;">{{$nt->nt_ten}}</th>
+                              <th style="text-align: center;">{{$nt->nt_ten}}</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td style="text-align: left;">Loại Nhà Trọ</td>
+                              <td>{{$nt->lnt_ten}}</td>
+                              <td>{{$nt->lnt_ten}}</td>
+                              
+                              
+                            </tr>
+                            <tr>
+                              <td style="text-align: left;">Địa Chỉ</td>
+                              <td>{{$nt->nt_diachi}}</td>
+                              <td>{{$nt->nt_diachi}}</td>
+                              
+                              
+                            </tr>
+                            <tr>
+                              <td style="text-align: left;">Giá Thuê</td>
+                              <td>{{$nt->nt_giathue}} VNĐ (/Tháng)</td>
+                              <td>{{$nt->nt_giathue}} VNĐ (/Tháng)</td>
+                              
+                            </tr>
+                            <tr>
+                              <td style="text-align: left;">Giá Điện</td>
+                              <td>{{$nt->nt_giadien}} (~ Kw/h)</td>
+                              <td>{{$nt->nt_giadien}} (~ Kw/h)</td>
+                              
+                            </tr>
+                           
+                            
+                            <tr>
+                              <td style="text-align: left;">Giá Nước</td>
+                              <td>{{$nt->nt_gianuoc}} (~ M<sup>3</sup>)</td>
+                              <td>{{$nt->nt_gianuoc}} (~ M<sup>3</sup>)</td>
+                              
+                            </tr>
+                            <tr>
+                              <td style="text-align: left;">Diện Tích</td>
+                              <td>{{$nt->nt_dientich}} (~ M<sup>2</sup>)</td>
+                              <td>{{$nt->nt_dientich}} (~ M<sup>2</sup>)</td>
+                              
+                            </tr>
+                            <tr>
+                              <td  style="text-align: left;">Tiện Ích</td>
+                              <td style="text-align: center;">
+                                @foreach ($dstienich as $ti)
+                                {{$ti->ti_ten}}
+                                <br>
+                                @endforeach
+                              </td>
+                              <td style="text-align: center;">
+                                @foreach ($dstienich as $ti)
+                                {{$ti->ti_ten}}
+                                <br>
+                                @endforeach
+                              </td>
+                              
+                            </tr>
+                           
+                          </tbody>
+                        </table>
+                        @endforeach
+
+                      </div> -->
                       <div class="tab-pane fade in" id="tab2">
-                        
-                       
-                      </div>
-                      <div class="tab-pane fade in" id="tab3">
                         <h3>Bài Đăng</h3>
                         @foreach($baidang as $bd)
                         <p class="desc-text">Loại Bài Đăng: {{$bd->lbd_ten}}</p>
@@ -201,7 +278,7 @@ height: 500px;
                         @endforeach
                         
                       </div>
-                      <div class="tab-pane fade in" id="tab4">
+                      <div class="tab-pane fade in" id="tab3">
                         <!-- <h3>This is tab 3</h3> -->
                           <!-- <div class="col-md-6" style="margin-top: 10px"> -->
                             <div class="fa fa-comments fa-2x" > Bình Luận Về Nhà Trọ</div>
@@ -249,7 +326,7 @@ height: 500px;
                   </div>
                   <div style="margin-top: 20px; margin-bottom: 20px">
                     <h2>SƠ ĐỒ NHÀ TRỌ</h2>
-                </div>
+                  </div>
                   <div id="map"></div>
                   @endforeach
                   
@@ -285,6 +362,7 @@ height: 500px;
         <script src="{{ asset ('theme/homepage/css/timepicker/bootstrap-timepicker.min.js') }}"></script>
         <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
         <script src="{{ asset ('theme/homepage/upload-image.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script>
           $(document).ready(function() {
               $(".btn-pref .btn").click(function () {
@@ -447,7 +525,65 @@ function geolocate(){
     
     initMap();
 </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(document).on('change', '#lnt_ma', function(){
+      var lnt_ma = $(this).val();
+      console.log(lnt_ma);
+      $.ajax({
+        type: 'get',
+        dataType: 'html',
+        url: '{{url('/timnhatro')}}',
+        data: {'lnt_ma' : lnt_ma},
+        success:function(data){
+          $("#nt_ma").empty();
+          var dataObject = JSON.parse(data);
+          dataObject.forEach(function(ele) {
+            console.log(ele);
+            $("#nt_ma").append('<option value = "' + ele.nt_ma +'">' + ele.nt_ten + '</option>');
+          })
+        }
+      });
+    });
+});
 
+
+$(document).ready(function(){
+    $(document).on('change', '#lma_ma', function(){
+      var lma_ma = $(this).val();
+      console.log(lma_ma);
+      $.ajax({
+        type: 'get',
+        dataType: 'html',
+        url: '{{url('/timmonan')}}',
+        data: {'lma_ma' : lma_ma},
+        success:function(data){
+          // $("#lma_ma").empty();
+          $("#ma_ten").empty();
+          $("#ma_ma").empty();
+          // $("#ma_hinh").empty();
+          var dataObject = JSON.parse(data);
+          dataObject.forEach(function(ele) {
+            console.log(ele);
+            var a;
+            a= ele.ma_ma;
+            console.log(a);
+            $("#ma_ma").append('<option value = "' + ele.ma_ma +'">' + ele.ma_ten + '</option>');
+            $("#monan").append('<div class="col-md-6"><div class="info-box"><span class="info-box-icon bg-green"><i class="fa fa-coffee"></i></span><div class="info-box-content"><input name="monan[id][]" id="monan" type="checkbox" value="'+ele.ma_ma+'">Mã Món Ăn: '+ele.ma_ma+'<span class="info-box-text"></span>Tên Món Ăn: '+ele.ma_ten+'<span class="info-box-text"></span>'+ele.ma_dongia+'<span class="info-box-text"></span>'+ele.ma_hinhanh+'<select name="monan[soluong][]"><option disabled selected>Chọn Số Lượng</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div></div></div>');
+            
+
+
+
+            
+
+          })
+
+          
+        }
+      });
+    });
+});
+</script>
 
 </body>
 </html>

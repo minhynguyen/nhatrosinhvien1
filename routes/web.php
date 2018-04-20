@@ -51,6 +51,9 @@ Route::resource('datphongfrontend', 'datphongfrontendController');
 Route::get('/dangnhap', function () {
     return view('frontend.dangnhap');
 });
+Route::get('/sosanh', function () {
+    return view('frontend.nhatro.compare');
+});
 Route::get('/dangki', function () {
     return view('frontend.dangki');
 });
@@ -76,6 +79,7 @@ Route::get('/thongtin', function () {
 Route::get('/loi', function () {
     return view('errors.khongduoctruycap');
 });
+Route::get('/timnhatro', 'FrontendController@timnhatro');
 // Route::get('/book', 'FrontendController@book')->name('book');
 // Route::get('/book/{id}', 'FrontendController@book')->name('book');
 

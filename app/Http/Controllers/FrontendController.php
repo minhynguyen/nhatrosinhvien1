@@ -10,8 +10,10 @@ use App\tienich;
 use App\nhatro;
 use App\nhatro_tienich;
 use App\hinhanh_nhatro;
+use App\datphong;
 use App\Http\Requests\nhatrorequest;
 use DB;
+use Carbon\Carbon;
 
 class FrontendController extends Controller
 {
@@ -56,6 +58,16 @@ class FrontendController extends Controller
     //   // $nhatro = nhatro::find($id);
     //   return view('frontend.nhatro.datphong')->with('$nhatro', $nhatro);
     // }
+
+    public function timnhatro(Request $request)
+    {
+        $lnt_ma = $request->lnt_ma;   
+
+        $data = DB::table('nhatro')->where('lnt_ma', $lnt_ma)->get();
+
+
+        return response()->json($data);
+    }
 
     
      public function timkiem(Request $request){
@@ -125,7 +137,12 @@ class FrontendController extends Controller
         $dsbaidangcho = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->where('baidang.bd_trangthai','2')->get();
         
         $dsnhatro = DB::table('nhatro')->where('id',$id)->get();
-        return view('frontend.profile')->with('dsnhatro', $dsnhatro)->with('dsbaidang', $dsbaidang)->with('dsbaidangcho', $dsbaidangcho);
+
+        $current = new Carbon();
+
+        $dsdatphong = DB::table('datphong')->join('nhatro', 'nhatro.nt_ma', '=', 'datphong.nt_ma')->join('users', 'users.id', '=', 'datphong.id')->where('nhatro.id',$id)->where('dp_thoigianketthuc','>=', $current) ->orderBy('dp_thoigianketthuc', 'asc')->get();
+        // dd($dsdatphong);
+        return view('frontend.profile')->with('dsnhatro', $dsnhatro)->with('dsbaidang', $dsbaidang)->with('dsbaidangcho', $dsbaidangcho)->with('dsdatphong', $dsdatphong);
 
     }
 

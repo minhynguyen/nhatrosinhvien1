@@ -165,6 +165,7 @@
                                       <option value="0">ALL</option>
                                         @foreach($dsDT as $DT)
                                         <option value="{{$DT}}">{{number_format($DT)}} m2</option>
+                                        <!-- <option value=""></option> -->
                                         @endforeach
                                       
                                       
@@ -270,7 +271,8 @@
             <div id="map"></div>
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.min.js') }}"> </script>
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/bootstrap.min.js') }}" ></script>
-            <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.js') }}"></script>     
+            <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.js') }}"></script>
+            <script type="text/javascript" src="{{ asset ('js/markercluster.js') }}"></script>      
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery.mixitup.min.js') }}" ></script>
             <script src="{{ asset ('theme/homepage/css/timepicker/bootstrap-timepicker.min.js') }}"></script>
             <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
@@ -304,7 +306,7 @@ $(document).ready(function(){
   
 </script>
 <script>
-  var map, marker;
+  var map, marker, markercluster;
   var mapDiv = document.getElementById('map');
   var myLatLng = {lat: 10.0309641000, lng: 105.7689041000};
 
@@ -320,7 +322,7 @@ $(document).ready(function(){
           position: myLatLng,
           map: map,
           title: 'Vị Trí Của Tôi',
-          draggable: true,
+          draggable: false,
           // icon: 'http://maps.google.com/mapfiles/ms/micons/green.png'
         });
        google.maps.event.addListener(marker,'position_changed',function(){
@@ -390,8 +392,9 @@ $(document).ready(function(){
            }  
 
          })(home));
-                              
+     // createCluster($nt);                         
   @endforeach
+
     var content = '<div id="iw-container">' +
                     '<div class="iw-title">Vị Trí Của Tôi: </div>' +
                     '<div class="iw-content">' +
@@ -457,7 +460,8 @@ $(document).ready(function(){
       };
   function GeolocationControl(){
       var geoButton = document.getElementById('curent-location');
-      google.maps.event.addListener(geoButton, 'click', geolocate); 
+      google.maps.event.addListener(geoButton, 'click', geolocate);
+
     };
 function geolocate(){
   if (navigator.geolocation) { //nếu trình duyệt lấy đc vị trí
@@ -474,6 +478,25 @@ function geolocate(){
           alert('use location');
         }
   };
+
+  function createCluster(markers_created){
+    var mcOptions = {girdSize: 50, maxZoom: 20, textColor: 'white', zoomOnClick: true};
+    markercluster = new MarkerCluster(map, markers_created, mcOptions);
+
+    google.maps.event.addListener(markercluster, 'click', function(cluster) {
+      var mk = cluster.getMarkers();
+      if(map.getZoom() < 14){
+        map.setZoom(map.getZoom()+1);
+        map.setCenter(cluster.getCenter())
+      }else{
+        infowindow.setContent('<div>Khong Zoom Duoc</div>');
+        infowindow.setPosition(cluster.getCenter());
+        infowindow.open(map);
+      }
+          
+    })
+
+  }
   function setci(){
     
     var circle = new google.maps.Circle({
@@ -509,6 +532,7 @@ function geolocate(){
         // remove_circle(circle);
       });
     // setci();
+
     geolocate();
     initMap();
     google.maps.event.addDomListener(window, 'load', map);
