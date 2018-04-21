@@ -185,7 +185,7 @@
                                 </li>
                                 <li>
                                  
-                                    <button type="button" id="btnTimkiem" name="btnTimkiem" class="btn btn-default form" style="width: 100%;height: 50px;"><span class="fa fa-search"></span>Tìm Kiếm</button>
+                                    <button type="button" id="btnTimkiem" name="btnTimkiem" class="btn btn-default form" style="width: 100%;height: 50px;"><span class="fa fa-search"></span> Tìm Kiếm</button>
                                     <!-- <button id="btnTimkiem" class=" btn btn-default navbar-right" type="button">Tìm Kiếm</button> -->
                                   
                                     
@@ -447,11 +447,109 @@ $(document).ready(function(){
   
 
   var customMapType = new google.maps.StyledMapType([
-          {stylers: [{hue: '#D2E4C8'}]},
+          // {stylers: [{hue: '#D2E4C8'}]},
           {
-                featureType: 'water',
-                stylers: [{color: '#599459'}]
-              },
+        "featureType": "landscape",
+        "stylers": [
+            {
+                "hue": "#FF0300"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 129.33333333333334
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "stylers": [
+            {
+                "hue": "#B6FF00"
+            },
+            {
+                "saturation": 63.79310344827584
+            },
+            {
+                "lightness": -47.61960784313726
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "stylers": [
+            {
+                "hue": "#00B7FF"
+            },
+            {
+                "saturation": -31.19999999999996
+            },
+            {
+                "lightness": 2.1803921568627374
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "stylers": [
+            {
+                "hue": "#00B5FF"
+            },
+            {
+                "saturation": -33.33333333333343
+            },
+            {
+                "lightness": 27.294117647058826
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "stylers": [
+            {
+                "hue": "#00B7FF"
+            },
+            {
+                "saturation": 8.400000000000006
+            },
+            {
+                "lightness": 36.400000000000006
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "stylers": [
+            {
+                "hue": "#ABFF00"
+            },
+            {
+                "saturation": 61.80000000000001
+            },
+            {
+                "lightness": 13.800000000000011
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
         ]);
   var customMapTypeId ='custom_style'
         map.mapTypes.set(customMapTypeId, customMapType);
