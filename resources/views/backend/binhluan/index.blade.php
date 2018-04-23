@@ -44,20 +44,20 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover text-center ">
                 <tr>
-                  <th>Mã Tài Khoản</th>
+                  <!-- <th>Mã Tài Khoản</th> -->
                   <th style="text-align: left;">Tên Tài Khoản</th>
                   <th style="text-align: left;">Tiêu Đề Bài Đăng</th>
-                  <th style="text-align: left;">Nội Dung</th>
+                  <th style="text-align: left;">Nội Dung Bình Luận</th>
                   <th style="text-align: left;">Ngày Đăng</th>
-                  <!-- <th style="text-align: left;">Nội Dung</th> -->
+                  <th style="text-align: center;">Tác Vụ</th>
                   
                   <!-- <th></th> -->
                 </tr>
                 @foreach ($dsbinhluan as $bl)
         <!-- nhãn từ controller -->
                 <tr>
-                    <td style="text-align: center;">{{$bl->id}}</td>
-                    <td style="text-align: center;">{{$bl->name}}</td>
+                    <!-- <td style="text-align: center;">{{$bl->id}}</td> -->
+                    <td style="text-align: left;">{{$bl->name}}</td>
                     <td style="text-align: left;">{{$bl->bd_tieude}}</td>
                     <td style="text-align: left;">{{$bl->bl_noidung}}</td>
                     <td style="text-align: left;">{{$bl->bl_taomoi}}</td>

@@ -39,7 +39,9 @@ Route::group(['prefix'=>'admin'], function(){
 
 });
 Route::resource('binhluan', 'binhluanController');
-
+Route::get('/changePassword','HomeController@showChangePasswordForm')->name('changePassword1');
+Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
+// Route::get('/search','SearchController@search');
 Route::resource('nhatrofrontend', 'NhaTroFrontendController');
 Route::resource('baidangfrontend', 'baidangfrontendController');
 Route::get('/', 'FrontendController@index')->name('index');

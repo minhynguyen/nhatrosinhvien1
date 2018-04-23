@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html>
 
          <head>
@@ -17,8 +17,6 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
             <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
-            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q"
-  type="text/javascript"></script> -->
             
       </head>
      
@@ -55,9 +53,33 @@
                                 <!-- <li>
                                     <a class="color_animation" href="">Đăng Nhập</a>
                                 </li> -->
-                                <li>
+                                <!-- <li>
                                     <a class="color_animation" href="{{ route('register')}}" style="margin-left: 2px!important"> Đăng Kí</a>
-                                </li>
+                                </li> -->
+                                <ul class="nav navbar-nav navbar-right">
+                                            <li class="dropdown" >
+                                              <a href="" class="dropdown-toggle"  data-toggle="dropdown" style="color: white" >{{ Auth::user()->name }} <span class="caret"></span></a>
+                                              <ul class="dropdown-menu" role="menu">
+                                                
+                                                <li><a href="{{ route('profile') }}" target="_blank">Thông Tin Tài Khoản</a></li>
+                                                <li><a href="{{ route('nhatrofrontend.create') }}" target="_blank">Đăng Kí Nhà Trọ</a></li>
+                                                <li class="divider"></li>
+                                                <li>
+                                                    <a href="{{ route('changePassword1') }}">
+                                                       Đổi Mật Khẩu
+                                                    </a>
+                                                </li>
+                                                <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                  document.getElementById('logout-form').submit();">Đăng Xuất</a></li>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+                                                <!-- <li><a href="#">Something else here</a></li>
+                                                
+                                                <li><a href="#">Separated link</a></li> -->
+                                              </ul>
+                                            </li>
+                                        </ul>
                             </ul>
                       
                             
@@ -70,26 +92,32 @@
             
 
             <div class="description_content">
+                
                 <div class="text-content container">
                     <div class="col-md-6">
-                        <h1 style="font-family: Time new romance">Đăng Nhập</h1>
+                        <h1 style="font-family: Time new romance">Đổi Mật Khẩu</h1>
                         <div class="fa fa-users fa-2x"></div>
-                        @if (session('warning'))
-                        <span class="alert alert-warning help-block">
-                            <strong>{{ session('warning') }}</strong>
-                        </span>
-                        @endif  
-                      <form  method="POST" action="{{ route('login') }}">
+                        @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+                        @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif  
+                      <form  method="POST" action="{{ route('changePassword') }}">
                         {{ csrf_field() }}
 
                         <div class="col-md-12" style="margin-top: 10px">
                             
-                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <input id="email" type="email" class="form" name="email" value="{{ old('email') }}" style="width: 100%" required autofocus placeholder="Email">
+                                <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                                <input id="current-password" type="password" class="form" name="current-password" style="width: 100%" required placeholder="Nhập Mật Khẩu Cũ">
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('current-password'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('current-password') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -97,23 +125,29 @@
 
                         <div class="col-md-12" style="margin-top: 10px">
                             
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <!-- <input id="password" type="password" class="form" name="password " style="width: 100%" placeholder="Mật Khẩu" required> -->
-                                <input id="password" type="password" class="form" name="password" required style="width: 100%" placeholder="Mật Khẩu">
-
-                                @if ($errors->has('password'))
+                            <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
+                                
+                                <input id="new-password" type="password" class="form" name="new-password" required style="width: 100%" placeholder="Nhập Mật Khẩu Mới">
+ 
+                                @if ($errors->has('new-password'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('new-password') }}</strong>
                                     </span>
                                 @endif
                               </div>
                         </div>
+                    <div class="col-md-12" style="margin-top: 10px">
+                        <div class="form-group">
+                                <input id="new-password-confirm" type="password" class="form" name="new-password_confirmation" required placeholder="Xác Nhận Mật Khẩu" style="width: 100%">
+                            
+                        </div>
+                    </div>
                         
                         <div class="col-md-6" style="margin-top: 10px">
                             
                         </div>
                         <div class="col-md-12" style="margin-top: 10px">
-                            <button type="submit" id="submit" name="submit" class="text-center form-btn" style="width: 100%; background-color: #50a900">Đăng Nhập</button>
+                            <button type="submit" id="submit" name="submit" class="text-center form-btn" style="width: 100%; background-color: #50a900">Đổi Mật Khẩu</button>
                         </div>
 
                         </form>
@@ -141,5 +175,19 @@
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery.mixitup.min.js') }}" ></script>
             <script src="{{ asset ('theme/homepage/css/timepicker/bootstrap-timepicker.min.js') }}"></script>
             <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+            <script >
+              $(document).ready(function(){
+                    $(".dropdown").hover(            
+                        function() {
+                            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideDown("fast");
+                            $(this).toggleClass('open');        
+                        },
+                        function() {
+                            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideUp("fast");
+                            $(this).toggleClass('open');       
+                        }
+                    );
+                });
+            </script>
         </body>
     </html>

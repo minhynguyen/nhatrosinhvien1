@@ -27,10 +27,10 @@
               <h3 class="box-title">DANH SÁCH CÁC NHÀ TRỌ</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="search">
 
                   <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    <button type="submit" class="btn btn-default" ><i class="fa fa-search"></i></button>
                   </div>
 
                 </div>
@@ -107,6 +107,25 @@
             <!-- /.box-body -->
           </div>
 
+@endsection
+
+@section('script')
+<!-- <script type="text/javascript">
+ 
+$('#search').on('keyup',function(){
+
+    $value=$(this).val();
+    $.ajax({ 
+    type : 'get',
+    url : '{{URL::to('search')}}',
+    data:{'search':$value},
+    success:function(data){
+    $('tbody').html(data);
+    }
+    });
+})
+ 
+</script> -->
 @endsection
 
 

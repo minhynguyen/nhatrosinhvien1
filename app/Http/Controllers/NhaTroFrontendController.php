@@ -14,6 +14,7 @@ use Auth;
 use DB;
 use Illuminate\Support\collection;
 use App\Http\Requests\nhatrorequest;
+use Carbon\Carbon;
 
 class NhaTroFrontendController extends Controller
 {
@@ -30,12 +31,17 @@ class NhaTroFrontendController extends Controller
         $dsbaidangcho = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->where('baidang.bd_trangthai','2')->get();
         $dstienich = tienich::all();
         $dsnhatro = DB::table('nhatro')->where('id',$id)->get();
+
+        $current = new Carbon();
+
+        $dsdatphong = DB::table('datphong')->join('nhatro', 'nhatro.nt_ma', '=', 'datphong.nt_ma')->join('users', 'users.id', '=', 'datphong.id')->where('nhatro.id',$id)->where('dp_thoigianketthuc','>=', $current) ->orderBy('dp_thoigianketthuc', 'asc')->get();
         
         return view('frontend.profile')->with('dsloainhatro', $dsloainhatro)
                                          ->with('dstienich', $dstienich)
                                          ->with('dsnhatro', $dsnhatro)
                                          ->with('dsbaidang', $dsbaidang)
-                                         ->with('dsbaidangcho', $dsbaidangcho);
+                                         ->with('dsbaidangcho', $dsbaidangcho)
+                                         ->with('dsdatphong', $dsdatphong);
     }
 
     /**

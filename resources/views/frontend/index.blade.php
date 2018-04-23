@@ -215,6 +215,11 @@
                                                 <li><a href="{{ route('profile') }}" target="_blank">Thông Tin Tài Khoản</a></li>
                                                 <li><a href="{{ route('nhatrofrontend.create') }}" target="_blank">Đăng Kí Nhà Trọ</a></li>
                                                 <li class="divider"></li>
+                                                <li>
+                                                    <a href="{{ route('changePassword1') }}" target="_blank">
+                                                       Đổi Mật Khẩu
+                                                    </a>
+                                                </li>
                                                 <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">Đăng Xuất</a></li>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
