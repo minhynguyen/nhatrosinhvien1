@@ -30,70 +30,9 @@
                     <div class="row">
                     <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="index.html" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
+                            <a class="navbar-brand" href="{{ route('index')}}" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
                         </div>
-
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav main-nav  clear navbar-right">
-                                <li>
-                                    <!-- <select class="form">
-                                      <option value="" disabled selected>Chọn Loại Nhà Trọ</option>
-                                      <option>Nhà trọ độc lập</option>
-                                      <option>Khu Nhà Trọ</option>
-                                      <option>Ở Cùng Chủ Nhà</option>
-                                      
-                                    </select> -->
-                                </li>
-                                <li>
-                                    <!-- <select class="form">
-                                      <option value="" disabled selected>Chọn Mức Giá</option>
-                                      <option>Trên 2 triệu</option>
-                                      <option>Trên 2 triệu</option>
-                                      <option>Trên 2 triệu</option>
-                                      <option>Trên 2 triệu</option>
-                                      <option>Trên 2 triệu</option>
-                                      
-                                    </select> -->
-                                </li>
-                                <li>
-                                    <!-- <select class="form" >
-                                      <option value="" disabled selected>Chọn Trường Học</option>
-                                      <option>Đại Học Cần Thơ</option>
-                                      <option>Đại Học Cần Thơ</option>
-                                      <option>Đại Học Cần Thơ</option>
-                                      
-                                    </select> -->
-                                </li>
-                                <li>
-                                    <!-- <select class="form" >
-                                      <option value="" disabled selected>Diện Tích</option>
-                                      <option>Trên 10m2</option>
-                                      <option>Trên 10m2</option>
-                                      <option>Trên 10m2</option>
-                                      <option>Trên 10m2</option>
-                                      
-                                    </select> -->
-                                </li>
-                                <li>
-                                    <!-- <select class="form" >
-                                      <option value="" disabled selected>Chọn Số Lượng Khách</option>
-                                      <option>Nhóm 1 đến 4 Khách</option>
-                                      <option>Nhóm 5 đến 10 Khách</option>
-                                      <option>Nhóm 10 đến 30 Khách</option>
-                                      <option>Trên 30 Khách</option>
-                                    </select> -->
-                                </li>
-                                <!-- <li>
-                                    <a class="color_animation" href="">Đăng Nhập</a>
-                                </li>
-                                <li>
-                                    <a class="color_animation" href="" style="margin-left: 2px!important"> | Đăng Kí</a>
-                                </li> -->
-                            </ul>
-                      
-                            
-                        </div><!-- /.navbar-collapse -->
+                        
                     </div>
 
                 </div><!-- /.container-fluid -->
@@ -108,11 +47,17 @@
                         <h1 style="font-family: Pacifico!important">Hẹn Xem Phòng</h1>
                          <!-- {{$nhatro -> nt_ten}} -->
                         <div class="fa fa-home fa-2x"></div>
-                        <div>
-                        <h2>Thông Tin Nhà Trọ</h2>
-                        <h2>{{$nhatro->nt_ten}}</h2>
-                        <h2>{{$nhatro->nt_diachi}}</h2>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                          <div class="panel panel-default">
+                            <div class="panel-body">
+                              <h2>Thông Tin Nhà Trọ</h2>
+                              {{$nhatro->nt_ten}} <br/>
+                              {{$nhatro->nt_diachi}}
+                            </div>
+                          </div>
+                          
                         </div>
+                        
                         <div class="col-md-12" style="text-align: left; margin-top: 10px;">
                             <span><strong>Mã Nhà Trọ:</strong></span>
                             <input type="text" name="nt_ma" class="form" style="width: 100%; margin-top: 10px" placeholder="Họ Và Tên" value="{{$nhatro->nt_ma}}">
@@ -197,5 +142,19 @@
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery.mixitup.min.js') }}" ></script>
             <script src="{{ asset ('theme/homepage/css/timepicker/bootstrap-timepicker.min.js') }}"></script>
             <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+            <script >
+  $(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
+</script>
         </body>
     </html>

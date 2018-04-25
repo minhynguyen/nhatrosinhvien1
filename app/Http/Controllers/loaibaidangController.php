@@ -35,7 +35,7 @@ class loaibaidangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(loaibaidangrequest $request)
     {
         $validatedData = $request->validate([
         'lbd_ten' => 'required|max:50',

@@ -27,6 +27,7 @@ Route::resource('full', 'FrontendController');
 Route::group(['prefix'=>'admin'], function(){	
 
 		Route::resource('truong', 'TruonghocController')->middleware(CheckLevelMiddleware::class); // route hỗ trợ lấy toàn bộ controller.
+
 		Route::resource('loainhatro', 'LoainhatroController')->middleware(CheckLevelMiddleware::class);
 		Route::resource('tienich', 'TienichController')->middleware(CheckLevelMiddleware::class);
 		Route::resource('user', 'UserController')->middleware(CheckLevelMiddleware::class);
@@ -38,6 +39,8 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::resource('binhluanadmin', 'binhluanbackendController');
 
 });
+
+Route::get('/truong','TruonghocController@index')->name('truong');
 Route::resource('binhluan', 'binhluanController');
 Route::get('/changePassword','HomeController@showChangePasswordForm')->name('changePassword1');
 Route::post('/changePassword','HomeController@changePassword')->name('changePassword');

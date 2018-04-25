@@ -39,7 +39,8 @@
                 <div class="container">
                     <div class="row">
                        <div class="navbar-header">
-                            <a class="navbar-brand" href="index.html" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
+                            <a class="navbar-brand" href="{{ route('index')}}" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
+
                         </div>
                       </div>
                 </div><!-- /.container-fluid -->
@@ -56,7 +57,7 @@
                               <div class="card-background">
                               </div>
                               <div class="useravatar">
-                                  <img alt="" src="{{ asset ('theme/homepage/image/avatar.png' )}}">
+                                  <img alt="" src="{{ asset ('theme/homepage/image/avatar.png')}}">
                               </div>
                               <div class="card-info" style="padding-top: 5px"> <span class="card-title">{{ Auth::user()->name }}</span>
 
@@ -131,9 +132,9 @@
                                           <td style="text-align: left;">{{$ds->nt_gianuoc}}</td>
                                           @if ($ds->nt_tinhtrang === 1)
 
-                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">Còn Phòng</span></td>
+                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Còn Phòng</span></td>
                                           @else
-                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Hết Phòng</span></td>
+                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">Hết Phòng</span></td>
                                           @endif
                                           @if ($ds->nt_trangthai === 2)
 

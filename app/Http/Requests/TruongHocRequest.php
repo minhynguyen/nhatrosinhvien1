@@ -24,7 +24,7 @@ class TruongHocRequest extends FormRequest
     public function rules()
     {
         return [
-        't_ten' => 'required|max:200',
+        't_ten' => 'required|max:200|unique:truong',
         't_vido' => 'required',
         't_kinhdo' => 'required',
         't_trangthai' => 'required',
@@ -37,6 +37,7 @@ class TruongHocRequest extends FormRequest
         't_kinhdo.required' => 'Kinh Độ Không Được Bỏ Trống',
         't_vido.required' => 'Vĩ Độ Không Được Bỏ Trống',
         't_ten.max' => 'Tên Không Được Vượt Quá :max Kí Tự',
+        't_ten.unique' => 'Trường Học Này Đã Tồn Tại',
         ];
     }
 }

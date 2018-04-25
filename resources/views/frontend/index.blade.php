@@ -19,6 +19,7 @@
             <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
             <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script src="{{ asset ('js/markerclusterer.js') }}"></script>
             <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
         async defer></script> -->
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
@@ -225,9 +226,12 @@
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                     {{ csrf_field() }}
                                                 </form>
-                                                <!-- <li><a href="#">Something else here</a></li>
+
+                                                @if( Auth::user()->level === 1 )
+                                                <li><a href="{{ route('truong') }}">Về Trang Quản Trị</a></li>
+                                                @endif
                                                 
-                                                <li><a href="#">Separated link</a></li> -->
+                                                <!-- <li><a href="#">Separated link</a></li> -->
                                               </ul>
                                             </li>
                                         </ul>
@@ -277,12 +281,12 @@
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.min.js') }}"> </script>
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/bootstrap.min.js') }}" ></script>
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.js') }}"></script>
-            <script type="text/javascript" src="{{ asset ('js/markercluster.js') }}"></script>      
+            <!-- <script type="text/javascript" src="{{ asset ('js/markercluster.js') }}"></script>       -->
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery.mixitup.min.js') }}" ></script>
             <script src="{{ asset ('theme/homepage/css/timepicker/bootstrap-timepicker.min.js') }}"></script>
             <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
             <!-- <link rel="stylesheet" href="{{ asset ('js/jqueryMap.js') }}"> -->
-            <!-- <script src="{{ asset ('js/jqueryMap.js') }}"></script> -->
+            <script src="{{ asset ('js/markerclusterer.js') }}"></script>
 <script>
   $(function(){
     // chấm là class # là id
@@ -360,7 +364,9 @@ $(document).ready(function(){
            }  
          })(school));
   @endforeach
+  
   @foreach($dsnhatro as $nt)
+  var markers = [];
     var home = new google.maps.Marker({
     position:{
       lat:{{$nt->nt_vido}},
@@ -370,6 +376,16 @@ $(document).ready(function(){
     icon: '{{ asset ('theme/homepage/image/house.png') }}'
     
   });
+  markers.push(home);
+  
+   var options = {
+            maxZoom: 13,
+            gridSize: 50,
+            imagePath: '{{ asset ('theme/homepage/image/m1.png') }}'
+        };
+  // console.log(markers.lat);
+  
+      
   var infowindow = new google.maps.InfoWindow();  
         google.maps.event.addListener(home, 'click', (function(home) {  
            return function() {
@@ -399,6 +415,8 @@ $(document).ready(function(){
          })(home));
      // createCluster($nt);                         
   @endforeach
+  var markerCluster = new MarkerClusterer(map, markers, options);
+  console.log(markerCluster);
 
     var content = '<div id="iw-container">' +
                     '<div class="iw-title">Vị Trí Của Tôi: </div>' +
@@ -453,107 +471,210 @@ $(document).ready(function(){
 
   var customMapType = new google.maps.StyledMapType([
           // {stylers: [{hue: '#D2E4C8'}]},
-          {
-        "featureType": "landscape",
+           {
+        "featureType": "all",
+        "elementType": "labels.icon",
         "stylers": [
             {
-                "hue": "#FF0300"
-            },
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 129.33333333333334
-            },
-            {
-                "gamma": 1
+                "visibility": "off"
             }
         ]
     },
     {
-        "featureType": "road.highway",
+        "featureType": "landscape.man_made",
+        "elementType": "geometry.stroke",
         "stylers": [
             {
-                "hue": "#B6FF00"
-            },
-            {
-                "saturation": 63.79310344827584
-            },
-            {
-                "lightness": -47.61960784313726
-            },
-            {
-                "gamma": 1
+                "color": "#c7c7c7"
             }
         ]
     },
     {
-        "featureType": "road.arterial",
+        "featureType": "landscape.natural",
+        "elementType": "geometry.fill",
         "stylers": [
             {
-                "hue": "#00B7FF"
+                "visibility": "on"
             },
             {
-                "saturation": -31.19999999999996
-            },
-            {
-                "lightness": 2.1803921568627374
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "stylers": [
-            {
-                "hue": "#00B5FF"
-            },
-            {
-                "saturation": -33.33333333333343
-            },
-            {
-                "lightness": 27.294117647058826
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "stylers": [
-            {
-                "hue": "#00B7FF"
-            },
-            {
-                "saturation": 8.400000000000006
-            },
-            {
-                "lightness": 36.400000000000006
-            },
-            {
-                "gamma": 1
+                "color": "#a9d8ae"
             }
         ]
     },
     {
         "featureType": "poi",
+        "elementType": "all",
         "stylers": [
             {
-                "hue": "#ABFF00"
-            },
-            {
-                "saturation": 61.80000000000001
-            },
-            {
-                "lightness": 13.800000000000011
-            },
-            {
-                "gamma": 1
+                "visibility": "off"
             }
         ]
+    },
+    {
+        "featureType": "poi.business",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.business",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.medical",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.medical",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#f2dccd"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.medical",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#a9d8ae"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.sports_complex",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 99
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#808080"
+            },
+            {
+                "lightness": 54
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#767676"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#f2f2f2"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway.controlled_access",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#e7e7e7"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "saturation": 43
+            },
+            {
+                "lightness": -11
+            },
+            {
+                "hue": "#0088ff"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#66cae1"
+            }
+        ]
+    
     },
         ]);
   var customMapTypeId ='custom_style'
@@ -561,6 +682,8 @@ $(document).ready(function(){
         map.setMapTypeId(customMapTypeId);
         geolocate();
       };
+
+
   function GeolocationControl(){
       var geoButton = document.getElementById('curent-location');
       google.maps.event.addListener(geoButton, 'click', geolocate);
@@ -582,24 +705,7 @@ function geolocate(){
         }
   };
 
-  function createCluster(markers_created){
-    var mcOptions = {girdSize: 50, maxZoom: 20, textColor: 'white', zoomOnClick: true};
-    markercluster = new MarkerCluster(map, markers_created, mcOptions);
-
-    google.maps.event.addListener(markercluster, 'click', function(cluster) {
-      var mk = cluster.getMarkers();
-      if(map.getZoom() < 14){
-        map.setZoom(map.getZoom()+1);
-        map.setCenter(cluster.getCenter())
-      }else{
-        infowindow.setContent('<div>Khong Zoom Duoc</div>');
-        infowindow.setPosition(cluster.getCenter());
-        infowindow.open(map);
-      }
-          
-    })
-
-  }
+  // var markerCluster = new MarkerClusterer(map, marker);
   function setci(){
     
     var circle = new google.maps.Circle({
