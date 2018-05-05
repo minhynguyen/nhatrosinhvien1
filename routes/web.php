@@ -11,9 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/test', function () {
+    return view('tets1');
+});
 use App\Http\Middleware\CheckLevelMiddleware;
 use App\truoghoc;
 use App\loainhatro;

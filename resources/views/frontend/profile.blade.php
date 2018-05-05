@@ -22,8 +22,28 @@
   <style>
   #map-canvas{
     width: 100%;
-    height: 290px;
-    
+    height: 290px;}
+    .btn1 {
+    flex: 1 1 auto;
+    margin: 10px;
+    padding: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+   /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+   }
+
+ .btn1:hover {
+  background-position: right center; /* change the direction of the change here */
+}
+
+.btn-1 {
+  background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+}
   }
   
 </style>
@@ -45,6 +65,7 @@
                       </div>
                 </div><!-- /.container-fluid -->
             </nav>
+
             
 
             <div class="description_content">
@@ -53,13 +74,20 @@
                         <h1 style="font-family: Time new romance">Thông Tin Tài Khoản</h1>
                         <!-- <div class="fa fa-user fade-2x"></div> -->
                         <!-- <div class="col-lg-12 col-sm-12"> -->
+                        <!-- <a class="btn1 btn-1">Tổng Nhà Trọ</a>   -->
+                          
                           <div class="card hovercard">
                               <div class="card-background">
+                                <img src="{{ asset ('theme/homepage/image/401.jpg')}}">
                               </div>
                               <div class="useravatar">
                                   <img alt="" src="{{ asset ('theme/homepage/image/avatar.png')}}">
                               </div>
-                              <div class="card-info" style="padding-top: 5px"> <span class="card-title">{{ Auth::user()->name }}</span>
+                              <div class="card-info" style="padding-top: 5px;">
+                                <span class="card-title">{{ Auth::user()->name }}</span>
+                                <br/>
+                                
+
 
                               </div>
                           </div>

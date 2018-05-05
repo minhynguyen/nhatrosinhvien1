@@ -89,7 +89,7 @@ class TruonghocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TruongHocRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try{
         $truong = truonghoc::find($id);
