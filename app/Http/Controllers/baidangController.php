@@ -18,7 +18,7 @@ class baidangController extends Controller
     {
         // $dsbaidang = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         // $dsloaibaidang = tienich::all();
-        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->get();
+        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->paginate(10);
         
         return view('backend.baidang.index')->with('dsbaidang', $dsbaidang);
     }

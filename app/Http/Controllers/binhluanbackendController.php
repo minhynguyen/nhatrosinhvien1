@@ -17,7 +17,8 @@ class binhluanbackendController extends Controller
      */
     public function index()
     {
-        $dsbinhluan = DB::table('binhluan')->join('users', 'binhluan.id', '=', 'users.id')->join('baidang', 'baidang.bd_ma', '=', 'binhluan.bd_ma')->get();
+        // $dstruong = truonghoc::paginate(10);
+        $dsbinhluan = DB::table('binhluan')->join('users', 'binhluan.id', '=', 'users.id')->join('baidang', 'baidang.bd_ma', '=', 'binhluan.bd_ma')->paginate(10);
         
         return view('backend.binhluan.index')->with('dsbinhluan', $dsbinhluan);
     }

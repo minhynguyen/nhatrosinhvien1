@@ -96,14 +96,30 @@ class NhaTroFrontendController extends Controller
         $nhatro->lnt_ma = $request->lnt_ma;
         $nhatro->save();
         
+        // $tienich = $request->input('tienich');
+        // // dd($tienich);
+        // foreach ($tienich as $ti) {
+        //     $nhatro_tienich = new nhatro_tienich();
+        //     $nhatro_tienich->nt_ma = $nhatro->nt_ma;
+        //     $nhatro_tienich->ti_ma = $ti;
+        //     $nhatro_tienich->save();
+        // }
+
+
         $tienich = $request->input('tienich');
-        // dd($tienich);
-        foreach ($tienich as $ti) {
-            $nhatro_tienich = new nhatro_tienich();
-            $nhatro_tienich->nt_ma = $nhatro->nt_ma;
-            $nhatro_tienich->ti_ma = $ti;
-            $nhatro_tienich->save();
+        if(empty($tienich)){
+        
         }
+        else{
+            foreach ($tienich as $ti) {
+                $nhatro_tienich = new nhatro_tienich();
+                $nhatro_tienich->nt_ma = $nhatro->nt_ma;
+                $nhatro_tienich->ti_ma = $ti;
+                $nhatro_tienich->save();
+            }
+        }
+        
+        
         $input=$request->all();
         $images=array();
         if($files=$request->file('images')){

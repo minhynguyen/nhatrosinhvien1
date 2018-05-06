@@ -35,6 +35,7 @@ class FrontendController extends Controller
                 ->where('nt_tinhtrang','1')
                 ->join('hinhanh_nhatro', 'hinhanh_nhatro.nt_ma', '=', 'nhatro.nt_ma')
                 ->get();
+                // dd($dsnhatro);
         // dd($dsnhatro);
         // $dsanh = hinhanh_nhatro::all();
         // $dsnhatro = DB::table('nhatro')->where('nt_trangthai','2')->get();

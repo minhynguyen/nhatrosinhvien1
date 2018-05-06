@@ -51,6 +51,16 @@
       <!-- form start -->
       <form role="form">
         <div class="box-body">
+          
+          <div class="form-group">
+            <label for="exampleInputPassword1">Loại Nhà Trọ</label>
+            <select name="lnt_ma" id="lnt_ma" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+              @foreach($dsloainhatro as $lnt)
+              <option value="{{$lnt->lnt_ma}}">{{$lnt->lnt_ten}}</option>
+              @endforeach
+            </select>
+          </div>
+
           <div class="form-group">
 
             <label for="exampleInputEmail1">Tên Nhà Trọ</label>
@@ -133,6 +143,31 @@
                   <!-- </select> -->
                 </select>
           </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword1">Loại Bài Đăng</label>
+            <select name="lbd_ma" id="lbd_ma" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+              @foreach($dsloaibaidang as $lbd)
+              <option value="{{$lbd->lbd_ma}}">{{$lbd->lbd_ten}}</option>
+              @endforeach
+            </select>
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="exampleInputEmail1">Tiêu Đề Bài Đăng</label>
+            <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="t_vido" placeholder="Nhập Vĩ Độ"> -->
+            <input type="text" class="form-control" name="bd_tieude" id="" style="width: 100%">
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="exampleInputEmail1">Nội Dung Bài Đăng</label>
+            <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="t_vido" placeholder="Nhập Vĩ Độ"> -->
+            <input type="text" class="form-control" name="bd_noidung" id="" style="width: 100%">
+          </div>
          
           <div class="form-group">
                 <label>Trạng Thái</label>
@@ -143,14 +178,7 @@
                   <!-- </select> -->
                 </select>
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Loại</label>
-            <select name="lnt_ma" id="lnt_ma" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-              @foreach($dsloainhatro as $lnt)
-              <option value="{{$lnt->lnt_ma}}">{{$lnt->lnt_ten}}</option>
-              @endforeach
-            </select>
-          </div>
+          
           
           <div class="form-group">
             <div class="fa fa-cogs fa-2x" > Tiện ích phòng trọ</div>

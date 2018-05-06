@@ -11,13 +11,7 @@
         <small>Thông Tin Các Nhà Trọ</small>
       </h1>
 @endsection
-@section('css')
-<style>
-  a {
-    color: #ffffff !important;
-}
-</style>
-@endsection
+
 
 
 <!-- noi dung can thay doi o giua -->
@@ -55,7 +49,7 @@
                   <th>Ngày Cập Nhật</th> -->
                   <th >Tình trạng</th>
                   <th >Trạng Thái</th>
-                  <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('nhatro.create') }}"><i class="fa fa-plus"></i> Thêm Nhà Trọ</a></button></th>
+                  <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('nhatro.create') }}" style="color: white"><i class="fa fa-plus"></i> Thêm Nhà Trọ</a></button></th>
                   <!-- <th></th> -->
                 </tr>
                 @foreach ($dsnhatro as $nhatro)
@@ -85,7 +79,7 @@
                         <td style="text-align: center;"><span class="badge bg-yellow">Chờ Duyệt</span></td>
                     @endif
                     <td>
-                      <button type="button" class="btn btn-warning"> <a href=" {{ route('nhatro.edit', ['nhatro' => $nhatro->nt_ma]) }}" ><i class="fa fa-edit"></i> </a></button>
+                      <button type="button" class="btn btn-warning"> <a href=" {{ route('nhatro.edit', ['nhatro' => $nhatro->nt_ma]) }}" style="color: white"><i class="fa fa-edit"></i> </a></button>
                     
                       
                     </td>
@@ -93,7 +87,7 @@
                       <form method="POST" action="{{route('nhatro.destroy', ['nhatro' => $nhatro->nt_ma])}}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                        <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i></a></button>
+                        <button type="submit" class="btn btn-danger"><a style="color: white"> <i class="fa fa-trash"></i></a></button>
                       </form>
                     </td>
                     
@@ -103,6 +97,9 @@
                 
                 
               </table>
+              <div style="float: right; margin-right: 10px;">
+                {!! $dsnhatro->render() !!}
+              </div>
             </div>
             <!-- /.box-body -->
           </div>

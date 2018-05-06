@@ -24,11 +24,11 @@ class nhatrorequest extends FormRequest
     public function rules()
     {
         return [
-            'nt_ten' => 'required|max:150|unique:nhatro',
+            'nt_ten' => 'required|max:150',
             'nt_kinhdo' => 'required',
             'nt_vido' => 'required',
             'nt_sdtlienhe' => 'required',
-            'nt_diachi' => 'required',
+            'nt_diachi' => 'required|unique:nhatro',
             'nt_giadien' => 'required',
             'nt_gianuoc' => 'required',
             'lnt_ma' => 'required',
@@ -48,7 +48,7 @@ class nhatrorequest extends FormRequest
         'nt_gianuoc.required' => 'Giá Nước Không Được Bỏ Trống',
         'lnt_ma.required' => 'Loại Nhà Trọ Không Được Bỏ Trống',
         'nt_ten.max' => 'Tên Không Được Vượt Quá :max Kí Tự',
-        'nt_ten.unique' => 'Nhà Trọ Này Đã Tồn Tại',
+        'nt_diachi.unique' => 'Nhà Trọ Này Đã Tồn Tại',
         ];
     }
     

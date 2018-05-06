@@ -50,7 +50,7 @@ height: 500px;
             <div class="container">
                 <div class="row">
                    <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
+                        <a class="navbar-brand" href="{{ route('index')}}" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

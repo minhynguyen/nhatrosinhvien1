@@ -11,13 +11,7 @@
         <small>Thông Tin Các Bài Đăng</small>
       </h1>
 @endsection
-@section('css')
-<style>
-  a {
-    color: #ffffff !important;
-}
-</style>
-@endsection
+
 
 
 <!-- noi dung can thay doi o giua -->
@@ -48,7 +42,7 @@
                   <th style="text-align: left;">Tiêu Đề</th>
                   <th style="text-align: left;">Nội Dung</th>
                   <th >Trạng Thái</th>
-                  <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('baidang.create') }}"><i class="fa fa-plus"></i> Thêm Bài Đăng</a></button></th>
+                  <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('baidang.create') }}" style="color: white"><i class="fa fa-plus"></i> Thêm Bài Đăng</a></button></th>
                   <!-- <th></th> -->
                 </tr>
                 @foreach ($dsbaidang as $baidang)
@@ -68,7 +62,7 @@
                         <td style="text-align: center;"><span class="badge bg-green">Đã Duyệt</span></td>
                     @endif
                     <td>
-                      <button type="button" class="btn btn-warning"> <a href=" {{ route('baidang.edit', ['baidang' => $baidang->bd_ma]) }}" ><i class="fa fa-edit"></i> </a></button>
+                      <button type="button" class="btn btn-warning"> <a href=" {{ route('baidang.edit', ['baidang' => $baidang->bd_ma]) }}" style="color: white"><i class="fa fa-edit"></i> </a></button>
                     
                       
                     </td>
@@ -86,6 +80,9 @@
                 
                 
               </table>
+              <div style="float: right; margin-right: 10px;">
+                {!! $dsbaidang->render() !!}
+              </div>
             </div>
             <!-- /.box-body -->
           </div>

@@ -11,13 +11,7 @@
         <small>Bình Luận Bài Đăng</small>
       </h1>
 @endsection
-@section('css')
-<style>
-  a {
-    color: #ffffff !important;
-}
-</style>
-@endsection
+
 
 
 <!-- noi dung can thay doi o giua -->
@@ -68,7 +62,7 @@
                       <form method="POST" action="{{route('binhluanadmin.destroy', ['binhluan' => $bl->bl_noidung])}}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                        <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete </a></button>
+                        <button type="submit" class="btn btn-danger"> <a style="color: white"> <i class="fa fa-trash"></i> Delete </a></button>
                       </form>
                     </td>
                 </tr>
@@ -77,6 +71,9 @@
                 
                 
               </table>
+              <div style="float: right; margin-right: 10px;">
+                {!! $dsbinhluan->render() !!}
+              </div>
             </div>
             <!-- /.box-body -->
           </div>

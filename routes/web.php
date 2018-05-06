@@ -38,9 +38,14 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::resource('baidang', 'baidangController')->middleware(CheckLevelMiddleware::class);
 		Route::resource('binhluanadmin', 'binhluanbackendController');
 
+
+
 });
 
 Route::get('/truong','TruonghocController@index')->name('truong');
+
+Route::get('/search','TruonghocController@search');
+
 Route::resource('binhluan', 'binhluanController');
 Route::get('/changePassword','HomeController@showChangePasswordForm')->name('changePassword1');
 Route::post('/changePassword','HomeController@changePassword')->name('changePassword');

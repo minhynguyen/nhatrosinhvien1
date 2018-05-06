@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\truonghoc;
 use App\Http\Requests\TruongHocRequest;
-
+use DB;
+use Yajra\Datatables\Datatables;
 class TruonghocController extends Controller
 {
     /**
@@ -15,8 +16,14 @@ class TruonghocController extends Controller
      */
     public function index()
     {
-        $dstruong = truonghoc::all();
+        $dstruong = truonghoc::paginate(10);
+        // $dstruong = truonghoc::all();
         return view('backend.truong.index')->with('dstruong',$dstruong);
+    }
+
+    public function anyData()
+    {
+        return Datatables::of(truong::query())->make(true);
     }
 
     /**
@@ -69,6 +76,57 @@ class TruonghocController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+        {
+         
+        if($request->ajax())
+         
+        {
+         
+        $output="";
+         
+        $truonghoc=DB::table('truong')->where('t_ten','LIKE','%'.$request->search."%")->get();
+         
+        if($truonghoc)
+         
+        {
+         
+        foreach ($truonghoc as $truonghoc) {
+         
+        $output.='<tr>'.
+         
+        '<td>'.$truonghoc->t_ma.'</td>'.
+         
+        '<td>'.$truonghoc->t_ten.'</td>'.
+         
+        '<td>'.$truonghoc->t_vido.'</td>'.
+         
+        '<td>'.$truonghoc->t_kinhdo.'</td>'.
+         
+        '<td>'.$truonghoc->t_trangthai.'</td>'.
+
+        
+
+        '</tr>';
+         
+        }
+         
+         
+         
+        return Response($output);
+         
+         
+         
+           }
+         
+         
+         
+           }
+ 
+ 
+ 
+}
 
     /**
      * Show the form for editing the specified resource.

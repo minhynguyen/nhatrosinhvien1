@@ -24,7 +24,7 @@ class nhatroController extends Controller
     {
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $dstienich = tienich::all();
-        $dsnhatro = DB::table('nhatro')->join('loainhatro', 'nhatro.lnt_ma', '=', 'loainhatro.lnt_ma')->get();
+        $dsnhatro = DB::table('nhatro')->join('loainhatro', 'nhatro.lnt_ma', '=', 'loainhatro.lnt_ma')->paginate(10);
         // $dsnhatro = DB::table('nhatro')->join('hinhanh_nhatro', 'nhatro.nt_ma', '=', 'hinhanh_nhatro.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nt_trangthai','2')->get();
         return view('backend.nhatro.index')->with('dsloainhatro', $dsloainhatro)
                                          ->with('dstienich', $dstienich)->with('dsnhatro', $dsnhatro);
@@ -37,10 +37,12 @@ class nhatroController extends Controller
      */
     public function create()
     {
+        $dsloaibaidang = DB::table('loaibaidang')->where('lbd_trangthai','2')->get();
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $dstienich = tienich::all();
         return view('backend.nhatro.create')->with('dsloainhatro', $dsloainhatro)
-                                         ->with('dstienich', $dstienich);
+                                            ->with('dstienich', $dstienich)
+                                            ->with('dsloaibaidang', $dsloaibaidang);
     }
 
     /**
@@ -82,20 +84,25 @@ class nhatroController extends Controller
         $nhatro->save();
         
         $tienich = $request->input('tienich');
-        // dd($tienich);
-        foreach ($tienich as $ti) {
-            $nhatro_tienich = new nhatro_tienich();
-            $nhatro_tienich->nt_ma = $nhatro->nt_ma;
-            $nhatro_tienich->ti_ma = $ti;
-            $nhatro_tienich->save();
+        if(empty($tienich)){
+        
         }
+        else{
+            foreach ($tienich as $ti) {
+                $nhatro_tienich = new nhatro_tienich();
+                $nhatro_tienich->nt_ma = $nhatro->nt_ma;
+                $nhatro_tienich->ti_ma = $ti;
+                $nhatro_tienich->save();
+            }
+        }
+
+        
         $input=$request->all();
         $images=array();
         if($files=$request->file('images')){
             foreach($files as $file){
                 $hinhanh_nhatro = new hinhanh_nhatro();
                 $hinhanh_nhatro->nt_ma = $nhatro->nt_ma;
-
                 $name=$file->getClientOriginalName();
                 $file->move('upload',$name);
                 $hinhanh_nhatro->ha_ten = $name;
@@ -109,6 +116,15 @@ class nhatroController extends Controller
                 // $images[]=$name;
                 $hinhanh_nhatro->save();
         }
+
+
+        $baidang = new baidang();
+        $baidang->nt_ma = $nhatro->nt_ma;
+        $baidang->lbd_ma = $request->lbd_ma;
+        $baidang->bd_tieude = $request->bd_tieude;
+        $baidang->bd_noidung = $request->bd_noidung;
+        $baidang->bd_trangthai = 1;
+        $baidang->save();
         // $images = $request->input('images');
         // foreach ($images as $pi) {
         //         $hinhanh_nhatro = new hinhanh_nhatro();
