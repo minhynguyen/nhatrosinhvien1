@@ -11,6 +11,25 @@
         <small>Bình Luận Bài Đăng</small>
       </h1>
 @endsection
+@section('input')
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
+<style>
+  a {
+    color: white !important;
+}
+td{
+  text-align: left !important;
+}
+th{
+  text-align: left !important;
+}
+</style>
+@endsection
 
 
 
@@ -22,21 +41,12 @@
               
               
 
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  </div>
-
-                </div>
-
-              </div>
+              
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover text-center ">
+              <table class="table table-hover text-center " id="binhluan-table">
+                <thead>
                 <tr>
                   <!-- <th>Mã Tài Khoản</th> -->
                   <th style="text-align: left;">Tên Tài Khoản</th>
@@ -47,36 +57,40 @@
                   
                   <!-- <th></th> -->
                 </tr>
-                @foreach ($dsbinhluan as $bl)
-        <!-- nhãn từ controller -->
-                <tr>
-                    <!-- <td style="text-align: center;">{{$bl->id}}</td> -->
-                    <td style="text-align: left;">{{$bl->name}}</td>
-                    <td style="text-align: left;">{{$bl->bd_tieude}}</td>
-                    <td style="text-align: left;">{{$bl->bl_noidung}}</td>
-                    <td style="text-align: left;">{{$bl->bl_taomoi}}</td>
-
-                    
-                    
-                    <td>
-                      <form method="POST" action="{{route('binhluanadmin.destroy', ['binhluan' => $bl->bl_noidung])}}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <button type="submit" class="btn btn-danger"> <a style="color: white"> <i class="fa fa-trash"></i> Delete </a></button>
-                      </form>
-                    </td>
-                </tr>
-
-        @endforeach
                 
+                </thead>
                 
               </table>
-              <div style="float: right; margin-right: 10px;">
-                {!! $dsbinhluan->render() !!}
-              </div>
+              
             </div>
             <!-- /.box-body -->
           </div>
+
+@endsection
+
+
+@section('script')
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script>
+$(function() {
+    $('#binhluan-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{!! route('binhluan') !!}',
+        columns: [
+            { data: 'name', name: 'name' },
+            { data: 'bd_tieude', name: 'bd_tieude' },
+            { data: 'bl_noidung', name: 'bl_noidung' },
+            { data: 'bl_taomoi', name: 'bl_taomoi' },
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+});
+</script> 
+
+
+ 
 
 @endsection
 

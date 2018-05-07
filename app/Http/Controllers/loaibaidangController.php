@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\loaibaidang;
 use App\Http\Requests\loaibaidangrequest;
+use Yajra\Datatables\Datatables;
 
 class loaibaidangController extends Controller
 {
@@ -29,6 +30,39 @@ class loaibaidangController extends Controller
         return view('backend.loaibaidang.create');
     }
 
+
+    // public function anyData()
+    // {
+    //     return Datatables::of(loaibaidang::query())
+    //     ->addColumn('action', function ($user) {
+    //             return '<a href="#edit-'.$user->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+    //         })
+    //     ->make(true);
+    // }
+
+
+
+
+    public function getAddEditRemoveColumnData()
+    {
+        $loaibaidang = loaibaidang::select(['lbd_ma', 'lbd_ten', 'lbd_trangthai', 'lbd_taomoi', 'lbd_capnhat']);
+
+        return Datatables::of($loaibaidang)
+            ->addColumn('action', function ($loaibaidang) {
+                return '<button type="button" class="btn btn-warning"><a class="table-action-btn" title="Chỉnh sửa" href="' . route('loaibaidang.edit', $loaibaidang->lbd_ma) . '"><i class="fa fa-pencil"></i></a></button>
+
+                    <button type="button" class="btn btn-danger"><a class="table-action-btn" title="Xóa" href="' . route('loaibaidang.delete', $loaibaidang->lbd_ma) . '"><i class="fa fa-trash"></i></a></button>';
+
+
+            })
+            // ->edit_column('lbd_trangthai', '@if ($lbd_trangthai ==="1") <span class="badge bg-yellow">KHÓA</span> @endif')\
+            ->editColumn('lbd_trangthai', '@if ($lbd_trangthai =="2")Khả Dụng @else Khóa  @endif')
+        
+        
+
+
+            ->make(true);
+    }
     /**
      * Store a newly created resource in storage.
      *

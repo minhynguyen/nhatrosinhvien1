@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\binhluan;
 use DB;
 use Auth;
+use Yajra\Datatables\Datatables;
 
 class binhluanbackendController extends Controller
 {
@@ -21,6 +22,24 @@ class binhluanbackendController extends Controller
         $dsbinhluan = DB::table('binhluan')->join('users', 'binhluan.id', '=', 'users.id')->join('baidang', 'baidang.bd_ma', '=', 'binhluan.bd_ma')->paginate(10);
         
         return view('backend.binhluan.index')->with('dsbinhluan', $dsbinhluan);
+    }
+
+
+    public function getAddEditRemoveColumnData()
+    {
+        $binhluan = DB::table('binhluan')->join('users', 'binhluan.id', '=', 'users.id')->join('baidang', 'baidang.bd_ma', '=', 'binhluan.bd_ma')
+            ->select(['users.name', 'baidang.bd_tieude', 'binhluan.bl_noidung', 'binhluan.bl_taomoi']);
+
+
+        // $binhluan = binhluan::join('users', 'binhluan.id', '=', 'users.id')::join('baidang', 'baidang.bd_ma', '=', 'binhluan.bd_ma')
+        //     ->select(['binhluan.name', 'binhluan.bd_tieude', 'binhluan.bl_noidung', 'binhluan.bl_taomoi']);
+        return Datatables::of($binhluan)
+            ->addColumn('action', function ($binhluan) {
+                return '<button type="button" class="btn btn-danger"><a class="table-action-btn" title="Xóa" href="' . route('binhluan.delete', $binhluan->bl_noidung) . '"><i class="fa fa-trash"></i></a></button>';
+
+            })
+            
+            ->make(true);
     }
 
     /**

@@ -39,12 +39,22 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::resource('binhluanadmin', 'binhluanbackendController');
 
 
+		Route::get('/loaibaidang/delete/{id}', ['as'=>'loaibaidang.delete', 'uses'=>'loaibaidangController@destroy']);
 
+
+		Route::get('/truonghoc/delete/{id}', ['as'=>'truong.delete', 'uses'=>'TruonghocController@destroy']);
+
+		Route::get('/binhluanadmin/delete/{id}', ['as'=>'binhluan.delete', 'uses'=>'binhluanbackendController@destroy']);
 });
+Route::get('/loaibaidang', 'loaibaidangController@getAddEditRemoveColumnData')->name('loaibaidang')->middleware(CheckLevelMiddleware::class);
+
+Route::get('/binhluanadmin', 'binhluanbackendController@getAddEditRemoveColumnData')->name('binhluan')->middleware(CheckLevelMiddleware::class);
+
+Route::get('/truonghoc', 'TruonghocController@getAddEditRemoveColumnData')->name('truonghoc')->middleware(CheckLevelMiddleware::class);
 
 Route::get('/truong','TruonghocController@index')->name('truong');
 
-Route::get('/search','TruonghocController@search');
+// Route::get('/search','TruonghocController@search');
 
 Route::resource('binhluan', 'binhluanController');
 Route::get('/changePassword','HomeController@showChangePasswordForm')->name('changePassword1');
@@ -93,5 +103,13 @@ Route::get('/timnhatro', 'FrontendController@timnhatro');
 // Route::get('/book', 'FrontendController@book')->name('book');
 // Route::get('/book/{id}', 'FrontendController@book')->name('book');
 
+// Route::get('/search', 'loaibaidangController@anyData')->name('search');
 
 
+
+// Route::get('/loaibaidang/delete/{loaibaidang}', ['as' => 'loaibaidang.delete', 'loaibaidang' => 'loaibaidangController@destroy']);
+
+
+
+
+// Route::get('/timkiem/{loainhatro}/{giaTu}/{giaden}/{dientich}', ['uses' => 'loaibaidangController@destroy']);

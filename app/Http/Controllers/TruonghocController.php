@@ -16,15 +16,15 @@ class TruonghocController extends Controller
      */
     public function index()
     {
-        $dstruong = truonghoc::paginate(10);
-        // $dstruong = truonghoc::all();
+        // $dstruong = truonghoc::paginate(10);
+        $dstruong = truonghoc::all();
         return view('backend.truong.index')->with('dstruong',$dstruong);
     }
 
-    public function anyData()
-    {
-        return Datatables::of(truong::query())->make(true);
-    }
+    // public function anyData()
+    // {
+    //     return Datatables::of(truong::query())->make(true);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -77,56 +77,20 @@ class TruonghocController extends Controller
         //
     }
 
-    public function search(Request $request)
-        {
-         
-        if($request->ajax())
-         
-        {
-         
-        $output="";
-         
-        $truonghoc=DB::table('truong')->where('t_ten','LIKE','%'.$request->search."%")->get();
-         
-        if($truonghoc)
-         
-        {
-         
-        foreach ($truonghoc as $truonghoc) {
-         
-        $output.='<tr>'.
-         
-        '<td>'.$truonghoc->t_ma.'</td>'.
-         
-        '<td>'.$truonghoc->t_ten.'</td>'.
-         
-        '<td>'.$truonghoc->t_vido.'</td>'.
-         
-        '<td>'.$truonghoc->t_kinhdo.'</td>'.
-         
-        '<td>'.$truonghoc->t_trangthai.'</td>'.
+    public function getAddEditRemoveColumnData()
+    {
+        $truonghoc = truonghoc::select(['t_ma', 't_ten', 't_kinhdo', 't_vido', 't_trangthai']);
 
-        
+        return Datatables::of($truonghoc)
+            ->addColumn('action', function ($truonghoc) {
+                return '<button type="button" class="btn btn-warning"><a class="table-action-btn" title="Chỉnh sửa" href="' . route('truong.edit', $truonghoc->t_ma) . '"><i class="fa fa-pencil"></i></a></button>
 
-        '</tr>';
-         
-        }
-         
-         
-         
-        return Response($output);
-         
-         
-         
-           }
-         
-         
-         
-           }
- 
- 
- 
-}
+                    <button type="button" class="btn btn-danger"><a class="table-action-btn" title="Xóa" href="' . route('truong.delete', $truonghoc->t_ma) . '"><i class="fa fa-trash"></i></a></button>';
+
+            })
+            ->editColumn('t_trangthai', '@if ($t_trangthai =="2")Khả Dụng @else Khóa  @endif')
+            ->make(true);
+    }
 
     /**
      * Show the form for editing the specified resource.
