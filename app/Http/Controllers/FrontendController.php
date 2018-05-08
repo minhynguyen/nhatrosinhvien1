@@ -125,12 +125,6 @@ class FrontendController extends Controller
     }
 
 
-    
-   
-        
-       
-    
-    
     public function getnhatro()
     {
         $id = Auth::user()->id;

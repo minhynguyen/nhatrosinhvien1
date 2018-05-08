@@ -79,10 +79,10 @@ $(function() {
         serverSide: true,
         ajax: '{!! route('binhluan') !!}',
         columns: [
-            { data: 'name', name: 'name' },
-            { data: 'bd_tieude', name: 'bd_tieude' },
-            { data: 'bl_noidung', name: 'bl_noidung' },
-            { data: 'bl_taomoi', name: 'bl_taomoi' },
+            { data: 'name', name: 'users.name' },
+            { data: 'bd_tieude', name: 'baidang.bd_tieude' },
+            { data: 'bl_noidung', name: 'binhluan.bl_noidung' },
+            { data: 'bl_taomoi', name: 'binhluan.bl_taomoi' },
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
