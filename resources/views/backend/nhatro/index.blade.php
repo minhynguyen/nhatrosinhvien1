@@ -12,7 +12,24 @@
       </h1>
 @endsection
 
+@section('input')
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+@endsection
+@section('css')
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+<style>
+  a {
+    color: #ffffff !important;
+}
+td{
+  text-align: center; !important;
+}
 
+th{
+  text-align: center; !important;
+}
+</style>
+@endsection
 
 <!-- noi dung can thay doi o giua -->
 @section('content')
@@ -33,7 +50,8 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover text-center ">
+              <table class="table table-hover text-center " id="nhatro-table">
+                <thead>
                 <tr>
                   <th>Mã</th>
                   <th style="text-align: left;">Tên Nhà Trọ</th>
@@ -52,61 +70,57 @@
                   <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('nhatro.create') }}" style="color: white"><i class="fa fa-plus"></i> Thêm Nhà Trọ</a></button></th>
                   <!-- <th></th> -->
                 </tr>
-                @foreach ($dsnhatro as $nhatro)
-        <!-- nhãn từ controller -->
-                <tr>
-                    <td>{{$nhatro->nt_ma}}</td>
-                    <td style="text-align: left;">{{$nhatro->nt_ten}}</td>
-                    <td style="text-align: left;">{{$nhatro->nt_diachi}}</td>
-                    <td style="text-align: left;">{{$nhatro->nt_vido}}</td>
-                    <td style="text-align: left;">{{$nhatro->nt_kinhdo}}</td>
-                    <td style="text-align: left;">{{$nhatro->lnt_ten}}</td>
-                    <td style="text-align: left;">{{$nhatro->nt_dientich}}</td>
-                     
-                    <td style="text-align: left;">{{$nhatro->nt_giadien}}</td>
-                    <td style="text-align: left;">{{$nhatro->nt_gianuoc}}</td>
-                    <td style="text-align: left;">{{$nhatro->nt_giathue}}</td>
-                    @if ($nhatro->nt_tinhtrang === 1)
-
-                        <td style="text-align: center;"><span class="badge bg-green">Còn Phòng</span></td>
-                    @else
-                        <td style="text-align: center;"><span class="badge bg-yellow">Hết Phòng</span></td>
-                    @endif
-                    @if ($nhatro->nt_trangthai === 1)
-
-                        <td style="text-align: center;"><span class="badge bg-green">Đã Duyệt</span></td>
-                    @else
-                        <td style="text-align: center;"><span class="badge bg-yellow">Chờ Duyệt</span></td>
-                    @endif
-                    <td>
-                      <button type="button" class="btn btn-warning"> <a href=" {{ route('nhatro.edit', ['nhatro' => $nhatro->nt_ma]) }}" style="color: white"><i class="fa fa-edit"></i> </a></button>
-                    
-                      
-                    </td>
-                    <td>
-                      <form method="POST" action="{{route('nhatro.destroy', ['nhatro' => $nhatro->nt_ma])}}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <button type="submit" class="btn btn-danger"><a style="color: white"> <i class="fa fa-trash"></i></a></button>
-                      </form>
-                    </td>
-                    
-                </tr>
-
-        @endforeach
+                </thead>
                 
                 
               </table>
-              <div style="float: right; margin-right: 10px;">
-                {!! $dsnhatro->render() !!}
-              </div>
+              
             </div>
             <!-- /.box-body -->
           </div>
 
 @endsection
-
 @section('script')
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script>
+$(function() {
+    $('#nhatro-table').DataTable({
+        processing: true,
+        serverSide: true,
+        "language": {
+          "lengthMenu": "Hiển thị _MENU_ dòng dữ liệu trên một trang",
+           "info":" Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu",
+           "infoEmpty":"Dữ liệu rỗng",
+           "emptyTable":"Chưa có dữ liệu nào",
+           "processing":"Đang Xử Lý...", 
+           "search":"Tìm Kiếm",
+           "loadingRecords":"Đang load dữ liệu",
+          "zeroRecords":"Không Tìm Thấy Dữ Liệu",
+          "infoFiltered":"(Lọc Trong _MAX_ Dòng Dữ Liệu)",
+        },
+        ajax: '{!! route('nhatro') !!}',
+        columns: [
+            { data: 'nt_ma', name: 'nt_ma' },
+            { data: 'name', name: 'users.name' },
+            { data: 'nt_ten', name: 'nt_ten' },
+            { data: 'lnt_ten', name: 'loainhatro.lnt_ten' },
+            { data: 'nt_diachi', name: 'nt_diachi' },
+            { data: 'nt_giathue', name: 'nt_giathue' },
+            { data: 'nt_dientich', name: 'nt_dientich' },
+            { data: 'nt_tinhtrang', name: 'nt_tinhtrang' },
+            { data: 'nt_trangthai', name: 'nt_trangthai' },
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+});
+</script> 
+
+
+ 
+
+@endsection
+
 <!-- <script type="text/javascript">
  
 $('#search').on('keyup',function(){
@@ -123,7 +137,7 @@ $('#search').on('keyup',function(){
 })
  
 </script> -->
-@endsection
+
 
 
 

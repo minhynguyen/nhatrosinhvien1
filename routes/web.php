@@ -45,10 +45,18 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::get('/truonghoc/delete/{id}', ['as'=>'truong.delete', 'uses'=>'TruonghocController@destroy']);
 
 		Route::get('/binhluanadmin/delete/{id}', ['as'=>'binhluan.delete', 'uses'=>'binhluanbackendController@destroy']);
+
+		Route::get('/baidang/delete/{id}', ['as'=>'baidang.delete', 'uses'=>'baidangController@destroy']);
+
+		Route::get('/nhatro/delete/{id}', ['as'=>'nhatro.delete', 'uses'=>'nhatroController@destroy']);
 });
 Route::get('/loaibaidang', 'loaibaidangController@getAddEditRemoveColumnData')->name('loaibaidang')->middleware(CheckLevelMiddleware::class);
 
+Route::get('/nhatro', 'nhatroController@getAddEditRemoveColumnData')->name('nhatro')->middleware(CheckLevelMiddleware::class);
+
 Route::get('/binhluanadmin', 'binhluanbackendController@getAddEditRemoveColumnData')->name('binhluan')->middleware(CheckLevelMiddleware::class);
+
+Route::get('/baidang', 'baidangController@getAddEditRemoveColumnData')->name('baidang')->middleware(CheckLevelMiddleware::class);
 
 Route::get('/truonghoc', 'TruonghocController@getAddEditRemoveColumnData')->name('truonghoc')->middleware(CheckLevelMiddleware::class);
 

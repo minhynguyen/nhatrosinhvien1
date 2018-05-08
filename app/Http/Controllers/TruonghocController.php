@@ -83,9 +83,9 @@ class TruonghocController extends Controller
 
         return Datatables::of($truonghoc)
             ->addColumn('action', function ($truonghoc) {
-                return '<button type="button" class="btn btn-warning"><a class="table-action-btn" title="Chỉnh sửa" href="' . route('truong.edit', $truonghoc->t_ma) . '"><i class="fa fa-pencil"></i></a></button>
+                return '<button type="button" class="btn btn-warning" style="width: 45%"><a class="table-action-btn" title="Chỉnh sửa" href="' . route('truong.edit', $truonghoc->t_ma) . '"><i class="fa fa-pencil"></i></a></button>
 
-                    <button type="button" class="btn btn-danger"><a class="table-action-btn" title="Xóa" href="' . route('truong.delete', $truonghoc->t_ma) . '"><i class="fa fa-trash"></i></a></button>';
+                    <button type="button" class="btn btn-danger" style="width: 45%"><a class="table-action-btn" title="Xóa" href="' . route('truong.delete', $truonghoc->t_ma) . '"><i class="fa fa-trash"></i></a></button>';
 
             })
             ->editColumn('t_trangthai', '@if ($t_trangthai =="2")Khả Dụng @else Khóa  @endif')

@@ -13,6 +13,7 @@ use Auth;
 use DB;
 use Illuminate\Support\collection;
 use App\Http\Requests\nhatrorequest;
+use Yajra\Datatables\Datatables;
 class nhatroController extends Controller
 {
     /**
@@ -262,5 +263,25 @@ class nhatroController extends Controller
         // $nhatro_tienich = nhatro_tienich::find($id);
         // $nhatro_tienich->delete();
         return redirect(route('nhatro.index'));
+    }
+
+
+    public function getAddEditRemoveColumnData()
+    {
+        $dsnhatro = DB::table('nhatro')->join('loainhatro', 'nhatro.lnt_ma', '=', 'loainhatro.lnt_ma')->join('users', 'users.id', '=', 'nhatro.id')
+            ->select(['nt_ma', 'users.name', 'nt_ten', 'loainhatro.lnt_ten', 'nt_diachi', 'nt_giathue', 'nt_dientich', 'nt_tinhtrang', 'nt_trangthai']);
+
+            
+
+        return Datatables::of($dsnhatro)
+            ->addColumn('action', function ($dsnhatro) {
+                return '<button type="button" class="btn btn-warning"><a class="table-action-btn" title="Chỉnh sửa" href="' . route('nhatro.edit', $dsnhatro->nt_ma) . '"><i class="fa fa-pencil"></i></a></button>
+
+                    <button type="button" class="btn btn-danger"><a class="table-action-btn" title="Xóa" href="' . route('nhatro.delete', $dsnhatro->nt_ma) . '"><i class="fa fa-trash"></i></a></button>';
+
+            })
+            ->editColumn('nt_trangthai', '@if ($nt_trangthai =="1")Khả Dụng @else Khóa  @endif')
+            ->editColumn('nt_tinhtrang', '@if ($nt_tinhtrang =="0")Hết Phòng @else Còn Phòng  @endif')
+            ->make(true);
     }
 }

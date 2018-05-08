@@ -35,7 +35,7 @@ class binhluanbackendController extends Controller
         //     ->select(['binhluan.name', 'binhluan.bd_tieude', 'binhluan.bl_noidung', 'binhluan.bl_taomoi']);
         return Datatables::of($binhluan)
             ->addColumn('action', function ($binhluan) {
-                return '<button type="button" class="btn btn-danger"><a class="table-action-btn" title="Xóa" href="' . route('binhluan.delete', $binhluan->bl_noidung) . '"><i class="fa fa-trash"></i></a></button>';
+                return '<button type="button" class="btn btn-danger" style="width: 96%"><a class="table-action-btn" title="Xóa" href="' . route('binhluan.delete', $binhluan->bl_noidung) . '"><i class="fa fa-trash"></i> Xóa Comment</a></button>';
 
             })
             

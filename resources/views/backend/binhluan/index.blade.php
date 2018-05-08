@@ -45,7 +45,7 @@ th{
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover text-center " id="binhluan-table">
+              <table class="table table-bordered table-hover" id="binhluan-table">
                 <thead>
                 <tr>
                   <!-- <th>Mã Tài Khoản</th> -->
@@ -77,6 +77,17 @@ $(function() {
     $('#binhluan-table').DataTable({
         processing: true,
         serverSide: true,
+        "language": {
+          "lengthMenu": "Hiển thị _MENU_ dòng dữ liệu trên một trang",
+           "info":" Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu",
+           "infoEmpty":"Dữ liệu rỗng",
+           "emptyTable":"Chưa có dữ liệu nào",
+           "processing":"Đang Xử Lý...", 
+           "search":"Tìm Kiếm",
+           "loadingRecords":"Đang load dữ liệu",
+          "zeroRecords":"Không Tìm Thấy Dữ Liệu",
+          "infoFiltered":"(Lọc Trong _MAX_ Dòng Dữ Liệu)",
+        },
         ajax: '{!! route('binhluan') !!}',
         columns: [
             { data: 'name', name: 'users.name' },

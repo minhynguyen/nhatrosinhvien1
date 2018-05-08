@@ -7,6 +7,7 @@ use App\baidang;
 use App\loaibaidang;
 use App\nhatro;
 use DB;
+use Yajra\Datatables\Datatables;
 class baidangController extends Controller
 {
     /**
@@ -18,7 +19,7 @@ class baidangController extends Controller
     {
         // $dsbaidang = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         // $dsloaibaidang = tienich::all();
-        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->paginate(10);
+        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->paginate(15);
         
         return view('backend.baidang.index')->with('dsbaidang', $dsbaidang);
     }
@@ -124,5 +125,24 @@ class baidangController extends Controller
         $baidang = baidang::find($id);
         $baidang->delete();
         return redirect(route('baidang.index'));
+    }
+
+
+    public function getAddEditRemoveColumnData()
+    {
+        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')
+            ->select(['baidang.bd_ma', 'users.name', 'nhatro.nt_ten', 'loaibaidang.lbd_ten', 'bd_tieude', 'bd_noidung', 'bd_trangthai']);
+
+        // $binhluan = binhluan::join('users', 'binhluan.id', '=', 'users.id')::join('baidang', 'baidang.bd_ma', '=', 'binhluan.bd_ma')
+        //     ->select(['binhluan.name', 'binhluan.bd_tieude', 'binhluan.bl_noidung', 'binhluan.bl_taomoi']);
+       return Datatables::of($dsbaidang)
+            ->addColumn('action', function ($dsbaidang) {
+                return '<button type="button" class="btn btn-warning" style="width: 45%"><a class="table-action-btn" title="Chỉnh sửa" href="' . route('baidang.edit', $dsbaidang->bd_ma) . '"><i class="fa fa-pencil"></i></a></button>
+
+                    <button type="button" class="btn btn-danger" style="width: 45%"><a class="table-action-btn" title="Xóa" href="' . route('baidang.delete', $dsbaidang->bd_ma) . '"><i class="fa fa-trash"></i></a></button>';
+
+            })
+            ->editColumn('bd_trangthai', '@if ($bd_trangthai =="1")Đã Duyệt @else Chờ Duyệt  @endif')
+            ->make(true);
     }
 }

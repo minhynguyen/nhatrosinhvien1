@@ -13,13 +13,35 @@
 @endsection
 
 
+@section('input')
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
+<style>
+  a {
+    color: white !important;
+}
+td{
+  text-align: left !important;
+}
+th{
+  text-align: left !important;
+}
+</style>
+@endsection
+
+
+
 
 <!-- noi dung can thay doi o giua -->
 @section('content')
 <div class="box">
             <div class="box-header">
               <h3 class="box-title">DANH SÁCH CÁC BÀI ĐĂNG</h3>
-              <div class="box-tools">
+              <!-- <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
@@ -29,11 +51,12 @@
 
                 </div>
 
-              </div>
+              </div> -->
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover text-center ">
+              <table class="table table-bordered table-hover" id="baidang-table">
+                <thead>
                 <tr>
                   <th>Mã</th>
                   <th style="text-align: left;">Tên Người Đăng</th>
@@ -42,41 +65,11 @@
                   <th style="text-align: left;">Tiêu Đề</th>
                   <th style="text-align: left;">Nội Dung</th>
                   <th >Trạng Thái</th>
-                  <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('baidang.create') }}" style="color: white"><i class="fa fa-plus"></i> Thêm Bài Đăng</a></button></th>
+                  <th ><button type="button" class="btn btn-info"> <a href="{{ route('baidang.create') }}" style="color: white"><i class="fa fa-plus"></i> Thêm Bài Đăng</a></button></th>
                   <!-- <th></th> -->
                 </tr>
-                @foreach ($dsbaidang as $baidang)
-        <!-- nhãn từ controller -->
-                <tr>
-                    <td>{{$baidang->bd_ma}}</td>
-                    <td style="text-align: left;">{{$baidang->name}}</td>
-                    <td style="text-align: left;">{{$baidang->nt_ten}}</td>
-                    <td style="text-align: left;">{{$baidang->lbd_ten}}</td>
-                    <td style="text-align: left;">{{$baidang->bd_tieude}}</td>
-                    <td style="text-align: left;">{{$baidang->bd_noidung}}</td>
-                    
-                    @if ($baidang->bd_trangthai === 2)
-
-                        <td style="text-align: center;"><span class="badge bg-yellow">Chờ Duyệt</span></td>
-                    @else
-                        <td style="text-align: center;"><span class="badge bg-green">Đã Duyệt</span></td>
-                    @endif
-                    <td>
-                      <button type="button" class="btn btn-warning"> <a href=" {{ route('baidang.edit', ['baidang' => $baidang->bd_ma]) }}" style="color: white"><i class="fa fa-edit"></i> </a></button>
-                    
-                      
-                    </td>
-                    <td>
-                      <form method="POST" action="{{route('baidang.destroy', ['baidang' => $baidang->bd_ma])}}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i></a></button>
-                      </form>
-                    </td>
-                    
-                </tr>
-
-        @endforeach
+                </thead>
+                
                 
                 
               </table>
@@ -90,4 +83,41 @@
 @endsection
 
 
+@section('script')
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script>
+$(function() {
+    $('#baidang-table').DataTable({
+        processing: true,
+        serverSide: true,
+        "language": {
+          "lengthMenu": "Hiển thị _MENU_ dòng dữ liệu trên một trang",
+           "info":" Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu",
+           "infoEmpty":"Dữ liệu rỗng",
+           "emptyTable":"Chưa có dữ liệu nào",
+           "processing":"Đang Xử Lý...", 
+           "search":"Tìm Kiếm",
+           "loadingRecords":"Đang load dữ liệu",
+          "zeroRecords":"Không Tìm Thấy Dữ Liệu",
+          "infoFiltered":"(Lọc Trong _MAX_ Dòng Dữ Liệu)",
+        },
+        ajax: '{!! route('baidang') !!}',
+        columns: [
+            { data: 'bd_ma', name: 'bd_ma' },
+            { data: 'name', name: 'users.name' },
+            { data: 'nt_ten', name: 'nhatro.nt_ten' },
+            { data: 'lbd_ten', name: 'loaibaidang.lbd_ten' },
+            { data: 'bd_tieude', name: 'bd_tieude' },
+            { data: 'bd_noidung', name: 'bd_noidung' },
+            { data: 'bd_trangthai', name: 'bd_trangthai' },
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+});
+</script> 
 
+
+ 
+
+@endsection

@@ -53,7 +53,7 @@ th{
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-bordered" id="loaibaidang-table">
+              <table class="table table-bordered table-hover" id="loaibaidang-table">
                 <!-- <thead> -->
                 <thead>
             <tr>
@@ -62,7 +62,7 @@ th{
                 <th>Tạo Mới</th>
                 <th>Cập Nhật</th>
                 <th>Trạng Thái</th>
-                <th style="text-align: center;"><button type="button" class="btn btn-info"> <a href="{{ route('loaibaidang.create') }}" style="color: white"><i class="fa fa-plus"></i> Thêm Trường</a></button></th>
+                <th style="text-align: center;"><button type="button" class="btn btn-info"> <a href="{{ route('loaibaidang.create') }}" style="color: white"><i class="fa fa-plus"></i> Thêm Loại Bài Đăng</a></button></th>
             </tr>
               </thead>
               </table>
@@ -79,6 +79,17 @@ $(function() {
     $('#loaibaidang-table').DataTable({
         processing: true,
         serverSide: true,
+        "language": {
+          "lengthMenu": "Hiển thị _MENU_ dòng dữ liệu trên một trang",
+           "info":" Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu",
+           "infoEmpty":"Dữ liệu rỗng",
+           "emptyTable":"Chưa có dữ liệu nào",
+           "processing":"Đang Xử Lý...", 
+           "search":"Tìm Kiếm",
+           "loadingRecords":"Đang load dữ liệu",
+          "zeroRecords":"Không Tìm Thấy Dữ Liệu",
+          "infoFiltered":"(Lọc Trong _MAX_ Dòng Dữ Liệu)",
+        },
         ajax: '{!! route('loaibaidang') !!}',
         columns: [
             { data: 'lbd_ma', name: 'lbd_ma' },

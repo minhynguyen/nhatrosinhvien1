@@ -72,8 +72,8 @@
                 <label>Trạng Thái</label>
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="bd_trangthai", id="bd_trangthai">
                   <!-- <select > -->
-                    <option value="1">Khóa</option>
-                    <option value="2">Khả dụng</option>
+                    <option value="1">Đã Duyệt</option>
+                    <option value="2">Chờ Duyệt</option>
                   <!-- </select> -->
                 </select>
           </div>
