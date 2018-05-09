@@ -280,7 +280,7 @@ class nhatroController extends Controller
                     <button type="button" class="btn btn-danger"><a class="table-action-btn" title="Xóa" href="' . route('nhatro.delete', $dsnhatro->nt_ma) . '"><i class="fa fa-trash"></i></a></button>';
 
             })
-            ->editColumn('nt_trangthai', '@if ($nt_trangthai =="1")Khả Dụng @else Khóa  @endif')
+            ->editColumn('nt_trangthai', '@if ($nt_trangthai =="1")Đã Duyệt @else Chờ Duyệt  @endif')
             ->editColumn('nt_tinhtrang', '@if ($nt_tinhtrang =="0")Hết Phòng @else Còn Phòng  @endif')
             ->make(true);
     }

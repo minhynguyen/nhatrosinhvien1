@@ -28,6 +28,8 @@ Route::group(['prefix'=>'admin'], function(){
 
 		Route::resource('truong', 'TruonghocController')->middleware(CheckLevelMiddleware::class); // route hỗ trợ lấy toàn bộ controller.
 
+		Route::resource('admin', 'adminController')->middleware(CheckLevelMiddleware::class);
+
 		Route::resource('loainhatro', 'LoainhatroController')->middleware(CheckLevelMiddleware::class);
 		Route::resource('tienich', 'TienichController')->middleware(CheckLevelMiddleware::class);
 		Route::resource('user', 'UserController')->middleware(CheckLevelMiddleware::class);

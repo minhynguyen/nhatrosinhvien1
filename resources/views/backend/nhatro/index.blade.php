@@ -17,16 +17,16 @@
 @endsection
 @section('css')
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
 <style>
   a {
-    color: #ffffff !important;
+    color: white !important;
 }
 td{
-  text-align: center; !important;
+  text-align: left !important;
 }
-
 th{
-  text-align: center; !important;
+  text-align: left !important;
 }
 </style>
 @endsection
@@ -36,38 +36,24 @@ th{
 <div class="box">
             <div class="box-header">
               <h3 class="box-title">DANH SÁCH CÁC NHÀ TRỌ</h3>
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="search">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default" ><i class="fa fa-search"></i></button>
-                  </div>
-
-                </div>
-
-              </div>
+             
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover text-center " id="nhatro-table">
+              <table class="table table-bordered table-hover" id="nhatro-table">
                 <thead>
                 <tr>
                   <th>Mã</th>
+                  <th style="text-align: left;">Người đăng</th>
                   <th style="text-align: left;">Tên Nhà Trọ</th>
-                  <th style="text-align: left;">Địa Chỉ</th>
-                  <th style="text-align: left;">Vĩ độ</th>
-                  <th style="text-align: left;">Kinh độ</th>
                   <th style="text-align: left;">Loại Nhà Trọ</th>
-                  <th style="text-align: left;">Diện Tích</th>
-                  <th style="text-align: left;">Giá Điện</th>
-                  <th style="text-align: left;">Giá Nước</th>
+                  <th style="text-align: left;">Địa Chỉ</th>
                   <th style="text-align: left;">Giá Thuê</th>
-                  <!-- <th>Ngày Tạo Mới</th>
-                  <th>Ngày Cập Nhật</th> -->
-                  <th >Tình trạng</th>
-                  <th >Trạng Thái</th>
-                  <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('nhatro.create') }}" style="color: white"><i class="fa fa-plus"></i> Thêm Nhà Trọ</a></button></th>
+                  <th style="text-align: left;">Diện Tích</th>
+                  <th style="text-align: left;">Tình Trạng</th>
+                  <th style="text-align: left;">Trạng Thái</th>
+                  
+                  <th><button type="button" class="btn btn-info"> <a href="{{ route('nhatro.create') }}" style="color: white"><i class="fa fa-plus"></i> Thêm Nhà Trọ</a></button></th>
                   <!-- <th></th> -->
                 </tr>
                 </thead>

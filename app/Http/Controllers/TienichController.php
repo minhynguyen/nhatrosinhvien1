@@ -94,6 +94,7 @@ class TienichController extends Controller
         $tienich = tienich::find($id);
         $tienich->ti_ten = $request->ti_ten; //trước giống tên cột sau giống tên input ở form nhập liệu
         $tienich->ti_diengiai = $request->ti_diengiai;
+        $tienich->ti_trangthai = $request->ti_trangthai;
         $tienich->save();
 
         return redirect(route('tienich.index')); //trả về trang cần hiển thị

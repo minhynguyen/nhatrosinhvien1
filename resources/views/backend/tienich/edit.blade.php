@@ -52,6 +52,22 @@
             
           </div>
 
+          <div class="form-group">
+                <label>Trạng Thái</label>
+                @if ($tienich->ti_trangthai === 1)
+                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="ti_trangthai", id="ti_trangthai">
+                    <option value="1" selected="">Khóa</option> 
+                    <option value="2">Khả Dụng</option>
+                </select>
+                @else
+                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="ti_trangthai", id="ti_trangthai">
+                    <option value="1" >Khóa</option> 
+                    <option value="2" selected>Khả Dụng</option>
+                </select>
+                @endif
+
+          </div>
+
           
           
 

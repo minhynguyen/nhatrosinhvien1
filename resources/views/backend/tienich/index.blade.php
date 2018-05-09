@@ -47,8 +47,8 @@
                   <th>Mã</th>
                   <th style="text-align: left;">Tên Tiện Ích</th>
                   <th style="text-align: left;">Diễn Giải</th>
-                  <!-- <th>Ngày Tạo Mới</th>
-                  <th>Ngày Cập Nhật</th> -->
+                  <th>Trạng Thái</th>
+                  <!-- <th>Ngày Cập Nhật</th> -->
                   <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('tienich.create') }}"><i class="fa fa-plus"></i> Thêm Tiện Ích</a></button></th>
                   <!-- <th></th> -->
                 </tr>
@@ -58,8 +58,13 @@
                     <td>{{$ti->ti_ma}}</td>
                     <td style="text-align: left;">{{$ti->ti_ten}}</td>
                     <td style="text-align: left;">{{$ti->ti_diengiai}}</td>
-                    <!-- <td>{{$ti->ti_taomoi}}</td>
-                    <td>{{$ti->ti_capnhat}}</td> -->
+                    @if ($ti->ti_trangthai === 1)
+
+                        <td style="text-align: center;"><span class="badge bg-yellow">KHÓA</span></td>
+                    @else
+                        <td style="text-align: center;"><span class="badge bg-green">Khả Dụng</span></td>
+                    @endif
+                    <!-- <td>{{$ti->ti_capnhat}}</td> -->
                     <td>
                       <button type="button" class="btn btn-warning"> <a href=" {{ route('tienich.edit', ['tienich' => $ti->ti_ma]) }}" ><i class="fa fa-edit"></i> Edit</a></button>
                     
