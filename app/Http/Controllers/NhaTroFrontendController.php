@@ -178,14 +178,25 @@ class NhaTroFrontendController extends Controller
         $tienich = tienich::all();
         $slider = DB::table('hinhanh_nhatro')->where('nt_ma',$id)->limit(3)->get();
 
-        
-
+        if (Auth::user()){
+        $id1 = Auth::user()->id;
+        $truong = DB::table('hoc')->join('users', 'users.id', '=', 'hoc.id')->join('truong', 'truong.t_ma', '=', 'hoc.t_ma')->where('users.id',$id1)->get();
+        // dd($truong);
+        }
+        else{
+            $truong = [];
+            // dd($truong);
+        }
+        return view('frontend.nhatro.show')->with('nhatro', $nhatro)->with('dstienich', $dstienich)->with('tienich', $tienich)->with('slider', $slider)->with('baidang', $baidang)->with('dsbinhluan', $dsbinhluan)->with('slider', $slider)->with('baidang', $baidang)->with('truong', $truong);
+        // else{
+        //     return view('frontend.nhatro.show')->with('nhatro', $nhatro)->with('dstienich', $dstienich)->with('tienich', $tienich)->with('slider', $slider)->with('baidang', $baidang)->with('dsbinhluan', $dsbinhluan)->with('slider', $slider)->with('baidang', $baidang);
+        // }
         // dd($dsdatphong);
         // $binhluan = DB::table('binhluan')->where('_ma',$id)->limit(3)->get();
         
         // $dshinhanh = DB::table('hinhanh_nhatro')->where('nt_ma',$id)->get();
         // dd($dshinhanh);
-        return view('frontend.nhatro.show')->with('nhatro', $nhatro)->with('dstienich', $dstienich)->with('tienich', $tienich)->with('slider', $slider)->with('baidang', $baidang)->with('dsbinhluan', $dsbinhluan)->with('slider', $slider)->with('baidang', $baidang);
+        
     }
 
 

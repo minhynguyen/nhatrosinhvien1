@@ -60,12 +60,12 @@
                         
                         <div class="col-md-12" style="text-align: left; margin-top: 10px;">
                             <span><strong>Mã Nhà Trọ:</strong></span>
-                            <input type="text" name="nt_ma" class="form" style="width: 100%; margin-top: 10px" placeholder="Họ Và Tên" value="{{$nhatro->nt_ma}}">
+                            <input type="text" name="nt_ma" class="form" style="width: 100%; margin-top: 10px" placeholder="Họ Và Tên" value="{{$nhatro->nt_ma}}" readonly="nt_ma">
                         </div>
 
                         <div class="col-md-12" style="text-align: left; margin-top: 10px;">
                             <span><strong>Tên Người Đặt:</strong></span>
-                            <input type="text" name="" class="form" style="width: 100%; margin-top: 10px" placeholder="Họ Và Tên" value="{{ Auth::user()->name}}">
+                            <input type="text" name="" class="form" style="width: 100%; margin-top: 10px" placeholder="Họ Và Tên" value="{{ Auth::user()->name}}" readonly="name">
                         </div>
 
                         <!-- <div class="col-md-12" style="text-align: left; margin-top: 10px;">

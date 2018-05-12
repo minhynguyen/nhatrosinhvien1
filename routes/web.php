@@ -84,9 +84,9 @@ Route::get('/dangnhap', function () {
 Route::get('/sosanh', function () {
     return view('frontend.nhatro.compare');
 });
-Route::get('/dangki', function () {
-    return view('frontend.dangki');
-});
+// Route::get('/dangki', function () {
+//     return view('frontend.dangki');
+// });
 // Route::get('/timkiem','FrontendController@timkiem');
 Route::get('/timkiem/{loainhatro}/{giaTu}/{giaden}/{dientich}', ['uses' => 'frontendController@timkiem']);
 // Route::get('/testMail', 'datphongfrontendController@testMail');

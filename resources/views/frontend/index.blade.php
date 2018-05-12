@@ -19,7 +19,7 @@
             <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
             <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script src="{{ asset ('js/markerclusterer.js') }}"></script>
+            <!-- <script src="{{ asset ('js/markerclusterer.js') }}"></script> -->
             <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
         async defer></script> -->
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
@@ -31,44 +31,39 @@
         <body>
             <style>
                 #map{
-                    width: 100%;
+                    /*width: 100%;*/
+                    margin: 0;
+                    padding: 0;
+                    max-width: none;
                     height: 100%;
                 }
-                #map img {
+                #map-canvas img {
                   max-width: none !important;
                 }
-
                 .gm-style-iw {
-                  width: 100% !important;
-                  /*height: 100% !important;*/
-                  /*top: 15px !important;
-                  margin-top: 0px!important;*/
+                  width: 350px !important;
+                  top: 15px !important;
                   left: 0px !important;
-                  /*background-color: #fff;
+                  background-color: #fff;
                   box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
                   border: 1px solid rgba(72, 181, 233, 0.6);
-                  border-radius: 2px 2px 10px 10px;*/
+                  border-radius: 2px 2px 10px 10px;
                 }
                 #iw-container {
                   margin-bottom: 10px;
-                  /*width: 100%;*/
-
-                  /*height: 100% !important;*/
                 }
                 #iw-container .iw-title {
-                  font-family: 'Time New Romance', sans-serif;
+                  font-family: 'Open Sans Condensed', sans-serif;
                   font-size: 22px;
                   font-weight: 400;
                   padding: 10px;
                   background-color: #48b5e9;
                   color: white;
                   margin: 0;
-
                   border-radius: 2px 2px 0 0;
                 }
                 #iw-container .iw-content {
-                  font-size: 15px;
-                  /*width: 100% !important;*/
+                  font-size: 13px;
                   line-height: 18px;
                   font-weight: 400;
                   margin-right: 1px;
@@ -97,6 +92,7 @@
                   background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
                   background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
                 }
+                
 
             </style>
 
@@ -228,7 +224,7 @@
                                                 </form>
 
                                                 @if( Auth::user()->level === 1 )
-                                                <li><a href="{{ route('truong') }}">Về Trang Quản Trị</a></li>
+                                                <li><a href="{{ route('admin.index') }}">Về Trang Quản Trị</a></li>
                                                 @endif
                                                 
                                                 <!-- <li><a href="#">Separated link</a></li> -->
@@ -287,6 +283,7 @@
             <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
             <!-- <link rel="stylesheet" href="{{ asset ('js/jqueryMap.js') }}"> -->
             <script src="{{ asset ('js/markerclusterer.js') }}"></script>
+            <script src="{{ asset ('js/infobox.js') }}"></script>
 <script>
   $(function(){
     // chấm là class # là id
@@ -366,7 +363,7 @@ $(document).ready(function(){
   @endforeach
   
   @foreach($dsnhatro as $nt)
-  var markers = [];
+  // var markers = [];
     var home = new google.maps.Marker({
     position:{
       lat:{{$nt->nt_vido}},
@@ -376,13 +373,13 @@ $(document).ready(function(){
     icon: '{{ asset ('theme/homepage/image/house.png') }}'
     
   });
-  markers.push(home);
+  // markers.push(home);
   
-   var options = {
-            maxZoom: 13,
-            gridSize: 50,
-            imagePath: '{{ asset ('theme/homepage/image/m1.png') }}'
-        };
+  //  var options = {
+  //           maxZoom: 13,
+  //           gridSize: 50,
+  //           imagePath: '{{ asset ('theme/homepage/image/m1.png') }}'
+  //       };
   // console.log(markers.lat);
   
       
@@ -408,6 +405,8 @@ $(document).ready(function(){
                   '</div>';
                   infowindow.setContent(content);
                   infowindow.open(map, home);
+                  infowindow.setOptions({maxWidth:350}); 
+                  // infowindow.maxWidth = 300px;
 
                    
            }  
@@ -415,8 +414,8 @@ $(document).ready(function(){
          })(home));
      // createCluster($nt);                         
   @endforeach
-  var markerCluster = new MarkerClusterer(map, markers, options);
-  console.log(markerCluster);
+  // var markerCluster = new MarkerClusterer(map, markers, options);
+  // console.log(markerCluster);
 
     var content = '<div id="iw-container">' +
                     '<div class="iw-title">Vị Trí Của Tôi: </div>' +
@@ -427,7 +426,7 @@ $(document).ready(function(){
   // A new Info Window is created and set content
   var infowindow = new google.maps.InfoWindow({
     content: content,
-    // maxWidth: 100%
+    // maxWidth: 100%,  
   });
   // This event expects a click on a marker
   // When this event is fired the Info Window is opened.
@@ -438,25 +437,25 @@ $(document).ready(function(){
   // google.maps.event.addListener(map, 'click', function() {
   //   infowindow.close();
   // });
-  // google.maps.event.addListener(infowindow, 'domready', function() {
-  //   var iwOuter = $('.gm-style-iw');
-  //   var iwBackground = iwOuter.prev();
-  //   iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-  //   iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-  //   iwOuter.parent().parent().css({left: '115px'});
-  //   iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
-  //   iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
-  //   iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
-  //   var iwCloseBtn = iwOuter.next();
-  //   iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
-  //   if($('.iw-content').height() < 140){
-  //     $('.iw-bottom-gradient').css({display: 'none'});
-  //   }
-  //   iwCloseBtn.mouseout(function(){
-  //     $(this).css({opacity: '1'});
-  //   });
-  //    google.maps.event.addDomListener(window, 'load', initMap);
-  // });
+  google.maps.event.addListener(infowindow, 'domready', function() {
+    var iwOuter = $('.gm-style-iw');
+    var iwBackground = iwOuter.prev();
+    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+    iwOuter.parent().parent().css({left: '10px'});
+    iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+    iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+    var iwCloseBtn = iwOuter.next();
+    iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
+    if($('.iw-content').height() < 140){
+      $('.iw-bottom-gradient').css({display: 'none'});
+    }
+    iwCloseBtn.mouseout(function(){
+      $(this).css({opacity: '1'});
+    });
+     google.maps.event.addDomListener(window, 'load', initMap);
+  });
   // google.maps.event.addDomListener(window, 'load', initMap);
   google.maps.event.addListener(marker, 'click', function() {
     infowindow.open(map,marker);

@@ -20,6 +20,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
         <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 
         
@@ -31,9 +33,17 @@
 <style>
 #map{
 width: 100%;
-height: 500px;
+height: 300px;
 
 }
+
+#map1{
+width: 100%;
+height: 300px;
+
+}
+
+
 </style>
 
 
@@ -129,18 +139,7 @@ height: 500px;
                           </tbody>
                     </table>
                     <!-- <hr> -->
-                    @if(isset(Auth::user()->id))
-                    <div class="row">
-                          <div class="col-md-12">
-                            <td align="center">
-                              <a class="btn btn-success" href="{{ route('datphongfrontend.edit', ['nhatro' => $nt->nt_ma]) }}"><em class="fa fa-pencil"> Hẹn Xem Nhà</em></a>
-                            </td>
-                        <!-- <h6><span>Retail Price</span></h6> -->
-                        <!-- <h2 class="price" style="color: #bc6264 ">Giá Thuê: {{$nt->nt_giathue}} /Tháng</h2> -->
-                        <!-- <h4><span>Email : {{$nt->email}}</span></h4> -->
-                      </div>
-                    </div>
-                    @endif
+                    
     <!-- <a href="#0" class="btn btn-cart">ADD TO CART</a> </div> -->
                   </div>
 
@@ -324,11 +323,88 @@ height: 500px;
 
 
                   </div>
+                  
                   <div style="margin-top: 20px; margin-bottom: 20px">
                     <h2>SƠ ĐỒ NHÀ TRỌ</h2>
+                    
+                    
+
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Xem Khoảng Cách</button>
+
+
+                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">Mở Chỉ Đường</button>
+
+                    @if(isset(Auth::user()->id))
+                    <!-- <div class="row"> -->
+                          <!-- <div class="col-md-12"> -->
+                            <!-- <td align="center"> -->
+                              <a class="btn btn-success btn-lg" href="{{ route('datphongfrontend.edit', ['nhatro' => $nt->nt_ma]) }}"><em class="fa fa-pencil"> Hẹn Xem Nhà</em></a>
+                            <!-- </td> -->
+                        <!-- <h6><span>Retail Price</span></h6> -->
+                        <!-- <h2 class="price" style="color: #bc6264 ">Giá Thuê: {{$nt->nt_giathue}} /Tháng</h2> -->
+                        <!-- <h4><span>Email : {{$nt->email}}</span></h4> -->
+                      <!-- </div> -->
+                    <!-- </div> -->
+                    @endif
+
+
+                  <div class="modal fade" id="myModal" role="dialog" style="margin-top: 80px;">
+                  <div class="modal-dialog">
+                  
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Hướng Dẫn Đường Đến Nhà Trọ</h4>
+                      </div>
+                      <!-- <div class="modal-body"> -->
+                        <div id="map"></div>
+                      <!-- </div> -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                    
                   </div>
-                  <div id="map"></div>
+                </div>
+                  </div>
+
+
+
+                  <!-- <div id="map"></div> -->
                   @endforeach
+
+                   @if(isset(Auth::user()->id) )
+                    @if(isset($truong))
+                      @foreach($truong as $t)
+                        <!-- <h2>{{$t->t_ten}}</h2> -->
+                      
+                  <div style="margin-top: 20px; margin-bottom: 20px">
+                    
+                  <div class="modal fade" id="myModal1" role="dialog" style="margin-top: 80px;">
+                  <div class="modal-dialog">
+                  
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h5 class="modal-title">Khoảng Cách Từ Trường {{$t->t_ten}}  Đến Nhà Trọ {{$nt->nt_ten}}</h5>
+                      </div>
+                      <!-- <div class="modal-body"> -->
+                        <div id="map1"></div>
+                      <!-- </div> -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                  </div>
+                  @endforeach
+                  @endif
+                  @endif
+
                   
               
       
@@ -374,7 +450,25 @@ height: 500px;
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places"
         ></script>
-        <script>
+
+        <script type="text/javascript">
+        $('#myModal').on('shown.bs.modal', function () {
+            var map = maps[0].map;
+            var currentCenter = map.getCenter();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(currentCenter);
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('#myModal1').on('shown.bs.modal', function () {
+            var map = maps[0].map;
+            var currentCenter = map.getCenter();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(currentCenter);
+        });
+    </script>
+<script>
   @foreach($nhatro as $nt)
   var lat = {{$nt->nt_vido}};
   var lng = {{$nt->nt_kinhdo}};
@@ -402,6 +496,7 @@ height: 500px;
           // draggable: true,
           // icon: 'http://maps.google.com/mapfiles/ms/micons/green.png'
         });
+  var myLatLng = {lat: 10.0309641000, lng: 105.7689041000};
  
   var home = new google.maps.Marker({
     position:{
@@ -410,9 +505,18 @@ height: 500px;
       
     },
     map:map,
+
     icon: '{{ asset ('theme/homepage/image/house.png') }}'
   });
+
+
   @endforeach
+
+
+
+
+
+
 
   // console.log(home.getPosition());
 
@@ -445,12 +549,18 @@ function geolocate(){
             map.setCenter(marker1);
             marker.setPosition(marker1);
             var directionsService = new google.maps.DirectionsService();
-        var directionsRequest = {
-          origin: home.getPosition(),
-          destination: marker1,
-          travelMode: google.maps.DirectionsTravelMode.DRIVING,
-          // unitSystem: google.maps.UnitSystem.METRIC
-        };
+
+
+            // var school = {lat: 10.0309641000, lng: 105.7689041000};
+            // marker.setPosition(school);
+            var directionsRequest = {
+              origin: home.getPosition(),
+              destination: marker1,
+              // destination: marker1,
+              travelMode: google.maps.DirectionsTravelMode.DRIVING,
+
+              // unitSystem: google.maps.UnitSystem.METRIC
+            };
         directionsService.route(
 
           directionsRequest,
@@ -462,36 +572,173 @@ function geolocate(){
               directionsDisplay.setDirections(response);
               new google.maps.DirectionsRenderer({
                 map: map,
-                // initMap();
-                // zoom: 17,
-
                 directions: response
               });
               
               service.getDistanceMatrix({
               origins: [home.getPosition()],
+
               destinations: [marker1],
               travelMode: 'DRIVING',
+
               
             }, function(response, status) {
               if (status === 'OK') {
-
                 var originList = response.originAddresses;
                 var destinationList = response.destinationAddresses;
                       for (var i = 0; i < originList.length; i++) {
-                    var results = response.rows[i].elements;
-                    for (var j = 0; j < results.length; j++) {
-                      var element = results[j];
-                      var dt = element.distance.text;
-                      var dr = element.duration.text;
+                        var results = response.rows[i].elements;
+                        for (var j = 0; j < results.length; j++) {
+                          var element = results[j];
+                          var dt = element.distance.text;
+                          var dr = element.duration.text;
+                        };
+                      console.log(dt, dr);
 
                     };
-                  console.log(dt, dr);
-
-                };
                 var content = '<div> Khoảng Cách: ' + dt + '<br> Thời Gian: ' +dr+ '<div>';
                 infowindow.setContent(content);
-                // infowindow.setPosition();
+                infowindow.setPosition(home.getPosition());
+                infowindow.open(map);
+                google.maps.event.addListener(home, 'mouseover', function() {
+                  infowindow.open(map,home);
+                });
+
+                // Event that closes the Info Window with a click on the map
+                google.maps.event.addListener(map, 'click', function() {
+                  infowindow.close();
+                });
+                
+
+              }
+            });
+
+            }
+            else
+              $("#error").append("Unable to retrieve your route<br />");
+          }
+        );
+          });
+        }else{
+          alert('use location');
+        }
+  };
+
+  
+  
+      }
+      
+    
+    initMap();
+</script>
+
+
+
+
+
+<script>
+   
+  
+  
+  
+function initialize() {
+        // var center = new google.maps.LatLng(37.4419, -122.1419);
+var center = {lat: 10.0309641000, lng: 105.7689041000};
+var map = new google.maps.Map(document.getElementById('map1'), {
+  zoom: 15,
+  center: center,
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+});
+  @foreach($nhatro as $nt)
+  var directionsService = new google.maps.DirectionsService();
+  var directionsDisplay = new google.maps.DirectionsRenderer();
+  var directionsDisplay = new google.maps.DirectionsRenderer({map: map});
+  var service = new google.maps.DistanceMatrixService();
+  var lat = {{$nt->nt_vido}};
+  var lng = {{$nt->nt_kinhdo}};
+  var infowindow = new google.maps.InfoWindow();
+  var home = new google.maps.Marker({
+    position:{
+      lat:lat,
+      lng: lng,
+      
+    },
+    map:map,
+
+    icon: '{{ asset ('theme/homepage/image/house.png') }}'
+  });
+
+
+  @endforeach
+
+        var customMapType = new google.maps.StyledMapType([
+          {stylers: [{hue: '#D2E4C8'}]},
+          {
+                featureType: 'water',
+                stylers: [{color: '#599459'}]
+              },
+        ]);
+  var customMapTypeId ='custom_style'
+        map.mapTypes.set(customMapTypeId, customMapType);
+        map.setMapTypeId(customMapTypeId);
+
+
+
+        var directionsService = new google.maps.DirectionsService();
+
+            @foreach($truong as $t)
+              var lat = {{$t->t_vido}};
+              var lng = {{$t->t_kinhdo}};
+
+            @endforeach
+            var school = {lat: lat, lng: lng};
+            marker.setPosition(school);
+            var directionsRequest = {
+              origin: home.getPosition(),
+              destination: school,
+              // destination: marker1,
+              travelMode: google.maps.DirectionsTravelMode.DRIVING,
+
+              // unitSystem: google.maps.UnitSystem.METRIC
+            };
+        directionsService.route(
+
+          directionsRequest,
+          function(response, status)
+          {
+            if (status == google.maps.DirectionsStatus.OK)
+            {
+              directionsDisplay.setDirections(response);
+              directionsDisplay.setDirections(response);
+              new google.maps.DirectionsRenderer({
+                map: map,
+                directions: response
+              });
+              
+              service.getDistanceMatrix({
+              origins: [home.getPosition()],
+
+              destinations: [school],
+              travelMode: 'DRIVING',
+
+              
+            }, function(response, status) {
+              if (status === 'OK') {
+                var originList = response.originAddresses;
+                var destinationList = response.destinationAddresses;
+                      for (var i = 0; i < originList.length; i++) {
+                        var results = response.rows[i].elements;
+                        for (var j = 0; j < results.length; j++) {
+                          var element = results[j];
+                          var dt = element.distance.text;
+                          var dr = element.duration.text;
+                        };
+                      console.log(dt, dr);
+
+                    };
+                var content = '<div> Khoảng Cách: ' + dt + '<br> Thời Gian: ' +dr+ '<div>';
+                infowindow.setContent(content);
+                infowindow.setPosition(home.getPosition());
                 infowindow.open(map);
                 google.maps.event.addListener(home, 'mouseover', function() {
                   infowindow.open(map,home);
@@ -512,78 +759,17 @@ function geolocate(){
           }
         );
 
-            // calculateAndDisplayRoute(pos);
-          });
-        }else{
-          alert('use location');
         }
-  };
-  // geolocate();
+
   
-      }
-      
-    
-    initMap();
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
 </script>
-<script type="text/javascript">
-  $(document).ready(function(){
-    $(document).on('change', '#lnt_ma', function(){
-      var lnt_ma = $(this).val();
-      console.log(lnt_ma);
-      $.ajax({
-        type: 'get',
-        dataType: 'html',
-        url: '{{url('/timnhatro')}}',
-        data: {'lnt_ma' : lnt_ma},
-        success:function(data){
-          $("#nt_ma").empty();
-          var dataObject = JSON.parse(data);
-          dataObject.forEach(function(ele) {
-            console.log(ele);
-            $("#nt_ma").append('<option value = "' + ele.nt_ma +'">' + ele.nt_ten + '</option>');
-          })
-        }
-      });
-    });
-});
-
-
-$(document).ready(function(){
-    $(document).on('change', '#lma_ma', function(){
-      var lma_ma = $(this).val();
-      console.log(lma_ma);
-      $.ajax({
-        type: 'get',
-        dataType: 'html',
-        url: '{{url('/timmonan')}}',
-        data: {'lma_ma' : lma_ma},
-        success:function(data){
-          // $("#lma_ma").empty();
-          $("#ma_ten").empty();
-          $("#ma_ma").empty();
-          // $("#ma_hinh").empty();
-          var dataObject = JSON.parse(data);
-          dataObject.forEach(function(ele) {
-            console.log(ele);
-            var a;
-            a= ele.ma_ma;
-            console.log(a);
-            $("#ma_ma").append('<option value = "' + ele.ma_ma +'">' + ele.ma_ten + '</option>');
-            $("#monan").append('<div class="col-md-6"><div class="info-box"><span class="info-box-icon bg-green"><i class="fa fa-coffee"></i></span><div class="info-box-content"><input name="monan[id][]" id="monan" type="checkbox" value="'+ele.ma_ma+'">Mã Món Ăn: '+ele.ma_ma+'<span class="info-box-text"></span>Tên Món Ăn: '+ele.ma_ten+'<span class="info-box-text"></span>'+ele.ma_dongia+'<span class="info-box-text"></span>'+ele.ma_hinhanh+'<select name="monan[soluong][]"><option disabled selected>Chọn Số Lượng</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div></div></div>');
-            
 
 
 
-            
-
-          })
-
-          
-        }
-      });
-    });
-});
-</script>
 
 </body>
 </html>
