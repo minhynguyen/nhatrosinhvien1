@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
      <head>
         <meta charset="UTF-8">
         <title>Nhà Trọ Sinh Viên</title>
@@ -20,8 +19,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
         <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.min.js') }}"> </script>
+        <link rel="stylesheet" href="{{ asset ('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" src="{{ asset ('js/bootstrap.min.js') }}">
+        <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
 
 
         
