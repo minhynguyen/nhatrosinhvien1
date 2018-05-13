@@ -454,20 +454,18 @@ height: 300px;
         ></script>
 
         <script type="text/javascript">
+          $(document).ready(function() {
         $('#myModal').on('shown.bs.modal', function () {
-            var map = maps[0].map;
-            var currentCenter = map.getCenter();
             google.maps.event.trigger(map, "resize");
-            map.setCenter(currentCenter);
+        });
         });
     </script>
 
     <script type="text/javascript">
+      $(document).ready(function() {
         $('#myModal1').on('shown.bs.modal', function () {
-            var map = maps[0].map;
-            var currentCenter = map.getCenter();
             google.maps.event.trigger(map, "resize");
-            map.setCenter(currentCenter);
+        });
         });
     </script>
 <script>
@@ -649,6 +647,9 @@ var center = {lat: 10.0309641000, lng: 105.7689041000};
 var map = new google.maps.Map(document.getElementById('map1'), {
   zoom: 15,
   center: center,
+  zoomControl: false,
+  streetViewControl: false,
+  scrolwheel : false,
   mapTypeId: google.maps.MapTypeId.ROADMAP
 });
   @foreach($nhatro as $nt)
