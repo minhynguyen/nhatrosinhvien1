@@ -4,14 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class hoc extends Model
+class o extends Model
 {
     public    $timestamps   = false;
 
-    protected $table        = 'hoc';
-    protected $fillable     = ['id', 't_ma'];
+    protected $table        = 'o';
+    protected $fillable     = ['id', 'nt_ma'];
     protected $guarded      = [];
-
 
     public    $incrementing = false;
 }

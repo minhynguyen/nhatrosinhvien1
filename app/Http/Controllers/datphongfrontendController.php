@@ -61,10 +61,10 @@ class datphongfrontendController extends Controller
         $mail = Auth::user()->email;
         // dd($mail);
         Mail::to($mail)
-            ->send(new bookEmail($send));
+            ->send(new Thongtindatphong($send));
 
         Mail::to($mailnhan)
-            ->send(new ThongbaodatphongEmail($send));
+            ->send(new Thongbaodatphong($send));
         
         return redirect(route('index')); //trả về trang cần hiển thị
     }

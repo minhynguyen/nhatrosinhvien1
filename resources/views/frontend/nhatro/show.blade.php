@@ -10,7 +10,7 @@
         <!-- <link rel="stylesheet" href="{{ asset ('theme/homepage/css/tt.css') }}"> -->
         <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="{{ asset ('theme/homepage/css/bootstrap.css') }}">
+        <!-- <link rel="stylesheet" href="{{ asset ('theme/homepage/css/bootstrap.css') }}"> -->
         <link rel="stylesheet" href="{{ asset ('theme/homepage/css/style-portfolio.css') }}">
         <link rel="stylesheet" href="{{ asset ('theme/homepage/css/picto-foundry-food.css') }}">
         <link rel="stylesheet" href="{{ asset ('theme/homepage/css/jquery-ui.css') }}">
@@ -157,7 +157,7 @@ height: 300px;
 
               <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group">
                           <div class="btn-group" role="group">
-                              <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                              <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="fa fa-star" aria-hidden="true"></span>
                                   <div class="hidden-xs">Thông Tin Chung</div>
                               </button>
                           </div>
@@ -167,7 +167,7 @@ height: 300px;
                               </button>
                           </div> -->
                           <div class="btn-group" role="group">
-                              <button type="button" id="following" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                              <button type="button" id="following" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="fa fa-user" aria-hidden="true"></span>
                                   <div class="hidden-xs">Bài Đăng</div>
                               </button>
                           </div>
@@ -193,82 +193,7 @@ height: 300px;
                       </div>
                       
                       </div>
-                      <!-- <div class="tab-pane fade in" id="tab4">
-                        <div class="fa  fa-server fa-2x" > So Sánh Nhà Trọ</div>
-                          
-                        @foreach($nhatro as $nt)
-                          <table class="table table-condensed table-hover">
-                          <thead>
-                            <tr>
-                              <th> </th>
-                              <th style="text-align: center;">{{$nt->nt_ten}}</th>
-                              <th style="text-align: center;">{{$nt->nt_ten}}</th>
-                              
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td style="text-align: left;">Loại Nhà Trọ</td>
-                              <td>{{$nt->lnt_ten}}</td>
-                              <td>{{$nt->lnt_ten}}</td>
-                              
-                              
-                            </tr>
-                            <tr>
-                              <td style="text-align: left;">Địa Chỉ</td>
-                              <td>{{$nt->nt_diachi}}</td>
-                              <td>{{$nt->nt_diachi}}</td>
-                              
-                              
-                            </tr>
-                            <tr>
-                              <td style="text-align: left;">Giá Thuê</td>
-                              <td>{{$nt->nt_giathue}} VNĐ (/Tháng)</td>
-                              <td>{{$nt->nt_giathue}} VNĐ (/Tháng)</td>
-                              
-                            </tr>
-                            <tr>
-                              <td style="text-align: left;">Giá Điện</td>
-                              <td>{{$nt->nt_giadien}} (~ Kw/h)</td>
-                              <td>{{$nt->nt_giadien}} (~ Kw/h)</td>
-                              
-                            </tr>
-                           
-                            
-                            <tr>
-                              <td style="text-align: left;">Giá Nước</td>
-                              <td>{{$nt->nt_gianuoc}} (~ M<sup>3</sup>)</td>
-                              <td>{{$nt->nt_gianuoc}} (~ M<sup>3</sup>)</td>
-                              
-                            </tr>
-                            <tr>
-                              <td style="text-align: left;">Diện Tích</td>
-                              <td>{{$nt->nt_dientich}} (~ M<sup>2</sup>)</td>
-                              <td>{{$nt->nt_dientich}} (~ M<sup>2</sup>)</td>
-                              
-                            </tr>
-                            <tr>
-                              <td  style="text-align: left;">Tiện Ích</td>
-                              <td style="text-align: center;">
-                                @foreach ($dstienich as $ti)
-                                {{$ti->ti_ten}}
-                                <br>
-                                @endforeach
-                              </td>
-                              <td style="text-align: center;">
-                                @foreach ($dstienich as $ti)
-                                {{$ti->ti_ten}}
-                                <br>
-                                @endforeach
-                              </td>
-                              
-                            </tr>
-                           
-                          </tbody>
-                        </table>
-                        @endforeach
-
-                      </div> -->
+                      
                       <div class="tab-pane fade in" id="tab2">
                         <h3>Bài Đăng</h3>
                         @foreach($baidang as $bd)
@@ -280,8 +205,6 @@ height: 300px;
                         
                       </div>
                       <div class="tab-pane fade in" id="tab3">
-                        <!-- <h3>This is tab 3</h3> -->
-                          <!-- <div class="col-md-6" style="margin-top: 10px"> -->
                             <div class="fa fa-comments fa-2x" > Bình Luận Về Nhà Trọ</div>
                             <div class="comments-list">
                               @foreach($dsbinhluan as $bl)
@@ -328,62 +251,53 @@ height: 300px;
                   
                   <div style="margin-top: 20px; margin-bottom: 20px">
                     <h2>SƠ ĐỒ NHÀ TRỌ</h2>
+                      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Xem Khoảng Cách</button>
+
+
+                      <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">Mở Chỉ Đường</button>
+
+                      @if(isset(Auth::user()->id))
+                      
+                        <a class="btn btn-success btn-lg" href="{{ route('datphongfrontend.edit', ['nhatro' => $nt->nt_ma]) }}"><em class="fa fa-pencil"> Hẹn Xem Nhà</em></a>
+                            
+                      @endif
+
+                      @if (Auth::user()->loai === 1)
+                           <a class="btn btn-success btn-lg" href="{{ route('sinhvien.edit', ['nhatro' => $nt->nt_ma]) }}"><em class="fa fa-pencil"> Lưu Nhà Trọ</em></a>
+                      @endif
+
+
+                  <div class="modal fade" id="myModal" role="dialog" style="margin-top: 110px;">
+                    <div class="modal-dialog">
                     
-                    
-
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Xem Khoảng Cách</button>
-
-
-                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">Mở Chỉ Đường</button>
-
-                    @if(isset(Auth::user()->id))
-                    <!-- <div class="row"> -->
-                          <!-- <div class="col-md-12"> -->
-                            <!-- <td align="center"> -->
-                              <a class="btn btn-success btn-lg" href="{{ route('datphongfrontend.edit', ['nhatro' => $nt->nt_ma]) }}"><em class="fa fa-pencil"> Hẹn Xem Nhà</em></a>
-                            <!-- </td> -->
-                        <!-- <h6><span>Retail Price</span></h6> -->
-                        <!-- <h2 class="price" style="color: #bc6264 ">Giá Thuê: {{$nt->nt_giathue}} /Tháng</h2> -->
-                        <!-- <h4><span>Email : {{$nt->email}}</span></h4> -->
-                      <!-- </div> -->
-                    <!-- </div> -->
-                    @endif
-
-
-                  <div class="modal fade" id="myModal" role="dialog" style="margin-top: 80px;">
-                  <div class="modal-dialog">
-                  
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Hướng Dẫn Đường Đến Nhà Trọ</h4>
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Hướng Dẫn Đường Đến Nhà Trọ</h4>
+                        </div>
+                        <!-- <div class="modal-body"> -->
+                          <div id="map"></div>
+                        <!-- </div> -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                       </div>
-                      <!-- <div class="modal-body"> -->
-                        <div id="map"></div>
-                      <!-- </div> -->
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      </div>
+                      
                     </div>
-                    
                   </div>
-                </div>
                   </div>
 
-
-
-                  <!-- <div id="map"></div> -->
                   @endforeach
 
                    @if(isset(Auth::user()->id) )
                     @if(isset($truong))
                       @foreach($truong as $t)
-                        <!-- <h2>{{$t->t_ten}}</h2> -->
+
                       
                   <div style="margin-top: 20px; margin-bottom: 20px">
                     
-                  <div class="modal fade" id="myModal1" role="dialog" style="margin-top: 80px;">
+                  <div class="modal fade" id="myModal1" role="dialog" style="margin-top: 110px;">
                   <div class="modal-dialog">
                   
                     <!-- Modal content-->

@@ -106,19 +106,15 @@
                           </div>
                         </div>
 
-                        <!-- <div class="col-md-6" style="margin-top: 10px">
-                            <input type="text" name="" class="form" style="width: 100%" placeholder="Số Điện Thoại">
-                        </div>
-                        <div class="col-md-6" style="margin-top: 10px">
-                            <input type="text" name="" class="form" style="width: 100%" placeholder="Địa Chỉ">
-                        </div> -->
+
+
+                        
+
+                        
 
                         <div class="col-md-6" style="margin-top: 10px">
                             <!-- <input type="text" name="" class="form" style="width: 100%" placeholder="Mật Khẩu"> -->
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            
-
-                            
                                 <input id="password" type="password" class="form" name="password" required placeholder="Mật Khẩu" style="width: 100%">
 
                                 @if ($errors->has('password'))
@@ -127,8 +123,34 @@
                                     </span>
                                 @endif
                             </div>
+
+
+                            <!-- <div class="col-md-6" style="margin-top: 10px"> -->
+                            
+                                <select class="form" name="loai" id="loai" style="width: 100%">
+                                      <option value="" disabled selected>Chọn Loại Tài Khoản</option>
+                                      <option value="0">Chủ Nhà Trọ</option>
+                                      <option value="1">Sinh Viên/ Người Thuê</option>
+                                </select>
+
+                            
+                            
+                            <!-- </div> -->
+
+
+
                         
                         </div>
+
+
+
+
+
+
+
+
+
+
                         <div class="col-md-6" style="margin-top: 10px">
                             <!-- <input type="text" name="" class="form" style="width: 100%" placeholder="Xác Nhận Mật Khẩu"> -->
                             <!-- <div class="form-group"> -->
@@ -139,13 +161,24 @@
                             <!-- </div> -->
                         <!-- </div> -->
                         </div>
-                        <div class="col-md-6" style="margin-top: 10px">
+
+
+
+
+
+
+            
+
+                        <!-- <div class="col-md-6" style="margin-top: 10px">
                             
-                        </div>
-                        <div class="col-md-6" style="margin-top: 10px">
+                        </div> -->
+
+
+                        <div class="col-md-6" style="margin-top: 15px">
                             <button type="submit" id="submit" name="submit" class="text-center form-btn" style="width: 100%; background-color: #50a900">Đăng Kí</button>
 
                         </div>
+
 
                         
                     </div>

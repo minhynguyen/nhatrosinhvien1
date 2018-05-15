@@ -12,6 +12,7 @@ use App\nhatro_tienich;
 use App\hinhanh_nhatro;
 use Auth;
 use DB;
+use Carbon\Carbon;
 use Illuminate\Support\collection;
 use App\Http\Requests\baidangrequest;
 
@@ -29,9 +30,15 @@ class baidangfrontendController extends Controller
         $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->get();
         $dsbaidangcho = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->where('baidang.bd_trangthai','2')->get();
         $dstienich = tienich::all();
+        $current = new Carbon();
         $dsnhatro = DB::table('nhatro')->where('id',$id)->get();
+        $dsdatphong = DB::table('datphong')->join('nhatro', 'nhatro.nt_ma', '=', 'datphong.nt_ma')->join('users', 'users.id', '=', 'datphong.id')->where('nhatro.id',$id)->where('dp_thoigianketthuc','>=', $current) ->orderBy('dp_thoigianketthuc', 'asc')->get();
         return view('frontend.profile')->with('dsloainhatro', $dsloainhatro)
-                                         ->with('dstienich', $dstienich)->with('dsnhatro', $dsnhatro)->with('dsbaidang', $dsbaidang)->with('dsbaidangcho', $dsbaidangcho);
+                                         ->with('dstienich', $dstienich)
+                                         ->with('dsnhatro', $dsnhatro)
+                                         ->with('dsbaidang', $dsbaidang)
+                                         ->with('dsdatphong', $dsdatphong)
+                                         ->with('dsbaidangcho', $dsbaidangcho);
     }
 
     /**
@@ -72,6 +79,9 @@ class baidangfrontendController extends Controller
                 'error' => true, 'message' => $ex->getMessage()], 500);
         }
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -145,5 +155,16 @@ class baidangfrontendController extends Controller
        $baidang = baidang::find($id);
         $baidang->delete();
         return redirect(route('baidangfrontend.index'));
+    }
+
+
+    public function dangtin($id)
+    {
+        $nhatro = nhatro::find($id);
+        // dd($nhatro);
+        $dsloaibaidang = loaibaidang::find(1);
+
+        return view('frontend.nhatro.dangtinoghep')->with('nhatro', $nhatro)
+                                                ->with('dsloaibaidang', $dsloaibaidang);
     }
 }

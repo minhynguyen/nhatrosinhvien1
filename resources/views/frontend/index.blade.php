@@ -208,13 +208,33 @@
                                             <li class="dropdown" >
                                               <a href="" class="dropdown-toggle"  data-toggle="dropdown" style="color: white" >{{ Auth::user()->name }} <span class="caret"></span></a>
                                               <ul class="dropdown-menu" role="menu">
-                                                
-                                                <li><a href="{{ route('profile') }}" target="_blank">Thông Tin Tài Khoản</a></li>
-                                                <li><a href="{{ route('nhatrofrontend.create') }}" target="_blank">Đăng Kí Nhà Trọ</a></li>
-                                                <li class="divider"></li>
+                                                @if( Auth::user()->loai === 0 )
                                                 <li>
-                                                    <a href="{{ route('changePassword1') }}" target="_blank">
-                                                       Đổi Mật Khẩu
+                                                  <a href="{{ route('profile') }}" target="_blank">Thông Tin Tài Khoản</a>
+                                                </li>
+                                                @endif
+
+                                                @if( Auth::user()->loai === 1 )
+                                                <li>
+                                                  <a href="{{ route('ttsinhvien') }}" target="_blank">Thông Tin Tài Khoản Sinh Viên</a>
+                                                </li>
+                                                @endif
+
+                                                @if( Auth::user()->loai === 0 )
+                                                <li>
+                                                  
+                                                  <a href="{{ route('nhatrofrontend.create') }}" target="_blank">Đăng Kí Nhà Trọ</a>
+                                                  
+                                                </li>
+                                                @endif
+
+
+                                                @if( Auth::user()->loai === 1 )
+                                                <li><a href="{{ route('admin.index') }}">Đăng Tin Ở Ghép</a></li>
+                                                @endif
+                                                <!-- <li class="divider"></li> -->
+                                                <li>
+                                                    <a href="{{ route('changePassword1') }}" target="_blank">Đổi Mật Khẩu
                                                     </a>
                                                 </li>
                                                 <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
@@ -226,6 +246,9 @@
                                                 @if( Auth::user()->level === 1 )
                                                 <li><a href="{{ route('admin.index') }}">Về Trang Quản Trị</a></li>
                                                 @endif
+
+
+                                                
                                                 
                                                 <!-- <li><a href="#">Separated link</a></li> -->
                                               </ul>

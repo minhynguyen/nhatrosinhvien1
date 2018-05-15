@@ -8,7 +8,7 @@
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/main.css') }}">
             <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
             <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
-            <link rel="stylesheet" href="{{ asset ('theme/homepage/css/bootstrap.css') }}">
+            <!-- <link rel="stylesheet" href="{{ asset ('theme/homepage/css/bootstrap.css') }}"> -->
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/style-portfolio.css') }}">
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/picto-foundry-food.css') }}">
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/jquery-ui.css') }}">
@@ -16,9 +16,12 @@
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
+            <link rel="stylesheet" href="{{ asset ('css/bootstrap.min.css') }}">
+            <link rel="stylesheet" src="{{ asset ('js/bootstrap.min.js') }}">
             <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
             type="text/javascript"></script>
+
   <style>
   #map-canvas{
     width: 100%;
@@ -93,28 +96,28 @@
                           </div>
                           <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
                               <div class="btn-group" role="group">
-                                  <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                  <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="fa fa-star" aria-hidden="true"></span>
                                       <div class="hidden-xs">Thông Tin Tài Khoản</div>
                                   </button>
                               </div>
                               <div class="btn-group" role="group">
-                                  <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                                  <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="fa fa-heart" aria-hidden="true"></span>
                                       <div class="hidden-xs">Quản Lý Nhà Trọ</div>
                                   </button>
                               </div>
                               <div class="btn-group" role="group">
-                                  <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                  <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="fa fa-user" aria-hidden="true"></span>
                                       <div class="hidden-xs">Quản Lý Bài Đăng</div>
                                   </button>
                               </div>
                               <div class="btn-group" role="group">
-                                  <button type="button" id="following" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                  <button type="button" id="following" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="fa fa-user" aria-hidden="true"></span>
                                       <div class="hidden-xs">Bài Đăng Chờ Duyệt</div>
                                   </button>
                               </div>
 
                               <div class="btn-group" role="group">
-                                  <button type="button" id="following" class="btn btn-default" href="#tab5" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                  <button type="button" id="following" class="btn btn-default" href="#tab5" data-toggle="tab"><span class="fa fa-user" aria-hidden="true"></span>
                                       <div class="hidden-xs">Quản Lí Đặt Phòng</div>
                                   </button>
                               </div>
@@ -124,13 +127,81 @@
                         <div class="tab-content">
                           <div class="tab-pane fade in active" id="tab1">
                             <p class="desc-text">Name: {{ Auth::user()->name }}</p>
-                          <p class="desc-text">Email: {{ Auth::user()->email }}</p>
+                            <p class="desc-text">Email: {{ Auth::user()->email }}</p>
+                            @foreach($hoc as $h)
+                                <p class="desc-text">Trường: {{ $h->t_ten }}</p>          
+                            @endforeach 
+                            @foreach($o as $ot)
+                                <p class="desc-text">Nhà Trọ Đang Ở: {{ $ot->nt_ten }}</p>          
+                            @endforeach 
                           @if (Auth::user()->loai === 1)
                           <p class="desc-text">Loại Tài Khoản: <span class="badge">Sinh Viên</span></p>
                         
                           @else
                               <p class="desc-text">Loại Tài Khoản: <span class="badge">Chủ Nhà Trọ</span></p>
                           @endif
+
+
+
+
+
+                          @if ($count === 0)
+                            <div style="margin-top: 20px; margin-bottom: 20px">
+                              <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">Cập Nhật Trường</button>
+                            <div class="modal fade" id="myModal" role="dialog" style="margin-top: 110px;">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                               <form name="frmnhatro" method="POST" action="{{ route('sinhvien.store') }}" enctype="multipart/form-data">
+
+                                      {{ csrf_field() }}    
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h5 class="modal-title">Chọn Trường Đại Học</h5>
+                                </div>
+                                
+                                <div class="modal-body">
+                                  
+                                
+                                  <select class="form-control" style="width: 100%" name="t_ma">
+                                      @foreach($dstruong as $t)
+                                        <option value="{{$t->t_ma}}">{{$t->t_ten}}</option>
+                                      @endforeach 
+                                                  
+                                  </select>
+                                  
+
+
+
+                                  
+                              
+
+                                    
+                                  
+
+                                  
+                                </div>
+
+                                 
+                                
+                                <div class="modal-footer">
+                                  
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-info" >Save</button>
+                                  
+                                </div>
+
+                                
+                              </div>
+                               </form>
+                              
+                              
+                            </div>
+                          </div>
+                            </div>
+                            @endif
+
                           </div>
                           <div class="tab-pane fade in" id="tab2">
                             <h3>Thông Tin Nhà Trọ</h3>
@@ -150,35 +221,7 @@
                                   </tr> 
                                 </thead>
                                 <tbody>
-                                        @foreach ($dsnhatro as $ds)
-                                        <tr>
-                                          <td style="text-align: left;">{{$ds->nt_ma}}</td>
-                                          <td style="text-align: left;">{{$ds->nt_ten}}</td>
-                                          <td style="text-align: left;">{{$ds->nt_diachi}}</td>
-                                          <td style="text-align: left;">{{$ds->nt_giathue}}</td>
-                                          <td style="text-align: left;">{{$ds->nt_giadien}}</td>
-                                          <td style="text-align: left;">{{$ds->nt_gianuoc}}</td>
-                                          @if ($ds->nt_tinhtrang === 1)
-
-                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Còn Phòng</span></td>
-                                          @else
-                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">Hết Phòng</span></td>
-                                          @endif
-                                          @if ($ds->nt_trangthai === 2)
-
-                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">Chờ Duyệt</span></td>
-                                          @else
-                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Đã Duyệt</span></td>
-                                          @endif
-                                          
-
-                                          <td align="center">
-                                            <a class="btn btn-default" href="{{ route('nhatrofrontend.edit', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-pencil"></em></a>
-                                            <a class="btn btn-danger" href="{{ route('nhatrofrontend.show', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-eye"></em></a>
-                                            <!-- <a class="btn btn-default" href="{{ route('full.update', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-pencil"></em>full</a> -->
-                                          </td>
-                                        </tr>
-                                        @endforeach
+                                        
                                       </tbody>
                               </table>
                             </div>
@@ -205,26 +248,7 @@
                                   </tr> 
                                 </thead>
                                 <tbody>
-                                   @foreach ($dsbaidang as $baidang)
-                                        <tr>
-                                          <td>{{$baidang->bd_ma}}</td>
-                                          <!-- <td style="text-align: left;">{{$baidang->name}}</td> -->
-                                          <td style="text-align: left;">{{$baidang->nt_ten}}</td>
-                                          <td style="text-align: left;">{{$baidang->lbd_ten}}</td>
-                                          <td style="text-align: left;">{{$baidang->bd_tieude}}</td>
-                                          <td style="text-align: left;">{{$baidang->bd_noidung}}</td>
-                                          <td style="text-align: center;">{{$baidang->bd_taomoi}}</td>
-                                          
-                                          @if ($baidang->bd_trangthai === 2)
-
-                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">Chờ Duyệt</span></td>
-                                          @else
-                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Đã Duyệt</span></td>
-                                          @endif
-                                          
-                                          
-                                        </tr>
-                                        @endforeach
+                                   
                                       </tbody>
                                       
                               </table>
@@ -251,30 +275,7 @@
                                   </tr> 
                                 </thead>
                                 <tbody>
-                                   @foreach ($dsbaidangcho as $baidangcho)
-                                        <tr>
-                                          <td>{{$baidangcho->bd_ma}}</td>
-                                          <!-- <td style="text-align: left;">{{$baidangcho->name}}</td> -->
-                                          <td style="text-align: left;">{{$baidangcho->nt_ten}}</td>
-                                          <td style="text-align: left;">{{$baidangcho->lbd_ten}}</td>
-                                          <td style="text-align: left;">{{$baidangcho->bd_tieude}}</td>
-                                          <td style="text-align: left;">{{$baidangcho->bd_noidung}}</td>
-                                          <td style="text-align: left;">{{$baidangcho->bd_taomoi}}</td>
-                                          @if ($baidangcho->bd_trangthai === 2)
-
-                                              <td style="text-align: center;"><span class="badge" style="background-color: orange">Chờ Duyệt</span></td>
-                                          @else
-                                              <td style="text-align: center;"><span class="badge" style="background-color: green">Đã Duyệt</span></td>
-                                          @endif
-                                          <td align="center">
-                                            <a class="btn btn-default" href="{{ route('baidangfrontend.edit', ['baidang' => $baidangcho->bd_ma]) }}"><em class="fa fa-pencil"></em></a>
-                                            <a class="btn btn-danger" href="{{ route('nhatrofrontend.show', ['baidang' => $baidang->bd_ma]) }}"><em class="fa fa-eye"></em></a>
-
-                                            
-                                          </td>
-                                          
-                                        </tr>
-                                        @endforeach
+                                   
                                       </tbody>
                                       
                               </table>
@@ -298,21 +299,7 @@
                                   </tr> 
                                 </thead>
                                 <tbody>
-                                      @foreach ($dsdatphong as $ds)
-                                        <tr>  
-                                          <td style="text-align: left;">{{$ds->nt_ten}}</td>
-                                          
-                                          <td style="text-align: left;">{{$ds->name}}</td>
-                                          <td style="text-align: left;">{{$ds->dp_sdt}}</td>
-                                          <td style="text-align: left;">{{$ds->dp_ghichu}}</td>
-                                          <td style="text-align: left;">{{$ds->dp_thoigiandat}}</td>
-                                          <td style="text-align: left;">{{$ds->dp_thoigianketthuc}}</td>
-                                          
-                                          
-                                          
-                                          
-                                        </tr>
-                                        @endforeach  
+                                      
                                         
                                 </tbody>
                               </table>
@@ -408,14 +395,15 @@
                 </div>
             </footer>
 
-            <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.min.js') }}"> </script>
-            <script type="text/javascript" src="{{ asset ('theme/homepage/js/bootstrap.min.js') }}" ></script>
-            <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.js') }}"></script>     
-            <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery.mixitup.min.js') }}" ></script>
-            <script src="{{ asset ('theme/homepage/css/timepicker/bootstrap-timepicker.min.js') }}"></script>
-            <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-            <script src="{{ asset ('theme/homepage/upload-image.js') }}"></script>
-            <script>
+           <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.min.js') }}"> </script>
+        <script type="text/javascript" src="{{ asset ('theme/homepage/js/bootstrap.min.js') }}" ></script>
+        <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.js') }}"></script>     
+        <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery.mixitup.min.js') }}" ></script>
+        <script src="{{ asset ('theme/homepage/css/timepicker/bootstrap-timepicker.min.js') }}"></script>
+        <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset ('theme/homepage/upload-image.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
               $(document).ready(function() {
                   $(".btn-pref .btn").click(function () {
                       $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
@@ -423,39 +411,9 @@
                       $(this).removeClass("btn-default").addClass("btn-primary");   
                   });
                 });
+
+
             </script>
-            <!-- <script src="{{ asset ('theme/homepage/ckeditor/ckeditor.js') }}"></script> -->
-            <!-- <script>CKEDITOR.replace('editor1');</script> -->
-            <!-- <script>
-
-
-                var map = new google.maps.Map(document.getElementById('map-canvas'),{
-                  center:{
-                        lat: 10.031450,
-                        lng: 105.768872
-                  },
-                  zoom:16,
-                  zoomControl: false,
-                  streetViewControl: false,
-                  scrolwheel : true
-                });
-
-                var marker = new google.maps.Marker({
-                  position: {
-                    lat: 10.031450,
-                    lng: 105.768872
-                  },
-                  map: map,
-                  draggable: true
-                });
-
-
-
-                
-
-
-                
-
-              </script> -->
+            
   </body>
 </html>

@@ -74,6 +74,7 @@ Route::resource('nhatrofrontend', 'NhaTroFrontendController');
 Route::resource('baidangfrontend', 'baidangfrontendController');
 Route::get('/', 'FrontendController@index')->name('index');
 Route::resource('datphongfrontend', 'datphongfrontendController');
+Route::get('/dangtin/{id}', ['as'=>'nhatro.dangtin', 'uses'=>'baidangfrontendController@dangtin']);
 // Route::get('/timkiem/{maLoai}/{giaTu}/{giaDen}/{dienTich}', ['uses' => 'frontendController@dsNhatro_timkiem']);
 // Route::get('/', function () {
 //     return view('frontend.index');
@@ -102,7 +103,10 @@ Route::get('/timkiem/{loainhatro}/{giaTu}/{giaden}/{dientich}', ['uses' => 'fron
 // Route::get('/profile', function () {
 //     return view('frontend.profile');
 // })->name('profile');
+Route::get('/dangtin', 'baidangfrontendController@dangtin');
 Route::get('/profile', 'FrontendController@getnhatro')->name('profile');
+Route::resource('sinhvien', 'sinhvienController');
+Route::get('/ttsinhvien', 'sinhvienController@index')->name('ttsinhvien');
 Route::get('/thongtin', function () {
     return view('frontend.nhatro.show');
 });
