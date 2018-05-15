@@ -68,28 +68,20 @@
                         <h1 style="font-family: Time new romance">Đăng Tin Ở Ghép</h1>
                         <div class="fa fa-tasks fa-2x"></div>
                         <div class="col-md-12" style="text-align: left; margin-top: 10px;">
-                            <span><strong>Mã Nhà Trọ:</strong></span>
-                            <input type="text" name="nt_ma" class="form" style="width: 100%; margin-top: 10px" placeholder="Họ Và Tên" value="{{$nhatro->nt_ma}}" readonly="nt_ma">
+                            <select class="form"  id="selectlocation" name="nt_ma" style="width: 100%">
+                                      <option value="0" disabled selected>Chọn Nhà Trọ Bạn Muốn Đăng Tin Ở Ghép</option>
+                                      
+                                        @foreach($nhatro as $nt)
+                                        <option value="{{$nt->nt_ma}}">{{$nt->nt_ten}}</option>
+                                        @endforeach
+                                      
+                                    </select>
                         </div>
 
-                        <div class="col-md-12" style="margin-top: 10px">
-                            <div class="panel panel-warning">
-                              <div class="panel-body">
 
-                                {{$nhatro->nt_ten}} <br/>
-                                {{$nhatro->nt_diachi}} <br/>
-                              </div>
-                            </div>
-                              
-                        </div>
-<!-- 
-                        <div class="col-md-12" style="text-align: left; margin-top: 10px;">
-                            <span><strong>Loại Bài Đăng:</strong></span>
-                            <input type="text" name="lbd_ma" class="panel" style="width: 100%; margin-top: 10px" placeholder="Họ Và Tên" value="{{$dsloaibaidang->lbd_ten}}" readonly="lbd_ma">
-                        </div> -->
 
                         <div class="col-md-12" style="margin-top: 10px">
-
+    
                           <div class="panel panel-default">
                             <div class="panel-body">
                               <span><strong>Loại Bài Đăng:</strong></span>
@@ -114,13 +106,10 @@
                         </div> -->
 
 
-                        <div class="col-md-12" style="margin-top: 10px">
-                          <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
-                            <!-- <input type="text" name="nt_ten" class="form" style="width: 100%" placeholder="Nội dung bài đăng" value="{{old('bd_noidung')}}"> -->
 
-                            <textarea rows="10" class="form" style="width: 100%; height: 100%;" placeholder="Nội dung bài đăng" value="{{old('bd_noidung')}}" name="bd_noidung">
-                              
-                            </textarea>
+                        <div class="col-md-12" style="margin-top: 10px; text-align: left;">
+                              <span><strong>Nội Dung Bài Đăng:</strong></span>
+                              <textarea name="bd_noidung" class="form textarea"  placeholder="Nội dung bài đăng" style="width: 100%">{{old('dp_ghichu')}}</textarea>
                         </div>
                         
 

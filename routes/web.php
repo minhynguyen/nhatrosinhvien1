@@ -103,7 +103,7 @@ Route::get('/timkiem/{loainhatro}/{giaTu}/{giaden}/{dientich}', ['uses' => 'fron
 // Route::get('/profile', function () {
 //     return view('frontend.profile');
 // })->name('profile');
-Route::get('/dangtin', 'baidangfrontendController@dangtin');
+Route::get('/dangtin', 'baidangfrontendController@dangtin')->name('dangtin');
 Route::get('/profile', 'FrontendController@getnhatro')->name('profile');
 Route::resource('sinhvien', 'sinhvienController');
 Route::get('/ttsinhvien', 'sinhvienController@index')->name('ttsinhvien');

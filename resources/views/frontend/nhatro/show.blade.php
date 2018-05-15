@@ -91,11 +91,11 @@ height: 300px;
 
                 </div>
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="fa fa-left"></span>
                 <span class="sr-only">Previous</span>
               </a>
               <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="fa fa-right"></span>
                 <span class="sr-only">Next</span>
               </a>
               </div>
@@ -198,8 +198,59 @@ height: 300px;
                         <h3>Bài Đăng</h3>
                         @foreach($baidang as $bd)
                         <p class="desc-text">Loại Bài Đăng: {{$bd->lbd_ten}}</p>
+                        <p class="desc-text">Người Đăng: {{$bd->name}}</p>
+                        @if ($bd->loai === 0)
+                        <p class="desc-text">Vai Trò: Chủ Trọ</p>
+                        @else
+                        <p class="desc-text">Vai Trò: Sinh Viên</p>
+                        @endif
                         <p class="desc-text">Tiêu Đề: {{$bd->bd_tieude}}</p>
                         <p class="desc-text">Nội Dung: {{$bd->bd_noidung}}</p>
+                        
+                        
+                        
+                        <div class="panel panel-info" style="margin-top: 50px ">
+                              <div class="panel-body">
+                              <div class="comments-list">
+                              @foreach($dsbinhluan as $bl)
+                              @if($bl->bd_ma === $bd->bd_ma)
+                       <div class="media">
+                          
+                           <p class="pull-right"><small><!-- {{$bl->bl_taomoi}} -->
+                              <?php \Carbon\Carbon::setLocale('vi')  ?>
+                             {{ \Carbon\Carbon::createFromTimeStamp(strtotime($bl->bl_taomoi  ))->diffForHumans() }}
+
+                             
+                             </small></p>
+                            
+                            <div class="media-body">
+                                
+                              <h4 class="media-heading user_name">{{$bl->name}}</h4>
+                              {{$bl->bl_noidung}}
+                              
+                              
+                            </div>
+                          </div>
+                          @endif
+                          @endforeach
+                        </div>
+                        </div>
+                        
+                        @if(isset(Auth::user()->id))
+                        <div class="panel-body">
+                            <form class="form-inline" name="frmBinhLuan" method="POST" action="{{ route('binhluan.update', ['baidang' => $bd->bd_ma]) }}">
+                              {{ csrf_field() }}
+                              {{ method_field('PATCH') }}
+
+                            <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea" name="bl_noidung"></textarea>
+                                <button class="btn btn-primary pull-right" type="submit">Gửi Bình Luận</button>
+                            </form>
+                        </div>
+                        @endif
+                        
+                    </div>
+                                
+                        
                         
                         @endforeach
                         
@@ -210,7 +261,7 @@ height: 300px;
                               @foreach($dsbinhluan as $bl)
                                <div class="media">
                                   
-                                   <p class="pull-right"><small><!-- {{$bl->bl_taomoi}} -->
+                                   <p class="pull-right"><small>
                                       <?php \Carbon\Carbon::setLocale('vi')  ?>
                                      {{ \Carbon\Carbon::createFromTimeStamp(strtotime($bl->bl_taomoi  ))->diffForHumans() }}
 
@@ -219,7 +270,7 @@ height: 300px;
                                     
                                     <div class="media-body">
                                         
-                                      <h4 class="media-heading user_name">{{$bl->name}}</h4>
+                                      <h4 class="media-heading user_name">{{$bl->name}} - {{$bl->bd_tieude}}</h4>
                                       {{$bl->bl_noidung}}
                                       
                                       
@@ -251,21 +302,26 @@ height: 300px;
                   
                   <div style="margin-top: 20px; margin-bottom: 20px">
                     <h2>SƠ ĐỒ NHÀ TRỌ</h2>
-                      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Xem Khoảng Cách</button>
+
+                      
 
 
                       <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">Mở Chỉ Đường</button>
 
                       @if(isset(Auth::user()->id))
+                        
                       
                         <a class="btn btn-success btn-lg" href="{{ route('datphongfrontend.edit', ['nhatro' => $nt->nt_ma]) }}"><em class="fa fa-pencil"> Hẹn Xem Nhà</em></a>
+
+
+                          @if (Auth::user()->loai === 1)
+
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Xem Khoảng Cách</button>
+                           <a class="btn btn-success btn-lg" href="{{ route('sinhvien.edit', ['nhatro' => $nt->nt_ma]) }}"><em class="fa fa-pencil"> Lưu Nhà Trọ</em></a>
+                          @endif
                             
                       @endif
-
-                      @if (Auth::user()->loai === 1)
-                           <a class="btn btn-success btn-lg" href="{{ route('sinhvien.edit', ['nhatro' => $nt->nt_ma]) }}"><em class="fa fa-pencil"> Lưu Nhà Trọ</em></a>
-                      @endif
-
+                    
 
                   <div class="modal fade" id="myModal" role="dialog" style="margin-top: 110px;">
                     <div class="modal-dialog">

@@ -8,6 +8,7 @@ use App\baidang;
 use App\loaibaidang;
 use App\tienich;
 use App\nhatro;
+use App\baidangtaikhoan;
 use App\nhatro_tienich;
 use App\hinhanh_nhatro;
 use Auth;
@@ -71,6 +72,13 @@ class baidangfrontendController extends Controller
         $baidang->bd_tieude = $request->bd_tieude;
         $baidang->bd_noidung = $request->bd_noidung;
         $baidang->save();
+
+        $baidangtaikhoan = new baidangtaikhoan();
+        $baidangtaikhoan->id = Auth::user()->id;
+        $baidangtaikhoan->bd_ma = $baidang->bd_ma;
+        $baidangtaikhoan->save();
+
+        
 
         return redirect(route('baidangfrontend.index')); //trả về trang cần hiển thị
         }
@@ -152,15 +160,17 @@ class baidangfrontendController extends Controller
      */
     public function destroy($id)
     {
-       $baidang = baidang::find($id);
+        $baidang = baidang::find($id);
         $baidang->delete();
         return redirect(route('baidangfrontend.index'));
     }
 
 
-    public function dangtin($id)
+    public function dangtin()
     {
-        $nhatro = nhatro::find($id);
+        $id = Auth::user()->id;
+
+        $nhatro = DB::table('nhatro')->join('o', 'o.nt_ma', '=', 'nhatro.nt_ma')->where('o.id',$id)->get();
         // dd($nhatro);
         $dsloaibaidang = loaibaidang::find(1);
 

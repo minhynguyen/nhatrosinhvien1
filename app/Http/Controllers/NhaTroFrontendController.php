@@ -10,6 +10,7 @@ use App\binhluan;
 use App\nhatro_tienich;
 use App\hinhanh_nhatro;
 use App\datphong;
+use App\baidangtaikhoan;
 use Auth;
 use DB;
 use Illuminate\Support\collection;
@@ -149,6 +150,12 @@ class NhaTroFrontendController extends Controller
         $baidang->save();
 
 
+        $baidangtaikhoan = new baidangtaikhoan();
+        $baidangtaikhoan->id = Auth::user()->id;
+        $baidangtaikhoan->bd_ma = $baidang->bd_ma;
+        $baidangtaikhoan->save();
+
+
         
 
         return redirect(route('profile')); //trả về trang cần hiển thị
@@ -169,10 +176,16 @@ class NhaTroFrontendController extends Controller
     {
         // dd($id);
         $nhatro = DB::table('nhatro')->join('users', 'users.id', '=', 'nhatro.id')->join('loainhatro', 'loainhatro.lnt_ma', '=', 'nhatro.lnt_ma')->where('nt_ma', $id)->get();
-        $baidang = DB::table('baidang')->join('loaibaidang', 'loaibaidang.lbd_ma', '=', 'baidang.lbd_ma')->where('nt_ma',$id)->get();
-        $idbaidang = DB::table('baidang')->join('nhatro', 'baidang.nt_ma', '=', 'nhatro.nt_ma')->where('baidang.nt_ma',$id)->value('bd_ma');
+        $baidang = DB::table('baidang')->join('loaibaidang', 'loaibaidang.lbd_ma', '=', 'baidang.lbd_ma')->where('nt_ma',$id)->join('baidangtaikhoan', 'baidangtaikhoan.bd_ma', '=', 'baidang.bd_ma')->join('users', 'users.id', '=', 'baidangtaikhoan.id')->get();
+        // dd($baidang);
+
+
+        // $idbaidang = DB::table('baidang')->join('nhatro', 'baidang.nt_ma', '=', 'nhatro.nt_ma')->where('baidang.nt_ma',$id)->value('bd_ma');
+
         
-        $dsbinhluan = DB::table('binhluan')->join('users', 'users.id', '=', 'binhluan.id')->where('binhluan.bd_ma', $idbaidang)->get();
+        $dsbinhluan = DB::table('binhluan')->join('baidang', 'baidang.bd_ma', '=', 'binhluan.bd_ma')
+                                        ->join('users', 'users.id', '=', 'binhluan.id')
+                                        ->where('baidang.nt_ma', $id)->get();
         // dd($dsbinhluan);
         $dstienich = DB::table('nhatro_tienich')->join('tienich', 'tienich.ti_ma', '=', 'nhatro_tienich.ti_ma')->where('nt_ma', $id)->get();
         $tienich = tienich::all();

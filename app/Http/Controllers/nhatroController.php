@@ -9,6 +9,7 @@ use App\tienich;
 use App\nhatro;
 use App\nhatro_tienich;
 use App\hinhanh_nhatro;
+use App\baidangtaikhoan;
 use Auth;
 use DB;
 use Illuminate\Support\collection;
@@ -126,6 +127,12 @@ class nhatroController extends Controller
         $baidang->bd_noidung = $request->bd_noidung;
         $baidang->bd_trangthai = 1;
         $baidang->save();
+
+
+        $baidangtaikhoan = new baidangtaikhoan();
+        $baidangtaikhoan->id = Auth::user()->id;
+        $baidangtaikhoan->bd_ma = $baidang->bd_ma;
+        $baidangtaikhoan->save();
         // $images = $request->input('images');
         // foreach ($images as $pi) {
         //         $hinhanh_nhatro = new hinhanh_nhatro();

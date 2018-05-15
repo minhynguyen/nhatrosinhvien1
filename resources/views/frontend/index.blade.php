@@ -230,7 +230,7 @@
 
 
                                                 @if( Auth::user()->loai === 1 )
-                                                <li><a href="{{ route('admin.index') }}">Đăng Tin Ở Ghép</a></li>
+                                                <li><a href="{{ route('dangtin') }}">Đăng Tin Ở Ghép</a></li>
                                                 @endif
                                                 <!-- <li class="divider"></li> -->
                                                 <li>
