@@ -53,7 +53,7 @@ th{
                   <th style="text-align: left;">Tiêu Đề Bài Đăng</th>
                   <th style="text-align: left;">Nội Dung Bình Luận</th>
                   <th style="text-align: left;">Ngày Đăng</th>
-                  <th style="text-align: center;">Tác Vụ</th>
+                  <th style="text-align: center !important">Tác Vụ</th>
                   
                   <!-- <th></th> -->
                 </tr>

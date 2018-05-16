@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\baidang;
 use App\loaibaidang;
+use App\baidangtaikhoan;
+use Auth;
 use App\nhatro;
 use DB;
 use Yajra\Datatables\Datatables;
@@ -54,6 +56,11 @@ class baidangController extends Controller
         $baidang->bd_noidung = $request->bd_noidung;
         $baidang->bd_trangthai = $request->bd_trangthai;
         $baidang->save();
+
+        $baidangtaikhoan = new baidangtaikhoan();
+        $baidangtaikhoan->id = Auth::user()->id;
+        $baidangtaikhoan->bd_ma = $baidang->bd_ma;
+        $baidangtaikhoan->save();
 
         return redirect(route('baidang.index')); //trả về trang cần hiển thị
         }

@@ -11,10 +11,21 @@
         <small>Tiện Ích Nhà Trọ</small>
       </h1>
 @endsection
+@section('input')
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+@endsection
 @section('css')
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 <style>
   a {
     color: #ffffff !important;
+}
+td{
+  text-align: center; !important;
+}
+
+th{
+  text-align: center; !important;
 }
 </style>
 @endsection
@@ -42,50 +53,61 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover text-center ">
+              <table class="table table-bordered table-hover" id="tienich-table">
+                <thead>
                 <tr>
                   <th>Mã</th>
                   <th style="text-align: left;">Tên Tiện Ích</th>
                   <th style="text-align: left;">Diễn Giải</th>
                   <th>Trạng Thái</th>
                   <!-- <th>Ngày Cập Nhật</th> -->
-                  <th colspan="2"><button type="button" class="btn btn-info"> <a href="{{ route('tienich.create') }}"><i class="fa fa-plus"></i> Thêm Tiện Ích</a></button></th>
+                  <th><button type="button" class="btn btn-info"> <a href="{{ route('tienich.create') }}"><i class="fa fa-plus"></i> Thêm Tiện Ích</a></button></th>
                   <!-- <th></th> -->
                 </tr>
-                @foreach ($dstienich as $ti)
-        <!-- nhãn từ controller -->
-                <tr>
-                    <td>{{$ti->ti_ma}}</td>
-                    <td style="text-align: left;">{{$ti->ti_ten}}</td>
-                    <td style="text-align: left;">{{$ti->ti_diengiai}}</td>
-                    @if ($ti->ti_trangthai === 1)
-
-                        <td style="text-align: center;"><span class="badge bg-yellow">KHÓA</span></td>
-                    @else
-                        <td style="text-align: center;"><span class="badge bg-green">Khả Dụng</span></td>
-                    @endif
-                    <!-- <td>{{$ti->ti_capnhat}}</td> -->
-                    <td>
-                      <button type="button" class="btn btn-warning"> <a href=" {{ route('tienich.edit', ['tienich' => $ti->ti_ma]) }}" ><i class="fa fa-edit"></i> Edit</a></button>
-                    
-                      
-                    </td>
-                    <td>
-                      <form method="POST" action="{{route('tienich.destroy', ['tienich' => $ti->ti_ma])}}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete </a></button>
-                      </form>
-                    </td>
-                </tr>
-
-        @endforeach
+                </thead>
                 
                 
               </table>
             </div>
             <!-- /.box-body -->
           </div>
+
+@endsection
+
+
+@section('script')
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script>
+$(function() {
+    $('#tienich-table').DataTable({
+        processing: true,
+        serverSide: true,
+        "language": {
+          "lengthMenu": "Hiển thị _MENU_ dòng dữ liệu trên một trang",
+           "info":" Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu",
+           "infoEmpty":"Dữ liệu rỗng",
+           "emptyTable":"Chưa có dữ liệu nào",
+           "processing":"Đang Xử Lý...", 
+           "search":"Tìm Kiếm",
+           "loadingRecords":"Đang load dữ liệu",
+          "zeroRecords":"Không Tìm Thấy Dữ Liệu",
+          "infoFiltered":"(Lọc Trong _MAX_ Dòng Dữ Liệu)",
+        },
+        ajax: '{!! route('tienich') !!}',
+        columns: [
+            { data: 'ti_ma', name: 'ti_ma' },
+            { data: 'ti_ten', name: 'ti_ten' },
+            { data: 'ti_diengiai', name: 'ti_diengiai' },
+            { data: 'ti_trangthai', name: 'ti_trangthai' },
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+});
+</script> 
+
+
+ 
 
 @endsection
 

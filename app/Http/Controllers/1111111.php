@@ -328,3 +328,62 @@
                 </tr>
 
         @endforeach
+
+
+        @foreach ($dstienich as $ti)
+        <!-- nhãn từ controller -->
+                <tr>
+                    <td>{{$ti->ti_ma}}</td>
+                    <td style="text-align: left;">{{$ti->ti_ten}}</td>
+                    <td style="text-align: left;">{{$ti->ti_diengiai}}</td>
+                    @if ($ti->ti_trangthai === 1)
+
+                        <td style="text-align: center;"><span class="badge bg-yellow">KHÓA</span></td>
+                    @else
+                        <td style="text-align: center;"><span class="badge bg-green">Khả Dụng</span></td>
+                    @endif
+                    <!-- <td>{{$ti->ti_capnhat}}</td> -->
+                    <td>
+                      <button type="button" class="btn btn-warning"> <a href=" {{ route('tienich.edit', ['tienich' => $ti->ti_ma]) }}" ><i class="fa fa-edit"></i> Edit</a></button>
+                    
+                      
+                    </td>
+                    <td>
+                      <form method="POST" action="{{route('tienich.destroy', ['tienich' => $ti->ti_ma])}}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete </a></button>
+                      </form>
+                    </td>
+                </tr>
+
+        @endforeach
+
+
+        @foreach ($dsloainhatro as $lnt)
+        <!-- nhãn từ controller -->
+                <tr>
+                    <td>{{$lnt->lnt_ma}}</td>
+                    <td style="text-align: center;">{{$lnt->lnt_ten}}</td>
+                    <!-- <td>{{$lnt->lnt_taomoi}}</td>
+                    <td>{{$lnt->lnt_capnhat}}</td> -->
+                    <!-- <td>{{$lnt->lnt_trangthai}}</td> -->
+                    @if ($lnt->lnt_trangthai === 1)
+
+                        <td style="text-align: center;"><span class="badge bg-yellow">KHÓA</span></td>
+                    @else
+                        <td style="text-align: center;"><span class="badge bg-green">Khả Dụng</span></td>
+                    @endif
+                    <td>
+                      <button type="button" class="btn btn-warning"> <a href=" {{ route('loainhatro.edit', ['loainhatro' => $lnt->lnt_ma]) }}" ><i class="fa fa-edit"></i> Edit</a></button>
+                    </td>
+                    <td>
+                      <form method="POST" action="{{route('loainhatro.destroy', ['loainhatro' => $lnt->lnt_ma])}}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete </a></button>
+                      </form>
+                    </td>
+                </tr>
+
+        @endforeach

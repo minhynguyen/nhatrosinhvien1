@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\loainhatro;
 use App\Http\Requests\LoaiNhaTroRequest;
+
+use Yajra\Datatables\Datatables;
 class LoainhatroController extends Controller
 {
     /**
@@ -84,7 +86,7 @@ class LoainhatroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(LoaiNhaTroRequest $request, $id)
+    public function update(request $request, $id)
     {
         try{
         $loainhatro = loainhatro::find($id);
@@ -111,5 +113,27 @@ class LoainhatroController extends Controller
         $loainhatro = loainhatro::find($id);
         $loainhatro->delete();
         return redirect(route('loainhatro.index'));
+    }
+
+
+    public function getAddEditRemoveColumnData()
+    {
+        $loainhatro = loainhatro::select(['lnt_ma', 'lnt_ten', 'lnt_trangthai']);
+
+        return Datatables::of($loainhatro)
+            ->addColumn('action', function ($loainhatro) {
+                return '<button type="button" class="btn btn-warning"><a class="table-action-btn" title="Chỉnh sửa" href="' . route('loainhatro.edit', $loainhatro->lnt_ma) . '"><i class="fa fa-pencil"></i></a></button>
+
+                    <button type="button" class="btn btn-danger"><a class="table-action-btn" title="Xóa" href="' . route('loainhatro.delete', $loainhatro->lnt_ma) . '"><i class="fa fa-trash"></i></a></button>';
+
+
+            })
+            // ->edit_column('lbd_trangthai', '@if ($lbd_trangthai ==="1") <span class="badge bg-yellow">KHÓA</span> @endif')\
+            ->editColumn('lnt_trangthai', '@if ($lnt_trangthai =="2")Khả Dụng @else Khóa  @endif')
+        
+        
+
+
+            ->make(true);
     }
 }

@@ -50,9 +50,14 @@ Route::group(['prefix'=>'admin'], function(){
 
 		Route::get('/baidang/delete/{id}', ['as'=>'baidang.delete', 'uses'=>'baidangController@destroy']);
 
+		Route::get('/tienich/delete/{id}', ['as'=>'tienich.delete', 'uses'=>'TienichController@destroy']);
+
 		Route::get('/nhatro/delete/{id}', ['as'=>'nhatro.delete', 'uses'=>'nhatroController@destroy']);
+		Route::get('/loainhatro/delete/{id}', ['as'=>'loainhatro.delete', 'uses'=>'LoainhatroController@destroy']);
 });
 Route::get('/loaibaidang', 'loaibaidangController@getAddEditRemoveColumnData')->name('loaibaidang')->middleware(CheckLevelMiddleware::class);
+Route::get('/tienich', 'TienichController@getAddEditRemoveColumnData')->name('tienich')->middleware(CheckLevelMiddleware::class);
+Route::get('/loainhatro', 'LoainhatroController@getAddEditRemoveColumnData')->name('loainhatro')->middleware(CheckLevelMiddleware::class);
 
 Route::get('/nhatro', 'nhatroController@getAddEditRemoveColumnData')->name('nhatro')->middleware(CheckLevelMiddleware::class);
 
