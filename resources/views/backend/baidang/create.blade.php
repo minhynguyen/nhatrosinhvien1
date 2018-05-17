@@ -62,7 +62,10 @@
 
           <div class="form-group">
             <label for="exampleInputEmail1">Nhập Nội Dung</label>
-            <input type="text" class="form-control" id="bd_noidung" name="bd_noidung" placeholder="Nhập Nội Dung">
+            <!-- <input type="text" class="form-control" id="bd_noidung" name="bd_noidung" placeholder="Nhập Nội Dung"> -->
+
+            <textarea id="editor1" name="bd_noidung" rows="10" cols="80" style="width: 100%" value="{{old('bd_noidung')}}">
+                              </textarea>
           </div>
           
 
@@ -100,6 +103,8 @@
 
 @endsection
 @section('script')
+<script src="{{ asset ('theme/homepage/ckeditor/ckeditor.js') }}"></script>
+<script>CKEDITOR.replace('editor1');</script>
 <script src=" {{ asset ('theme/admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <script>
   $(function(){

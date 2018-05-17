@@ -440,7 +440,7 @@ div#bs-example-navbar-collapse-1 {
 }
 
 nav {
-    background: #50a900 !important;
+    background: #004a40 !important;
     /*background: #003d61 !important;*/
     font-size: 18px;
     color: white !important;
@@ -520,6 +520,7 @@ INTRO CONTAINER
     padding: 0;
     border: 0;
     display: inline-block;
+    /*background: url('{{ asset ('theme/homepage/image/pic2.jpg') }}') no-repeat center center; */
 }
 
 .background_content h1 span {
@@ -546,7 +547,7 @@ INTRO CONTAINER
 }
  .pricing.background_content{
     /*background: url('../images/BG1.jpg') no-repeat center center; */
-    background: url('../images/pricing.jpg') no-repeat center center; 
+    background: url('{{ asset ('theme/homepage/image/pic3.jpg') }}') no-repeat center center; 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -737,7 +738,7 @@ p.sub-footer-text a{
     background:white; 
      /*text-align: top;*/
     /*border: 1px solid rgba(13, 12, 12, 0.23);*/
-    color:#50a900 !important;
+    color:#004a40 !important;
     font-size:13px;
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
@@ -1127,3 +1128,6 @@ MEDIA QUERIE DESKTOP
         font-size: 30px;
     }
 }
+
+
+

@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')   
 
 @section('title')
-  THÊM MỚI BÀI ĐĂNG
+  CẬP NHẬT BÀI ĐĂNG
 @endsection
 @section('css')
   <link rel="stylesheet" href="{{ asset ('theme/admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
@@ -58,7 +58,13 @@
 
           <div class="form-group">
             <label for="exampleInputEmail1">Nhập Nội Dung</label>
-            <input type="text" class="form-control" id="bd_noidung" name="bd_noidung" placeholder="Nhập Nội Dung" value="{{$baidang->bd_noidung}}">
+            <!-- <input type="text" class="form-control" id="bd_noidung" name="bd_noidung" placeholder="Nhập Nội Dung" value="{{$baidang->bd_noidung}}"> -->
+
+            <label for="exampleInputEmail1">Nhập Nội Dung</label>
+            
+
+            <textarea id="editor1" name="bd_noidung" rows="10" cols="80" style="width: 100%" value="{{old('bd_noidung')}}">{!!$baidang->bd_noidung!!}
+                              </textarea>
           </div>
           
 
@@ -102,6 +108,8 @@
 
 @endsection
 @section('script')
+<script src="{{ asset ('theme/homepage/ckeditor/ckeditor.js') }}"></script>
+<script>CKEDITOR.replace('editor1');</script>
 <script src=" {{ asset ('theme/admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <script>
   $(function(){

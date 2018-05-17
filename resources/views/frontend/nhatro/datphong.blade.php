@@ -2,9 +2,11 @@
     <html>
          <head>
             <meta charset="UTF-8">
-            <title>Nhà Trọ Sinh Viên</title>
+            <title>Hẹn Xem Phòng</title>
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/normalize.css') }}">
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset ('theme/homepage/css/dat.css') }}">
+            <link rel="stylesheet" href="{{ asset ('theme/homepage/css/show.css') }}">
             <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
             <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/bootstrap.css') }}">
@@ -32,33 +34,156 @@
                         <div class="navbar-header">
                             <a class="navbar-brand" href="{{ route('index')}}" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
                         </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav main-nav  clear navbar-right">
+                              <li>
+                              </li>
+                              @guest
+                                <li>
+                                    <a class="color_animation" href="{{ route('login')}}">Đăng Nhập</a>
+                                </li>
+                                <li>
+                                    <a class="color_animation" href="{{ route('register')}}" style="margin-left: 2px!important"> | Đăng Kí</a>
+                                </li>
+                                   
+                                @else
+                                <!--  -->
+
+                                    <li class="dropdown">
+                                       
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li class="dropdown" >
+                                              <a href="" class="dropdown-toggle"  data-toggle="dropdown" style="color: white" >{{ Auth::user()->name }} <span class="caret"></span></a>
+                                              <ul class="dropdown-menu" role="menu">
+                                                @if( Auth::user()->loai === 0 )
+                                                <li>
+                                                  <a href="{{ route('profile') }}" target="_blank">Thông Tin Tài Khoản</a>
+                                                </li>
+                                                @endif
+
+                                                @if( Auth::user()->loai === 1 )
+                                                <li>
+                                                  <a href="{{ route('ttsinhvien') }}" target="_blank">Thông Tin Tài Khoản Sinh Viên</a>
+                                                </li>
+                                                @endif
+
+                                                @if( Auth::user()->loai === 0 )
+                                                <li>
+                                                  
+                                                  <a href="{{ route('nhatrofrontend.create') }}" target="_blank">Đăng Kí Nhà Trọ</a>
+                                                  
+                                                </li>
+                                                @endif
+
+
+                                                @if( Auth::user()->loai === 1 )
+                                                <li><a href="{{ route('dangtin') }}">Đăng Tin Ở Ghép</a></li>
+                                                @endif
+                                                <!-- <li class="divider"></li> -->
+                                                <li>
+                                                    <a href="{{ route('changePassword1') }}" target="_blank">Đổi Mật Khẩu
+                                                    </a>
+                                                </li>
+                                                <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                  document.getElementById('logout-form').submit();">Đăng Xuất</a></li>
+
+                                                  <!-- <li><a href="#">Some other action</a></li> -->
+                                                  <li class="divider"></li>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+
+                                                @if( Auth::user()->level === 1 )
+                                                <li><a href="{{ route('admin.index') }}">Về Trang Quản Trị</a></li>
+                                                @endif
+
+                                              </ul>
+                                            </li>
+                                        </ul>
+
+                                       
+                                    </li>
+                                @endguest
+                            </ul>
+                    </div>
                         
                     </div>
 
                 </div><!-- /.container-fluid -->
             </nav>
              
-            
+        
         <form name="frmdat" method="POST" action="{{route('datphongfrontend.store')}}"> <!-- action tu controller -->
           {{ csrf_field() }}
+
+
             <div class="description_content">
+
+              
                 <div class="text-content container">
+                  <div class="col-md-12">
+                    <div class="col-lg-4 col-sm-6">
+                      <div class="product-list-left-effect">
+                      <img src="{{ asset ('theme/homepage/image/dat2.jpg') }}"  class="img-fluid" />
+
+                      <div class="product-overlay">
+                      <h3>Bước 1</h3>
+                      <h4>Chọn Nhà Trọ Thích Hợp Với Bạn</h4>
+                      </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4 col-sm-6">
+                      <div class="product-list-left-effect">
+                      <img src="{{ asset ('theme/homepage/image/dat4.jpg') }}" class="img-fluid" />
+
+                      <div class="product-overlay">
+                      <h3>Bước 2</h3>
+                      <h3>Điền Thông Tin Vào Form Hẹn Xem Phòng.</h3>
+                      <h3>Check Mail Xác Nhận.</h3>
+                      </div>
+                      </div>
+                      </div>
+
+
+                      <div class="col-lg-4 col-sm-6">
+                        <div class="product-list-left-effect">
+                        <img src="{{ asset ('theme/homepage/image/dat3.jpg') }}" class="img-fluid" />
+
+                        <div class="product-overlay">
+                        <h3>Bước 3</h3>
+                        <h3>Đến Xem Nhà</h3>
+                        </div>
+                        </div>
+                        </div>
+                  </div>
                     <div class="col-md-6">
-                        <h1 style="font-family: Pacifico!important">Hẹn Xem Phòng</h1>
+                      
+                       <div id='nz-div-2' style="margin-top: -15px;">
+                        <h3 class="tde" style="margin-left:-350px !important">         
+                             <span>Hẹn Xem Phòng</span>
+                        </h3>
+                        <hr>
+                      </div>
+                        <!-- <h1 style="font-family: Pacifico!important">Hẹn Xem Phòng</h1> -->
                          <!-- {{$nhatro -> nt_ten}} -->
-                        <div class="fa fa-home fa-2x"></div>
+                        <!-- <div class="fa fa-home fa-2x"></div> -->
+
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <div class="panel panel-default">
-                            <div class="panel-body">
-                              <h2>Thông Tin Nhà Trọ</h2>
+                          <div class="offer offer-success" style="margin-top: 10px;">
+                            <div class="offer-content">
+                               <h2>Thông Tin Nhà Trọ</h2>
                               {{$nhatro->nt_ten}} <br/>
                               {{$nhatro->nt_diachi}}
                             </div>
                           </div>
+                         
                           
                         </div>
-                        
-                        <div class="col-md-12" style="text-align: left; margin-top: 10px;">
+
+                        <div class="panel panel-success">
+                          <div class="panel-body">
+                            <div class="col-md-12" style="text-align: left; margin-top: 10px;">
                             <span><strong>Mã Nhà Trọ:</strong></span>
                             <input type="text" name="nt_ma" class="form" style="width: 100%; margin-top: 10px" placeholder="Họ Và Tên" value="{{$nhatro->nt_ma}}" readonly="nt_ma">
                         </div>
@@ -68,14 +193,11 @@
                             <input type="text" name="" class="form" style="width: 100%; margin-top: 10px" placeholder="Họ Và Tên" value="{{ Auth::user()->name}}" readonly="name">
                         </div>
 
-                        <!-- <div class="col-md-12" style="text-align: left; margin-top: 10px;">
-                            <span><strong>Tên Người Đặt:</strong></span>
-                            <input type="text" name="" class="form" style="width: 100%; margin-top: 10px" placeholder="Họ Và Tên" value="{{ Auth::user()->name}}">
-                        </div> -->
+                        
 
                         <div class="col-md-12" style="margin-top: 10px; text-align: left;">
                             <span><strong>Email Người Đặt:</strong></span>
-                            <input type="text" name="" class="form" style="width: 100%" placeholder="Email" value="{{ Auth::user()->email}}">
+                            <input type="text" name="" class="form" style="width: 100%" placeholder="Email" value="{{ Auth::user()->email}}" readonly="Email">
                         </div>
 
                         <div class="col-md-12" style="margin-top: 10px; text-align: left;">
@@ -89,10 +211,14 @@
                               <span><strong>Ghi Chú:</strong></span>
                               <textarea name="dp_ghichu" class="form textarea"  placeholder="Nội dung bài đăng" style="width: 100%">{{old('dp_ghichu')}}</textarea>
                         </div>
+                          </div>
+                        </div>
+                        
+                        
 
 
                         <div class="col-md-12" style="margin-top: 10px">
-                            <button type="submit" id="submit" name="submit" class="text-center form-btn" style="width: 100%; background-color: #50a900">Đặt Xem Phòng</button>
+                            <button type="submit" id="submit" name="submit" class="text-center form-btn" style="width: 100%; background-color: #00b9a0">Đặt Xem Phòng</button>
                         </div>
 
                         
@@ -107,8 +233,16 @@
                        </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <h2 style="margin-top: 20px">Danh Sách Đặt Phòng</h2>
-                      <table class="table table-striped table-bordered table-list">
+                      <!-- <h2 style="margin-top: 20px">Danh Sách Đặt Phòng</h2> -->
+                      <div id='nz-div-2' style="margin-top: 10px;">
+                        <h3 class="tde" style="margin-left:-255px !important">         
+                             <span>Danh Sách Đặt Phòng</span>
+                        </h3>
+                        <hr>
+                      </div>
+                      <div class="panel panel-warning">
+                        <div class="panel-body">
+                          <table class="table table-striped table-bordered table-list">
                         <thead>
                           <tr>
                             <th style="text-align: center;">Giờ Đặt</th>
@@ -125,10 +259,15 @@
                         </tbody>
                         
                       </table>
+                        </div>
+                      </div>
+                      
                     </div>
                 </div>
             </div>
           </form>
+
+
           
             <footer class="sub_footer" style="margin-top: 25px">
                 <div class="container">

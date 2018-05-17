@@ -74,7 +74,7 @@ th{
                 
               </table>
               <div style="float: right; margin-right: 10px;">
-                {!! $dsbaidang->render() !!}
+                
               </div>
             </div>
             <!-- /.box-body -->

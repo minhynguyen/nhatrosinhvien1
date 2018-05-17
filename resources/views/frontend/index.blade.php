@@ -239,6 +239,9 @@
                                                 </li>
                                                 <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">Đăng Xuất</a></li>
+
+                                                  <!-- <li><a href="#">Some other action</a></li> -->
+                                                  <li class="divider"></li>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                     {{ csrf_field() }}
                                                 </form>

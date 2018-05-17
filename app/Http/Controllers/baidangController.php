@@ -149,6 +149,7 @@ class baidangController extends Controller
                     <button type="button" class="btn btn-danger" style="width: 45%"><a class="table-action-btn" title="Xóa" href="' . route('baidang.delete', $dsbaidang->bd_ma) . '"><i class="fa fa-trash"></i></a></button>';
 
             })
+            ->editColumn('bd_noidung', '{!!$bd_noidung!!}')
             ->editColumn('bd_trangthai', '@if ($bd_trangthai =="1")Đã Duyệt @else Chờ Duyệt  @endif')
             ->make(true);
     }

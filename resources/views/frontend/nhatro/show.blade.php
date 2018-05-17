@@ -7,6 +7,7 @@
         <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
         <link rel="stylesheet" href="{{ asset ('theme/homepage/css/normalize.css') }}">
         <link rel="stylesheet" href="{{ asset ('theme/homepage/css/main.css') }}">
+        <link rel="stylesheet" href="{{ asset ('theme/homepage/css/show.css') }}">
         <!-- <link rel="stylesheet" href="{{ asset ('theme/homepage/css/tt.css') }}"> -->
         <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
@@ -22,6 +23,7 @@
         <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.min.js') }}"> </script>
         <link rel="stylesheet" href="{{ asset ('css/bootstrap.min.css') }}">
         <link rel="stylesheet" src="{{ asset ('js/bootstrap.min.js') }}">
+        
         <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
         <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
 
@@ -64,14 +66,110 @@ height: 300px;
                    <div class="navbar-header">
                         <a class="navbar-brand" href="{{ route('index')}}" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
                     </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav main-nav  clear navbar-right">
+                              <li>
+                              </li>
+                              @guest
+                                <li>
+                                    <a class="color_animation" href="{{ route('login')}}">Đăng Nhập</a>
+                                </li>
+                                <li>
+                                    <a class="color_animation" href="{{ route('register')}}" style="margin-left: 2px!important"> | Đăng Kí</a>
+                                </li>
+                                   
+                                @else
+                                <!--  -->
+
+                                    <li class="dropdown">
+                                        <!-- <a href="#" class="color_animation" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                            {{ Auth::user()->name }} <span class="caret" class="color_animation"></span>
+                                        </a> -->
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li class="dropdown" >
+                                              <a href="" class="dropdown-toggle"  data-toggle="dropdown" style="color: white" >{{ Auth::user()->name }} <span class="caret"></span></a>
+                                              <ul class="dropdown-menu" role="menu">
+                                                @if( Auth::user()->loai === 0 )
+                                                <li>
+                                                  <a href="{{ route('profile') }}" target="_blank">Thông Tin Tài Khoản</a>
+                                                </li>
+                                                @endif
+
+                                                @if( Auth::user()->loai === 1 )
+                                                <li>
+                                                  <a href="{{ route('ttsinhvien') }}" target="_blank">Thông Tin Tài Khoản Sinh Viên</a>
+                                                </li>
+                                                @endif
+
+                                                @if( Auth::user()->loai === 0 )
+                                                <li>
+                                                  
+                                                  <a href="{{ route('nhatrofrontend.create') }}" target="_blank">Đăng Kí Nhà Trọ</a>
+                                                  
+                                                </li>
+                                                @endif
+
+
+                                                @if( Auth::user()->loai === 1 )
+                                                <li><a href="{{ route('dangtin') }}">Đăng Tin Ở Ghép</a></li>
+                                                @endif
+                                                <!-- <li class="divider"></li> -->
+                                                <li>
+                                                    <a href="{{ route('changePassword1') }}" target="_blank">Đổi Mật Khẩu
+                                                    </a>
+                                                </li>
+                                                <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                  document.getElementById('logout-form').submit();">Đăng Xuất</a></li>
+
+                                                  <!-- <li><a href="#">Some other action</a></li> -->
+                                                  <li class="divider"></li>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+
+                                                @if( Auth::user()->level === 1 )
+                                                <li><a href="{{ route('admin.index') }}">Về Trang Quản Trị</a></li>
+                                                @endif
+
+
+                                                
+                                                
+                                                <!-- <li><a href="#">Separated link</a></li> -->
+                                              </ul>
+                                            </li>
+                                        </ul>
+
+                                        <!-- <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                  document.getElementById('logout-form').submit();">Đăng Xuất
+                                                </a>
+                                                <a href="{{ route('profile') }}">Thông Tin Tài Khoản
+                                                </a>
+
+                                                
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+                                            </li>
+                                        </ul> -->
+                                    </li>
+                                @endguest
+                            </ul>
+                    </div>
                 </div>
+
+                <ul>
+                  
+                </ul>
             </div><!-- /.container-fluid -->
         </nav>
         <div class="description_content">
           <div class="text-content container">
             <div class="container">
               <div class="row">
-                <div class="col-md-7 ">
+                <div class="col-md-7" style="margin-top: 25px;">
                   <div id="myCarousel" class="carousel slide" data-ride="carousel">
                   <ol class="carousel-indicators">
                       @foreach($slider as $item)
@@ -100,11 +198,20 @@ height: 300px;
               </a>
               </div>
                   </div>
-
                   <div class="col-md-5">
                     @foreach($nhatro as $nt)
-                    <h2 style="font-family: Pacifico; font-size: 40px !important; color: #bc6264">{{$nt->nt_ten}}</h2>
-                    <table class="table">
+                    <!-- <h2 style="font-family: Pacifico; font-size: 40px !important; color: #bc6264">{{$nt->nt_ten}}</h2> -->
+                    
+
+                      <div class="offer offer-success">
+                        <div class="offer-content">
+                            <div id='nz-div-2'>
+                              <h3 class="tde">         
+                                   <span>{{$nt->nt_ten}}</span>
+                              </h3>
+                              <hr>
+                            </div>
+                      <table class="table">
                           <tbody>
                             <tr>
                                   <td style="text-align: left;"><span><strong>Liên Hệ:</strong></span></td>
@@ -118,10 +225,17 @@ height: 300px;
                                   <td style="text-align: left; width: 150px"><span><strong>Email:</strong></span></td>
                                   <td style="text-align: right;">{{$nt->email}}</td>
                             </tr>
+
                             <tr>
                                   <td style="text-align: left;"><span><strong>Địa Chỉ:</strong> </span></td>
                                   <td style="text-align: right;">{{$nt->nt_diachi}}</td>
                             </tr>
+
+                            <tr>
+                                  <td style="text-align: left;"><span><strong>Loại Nhà Trọ:</strong> </span></td>
+                                  <td style="text-align: right;">{{$nt->lnt_ten}}</td>
+                            </tr>
+
                             <tr>
                                   <td style="text-align: left;"><span><strong>Diện Tích:</strong> </span></td>
                                   <td style="text-align: right;">{{$nt->nt_dientich}} (~ M<sup>2</sup>)</td>
@@ -138,78 +252,169 @@ height: 300px;
                                   <td style="text-align: left;"><span><strong>Giá Thuê:</strong></span></td>
                                   <td style="text-align: right;">{{$nt->nt_giathue}} (/Tháng)</td>
                             </tr>
+                            
                           </tbody>
+
                     </table>
+                      
+                          <div style="float: right; margin-bottom: 5px;">
+                          <a data-toggle="modal" href='#modal-2' style="color: red">Xem Tiện Ích Nhà Trọ >></a>
+                          </div>
+                        </div>
+                        
+                        
+                      </div>
+
+                        <div class="modal fade" id="modal-2" style="margin-top: 50px;">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header" style="background-color: #00846b">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title fa fa-cogs fa-2x" style="color: 
+                                white"> Tiện Ích Nhà Trọ</h4>
+                              </div>
+                              <div class="modal-body">
+                                  <div class="checkbox" style="text-align: left;">
+                                    @foreach ($dstienich as $ti)
+                                    <label><input type="checkbox"  value="{{$ti->ti_ma}}" <?php echo ($ti->ti_ma == $ti->ti_ma) ? 'checked' : ''  ?> >{{$ti->ti_ten}}</label>
+                                    @endforeach
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+         
                     <!-- <hr> -->
                     
     <!-- <a href="#0" class="btn btn-cart">ADD TO CART</a> </div> -->
                   </div>
 
                 </div>
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    <h2>THÔNG TIN CHI TIẾT VỀ NHÀ TRỌ</h2>
+                <div>
+                  <div class="btn btn-group" style="margin-top: 20px; margin-bottom: 20px">
+                    <h2>SƠ ĐỒ NHÀ TRỌ</h2>
+
+                      
+
+                        
+                      <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" style="background-color: #10ada5"><i class="fa fa-car" ></i> Mở Chỉ Đường</button>
+
+                      @if(isset(Auth::user()->id))
+                        
+                      
+                        
+
+
+                          @if (Auth::user()->loai === 1)
+
+                            <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal1" style="background-color: #10ada5"><i class="fa  fa-bicycle"></i> Xem Khoảng Cách</button>
+                           <a class="btn btn-default btn-lg" href="{{ route('sinhvien.edit', ['nhatro' => $nt->nt_ma]) }}" style="background-color: #10ada5"><em class="fa fa-check"> Lưu Nhà Trọ</em></a>
+                          @endif
+                          <a class="btn btn-default btn-lg" href="{{ route('datphongfrontend.edit', ['nhatro' => $nt->nt_ma]) }}" style="background-color: #10ada5"><em class="fa fa-calendar"> Hẹn Xem Nhà</em></a>
+                            
+                      @endif
+                    
+
+                  <div class="modal fade" id="myModal" role="dialog" style="margin-top: 110px;">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Hướng Dẫn Đường Đến Nhà Trọ</h4>
+                        </div>
+                        <!-- <div class="modal-body"> -->
+                          <div id="map"></div>
+                        <!-- </div> -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  </div>
                 </div>
-              </div>
-              
 
-              
-
-
-              <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group">
-                          <div class="btn-group" role="group">
-                              <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="fa fa-star" aria-hidden="true"></span>
-                                  <div class="hidden-xs">Thông Tin Chung</div>
-                              </button>
-                          </div>
-                          <!-- <div class="btn-group" role="group">
-                              <button type="button" id="favorites" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                  <div class="hidden-xs">So Sánh Nhà Trọ</div>
-                              </button>
-                          </div> -->
-                          <div class="btn-group" role="group">
-                              <button type="button" id="following" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="fa fa-user" aria-hidden="true"></span>
-                                  <div class="hidden-xs">Bài Đăng</div>
-                              </button>
-                          </div>
-                          <div class="btn-group" role="group">
-                              <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="fa fa-comments" aria-hidden="true"></span>
-                                  <div class="hidden-xs">Bình Luận/ Đánh Giá</div>
-                              </button>
-                          </div>
+                <div style="margin-top: 20px; margin-bottom: 20px">
+                    <!-- <h2>THÔNG TIN CHI TIẾT VỀ NHÀ TRỌ</h2> -->
+                    <div id='nz-div-2'>
+                        <h3 class="tde" style="margin-left:-760px !important;">         
+                             <span>BÀI ĐĂNG TIN CHO THUÊ NHÀ TRỌ</span>
+                        </h3>
+                        <hr>
                       </div>
-
-                      <div class="well" style="background-color: white">
-                    <div class="tab-content">
-                      <div class="tab-pane fade in active" id="tab1">
-                      <p class="desc-text">Loại Nhà Trọ: {{$nt->lnt_ten}}</p>
-                      <p class="desc-text">Giá Điện: {{$nt->nt_giadien}}</p>
-                      <p class="desc-text">Giá Nước: {{$nt->nt_gianuoc}}</p>
-                        
-                      <div class="fa fa-cogs fa-2x" style="text-align: left;"> Tiện ích phòng trọ</div>
-                        <div class="checkbox" style="text-align: left;">
-                          @foreach ($dstienich as $ti)
-                          <label><input type="checkbox"  value="{{$ti->ti_ma}}" <?php echo ($ti->ti_ma == $ti->ti_ma) ? 'checked' : ''  ?> >{{$ti->ti_ten}}</label>
-                          @endforeach
-                      </div>
-                      
-                      </div>
-                      
-                      <div class="tab-pane fade in" id="tab2">
-                        <h3>Bài Đăng</h3>
+                      <div class="col-md-12">
                         @foreach($baidang as $bd)
-                        <p class="desc-text">Loại Bài Đăng: {{$bd->lbd_ten}}</p>
-                        <p class="desc-text">Người Đăng: {{$bd->name}}</p>
-                        @if ($bd->loai === 0)
-                        <p class="desc-text">Vai Trò: Chủ Trọ</p>
-                        @else
-                        <p class="desc-text">Vai Trò: Sinh Viên</p>
-                        @endif
-                        <p class="desc-text">Tiêu Đề: {{$bd->bd_tieude}}</p>
-                        <p class="desc-text">Nội Dung: {{$bd->bd_noidung}}</p>
-                        
-                        
-                        
-                        <div class="panel panel-info" style="margin-top: 50px ">
+                      <div class="row"> 
+                      <div class="col-xs-12 col-sm-3 col-md-3">
+                          <div class="offer offer-success">
+                            
+                            <?php  
+                                  $count = 0;
+                                 ?>
+                              @foreach($dsbinhluan as $bl)
+                              @if($bl->bd_ma === $bd->bd_ma)
+                                  <?php 
+                                    $count +=1;
+                                   ?>
+                                   @endif
+                                   @endforeach
+                                  
+                          <a href="#">
+                              <img src="{{ asset ('upload/chothue.jpg')}}" class="img-responsive img-box img-thumbnail"> 
+                          </a>
+                        </div>
+                      </div> 
+                      <div class="col-xs-12 col-sm-9 col-md-9">
+                          <div class="list-group" style="text-align: left;">
+                              <div class="list-group-item"">
+                                <div class="col-md-12">
+                                  <div class="col-md-8" style="float: left;">
+                                    <h3>{{$bd->bd_tieude}}</h3>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <h3> <?php \Carbon\Carbon::setLocale('vi')?>
+                                     {{ \Carbon\Carbon::createFromTimeStamp(strtotime($bd->bd_taomoi  ))->diffForHumans() }}
+                                    </h3>
+                                  </div>
+                                </div>
+                                <div class="col-md-12">
+                                  <div class="col-md-8" style="float: left;">
+                                    <h4><i class="fa fa-user"></i> Người Đăng: {{$bd->name}}</h4>
+                                     <h4><i class="fa  fa-tags"></i> Loại Bài Đăng: {{$bd->lbd_ten}}</h4>
+                                    <div style="text-align: left;">
+                                      <h4><i class="fa fa-align-justify"></i> Nội Dung:</h4>
+                                    {!! $bd->bd_noidung !!}
+                                    </div>
+                                      </div>
+                                  <div class="col-md-4">
+                                    
+                                    @if ($bd->loai === 0)
+                                     <h4><i class="fa fa-street-view"></i> Vai Trò: Chủ Trọ</h4>
+                                    
+                                    @else
+                                    <h4><i class="fa fa-street-view"></i> Vai Trò: Sinh Viên</h4>
+                                    @endif
+                                  </div>
+                                </div>
+                                
+                                
+                                
+                              </div>
+
+                          </div>
+                         
+                          
+                      </div>
+
+                  </div>
+                    
+                     <div class="panel panel-info">
                               <div class="panel-body">
                               <div class="comments-list">
                               @foreach($dsbinhluan as $bl)
@@ -249,101 +454,19 @@ height: 300px;
                         @endif
                         
                     </div>
-                                
-                        
-                        
-                        @endforeach
-                        
-                      </div>
-                      <div class="tab-pane fade in" id="tab3">
-                            <div class="fa fa-comments fa-2x" > Bình Luận Về Nhà Trọ</div>
-                            <div class="comments-list">
-                              @foreach($dsbinhluan as $bl)
-                               <div class="media">
-                                  
-                                   <p class="pull-right"><small>
-                                      <?php \Carbon\Carbon::setLocale('vi')  ?>
-                                     {{ \Carbon\Carbon::createFromTimeStamp(strtotime($bl->bl_taomoi  ))->diffForHumans() }}
+                    <hr>
+                    @endforeach
 
-                                     
-                                     </small></p>
-                                    
-                                    <div class="media-body">
-                                        
-                                      <h4 class="media-heading user_name">{{$bl->name}} - {{$bl->bd_tieude}}</h4>
-                                      {{$bl->bl_noidung}}
-                                      
-                                      
-                                    </div>
-                                  </div>
-                                  @endforeach
-                                </div>
-                                @if(isset(Auth::user()->id))
-                                
-                                <div class="panel panel-info" style="margin-top: 50px ">
-                                      <div class="panel-body">
-                                          <form class="form-inline" name="frmBinhLuan" method="POST" action="{{ route('binhluan.update', ['baidang' => $bd->bd_ma]) }}">
-                                            {{ csrf_field() }}
-                                            {{ method_field('PATCH') }}
-
-                                          <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea" name="bl_noidung"></textarea>
-                                              <button class="btn btn-primary pull-right" type="submit">Gửi Bình Luận</button>
-                                          </form>
-                                      </div>
-                                  </div>
-                                @endif
-                      </div>
-
+                        
+         
                     </div>
 
 
 
-                  </div>
-                  
-                  <div style="margin-top: 20px; margin-bottom: 20px">
-                    <h2>SƠ ĐỒ NHÀ TRỌ</h2>
-
-                      
 
 
-                      <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">Mở Chỉ Đường</button>
-
-                      @if(isset(Auth::user()->id))
-                        
-                      
-                        <a class="btn btn-success btn-lg" href="{{ route('datphongfrontend.edit', ['nhatro' => $nt->nt_ma]) }}"><em class="fa fa-pencil"> Hẹn Xem Nhà</em></a>
-
-
-                          @if (Auth::user()->loai === 1)
-
-                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Xem Khoảng Cách</button>
-                           <a class="btn btn-success btn-lg" href="{{ route('sinhvien.edit', ['nhatro' => $nt->nt_ma]) }}"><em class="fa fa-pencil"> Lưu Nhà Trọ</em></a>
-                          @endif
-                            
-                      @endif
-                    
-
-                  <div class="modal fade" id="myModal" role="dialog" style="margin-top: 110px;">
-                    <div class="modal-dialog">
-                    
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          <h4 class="modal-title">Hướng Dẫn Đường Đến Nhà Trọ</h4>
-                        </div>
-                        <!-- <div class="modal-body"> -->
-                          <div id="map"></div>
-                        <!-- </div> -->
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                      
-                    </div>
-                  </div>
-                  </div>
-
+                </div>
+              </div>
                   @endforeach
 
                    @if(isset(Auth::user()->id) )
@@ -741,6 +864,20 @@ var map = new google.maps.Map(document.getElementById('map1'), {
 
 
 
+</script>
+<script >
+  $(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
 </script>
 
 
