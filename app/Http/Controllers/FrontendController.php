@@ -128,14 +128,14 @@ class FrontendController extends Controller
     public function getnhatro()
     {
         $id = Auth::user()->id;
-        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->join('baidangtaikhoan', 'baidangtaikhoan.bd_ma', '=', 'baidang.bd_ma')->where('baidangtaikhoan.id',$id)->get();
-        $dsbaidangcho = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->where('baidang.bd_trangthai','2')->get();
+        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->join('baidangtaikhoan', 'baidangtaikhoan.bd_ma', '=', 'baidang.bd_ma')->where('baidangtaikhoan.id',$id)->paginate(3);
+        $dsbaidangcho = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->where('baidang.bd_trangthai','2')->paginate(3);
         
-        $dsnhatro = DB::table('nhatro')->where('id',$id)->get();
+        $dsnhatro = DB::table('nhatro')->where('id',$id)->paginate(5);
 
         $current = new Carbon();
 
-        $dsdatphong = DB::table('datphong')->join('nhatro', 'nhatro.nt_ma', '=', 'datphong.nt_ma')->join('users', 'users.id', '=', 'datphong.id')->where('nhatro.id',$id)->where('dp_thoigianketthuc','>=', $current) ->orderBy('dp_thoigianketthuc', 'asc')->get();
+        $dsdatphong = DB::table('datphong')->join('nhatro', 'nhatro.nt_ma', '=', 'datphong.nt_ma')->join('users', 'users.id', '=', 'datphong.id')->where('nhatro.id',$id)->where('dp_thoigianketthuc','>=', $current) ->orderBy('dp_thoigianketthuc', 'asc')->paginate(5);
         // dd($dsdatphong);
         return view('frontend.profile')->with('dsnhatro', $dsnhatro)
                                         ->with('dsbaidang', $dsbaidang)

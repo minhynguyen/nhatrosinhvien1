@@ -25,6 +25,8 @@ Route::get('/home', 'FrontendController@index')->name('index');
 // Route::get('/full', 'FrontendController@update')->name('full');
 Route::resource('full', 'FrontendController');
 Route::group(['prefix'=>'admin'], function(){	
+		Route::get('loaibaidang/pdf', 'loaibaidangController@pdf')->name('loaibaidang.pdf');
+		Route::get('nhatro/pdf', 'nhatroController@pdf')->name('nhatro.pdf');
 
 		Route::resource('truong', 'TruonghocController')->middleware(CheckLevelMiddleware::class); // route hỗ trợ lấy toàn bộ controller.
 
@@ -84,6 +86,8 @@ Route::get('/dangtin/{id}', ['as'=>'nhatro.dangtin', 'uses'=>'baidangfrontendCon
 // Route::get('/', function () {
 //     return view('frontend.index');
 // });
+
+
 Route::get('/dangnhap', function () {
     return view('frontend.dangnhap');
 });
@@ -109,6 +113,7 @@ Route::get('/timkiem/{loainhatro}/{giaTu}/{giaden}/{dientich}', ['uses' => 'fron
 //     return view('frontend.profile');
 // })->name('profile');
 Route::get('/dangtin', 'baidangfrontendController@dangtin')->name('dangtin');
+
 Route::get('/profile', 'FrontendController@getnhatro')->name('profile');
 Route::resource('sinhvien', 'sinhvienController');
 Route::get('/ttsinhvien', 'sinhvienController@index')->name('ttsinhvien');

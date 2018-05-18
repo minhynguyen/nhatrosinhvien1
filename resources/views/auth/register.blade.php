@@ -175,7 +175,7 @@
 
 
                         <div class="col-md-6" style="margin-top: 15px">
-                            <button type="submit" id="submit" name="submit" class="text-center form-btn" style="width: 100%; background-color: #50a900">Đăng Kí</button>
+                            <button type="submit"  class="text-center form-btn" style="width: 100%; background-color: ##00b9a0"><li class="fa fa-paper-plane"> </li> Đăng Kí</button>
 
                         </div>
 

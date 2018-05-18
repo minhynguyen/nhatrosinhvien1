@@ -36,7 +36,7 @@ th{
 <div class="box">
             <div class="box-header">
               <h3 class="box-title">DANH SÁCH CÁC NHÀ TRỌ</h3>
-             
+              <button type="button" class="btn btn-sm pull-right" style="margin-left: 2px"> <a href="{{ route('nhatro.pdf') }}"><i class="fa fa-file-pdf-o"></i> In PDF </a></button>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">

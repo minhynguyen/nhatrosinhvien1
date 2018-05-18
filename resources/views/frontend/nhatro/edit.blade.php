@@ -6,6 +6,7 @@
             <title>Nhà Trọ Sinh Viên</title>
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/normalize.css') }}">
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset ('theme/homepage/css/show.css') }}">
             <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
             <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/bootstrap.css') }}">
@@ -17,7 +18,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="{{ asset ('theme/homepage/css/font-awesome.min.css') }}" rel="stylesheet">
             <link rel="icon" href="{{ asset ('theme/homepage/image/icon.ico') }}" type="image/x-icon">
-            <link rel="stylesheet" href="{{url('css/dropzone.css')}}">
+            <!-- <link rel="stylesheet" href="{{url('css/dropzone.css')}}"> -->
             <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
         async defer></script> -->
             <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
@@ -28,7 +29,51 @@
     height: 290px;
     
   }
+
+
+.helpr-section {
+    height: 65%;
+    background: #655f58 url('{{ asset ('theme/homepage/image/bantop.jpg') }}');
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+}
+.helpr-text {
+    height: 575px;
+}
+
+.helpr-title {
+    padding: 190px 0 10px;
+    font-size: 70px;
+    line-height: 80px;
+    -webkit-text-shadow: 0 4px 6px rgba(0,0,0,.20);
+    -moz-text-shadow: 0 4px 6px rgba(0,0,0,.20);
+    text-shadow: 0 4px 6px rgba(0,0,0,.20);
+    font-family: 'LatoWebBlack', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #ffffff;
+    margin: 0;
+    position: relative;
+}
+.helpr-content {
+    position: relative;
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+.delete1{
+  float: left;
+}
+
+
+
+
+
+
+
 </style>
+
+
 
 
             
@@ -36,30 +81,109 @@
      
 
         <body>
-
-           
              <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container">
                     <div class="row">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                       <div class="navbar-header">
+                        <div class="navbar-header">
                             <a class="navbar-brand" href="{{ route('index')}}" style="margin-left: -50px; padding-top: 20px">NhàTrọSinhViên</a>
                         </div>
-
-                        <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                           
-                        </div><!-- /.navbar-collapse -->
+                            <ul class="nav navbar-nav main-nav  clear navbar-right">
+                              <li>
+                              </li>
+                              @guest
+                                <li>
+                                    <a class="color_animation" href="{{ route('login')}}">Đăng Nhập</a>
+                                </li>
+                                <li>
+                                    <a class="color_animation" href="{{ route('register')}}" style="margin-left: 2px!important"> | Đăng Kí</a>
+                                </li>
+                                   
+                                @else
+                                <!--  -->
+
+                                    <li class="dropdown">
+                                       
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li class="dropdown" >
+                                              <a href="" class="dropdown-toggle"  data-toggle="dropdown" style="color: white" >{{ Auth::user()->name }} <span class="caret"></span></a>
+                                              <ul class="dropdown-menu" role="menu">
+                                                @if( Auth::user()->loai === 0 )
+                                                <li>
+                                                  <a href="{{ route('profile') }}" target="_blank">Thông Tin Tài Khoản</a>
+                                                </li>
+                                                @endif
+
+                                                @if( Auth::user()->loai === 1 )
+                                                <li>
+                                                  <a href="{{ route('ttsinhvien') }}" target="_blank">Thông Tin Tài Khoản Sinh Viên</a>
+                                                </li>
+                                                @endif
+
+                                                @if( Auth::user()->loai === 0 )
+                                                <li>
+                                                  
+                                                  <a href="{{ route('nhatrofrontend.create') }}" target="_blank">Đăng Kí Nhà Trọ</a>
+                                                  
+                                                </li>
+                                                @endif
+
+
+                                                @if( Auth::user()->loai === 1 )
+                                                <li><a href="{{ route('dangtin') }}">Đăng Tin Ở Ghép</a></li>
+                                                @endif
+                                                <!-- <li class="divider"></li> -->
+                                                <li>
+                                                    <a href="{{ route('changePassword1') }}" target="_blank">Đổi Mật Khẩu
+                                                    </a>
+                                                </li>
+                                                <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                  document.getElementById('logout-form').submit();">Đăng Xuất</a></li>
+
+                                                  <!-- <li><a href="#">Some other action</a></li> -->
+                                                  <li class="divider"></li>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+
+                                                @if( Auth::user()->level === 1 )
+                                                <li><a href="{{ route('admin.index') }}">Về Trang Quản Trị</a></li>
+                                                @endif
+
+                                              </ul>
+                                            </li>
+                                        </ul>
+
+                                       
+                                    </li>
+                                @endguest
+                            </ul>
                     </div>
+                        
+                    </div>
+
                 </div><!-- /.container-fluid -->
             </nav>
-        <form name="frmTruong" method="POST" action="{{route('nhatrofrontend.update', ['nhatro'=> $nhatro->nt_ma]) }}"> <!-- action tu controller -->
+
+            <section id="home" class="helpr-section helpr-layout-1 section section-inverse-color" >
+            <div class="container">
+              <div class="webHomeTitle">
+                <h2 class="helpr-title">Cập Nhật Nhà Trọ</h2>
+              </div>
+            </div>
+          </section>
+            
+          <form name="frmTruong" method="POST" action="{{route('nhatrofrontend.update', ['nhatro'=> $nhatro->nt_ma]) }}"> <!-- action tu controller -->
           {{ csrf_field() }}
           {{ method_field('PATCH') }}
-            <div class="description_content">
-                <div class="text-content container">
+            <div class="description_content" >
+                <div class="text-content container" style="margin-top: 0px;">
+                  <div class="col-md-12">
+                    
+                  </div>
                     @if($errors->any())
-                      <div class="alert alert-danger" style="background-color: red; text-align: left;">
+                      <div class="alert alert-danger" style="background-color: #31708f; text-align: left;">
                         <ul>
                           <!-- hàm validate trong lar hỗ trợ biến errors -->
                           @foreach($errors->all() as $error)
@@ -68,40 +192,106 @@
                         </ul>
                       </div>
                       @endif
-                    <div class="col-md-6">
-                        <h1 style="font-family: Time new romance">Cập Nhật Nhà Trọ</h1>
-                        <div class="fa fa-tasks fa-2x"></div>
-                        
-                        <div class="col-md-12" style="margin-top: 10px">
-                            <!-- <input type="text" name="" class="form" style="width: 100%" placeholder="Chọn Loại Bài Đăng"> -->
-                            <select class="form" style="width: 100%" name="lnt_ma">
+                    <div class="col-md-6" >
+                        <div id='nz-div-2' style="margin-top: -15px;">
+                          <h3 class="tde" style="margin-left:-350px !important">         
+                               <span>Thông Tin Chung</span>
+                          </h3>
+                        <hr>
+                      </div>
+                        <div class="panel panel-success" style="margin-top: -35px">
+                          <div class="panel-body">
+                              <div class="col-md-12" style="margin-top: 10px">
+                                <select class="form" style="width: 100%" name="lnt_ma">
                                       <option value="" disabled selected>Chọn Loại Nhà Trọ</option>
                                       @foreach($dsloainhatro as $lnt)
-                                        <!-- <option value="{{$lnt->lnt_ma}}">{{$lnt->lnt_ten}}</option> -->
+                                        
                                         <option value="{{$lnt->lnt_ma}}" <?php echo ($lnt->lnt_ma == $nhatro->lnt_ma) ? 'selected' : ''  ?>>{{$lnt->lnt_ten}}</option>
                                       @endforeach      
-                            </select>
-                        </div>
+                                </select>
+                              </div>
 
-                       
-
-                        <div class="col-md-12" style="margin-top: 10px">
+                              <div class="col-md-12" style="margin-top: 10px">
                           <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
-                            <input type="text" name="nt_ten" class="form" style="width: 100%" placeholder="Tên Nhà Trọ" value="{{$nhatro->nt_ten}}">
-                        </div>
+                                <input type="text" name="nt_ten" class="form" style="width: 100%" placeholder="Tên Nhà Trọ" value="{{$nhatro->nt_ten}}">
+                              </div>
                         
 
-                        
-                        <!-- <div class="col-md-12" style="margin-top: 10px">
+                              <div class="col-md-12" style="margin-top: 10px">
                             <input type="text" name="" class="form" style="width: 100%" placeholder="Tên Người Cho Thuê" value="{{ Auth::user()->name}}">
-                        </div> -->
+                            </div>
 
                         <div class="col-md-12" style="margin-top: 10px">
                             <input type="text" name="nt_sdtlienhe" class="form" style="width: 100%" placeholder="Số Điện Thoại Liên Lạc" value="{{$nhatro->nt_sdtlienhe}}">
                         </div>
 
                         <div class="col-md-12" style="margin-top: 10px">
-                            <input type="text" name="nt_dientich" class="form" style="width: 100%" placeholder="Diện Tích Nhà Trọ" value="{{$nhatro->nt_dientich}}">
+                            <div id='nz-div-2' >
+                            <h3 class="tde" style="margin-left:-240px !important">         
+                                 <span>Thông Tin Chi Tiết Nhà Trọ</span>
+                            </h3>
+                          <hr>
+                        </div>
+                        </div>
+
+                          
+
+                        <div class="col-md-12" style="margin-top: 10px">
+                          <!-- <div  class="fa fa-cogs fa-2x"> Địa Chỉ Cụ Thể</div> -->
+                          <label for="">ĐỊA CHỈ CỤ THỂ</label>
+                              <input id="pac-input" type="text" name="nt_diachi" placeholder="Vui Lòng Nhập Chính Xác Địa Chỉ Nhà Trọ" style="width: 100%" class="form" value="{{$nhatro->nt_diachi}}" readonly="nt_diachi">
+                 <!-- <div id="map"></div> -->
+                               <div id="infowindow-content">
+                                <img src="" width="16" height="16" id="place-icon">
+                                <span id="place-name"  class="title"></span><br>
+                                <span id="place-address"></span>
+                              </div>
+                              
+                          
+                        </div>
+
+                        <div class="col-md-6" style="margin-top: 10px">
+                          
+                            <label for="">VĨ ĐỘ (LATITUDE)</label>
+                            <input type="text" class="form" name="nt_vido" id="lat" style="width: 100%" value="{{$nhatro->nt_vido}}" readonly="nt_vido">
+                          
+                        </div>
+                        <div class="col-md-6" style="margin-top: 10px"> 
+                          
+                            <label for="">KINH ĐỘ (LONGITUDE)</label>
+                            <input type="text" class="form" name="nt_kinhdo" id="lng" style="width: 100%" value="{{$nhatro->nt_kinhdo}}" readonly="nt_kinhdo">
+                          
+                        </div>
+
+                        <div class="col-md-12" style="margin-top: 10px">
+                          <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
+                          <div class="input-group" class="form">
+                              <input type="text" class="form" name="nt_dientich" placeholder="Diện Tích Phòng" value="{{$nhatro->nt_dientich}}" style="width: 100%">
+                              <span class="input-group-addon" >(~ M<sup>2</sup>).</span>
+                            </div>
+                            <!-- <input type="text" name="nt_dientich" class="form" style="width: 100%" placeholder="Diện Tích Phòng" value="{{old('nt_dientich')}}">
+                            <span class="input-group-addon">(~ M<sup>3</sup>).</span> -->
+                        </div>
+
+                        <div class="col-md-12" style="margin-top: 10px">
+                            <div class="input-group" class="form">
+                              <input type="text" class="form" name="nt_giathue" placeholder="Giá Cho Thuê" value="{{$nhatro->nt_giathue}}" style="width: 100%">
+                              <span class="input-group-addon">(VNĐ / Tháng).</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" style="margin-top: 10px">
+                            <div class="input-group" class="form">
+                              <input type="text" class="form" name="nt_giadien" placeholder="Giá Điện" value="{{$nhatro->nt_giadien}}">
+                              <span class="input-group-addon" style="width: 100%">(~ Kw/h)</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" style="margin-top: 10px">
+                            <div class="input-group" class="form">
+                              <input type="text" class="form" name="nt_gianuoc" placeholder="Giá Nước" value="{{$nhatro->nt_gianuoc}}">
+                              <span class="input-group-addon" style="width: 100%">(~ M<sup>3</sup>).</span>
+                            </div>
                         </div>
 
                         <div class="col-md-12" style="margin-top: 10px">
@@ -113,6 +303,30 @@
 
                             </select>
                         </div>
+
+
+                        
+                        <div class="col-md-6" style="margin-top: 10px">
+                            
+                        </div>
+
+
+
+
+
+
+                          </div>
+                        </div>
+                        <!-- <div class="fa fa-tasks fa-2x"></div> -->
+                        
+                      
+                      
+                        
+
+                        
+                        
+
+                        
                         
                         <!-- <div class="col-md-6" style="margin-top: 10px">
                             <div class="input-group" class="form">
@@ -129,39 +343,40 @@
                         </div> -->
 
 
-                        <div class="col-md-12" style="margin-top: 10px">
-                          <div class="fa fa-cogs fa-2x" > Địa Chỉ Cụ Thể</div>
-                              <input id="pac-input" type="text" name="nt_diachi" placeholder="Vui Lòng Nhập Chính Xác Địa Chỉ Nhà Trọ" style="width: 100%" class="form" value="{{$nhatro->nt_diachi}}">
-                
-                 <!-- <div id="map"></div> -->
-                               <div id="infowindow-content">
-                                <img src="" width="16" height="16" id="place-icon">
-                                <span id="place-name"  class="title"></span><br>
-                                <span id="place-address"></span>
-                              </div>
-                              
-                          
-                        </div>
-                        <div class="col-md-6" style="margin-top: 10px">
-                          
-                            <label for="">VĨ ĐỘ (LATITUDE)</label>
-                            <input type="text" class="form" name="nt_vido" id="lat" style="width: 100%" value="{{$nhatro->nt_vido}}">
-                          
-                        </div>
-                        <div class="col-md-6" style="margin-top: 10px"> 
-                          
-                            <label for="">KINH ĐỘ (LONGITUDE)</label>
-                            <input type="text" class="form" name="nt_kinhdo" id="lng" style="width: 100%" value="{{$nhatro->nt_kinhdo}}">
-                          
-                        </div>
+                        
+                        
+
+                        
+                    </div>
+                    <div class="col-md-6">
+                    <div id='nz-div-2' style="margin-top: -15px;">
+                        <h3 class="tde" style="margin-left: -300px !important">         
+                             <span>Sơ Đồ Vị Trí Nhà Trọ</span>
+                        </h3>
+                        <hr>
+                      </div>
+                    </div>
+                    <div class="col-md-6" style="margin-top: 10px">
+                      <label>Kéo thả vị trí trên bản đồ để chỉnh địa điểm chính xác hơn</label>
+                        <div id="map"></div>
+                    </div>
+                    
+                   <!--  <div class="col-md-6" style="margin-top: 10px">
+                    <div id='nz-div-2' style="margin-top: -15px;">
+                        <h3 class="tde" style="margin-left: -300px !important">         
+                             <span>Tiện ích phòng trọ</span>
+                        </h3>
+                        <hr>
+                      </div>
+                    </div> -->
 
 
-                        <!-- <div class="col-md-12" style="margin-top: 10px">
-                          <div class="fa fa-cogs fa-2x" > Tiện ích phòng trọ</div>
+                   <!--  <div class="col-md-6" style="margin-top: 20px">
+                          
                           <div class="col-md-12">
                             <div class="checkbox">
                               @foreach($dstienich as $ti)
-                             
+                              
                               <label><input type="checkbox" value="{{$ti->ti_ma}}" name="tienich[]">{{$ti->ti_ten}}</label>
                               @endforeach
                               
@@ -170,95 +385,45 @@
                         </div> -->
 
 
-                        <div class="col-md-12" style="margin-top: 10px">
-                          <div class="fa fa-cubes fa-2x" > Thông Tin Bổ Sung</div>
-                          <div class="col-md-6" style="margin-top: 10px">
-                            <div class="input-group" class="form">
-                              <input type="text" class="form" name="nt_giadien" placeholder="Giá Điện" value="{{$nhatro->nt_giadien}}">
-                              <span class="input-group-addon">(~ Kw/h)</span>
-                            </div>
-                        </div>
+                      <!--   <div class="col-md-6" style="margin-top: 10px">
+                    <div id='nz-div-2' style="margin-top: -15px;">
+                        <h3 class="tde" style="margin-left: -300px !important">         
+                             <span>Hình Ảnh Nhà Trọ</span>
+                        </h3>
+                        <hr>
+                      </div>
+                    </div> -->
 
-                        <div class="col-md-6" style="margin-top: 10px">
-                            <div class="input-group" class="form">
-                              <input type="text" class="form" name="nt_gianuoc" placeholder="Giá Nước" value="{{$nhatro->nt_gianuoc}}">
-                              <span class="input-group-addon">(~ M<sup>3</sup>).</span>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12" style="margin-top: 10px">
-                            <div class="input-group" class="form">
-                              <input type="text" class="form" name="nt_giathue" placeholder="Giá Cho Thuê" value="{{$nhatro->nt_giathue}}" style="width: 100%">
-                              <span class="input-group-addon">(VNĐ / Tháng).</span>
-                            </div>
-                        </div>
-
-
-
-                        <!-- <div class="col-md-6" style="margin-top: 10px">
-                            <select class="form" style="width: 100%">
-                                      <option value="" disabled selected>Vệ Sinh</option>
-                                      <option value="">Khép Kín</option>
-                                      <option value="">Chung</option>      
-                            </select>
-                        </div> -->
-                        <!-- <div class="col-md-6" style="margin-top: 10px">
-                            <select class="form" style="width: 100%">
-                                      <option value="" disabled selected>Camera An Ninh</option>
-                                      <option value="">Có</option>
-                                      <option value="">Không</option>      
-                            </select>
-                        </div> -->
-
-                        </div>
-                        <div class="col-md-6" style="margin-top: 10px">
-                            
-                        </div>
-                        
-
-                        
-                    </div>
-                    <div class="col-md-6">
-                        <div class="img-section">
-                           <img src="{{ asset ('theme/homepage/image/pic6.jpg' )}}" width="250" height="220">
-                           <img src="{{ asset ('theme/homepage/image/pic6.jpg' )}}" width="250" height="220">
-                           <div class="img-section-space"></div>
-                           <img src="{{ asset ('theme/homepage/image/pic3.jpg' )}}"  width="250" height="220">
-                           <img src="{{ asset ('theme/homepage/image/pic4.jpg' )}}"  width="250" height="220">
-                       </div>
-                    </div>
-                    <div class="col-md-6" style="margin-top: 10px">
-                      <label>Kéo thả vị trí trên bản đồ để chỉnh địa điểm chính xác hơn</label>
-                        <div id="map"></div>
-                    </div>
-
-                    <!-- <div class="col-md-6">
-                        <div class="fa fa-cubes fa-2x" > Hình Ảnh Nhà Trọ</div>
+                     <!-- <div class="col-md-6">
                         
                          <div class="form-group">
                           <div id="filediv">
                             <input type="file" id="file" name="images[]" multiple="multiple" accept="image/*" title="Select Images To Be Uploaded">
                             <br>
-                      </div>
+                            </div>
 
-                      </div>
+                          </div>
                            
                     </div> -->
+                    <!-- <div class="col-md-6">
+                        <div class="img-section">
+                           <img style="height: 220px; width: 250px !important" src="{{ asset ('theme/homepage/image/anh1.jpg') }}" width="250" height="220">
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/anh2.jpg') }}" width="250" height="220">
+                           <div class="img-section-space"></div>
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/pic2.jpg') }}"  width="250" height="220">
+                           <img style="height: 220px !important" src="{{ asset ('theme/homepage/image/pic3.jpg') }}"  width="250" height="220">
+                       </div>
+                    </div> -->
+                    
+
+                    
 
 
-                    <!-- <div class="col-md-12">
-                        
-                        <textarea id="editor1" name="nt_thongtin" rows="10" cols="80" style="width: 100%" value="{{old('nt_thongtin')}}">
-                    </textarea>
-                    </div> -->
-                    <!-- <div class="col-md-12"> -->
-                        <!-- <div class="col-md-12" style="margin-top: 10px">
-                          <div class="fa fa-puzzle-piece fa-2x" > Thông Tin Mô Tả Thêm</div>
-                            <input type="text" name="nt_thongtin" class="form" style="width: 100%" placeholder="Thông Tin Thêm" value="{{$nhatro->nt_thongtin}}">
-                    </div> -->
+                    
+                    
 
                     <div class="col-md-12" style="margin-top: 10px">
-                            <button type="submit"  class="text-center form-btn" style="width: 100%; background-color: #50a900"><li class="fa fa-paper-plane"> </li> Cập Nhật</button>
+                            <button type="submit"  class="text-center form-btn" style="width: 100%; background-color: ##00b9a0"><li class="fa fa-paper-plane"> </li> Đăng Kí</button>
                     </div>
                   </form>
 
@@ -281,7 +446,7 @@
             <script src="{{ asset ('theme/homepage/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
             <script src="{{ asset ('theme/homepage/upload-image.js') }}"></script>
             <script src="{{ asset ('theme/homepage/ckeditor/ckeditor.js') }}"></script>
-            <!-- <script>CKEDITOR.replace('editor1');</script> -->
+            <script>CKEDITOR.replace('editor1');</script>
 
 <script>
   $('#add_more').click(function() {
@@ -333,7 +498,7 @@
         $.each(this.files, function(i, img) {
           var reader = new FileReader(),
             newElement = $("<div id='previewImg" + i + "' class='abcd'><img /></div>"),
-            deleteBtn = $("<span class='delete' onClick='deletePreview(this, " + i + ")'>delete</span>").prependTo(newElement),
+            deleteBtn = $("<button class='btn btn-danger delete1' onClick='deletePreview(this, " + i + ")'>Xóa Ảnh Này</button>").prependTo(newElement),
             preview = newElement.find("img");
 
           reader.onloadend = function() {
@@ -362,8 +527,8 @@
             <script>
  function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: {{$nhatro->nt_vido}}, lng: {{$nhatro->nt_kinhdo}}},
-          zoom: 17,
+          center: {lat: 10.031450, lng: 105.768872},
+          zoom: 15,
           scrollwheel: true
         });
         var card = document.getElementById('pac-card');
@@ -382,8 +547,8 @@
         infowindow.setContent(infowindowContent);
         var marker = new google.maps.Marker({
                   position: {
-                  lat: {{$nhatro->nt_vido}},
-                  lng: {{$nhatro->nt_kinhdo}}
+                  lat: 10.031450,
+                  lng: 105.768872
             },
           map: map,
           draggable: true,
@@ -454,12 +619,27 @@
                         alert('use location');
                       }
                 };
-                // geolocate();
+                geolocate();
       }
       
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdCD7PZpWL_CKCYzebqsN8WEAkcjWcqY&libraries&libraries=places&callback=initMap"
         async defer></script>
+
+        <script >
+  $(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
+</script>
     
   </body>
 </html>

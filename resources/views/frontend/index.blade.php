@@ -6,10 +6,12 @@
             <title>Nhà Trọ Sinh Viên</title>
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/normalize.css') }}">
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset ('css/bootstrap.min.css') }}">
+            <link rel="stylesheet" src="{{ asset ('js/bootstrap.min.js') }}">
             <!-- <link rel="stylesheet" href="{{ asset ('js/jqueryMap.js') }}"> -->
             <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
             <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
-            <link rel="stylesheet" href="{{ asset ('theme/homepage/css/bootstrap.css') }}">
+            <!-- <link rel="stylesheet" href="{{ asset ('theme/homepage/css/bootstrap.css') }}"> -->
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/style-portfolio.css') }}">
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/picto-foundry-food.css') }}">
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/jquery-ui.css') }}">
@@ -119,13 +121,13 @@
                                 </li>
                               <?php 
                                   $dsGiaTu = [];
-                                  for($i=200000; $i<=2200000; $i+= 200000){
+                                  for($i=200000; $i<=3000000; $i+= 100000){
                                       array_push($dsGiaTu, $i);
                                   }
                                ?>
                                <?php 
                                   $dsGiaDen = [];
-                                  for($i=200000; $i<=2200000; $i+= 200000){
+                                  for($i=1000000; $i<=8000000; $i+= 100000){
                                       array_push($dsGiaDen, $i);
                                   }
                                ?>
@@ -355,7 +357,7 @@ $(document).ready(function(){
           map: map,
           title: 'Vị Trí Của Tôi',
           draggable: false,
-          // icon: 'http://maps.google.com/mapfiles/ms/micons/green.png'
+          icon: 'http://maps.google.com/mapfiles/ms/micons/green.png'
         });
        google.maps.event.addListener(marker,'position_changed',function(){
     var lat = marker.getPosition().lat();
@@ -399,14 +401,7 @@ $(document).ready(function(){
     icon: '{{ asset ('theme/homepage/image/house.png') }}'
     
   });
-  // markers.push(home);
   
-  //  var options = {
-  //           maxZoom: 13,
-  //           gridSize: 50,
-  //           imagePath: '{{ asset ('theme/homepage/image/m1.png') }}'
-  //       };
-  // console.log(markers.lat);
   
       
   var infowindow = new google.maps.InfoWindow();  
@@ -443,17 +438,17 @@ $(document).ready(function(){
   // var markerCluster = new MarkerClusterer(map, markers, options);
   // console.log(markerCluster);
 
-    var content = '<div id="iw-container">' +
-                    '<div class="iw-title">Vị Trí Của Tôi: </div>' +
-                    '<div class="iw-content">' +
-                      '<div class="iw-subTitle">Tọa Độ: </div>'+
-                      '<img src="{{ asset ('theme/homepage/image/mar.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
-                  '</div>';
-  // A new Info Window is created and set content
-  var infowindow = new google.maps.InfoWindow({
-    content: content,
-    // maxWidth: 100%,  
-  });
+  //   var content = '<div id="iw-container">' +
+  //                   '<div class="iw-title">Vị Trí Của Tôi: </div>' +
+  //                   '<div class="iw-content">' +
+  //                     '<div class="iw-subTitle">Tọa Độ: </div>'+
+  //                     '<img src="{{ asset ('theme/homepage/image/mar.png') }}" alt="Porcelain Factory of Vista Alegre" height="50" width="50">' +
+  //                 '</div>';
+  // // A new Info Window is created and set content
+  // var infowindow = new google.maps.InfoWindow({
+  //   content: content,
+  //   // maxWidth: 100%,  
+  // });
   // This event expects a click on a marker
   // When this event is fired the Info Window is opened.
   // google.maps.event.addListener(marker, 'click', function() {

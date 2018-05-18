@@ -41,7 +41,7 @@ class HomeController extends Controller
  
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
             //Current password and new password are same
-            return redirect()->back()->with("error","Mật Khẩu Cũ Và Mật Khẩu Cũ Giống Nhau. Vui Lòng Nhập Lại Mật Khẩu Mới!!!");
+            return redirect()->back()->with("error","Mật Khẩu Cũ Và Mật Khẩu Mới Giống Nhau. Vui Lòng Nhập Lại Mật Khẩu Mới!!!");
         }
  
         $validatedData = $request->validate([

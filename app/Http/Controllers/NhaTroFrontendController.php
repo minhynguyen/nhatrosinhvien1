@@ -10,6 +10,7 @@ use App\binhluan;
 use App\nhatro_tienich;
 use App\hinhanh_nhatro;
 use App\datphong;
+use App\o;
 use App\baidangtaikhoan;
 use Auth;
 use DB;
@@ -28,14 +29,14 @@ class NhaTroFrontendController extends Controller
     {
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $id = Auth::user()->id;
-        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->get();
+        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->paginate(3);
         $dsbaidangcho = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->where('baidang.bd_trangthai','2')->get();
         $dstienich = tienich::all();
-        $dsnhatro = DB::table('nhatro')->where('id',$id)->get();
+        $dsnhatro = DB::table('nhatro')->where('id',$id)->paginate(5);
 
         $current = new Carbon();
 
-        $dsdatphong = DB::table('datphong')->join('nhatro', 'nhatro.nt_ma', '=', 'datphong.nt_ma')->join('users', 'users.id', '=', 'datphong.id')->where('nhatro.id',$id)->where('dp_thoigianketthuc','>=', $current) ->orderBy('dp_thoigianketthuc', 'asc')->get();
+        $dsdatphong = DB::table('datphong')->join('nhatro', 'nhatro.nt_ma', '=', 'datphong.nt_ma')->join('users', 'users.id', '=', 'datphong.id')->where('nhatro.id',$id)->where('dp_thoigianketthuc','>=', $current) ->orderBy('dp_thoigianketthuc', 'asc')->paginate(5);
         
         return view('frontend.profile')->with('dsloainhatro', $dsloainhatro)
                                          ->with('dstienich', $dstienich)
@@ -147,6 +148,7 @@ class NhaTroFrontendController extends Controller
         $baidang->lbd_ma = $request->lbd_ma;
         $baidang->bd_tieude = $request->bd_tieude;
         $baidang->bd_noidung = $request->bd_noidung;
+        $baidang->bd_trangthai = 1;
         $baidang->save();
 
 
@@ -176,7 +178,8 @@ class NhaTroFrontendController extends Controller
     {
         // dd($id);
         $nhatro = DB::table('nhatro')->join('users', 'users.id', '=', 'nhatro.id')->join('loainhatro', 'loainhatro.lnt_ma', '=', 'nhatro.lnt_ma')->where('nt_ma', $id)->get();
-        $baidang = DB::table('baidang')->join('loaibaidang', 'loaibaidang.lbd_ma', '=', 'baidang.lbd_ma')->where('nt_ma',$id)->join('baidangtaikhoan', 'baidangtaikhoan.bd_ma', '=', 'baidang.bd_ma')->join('users', 'users.id', '=', 'baidangtaikhoan.id')->get();
+        $baidang = DB::table('baidang')->join('loaibaidang', 'loaibaidang.lbd_ma', '=', 'baidang.lbd_ma')->where('nt_ma',$id)->join('baidangtaikhoan', 'baidangtaikhoan.bd_ma', '=', 'baidang.bd_ma')->join('users', 'users.id', '=', 'baidangtaikhoan.id')
+            ->orderBy('bd_taomoi', 'desc')->get();
         // dd($baidang);
 
 
@@ -279,7 +282,12 @@ class NhaTroFrontendController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $nhatro = nhatro::find($id);
+        $nhatro->delete();
+        $res=nhatro_tienich::where('nt_ma',$id)->delete();
+        $o=o::where('nt_ma',$id)->delete();
+
+        return redirect(route('nhatrofrontend.index'));
     }
 
     

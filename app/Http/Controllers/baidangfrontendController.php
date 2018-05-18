@@ -28,12 +28,12 @@ class baidangfrontendController extends Controller
     {
         $dsloainhatro = DB::table('loainhatro')->where('lnt_trangthai','2')->get();
         $id = Auth::user()->id;
-        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->get();
-        $dsbaidangcho = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->where('baidang.bd_trangthai','2')->get();
+        $dsbaidang = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->paginate(3);
+        $dsbaidangcho = DB::table('baidang')->join('loaibaidang', 'baidang.lbd_ma', '=', 'loaibaidang.lbd_ma')->join('nhatro', 'nhatro.nt_ma', '=', 'baidang.nt_ma')->join('users', 'users.id', '=', 'nhatro.id')->where('nhatro.id',$id)->where('baidang.bd_trangthai','2')->paginate(3);
         $dstienich = tienich::all();
         $current = new Carbon();
-        $dsnhatro = DB::table('nhatro')->where('id',$id)->get();
-        $dsdatphong = DB::table('datphong')->join('nhatro', 'nhatro.nt_ma', '=', 'datphong.nt_ma')->join('users', 'users.id', '=', 'datphong.id')->where('nhatro.id',$id)->where('dp_thoigianketthuc','>=', $current) ->orderBy('dp_thoigianketthuc', 'asc')->get();
+        $dsnhatro = DB::table('nhatro')->where('id',$id)->paginate(5);
+        $dsdatphong = DB::table('datphong')->join('nhatro', 'nhatro.nt_ma', '=', 'datphong.nt_ma')->join('users', 'users.id', '=', 'datphong.id')->where('nhatro.id',$id)->where('dp_thoigianketthuc','>=', $current) ->orderBy('dp_thoigianketthuc', 'asc')->paginate(5);;
         return view('frontend.profile')->with('dsloainhatro', $dsloainhatro)
                                          ->with('dstienich', $dstienich)
                                          ->with('dsnhatro', $dsnhatro)
@@ -71,6 +71,7 @@ class baidangfrontendController extends Controller
         $baidang->lbd_ma = $request->lbd_ma;
         $baidang->bd_tieude = $request->bd_tieude;
         $baidang->bd_noidung = $request->bd_noidung;
+        $baidang->bd_trangthai = 1;
         $baidang->save();
 
         $baidangtaikhoan = new baidangtaikhoan();
@@ -79,9 +80,13 @@ class baidangfrontendController extends Controller
         $baidangtaikhoan->save();
 
         
-
+        if(Auth::user()->loai == 0){
         return redirect(route('baidangfrontend.index')); //trả về trang cần hiển thị
         }
+        else{
+            return redirect(route('sinhvien.index'));
+        }
+    }
         catch(QueryException $ex){
             return reponse([
                 'error' => true, 'message' => $ex->getMessage()], 500);
@@ -122,9 +127,19 @@ class baidangfrontendController extends Controller
     {
         $baidang = baidang::find($id);
         $dsloaibaidang = loaibaidang::all();
-        // $dsnhatro = nhatro::all();
         
-        return view('frontend.nhatro.baidangedit')->with('baidang', $baidang)->with('dsloaibaidang', $dsloaibaidang);
+        if(Auth::user()->loai == 0){
+        return view('frontend.nhatro.baidangedit')->with('baidang', $baidang)->with('dsloaibaidang', $dsloaibaidang);}
+        else{
+            $nhatro = DB::table('nhatro')
+                    ->join('baidang', 'baidang.nt_ma', '=', 'nhatro.nt_ma')
+                    ->where('bd_ma', $id)->get();
+            $dsloaibaidang = loaibaidang::find(1);
+            return view('frontend.nhatro.baidangoghepedit')
+                                ->with('baidang', $baidang)
+                                ->with('nhatro', $nhatro)
+                                ->with('dsloaibaidang', $dsloaibaidang);
+        }
     }
 
     /**

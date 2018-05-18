@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\loaibaidang;
 use App\Http\Requests\loaibaidangrequest;
 use Yajra\Datatables\Datatables;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class loaibaidangController extends Controller
 {
@@ -146,5 +147,36 @@ class loaibaidangController extends Controller
         $loaibaidang = loaibaidang::find($id);
         $loaibaidang->delete();
         return redirect(route('loaibaidang.index'));
+    }
+
+    public function pdf()
+    {
+        try{
+            $dsloaibaidang = loaibaidang::all();
+            // $dsChude = ChuDe::take(20)->get(); // hàm này lấy 20 dòng không lấy hết
+            //dd($dsChude);
+            $data = [
+                'dsloaibaidang' => $dsloaibaidang,
+            ];
+            // xem trước pdf
+            return view('backend.loaibaidang.loaibaidangpdf')->with('dsloaibaidang', $dsloaibaidang);
+
+            // xuất pdf và cho download
+            $pdf = PDF::loadView('backend.loaibaidang.loaibaidangpdf', $data);
+            return $pdf->download('DanhMucLoaiBaiDang.pdf');
+        }
+        catch(QueryException $ex){
+            return reponse([
+                'error' => true,
+                'message' => $ex->getMessage()
+            ], 200);
+
+        } catch(PDOExpection $ex){
+            return reponse([
+                'error' => true,
+                'message' => $ex->getMessage()
+            ], 200);
+        }
+       
     }
 }

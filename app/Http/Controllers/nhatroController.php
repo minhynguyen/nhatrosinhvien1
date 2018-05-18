@@ -15,6 +15,7 @@ use DB;
 use Illuminate\Support\collection;
 use App\Http\Requests\nhatrorequest;
 use Yajra\Datatables\Datatables;
+use Barryvdh\DomPDF\Facade as PDF;
 class nhatroController extends Controller
 {
     /**
@@ -290,5 +291,38 @@ class nhatroController extends Controller
             ->editColumn('nt_trangthai', '@if ($nt_trangthai =="1")Đã Duyệt @else Chờ Duyệt  @endif')
             ->editColumn('nt_tinhtrang', '@if ($nt_tinhtrang =="0")Hết Phòng @else Còn Phòng  @endif')
             ->make(true);
+    }
+
+
+    public function pdf()
+    {
+        try{
+            
+            $dsnhatro = DB::table('nhatro')->join('loainhatro', 'nhatro.lnt_ma', '=', 'loainhatro.lnt_ma')->join('users', 'users.id', '=', 'nhatro.id')->get();
+            // $dsChude = ChuDe::take(20)->get(); // hàm này lấy 20 dòng không lấy hết
+            //dd($dsChude);
+            $data = [
+                'dsnhatro' => $dsnhatro,
+            ];
+            // xem trước pdf
+            return view('backend.nhatro.nhatropdf')->with('dsnhatro', $dsnhatro);
+
+            // xuất pdf và cho download
+            $pdf = PDF::loadView('backend.nhatro.nhatropdf', $data);
+            return $pdf->download('DanhSachNhaTro.pdf');
+        }
+        catch(QueryException $ex){
+            return reponse([
+                'error' => true,
+                'message' => $ex->getMessage()
+            ], 200);
+
+        } catch(PDOExpection $ex){
+            return reponse([
+                'error' => true,
+                'message' => $ex->getMessage()
+            ], 200);
+        }
+       
     }
 }

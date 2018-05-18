@@ -36,6 +36,7 @@ th{
 <div class="box">
             <div class="box-header">
               <h3 class="box-title">DANH SÁCH CÁC LOẠI BÀI ĐĂNG</h3>
+              <button type="button" class="btn btn-sm pull-right" style="margin-left: 2px"> <a href="{{ route('loaibaidang.pdf') }}"><i class="fa fa-file-pdf-o"></i> In PDF </a></button> 
               
               
 
