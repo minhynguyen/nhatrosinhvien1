@@ -49,7 +49,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <span class="sr-only">Toggle navigation</span>
       </a>
       <!-- Navbar Right Menu -->
-      
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+         
+          
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="hidden-xs">{{ Auth::user()->name }}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <p>
+                  {{ Auth::user()->name }}
+                  <small>ADMIN</small>
+                </p>
+                <p>{{ Auth::user()->email }}</p>
+              </li>
+            </ul>
+          </li>
+         
+        </ul>
+      </div>
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->

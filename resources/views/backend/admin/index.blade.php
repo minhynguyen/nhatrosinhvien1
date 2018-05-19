@@ -42,7 +42,7 @@
                   <div class="inner">
                     <h3>{{$dsnhatronew}}</h3>
                     <p>Nhà Trọ Mới Đăng Kí </p>
-                    <p>Tổng Số Nhà Trọ: {{$dsnhatro}}</p>
+                    <!-- <p>Tổng Số Nhà Trọ: {{$dsnhatro}}</p> -->
 
                   </div>
                   <div class="icon">
@@ -62,10 +62,10 @@
                   <h3>{{$dsbaidangnew}}</h3>
 
                   <p>Bài Đăng Mới</p>
-                  <p>Tổng Số Bài Đăng: {{$dsbaidang}}</p>
+                  <!-- <p>Tổng Số Bài Đăng: {{$dsbaidang}}</p> -->
                 </div>
                 <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <i class="fa fa-list-alt"></i>
                 </div>
                 <a href="{{route('baidang.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -79,7 +79,7 @@
                   <h3>{{$dsusernew}}</h3>
 
                   <p>Người Dùng Mới</p>
-                  <p>Tổng Số Người Dùng: {{$dsuser}}</p>
+                  <!-- <p>Tổng Số Người Dùng: {{$dsuser}}</p> -->
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
@@ -93,10 +93,10 @@
           <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3>{{$dscommment}}</h3>
+                  <h3>{{$dscommmentnew}}</h3>
 
-                  <p>Bình Luận</p>
-                  <p>Tổng Số Bình Luận Trong Ngày: {{$dscommment}}</p>
+                  <p>Bình Luận Trong Ngày</p>
+                  <!-- <p>Tổng Số Bình Luận: {{$dscommment}}</p> -->
                 </div>
                 <div class="icon">
                   <i class="fa fa-comment"></i>
@@ -116,36 +116,42 @@
               <div class="row">
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                    <h5 class="description-header">$35,210.43</h5>
-                    <span class="description-text">TOTAL REVENUE</span>
+                    
+                    <span class="description-text">Tổng Số Nhà Tro</span>
+                    <h5 class="description-header">{{$dsnhatro}}</h5>
+                    <span class="description-percentage text-green"><i class="fa fa-home"></i></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
-                    <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                    <h5 class="description-header">$10,390.90</h5>
-                    <span class="description-text">TOTAL COST</span>
+                    
+                    <span class="description-text">Bài Đăng</span>
+                    <h5 class="description-header">{{$dsbaidang}}</h5>
+                    <span class="description-percentage text-yellow"><i class="fa fa-file-text"></i></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                    <h5 class="description-header">$24,813.53</h5>
-                    <span class="description-text">TOTAL PROFIT</span>
+                    
+                    
+                    <span class="description-text">Người Dùng</span>
+                    <h5 class="description-header">{{$dsuser}}</h5>
+                    <span class="description-percentage text-green"><i class="fa fa-users"></i></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block">
-                    <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                    <h5 class="description-header">1200</h5>
-                    <span class="description-text">GOAL COMPLETIONS</span>
+                    
+                    <span class="description-text">Bình Luận</span>
+
+                    <h5 class="description-header">{{$dscommment}}</h5>
+                    <span class="description-percentage text-red"><i class="fa fa-comments"></i></span>
                   </div>
                   <!-- /.description-block -->
                 </div>

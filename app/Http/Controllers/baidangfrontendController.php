@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Support\collection;
 use App\Http\Requests\baidangrequest;
 
+
 class baidangfrontendController extends Controller
 {
     /**

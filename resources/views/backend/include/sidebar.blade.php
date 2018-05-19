@@ -31,7 +31,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="active"><a href="{{ route('index')}}" target="_blank"><i class="fa fa-home"></i> <span>Trang Chủ</span></a></li>
 
-        <li class="active"><a href="{{ route('admin.index')}}"><i class="fa fa-home"></i> <span>Trang Chủ Admin</span></a></li>
+        <li><a href="{{ route('admin.index')}}"><i class="fa fa-dashboard"></i> <span>Trang Chủ Admin</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-mortar-board"></i> <span>Trường</span>
             <span class="pull-right-container">

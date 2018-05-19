@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{{ asset ('theme/homepage/css/normalize.css') }}">
         <link rel="stylesheet" href="{{ asset ('theme/homepage/css/main.css') }}">
         <link rel="stylesheet" href="{{ asset ('theme/homepage/css/show.css') }}">
+        <link rel="stylesheet" href="{{ asset ('theme/homepage/css/footer.css') }}">
         <!-- <link rel="stylesheet" href="{{ asset ('theme/homepage/css/tt.css') }}"> -->
         <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
@@ -294,13 +295,10 @@ height: 300px;
 
                 </div>
                 <div>
-                  <div class="btn btn-group" style="margin-top: 20px; margin-bottom: 20px">
-                    <h2>SƠ ĐỒ NHÀ TRỌ</h2>
+                  <h2>SƠ ĐỒ NHÀ TRỌ</h2>
+                  <div class="btn btn-group" style="margin-top: 20px; margin-bottom: 20px;">
 
-                      
-
-                        
-                      <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" style="background-color: #10ada5"><i class="fa fa-car" ></i> Mở Chỉ Đường</button>
+                      <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" style="background-color: #10ada5; color: white"><i class="fa fa-car" ></i> Mở Chỉ Đường</button>
 
                       @if(isset(Auth::user()->id))
                         
@@ -310,10 +308,10 @@ height: 300px;
 
                           @if (Auth::user()->loai === 1)
 
-                            <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal1" style="background-color: #10ada5"><i class="fa  fa-bicycle"></i> Xem Khoảng Cách</button>
-                           <a class="btn btn-default btn-lg" href="{{ route('sinhvien.edit', ['nhatro' => $nt->nt_ma]) }}" style="background-color: #10ada5"><em class="fa fa-check"> Lưu Nhà Trọ</em></a>
+                            <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal1" style="background-color: #10ada5; color: white"><i class="fa  fa-bicycle"></i> Xem Khoảng Cách</button>
+                           <a class="btn btn-default btn-lg" href="{{ route('sinhvien.edit', ['nhatro' => $nt->nt_ma]) }}" style="background-color: #10ada5; color: white"><em class="fa fa-check"> Lưu Nhà Trọ</em></a>
                           @endif
-                          <a class="btn btn-default btn-lg" href="{{ route('datphongfrontend.edit', ['nhatro' => $nt->nt_ma]) }}" style="background-color: #10ada5"><em class="fa fa-calendar"> Hẹn Xem Nhà</em></a>
+                          <a class="btn btn-default btn-lg" href="{{ route('datphongfrontend.edit', ['nhatro' => $nt->nt_ma]) }}" style="background-color: #10ada5; color: white"><em class="fa fa-calendar"> Hẹn Xem Nhà</em></a>
                             
                       @endif
                     
@@ -522,11 +520,42 @@ height: 300px;
 
 
         
-        <footer class="sub_footer" style="margin-top: 55px">
-            <div class="container">
-                <div class="social_heading" style="font-family: time new romance; margin-top: 5px">Hệ Thống Quản Lý Nhà Trọ Sinh Viên</div>
-            </div>
-        </footer>
+        
+<footer>
+  <div class="container">
+    <div class="row">
+  
+    <div class="col-sm-12">
+      <h3 class="footer_h3">Hệ Thống Gợi Ý Tìm Nhà Trọ Cho Sinh Viên Khu Vực Thành Phố Cần Thơ</h3>
+      <!-- <ul class="footer_ul">
+        <li><a href="#">Home</a></li>
+        <li><a href="faq.php">FAQs</a></li>
+        
+      </ul> -->
+    </div>
+  
+   <!--  <div class="col-sm-3">
+      <h3 class="footer_h3">Useful Links</h3>
+      <ul class="footer_ul">
+        <li><a href="#">Space Adventure</a></li>
+        <li><a href="#">Mr. Chicken</a></li>
+       
+      </ul>
+    </div>
+  
+    <div class="col-sm-3 col-sm-offset-3"> 
+      <h3 class="footer_h3 fb">Facebook</h3>
+    </div> -->
+    </div> 
+  </div>
+  <div class="copyright">
+    <div class="container">
+      <div class="row">
+         <p>© Copyright   2018. All rights reserved</p>
+      </div>
+    </div>
+  </div>
+</footer>
 
         <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.min.js') }}"> </script>
         <script type="text/javascript" src="{{ asset ('theme/homepage/js/bootstrap.min.js') }}" ></script>

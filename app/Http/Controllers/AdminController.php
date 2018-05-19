@@ -26,6 +26,7 @@ class AdminController extends Controller
         $dsbaidang = DB::table('baidang')->count();
         $dsbaidangnew = DB::table('baidang')->whereDate('bd_taomoi', $day)->count();
         $dscommment = DB::table('binhluan')->count();
+        $dscommmentnew = DB::table('binhluan')->whereDate('bl_taomoi', $day)->count();
         $dsusernew = DB::table('users')->whereDate('created_at', $day)->count();
         $dsuser = DB::table('users')->count();
         return view('backend.admin.index')
@@ -33,6 +34,7 @@ class AdminController extends Controller
                         ->with('dsuser', $dsuser)
                         ->with('dsusernew', $dsusernew)
                         ->with('dscommment', $dscommment)
+                        ->with('dscommmentnew', $dscommmentnew)
                         ->with('dsnhatro', $dsnhatro)
                         ->with('dsbaidangnew', $dsbaidangnew)
                         ->with('dsbaidang', $dsbaidang);

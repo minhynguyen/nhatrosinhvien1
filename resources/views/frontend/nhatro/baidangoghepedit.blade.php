@@ -7,6 +7,7 @@
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/normalize.css') }}">
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/main.css') }}">
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/show.css') }}">
+            <link rel="stylesheet" href="{{ asset ('theme/homepage/css/footer.css') }}">
             <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
             <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
             <link rel="stylesheet" href="{{ asset ('theme/homepage/css/bootstrap.css') }}">
@@ -369,11 +370,42 @@
 
                 </div>
             </div>
-            <footer class="sub_footer" style="margin-top: 25px">
-                <div class="container">
-                    <div class="social_heading" style="font-family: time new romance; margin-top: 5px">Hệ Thống Quản Lý Nhà Trọ Sinh Viên</div>
-                </div>
-            </footer>
+            
+<footer>
+  <div class="container">
+    <div class="row">
+  
+    <div class="col-sm-12">
+      <h3 class="footer_h3">Hệ Thống Gợi Ý Tìm Nhà Trọ Cho Sinh Viên Khu Vực Thành Phố Cần Thơ</h3>
+      <!-- <ul class="footer_ul">
+        <li><a href="#">Home</a></li>
+        <li><a href="faq.php">FAQs</a></li>
+        
+      </ul> -->
+    </div>
+  
+   <!--  <div class="col-sm-3">
+      <h3 class="footer_h3">Useful Links</h3>
+      <ul class="footer_ul">
+        <li><a href="#">Space Adventure</a></li>
+        <li><a href="#">Mr. Chicken</a></li>
+       
+      </ul>
+    </div>
+  
+    <div class="col-sm-3 col-sm-offset-3"> 
+      <h3 class="footer_h3 fb">Facebook</h3>
+    </div> -->
+    </div> 
+  </div>
+  <div class="copyright">
+    <div class="container">
+      <div class="row">
+         <p>© Copyright   2018. All rights reserved</p>
+      </div>
+    </div>
+  </div>
+</footer>
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/jquery-1.10.2.min.js') }}"> </script>
             <!-- <script type="text/javascript" src="{{ asset ('theme/homepage/js/upload.js') }}"> </script> -->
             <script type="text/javascript" src="{{ asset ('theme/homepage/js/bootstrap.min.js') }}" ></script>

@@ -94,9 +94,114 @@
                   background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
                   background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
                 }
-                
 
             </style>
+              <style>
+      
+      @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700');
+
+.login{
+   font-family: 'Josefin Sans', sans-serif;
+   background: #fbfbfb; 
+}
+
+label{
+    font-weight:400;
+    font-size:15px;
+}
+ 
+.login-box{
+    margin-top: 40px;
+    -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.24);
+    box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.24);
+    padding:0px;
+    background:#78d46e;
+    background-image: url("{{ asset ('theme/homepage/image/dat4.jpg') }}");
+}
+
+.left-box{
+    padding:50px;
+    color:#FFF;
+}
+
+.left-box h1{
+    font-weight:600;
+    font-family: 'Josefin Sans', sans-serif;
+    text-transform:capitalize;
+    color:#FFF;
+
+    font-size:32px;
+}
+
+.right-box{
+    background:#FFF;
+    min-height:520px;
+}
+
+.right-box 
+.h1{
+    font-weight:600;
+    font-family: 'Josefin Sans', sans-serif;
+    color:#444;
+    font-size:32px;
+    padding:50px;
+}
+    
+.form2{
+    padding:20px 30px;
+    /*margin-left: 5px;*/
+}
+
+.form-control{
+    box-shadow: none;
+    border-radius: 0px;
+    border-bottom: 1px solid #2196f3;
+    border-top: 1px;
+    border-left: none;
+    border-right: none;
+}
+
+.btn1{
+    font-weight: 700;
+    font-size:15px;
+    color:#FFF;
+    border-radius: 0;
+    background: #78d46e;
+    padding:12px 30px;
+    float:right;
+    margin-top:40px;
+}
+
+.btn1:hover{
+    border:2px solid #78d46e;
+    background:#FFF;
+}
+
+input[type=text], input[type=password], input[type=email] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #d2d2d2;
+    border-radius: 0;
+    margin-bottom:50px;
+    box-shadow: none;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+    box-shadow: none;
+    border-bottom: 1px solid #78d46e;
+}
+
+.form2 {
+    padding:30px 0px;
+}
+
+.white-btn{
+    background:#FFF;
+    color:#78d46e;
+}
+
+  </style>
 
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container">
@@ -184,7 +289,7 @@
                                 </li>
                                 <li>
                                  
-                                    <button type="button" id="btnTimkiem" name="btnTimkiem" class="btn btn-default form" style="width: 100%;height: 50px;"><span class="fa fa-search"></span> Tìm Kiếm</button>
+                                    <button type="button" id="btnTimkiem" name="btnTimkiem" class="btn btn-default form" style="width: 100%;height: 50px;"><span class="fa fa-search"></span>Tìm Kiếm</button>
                                     <!-- <button id="btnTimkiem" class=" btn btn-default navbar-right" type="button">Tìm Kiếm</button> -->
                                   
                                     
@@ -193,7 +298,9 @@
                         <!-- Authentication Links -->
                                 @guest
                                 <li>
-                                    <a class="color_animation" href="{{ route('login')}}">Đăng Nhập</a>
+                                  <!-- <a class="color_animation" data-toggle="modal" href='#modal-id'>Đăng Nhập</a> -->
+                                  <a class="color_animation" data-toggle="modal" href='#modal-id'>Đăng Nhập</a>
+                                    <!-- <a class="color_animation" href="{{ route('login')}}">Đăng Nhập</a> -->
                                 </li>
                                 <li>
                                     <a class="color_animation" href="{{ route('register')}}" style="margin-left: 2px!important"> | Đăng Kí</a>
@@ -296,7 +403,79 @@
                 
 
             </nav>
-            
+
+            <!-- login -->
+@if (session('warning'))
+<!-- <span class="alert alert-warning help-block">
+  <strong>{{ session('warning') }}</strong>
+</span> -->
+<script>
+    alert("{{ session('warning') }}");
+</script>
+@endif 
+@if ($errors->has('email'))
+<script>
+    alert("Vui Lòng Kiểm Tra Lại Email!");
+</script>
+@endif
+
+@if ($errors->has('password'))
+      <script>
+        alert("Vui Lòng Kiểm Tra Lại Mật Khẩu!");
+    </script>
+    <!-- <span class="help-block">
+        <strong>{{ $errors->first('password') }}</strong>
+    </span> -->
+@endif
+            <div class="modal fade" id="modal-id" >
+                <div class="modal-dialog form2" style="margin-left: 300px;">
+                    <div class="modal-content">
+                            <div class="login">
+                                <form  method="POST" action="{{ route('login') }}">
+                                {{ csrf_field() }}
+                                    <div class="col-md-12 col-lg-offset-2 login-box" >
+                                        <div class="col-lg-6 left-box">
+                                            <!-- <h2 class="h1">Contact Us</h2>
+                                            <p>Lorem ipsum dolor sit amet, sed ei doming nostrum inciderint</p>
+                                            <br> -->
+                                        </div>
+                                        <div class="col-lg-6 right-box">
+                                        <h2 class="h1">Login</h2>
+                                
+                                             <div class="form2">
+                                                
+                                                <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+                                
+                                                <label for="username">Email </label>
+                                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+
+                                                    
+                                                    
+                                                </div>
+                                                <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
+                                                    <label for="password">Password</label>
+                                                    <input id="password" type="password" class="form-control" name="password">
+                                                   
+                                                </div>
+                                        
+                                                <div class="login-button">
+                                                    <button class="btn1 btn-default">Login</button>
+                                                    <button class="btn1 btn-default"  data-dismiss="modal">Close</button>
+                                                </div>
+                                        
+                                            </div>
+                             
+                                        </div>  <!-- right-box -->
+                                    </div> <!--col-lg-8-->
+                                </form>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+
+
+
            
 
 
