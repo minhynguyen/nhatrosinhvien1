@@ -644,16 +644,16 @@ height: 300px;
 
   // console.log(home.getPosition());
 
-var customMapType = new google.maps.StyledMapType([
-          {stylers: [{hue: '#D2E4C8'}]},
-          {
-                featureType: 'water',
-                stylers: [{color: '#599459'}]
-              },
-        ]);
-  var customMapTypeId ='custom_style'
-        map.mapTypes.set(customMapTypeId, customMapType);
-        map.setMapTypeId(customMapTypeId);
+// var customMapType = new google.maps.StyledMapType([
+//           {stylers: [{hue: '#D2E4C8'}]},
+//           {
+//                 featureType: 'water',
+//                 stylers: [{color: '#599459'}]
+//               },
+//         ]);
+//   var customMapTypeId ='custom_style'
+//         map.mapTypes.set(customMapTypeId, customMapType);
+//         map.setMapTypeId(customMapTypeId);
         geolocate();
       
 
@@ -798,16 +798,16 @@ var map = new google.maps.Map(document.getElementById('map1'), {
 
   @endforeach
 
-        var customMapType = new google.maps.StyledMapType([
-          {stylers: [{hue: '#D2E4C8'}]},
-          {
-                featureType: 'water',
-                stylers: [{color: '#599459'}]
-              },
-        ]);
-  var customMapTypeId ='custom_style'
-        map.mapTypes.set(customMapTypeId, customMapType);
-        map.setMapTypeId(customMapTypeId);
+  //       var customMapType = new google.maps.StyledMapType([
+  //         {stylers: [{hue: '#D2E4C8'}]},
+  //         {
+  //               featureType: 'water',
+  //               stylers: [{color: '#599459'}]
+  //             },
+  //       ]);
+  // var customMapTypeId ='custom_style'
+  //       map.mapTypes.set(customMapTypeId, customMapType);
+  //       map.setMapTypeId(customMapTypeId);
 
 
 

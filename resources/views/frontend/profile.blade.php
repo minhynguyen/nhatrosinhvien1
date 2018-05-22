@@ -160,22 +160,22 @@
             <div class="panels">
                 <div class="panel panel1">
                   <p></p>
-                  <p>THÔNG</p>
+                  <p></p>
                   <p></p>
                 </div>
                 <div class="panel panel2">
                   <p></p>
-                  <p>TIN</p>
+                  <p></p>
                   <p></p>
                 </div>
                 <div class="panel panel3">
                   <p></p>
-                  <p>TÀI</p>
+                  <p></p>
                   <p></p>
                 </div>
                 <div class="panel panel4">
                   <p></p>
-                  <p>KHOẢN</p>
+                  <p></p>
                   <p></p>
                 </div>
               </div>
@@ -238,7 +238,7 @@
                                       
                                       
 
-                                      <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#myModal2">Đổi Mật Khẩu</button>
+                                      <button type="button" class="btn btn-block btn-success" style="background-color: green !important" data-toggle="modal" data-target="#myModal2">Đổi Mật Khẩu</button>
                                   </div>
                               </div>
                             </div>
@@ -288,7 +288,7 @@
 
                                           
                                           <td>
-                                            <a class="btn btn-success" href="{{ route('nhatrofrontend.show', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-eye"></em></a>
+                                            <a class="btn btn-success" style="background-color: green !important" href="{{ route('nhatrofrontend.show', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-eye"></em></a>
                                             <!-- <a class="btn btn-default" href="{{ route('full.update', ['nhatro' => $ds->nt_ma]) }}"><em class="fa fa-pencil"></em>full</a> -->
                                           </td>
 
@@ -362,7 +362,7 @@
                                               <td style="text-align: center;"><span class="badge" style="background-color: green">Đã Duyệt</span></td>
                                           @endif
                                           <td>
-                                            <a class="btn btn-success" href="{{ route('nhatrofrontend.show', ['nhatro' => $baidang->nt_ma]) }}"><em class="fa fa-eye"></em></a>
+                                            <a class="btn btn-success" style="background-color: green !important" href="{{ route('nhatrofrontend.show', ['nhatro' => $baidang->nt_ma]) }}"><em class="fa fa-eye"></em></a>
                                             </td>
                                           <td>
                                             <a class="btn btn-warning" href="{{ route('baidangfrontend.edit', ['baidang' => $baidang->bd_ma]) }}"><em class="fa fa-pencil"></em></a>
