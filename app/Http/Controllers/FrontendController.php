@@ -31,8 +31,7 @@ class FrontendController extends Controller
         $dstienich = tienich::all();
         $dsnhatro = DB::table('nhatro')
                 ->join('users', 'users.id', '=', 'nhatro.id')
-                ->where('nt_trangthai','1')
-                ->where('nt_tinhtrang','1')
+                ->where('nt_trangthai','1') 
                 ->join('hinhanh_nhatro', 'hinhanh_nhatro.nt_ma', '=', 'nhatro.nt_ma')
                 ->get();
                 // dd($dsnhatro);

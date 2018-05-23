@@ -205,7 +205,7 @@
                         <div class="panel panel-success" style="margin-top: -35px">
                           <div class="panel-body">
                               <div class="col-md-12" style="margin-top: 10px">
-                                <select class="form" style="width: 100%" name="lnt_ma">
+                                <select class="form" style="width: 100%" name="lnt_ma" required">
                                           <option value="" disabled selected>Chọn Loại Nhà Trọ</option>
                                           @foreach($dsloainhatro as $lnt)
                                             <option value="{{$lnt->lnt_ma}}">{{$lnt->lnt_ten}}</option>
@@ -310,7 +310,7 @@
 
                         <div class="col-md-12" style="margin-top: 10px">
                             <!-- <input type="text" name="" class="form" style="width: 100%" placeholder="Chọn Loại Bài Đăng"> -->
-                            <select class="form" style="width: 100%" name="lbd_ma">
+                            <select class="form" style="width: 100%" name="lbd_ma" required>
                                       <option value="" disabled selected>Chọn Loại Bài Đăng</option>
                                       @foreach($dsloaibaidang as $lbd)
                                         <option value="{{$lbd->lbd_ma}}">{{$lbd->lbd_ten}}</option>
@@ -320,9 +320,9 @@
 
                         
 
-                        <div class="col-md-12" style="margin-top: 10px">
+                        <div class="col-md-12" style="margin-top: 10px" >
                           <!-- <div class="fa fa-home fa-2x"> Thông Tin Nhà Trọ</div> -->
-                            <input type="text" name="bd_tieude" class="form" style="width: 100%" placeholder="Tiêu đề bài đăng" value="{{old('bd_tieude')}}">
+                            <input type="text" name="bd_tieude" class="form" style="width: 100%" placeholder="Tiêu đề bài đăng" value="{{old('bd_tieude')}}" required>
                         </div>
 
                         
@@ -340,7 +340,7 @@
 
 
                             
-                                  <textarea id="editor1" name="bd_noidung" rows="10" cols="80" style="width: 100%" value="{{old('bd_noidung')}}">
+                                  <textarea id="editor1" name="bd_noidung" rows="10" cols="80" style="width: 100%" value="{{old('bd_noidung')}}" required>
                                   </textarea>
                               
                             </div>

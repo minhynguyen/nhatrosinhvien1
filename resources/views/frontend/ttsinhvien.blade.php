@@ -140,22 +140,22 @@
             <div class="panels">
                 <div class="panel panel1">
                   <p></p>
-                  <p>THÔNG</p>
+                  <p></p>
                   <p></p>
                 </div>
                 <div class="panel panel2">
                   <p></p>
-                  <p>TIN</p>
+                  <p></p>
                   <p></p>
                 </div>
                 <div class="panel panel3">
                   <p></p>
-                  <p>TÀI</p>
+                  <p></p>
                   <p></p>
                 </div>
                 <div class="panel panel4">
                   <p></p>
-                  <p>KHOẢN</p>
+                  <p></p>
                   <p></p>
                 </div>
               </div>

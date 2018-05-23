@@ -589,7 +589,8 @@ $(document).ready(function(){
               var content = '<div id="iw-container">' +
                     '<div class="iw-title">{{$nt->nt_ten}}</div>' +
                     '<div class="iw-content">' +
-                      '<div class="iw-subTitle">Thông Tin: </div>' +
+                     
+                      '<div class="iw-subTitle">Thông Tin: <div  style="text-align: right !important;"> @if ($nt->nt_tinhtrang =="1")Còn Phòng @else Hết Phòng  @endif</div></div>' +
                       '<img src="{{ asset('upload/' . $nt->ha_ten)}}" alt="" height="150" width="100">' +
                       '<p>Địa Chỉ: {{$nt->nt_diachi}}</p>' +
                       '<p>Diện Tích: {{$nt->nt_dientich}} (~ M<sup>2</sup>)</p>' +
